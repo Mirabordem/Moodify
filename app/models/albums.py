@@ -1,4 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+
+
+
 class Album(db.Model):
     __tablename__= 'albums'
 
