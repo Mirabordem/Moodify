@@ -1,4 +1,8 @@
 .env
 dev.db
 .venv
-
+instance/dev.db
+__pycache__/
+*.py[cod]
+.DS_Store
+.vscode/

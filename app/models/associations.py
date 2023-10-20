@@ -1,4 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+# from .songs import Song
+# from .playlists import Playlist
+# from .user import User
 
 
 likes = db.Table('likes',
