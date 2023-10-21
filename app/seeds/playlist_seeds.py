@@ -53,14 +53,19 @@ def seed_playlists():
 
     for i in range (1,4):
         blank_playlist.user_id = i
-        for k in range(1,11):
-            blank_playlist.name = playlist_names[randint(0,15)]
-            blank_playlist.description = playlist_descriptions[randint(0,9)]
+        rand_idx_list = [sample(range(20), 10)]
+        counter = 0
+        for idx in rand_idx_list:
+            blank_playlist.name = playlist_names[idx]
+            blank_playlist.description = playlist_descriptions[counter]
+            counter += 1
 
-            new_playlist = Playlist(name=blank_playlist.name,
-                                    cover_image_url = None,
-                                    description = blank_playlist.description,
-                                    user_id = blank_playlist.user_id)
+            new_playlist = Playlist(
+                name=blank_playlist.name,
+                cover_image_url = None,
+                description = blank_playlist.description,
+                user_id = blank_playlist.user_id
+                )
 
             master_playlist.append(new_playlist)
     db.session.add_all(master_playlist)

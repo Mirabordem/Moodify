@@ -3,7 +3,7 @@ from random import sample
 from sqlalchemy.sql import text
 
 
-def seed_playlist_song():
+def seed_playlist_songs():
 
     for i in range(1, 31):
         playlist = Playlist.query.get(i)
@@ -13,7 +13,7 @@ def seed_playlist_song():
     db.session.commit()
 
 
-def und_playlist_songs():
+def undo_playlist_songs():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.playlist_songs RESTART IDENTITY CASCADE;")
     else:
