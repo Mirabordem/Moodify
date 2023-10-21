@@ -31,7 +31,7 @@ export const deletePlaylist = (playlistId) => {
 
 // thunks
 
-initialState = {}
+const initialState = {}
 const playlistReducer = (state = initialState, action) => {
     switch (action.type) {
         case ALL_PLAYLISTS:
@@ -50,3 +50,6 @@ const playlistReducer = (state = initialState, action) => {
             return state
     }
 }
+
+
+export default playlistReducer
