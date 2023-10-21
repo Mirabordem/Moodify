@@ -16,6 +16,7 @@ class Song(db.Model):
     audio_url = db.Column(db.String(255), nullable=False, unique=True)
     song_length = db.Column(db.Integer,nullable=False)
     album_of_song = db.relationship('Album',back_populates = 'album_songs')
+    
     likers = db.relationship('User', secondary=likes, back_populates='liked_songs')
     playlists_with_song = db.relationship('Playlist', secondary=playlist_songs, back_populates='songs_on_playlist')
 

@@ -8,7 +8,7 @@ def seed_likes():
 #for each user add an extend their liked songs with sample for range number of songs
     users = User.query.all()
     for user in users:
-        song_ids = [sample(range(1,90), 40)]
+        song_ids = sample(range(1,90), 40)
         user.liked_songs.extend(song_ids)
     db.session.commit()
 
