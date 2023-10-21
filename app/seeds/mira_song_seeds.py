@@ -84,11 +84,11 @@ mira_songs = [
             "song_length": 212,
         },
         {
-            "name: "Five Years",
-            "album_id: 4,
-            "track_number: 13,
-            "audio_url: "https://moodifybucket.s3.us-east-2.amazonaws.com/songs/DavidBowie-Ziggy-Stardust/Five+Years+(2012+Remaster).mp3",
-            "song_length: 283,
+            "name": "Five Years",
+            "album_id": 4,
+            "track_number": 13,
+            "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/songs/DavidBowie-Ziggy-Stardust/Five+Years+(2012+Remaster).mp3",
+            "song_length": 283,
         },
         {
             "name": "David Bowie Is - Nile Rodgers",
@@ -129,8 +129,7 @@ mira_songs = [
             "name": "El Merengue",
             "album_id": 5,
             "track_number": 5,
-            "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Album-2000-songs/El+Merengue+-+Marshmello+x+MTZ+Manuel+Turizo++Video+Lyric.mp3
-",
+            "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Album-2000-songs/El+Merengue+-+Marshmello+x+MTZ+Manuel+Turizo++Video+Lyric.mp3",
             "song_length": 188,
         },
         {
@@ -154,61 +153,60 @@ mira_songs = [
             "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Love+Deluxe-songs/Sade+-+Mermaid+(Audio).mp3",
             "song_length": 263,
         },
-         {
+        {
             "name": "Bullet Proof Soul ",
             "album_id": 6,
             "track_number": 2,
             "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Love+Deluxe-songs/Sade+-+Bullet+Proof+Soul+(Audio).mp3",
             "song_length": 325,
         },
-         {
+        {
             "name": "Pearls",
             "album_id": 6,
             "track_number": 3,
             "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Love+Deluxe-songs/Sade+-+Pearls+(Audio).mp3",
             "song_length": 274,
         },
-         {
+        {
             "name": "Cherish The Day",
             "album_id": 6,
             "track_number": 4,
             "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Love+Deluxe-songs/Sade+-+Cherish+The+Day+-+Official+-+1993.mp3",
             "song_length": 263,
         },
-         {
+        {
             "name": "Kiss Of Life",
             "album_id": 6,
             "track_number": 5,
             "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Love+Deluxe-songs/Sade+-+Kiss+Of+Life+-+Official+-+1993.mp3",
             "song_length": 251,
         },
-         {
+        {
             "name": "Like a Tattoo ",
             "album_id": 6,
             "track_number": 6,
             "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Love+Deluxe-songs/Sade+-+Like+a+Tattoo+(Audio).mp3",
             "song_length": 221,
         },
-         {
+        {
             "name": "I Couldn't Love You More ",
             "album_id": 6,
             "track_number": 7,
             "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Love+Deluxe-songs/Sade+-+I+Couldn't+Love+You+More+(Audio).mp3",
             "song_length": 228,
         },
-         {
+        {
             "name": " Feel No Pain",
             "album_id": 6,
             "track_number": 8,
             "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Love+Deluxe-songs/Sade+-+Feel+No+Pain+-+Official+-+1992.mp3",
             "song_length": 227,
         },
-         {
+        {
             "name": "No Ordinary Love",
             "album_id": 6,
             "track_number": 9,
             "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Love+Deluxe-songs/Sade+-+No+Ordinary+Love+-+Official+-+1992.mp3",
             "song_length": 241,
         },
-
     ]
