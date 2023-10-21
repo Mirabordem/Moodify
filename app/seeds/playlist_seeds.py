@@ -29,16 +29,16 @@ playlist_names = [
 
 
 playlist_descriptions = [
-    "Embark on a musical journey that will soothe your soul and lift your spirits.",
-    "Experience a curated selection of songs that will take you back in time and touch your heart.",
-    "Get lost in the melodies and rhythms of this enchanting playlist, perfect for late-night contemplation.",
-    "Indulge in a collection of heartfelt tunes that will mend your broken heart and heal your soul.",
-    "Dive into a sonic oasis filled with tracks that will transport you to a world of pure relaxation.",
-    "Discover the perfect soundtrack for your road trips, featuring an eclectic mix of musical treasures.",
-    "Elevate your mood with this handpicked playlist of energetic tracks that'll keep you grooving all day long.",
-    "Unwind and destress with this carefully crafted collection of songs that'll make your worries melt away.",
-    "Feel the rhythm and embrace the beats with this playlist designed to get your body moving and your heart pumping.",
-    "Bid farewell to the day with this dreamy selection of songs that will lull you into a peaceful slumber."
+    "Let's get this party started.",
+    "This playlist be romantic as heck.  Man I miss my ex",
+    "Bubble bath mix.  For after a hard day at the office",
+    "I will get in shape this year!  This is my inspiration.",
+    "Road trip mix.",
+    "I'm angry at the world and I'm never coming out.",
+    "Just calm down.  calm.....down",
+    "Throwback mix.  For back when everything made sense",
+    "I just wanna dance",
+    "Meditation music."
 ]
 
 
