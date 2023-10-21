@@ -1,4 +1,4 @@
-.env
+
 dev.db
 .venv
 instance/dev.db
