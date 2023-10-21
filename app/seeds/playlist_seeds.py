@@ -1,7 +1,7 @@
-from ..models import Playlist,db,environment, SCHEMA
+from ..models import Playlist, db, environment, SCHEMA
 from sqlalchemy.sql import text
 import random
-from random import randint
+from random import randint, sample
 
 
 playlist_names = [
@@ -45,22 +45,27 @@ playlist_descriptions = [
 
 
 
-blank_playlist={"id":0, "name":'random','cover_image_url':'random','description':'randomtextupto1000','user_id':'random 1 to 3'}
+# blank_playlist={"id":0, "name":'random','cover_image_url':'random','description':'randomtextupto1000','user_id':'random 1 to 3'}
 counter = 0
 def seed_playlists():
     master_playlist=[]
 
 
     for i in range (1,4):
-        blank_playlist.user_id = i
-        for k in range(1,11):
-            blank_playlist.name = playlist_names[randint(0,15)]
-            blank_playlist.description = playlist_descriptions[randint(0,9)]
+        # new_user_id = i
+        rand_idx_list = sample(range(20), 10)
+        counter = 0
+        for idx in rand_idx_list:
+            new_name = playlist_names[idx]
+            new_description = playlist_descriptions[counter]
+            counter += 1
 
-            new_playlist = Playlist(name=blank_playlist.name,
-                                    cover_image_url = None,
-                                    description = blank_playlist.description,
-                                    user_id = blank_playlist.user_id)
+            new_playlist = Playlist(
+                name=new_name,
+                cover_image_url = None,
+                description = new_description,
+                user_id = i
+                )
 
             master_playlist.append(new_playlist)
     db.session.add_all(master_playlist)

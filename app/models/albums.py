@@ -15,7 +15,7 @@ class Album(db.Model):
     artist = db.Column(db.String(100), nullable = False)
     cover_image_url = db.Column(db.String(255), nullable = False)
     user_owner = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
-    albums_owner = db.relationship('User', back_populates = 'users_albums')
+    album_owner = db.relationship('User', back_populates = 'users_albums')
     album_songs = db.relationship('Song',back_populates = 'album_of_song')
 
 

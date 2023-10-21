@@ -1,19 +1,18 @@
-from app.models import db, Playlist, Song
+from app.models import db, Playlist, environment, Song
 from random import sample
 from sqlalchemy.sql import text
 
 
-def seed_playlist_song():
+def seed_playlist_songs():
 
-    for i in range(1, 31):
-        playlist = Playlist.query.get(i)
-        song_ids = [sample(range(1,90), 20)]
-        playlist.songs_on_playlist.extend(song_ids)
-
+    playlists = Playlist.query.all()
+    songs = Song.query.all()
+    for playlist in playlists:
+        song_selection = sample(songs, 20)
+        playlist.songs_on_playlist.extend(song_selection)
     db.session.commit()
 
-
-def und_playlist_songs():
+def undo_playlist_songs():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.playlist_songs RESTART IDENTITY CASCADE;")
     else:
