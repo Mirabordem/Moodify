@@ -84,11 +84,11 @@ mira_songs = [
             "song_length": 212,
         },
         {
-            "name: "Five Years",
-            "album_id: 4,
-            "track_number: 13,
-            "audio_url: "https://moodifybucket.s3.us-east-2.amazonaws.com/songs/DavidBowie-Ziggy-Stardust/Five+Years+(2012+Remaster).mp3",
-            "song_length: 283,
+            "name": "Five Years",
+            "album_id": 4,
+            "track_number": 13,
+            "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/songs/DavidBowie-Ziggy-Stardust/Five+Years+(2012+Remaster).mp3",
+            "song_length": 283,
         },
         {
             "name": "David Bowie Is - Nile Rodgers",
@@ -129,8 +129,7 @@ mira_songs = [
             "name": "El Merengue",
             "album_id": 5,
             "track_number": 5,
-            "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Album-2000-songs/El+Merengue+-+Marshmello+x+MTZ+Manuel+Turizo++Video+Lyric.mp3
-",
+            "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Album-2000-songs/El+Merengue+-+Marshmello+x+MTZ+Manuel+Turizo++Video+Lyric.mp3",
             "song_length": 188,
         },
         {
