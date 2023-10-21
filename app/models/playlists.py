@@ -12,7 +12,7 @@ class Playlist(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column (db.String(255))
     cover_image_url = db.Column (db.String(255))
-    description = db.Column (db.Text(1000))
+    description = db.Column (db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')),nullable=False)
 
 
