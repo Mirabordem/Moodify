@@ -98,7 +98,7 @@ def seed_albums():
 # it will reset the primary keys for you as well.
 def undo_albums():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.albums RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM albums"))
 
