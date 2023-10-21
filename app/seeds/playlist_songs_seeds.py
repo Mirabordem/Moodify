@@ -1,4 +1,4 @@
-from app.models import db, Playlist, environment, Song
+from app.models import db, Playlist, environment, Song, SCHEMA
 from random import sample
 from sqlalchemy.sql import text
 
