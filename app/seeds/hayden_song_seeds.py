@@ -1,6 +1,6 @@
 hayden_songs = [
         {
-            'name': "Chery coloured Funk",
+            'name': "Cherry coloured Funk",
             'album_id': 1,
             'track_number': 1,
             'audio_url': "https://moodifybucket.s3.us-east-2.amazonaws.com/songs/Cherry+coloured+Funk+-+1.mp3",
