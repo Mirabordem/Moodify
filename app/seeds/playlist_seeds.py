@@ -1,4 +1,4 @@
-from ..models import playlists
+from ..models import Playlist,db,environment, SCHEMA
 from sqlalchemy.sql import text
 import random
 from random import randint
@@ -54,7 +54,22 @@ def seed_playlists():
     for i in range (1,4):
         blank_playlist.user_id = i
         for k in range(1,11):
-            counter = counter +k
-            blank_playlist.id= counter
             blank_playlist.name = playlist_names[randint(0,15)]
             blank_playlist.description = playlist_descriptions[randint(0,9)]
+
+            new_playlist = Playlist(name=blank_playlist.name,
+                                    cover_image_url = None,
+                                    description = blank_playlist.description,
+                                    user_id = blank_playlist.user_id)
+
+            master_playlist.append(new_playlist)
+    db.session.add_all(master_playlist)
+    db.session.commit()
+
+def undo_playlists():
+        if environment == "production":
+            db.session.execute(f"TRUNCATE table {SCHEMA}.playlists RESTART IDENTITY CASCADE;")
+        else:
+            db.session.execute(text("DELETE FROM playlists"))
+
+        db.session.commit()
