@@ -1,7 +1,159 @@
-.profile-dropdown {
-  position: absolute;
-}
 
 .hidden {
   display: none;
+}
+
+.nav-container {
+  z-index: 8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  padding: 10px 25px 18px 25px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgb(137, 136, 136);
+}
+
+.Moodify-logo {
+  width: 160px;
+  height: 60px;
+  /* object-fit: contain; */
+}
+
+.nav-profile {
+  display: flex;
+  align-items: center;
+  margin-right: 60px;
+  color: white;
+}
+
+.new-album {
+  text-decoration: none;
+  color: white;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  font-size: 18px;
+  right: 110px;
+  top: 30px;
+  padding: 7px 12px;
+}
+
+.new-album:hover {
+  cursor: pointer;
+  color: rgba(14, 189, 101, 0.778);
+  background-color: white;
+  border-radius: 20px;
+  transition-delay: 0ms;
+}
+
+.new-album:active {
+  border: 1px solid rgb(246, 243, 243);
+  box-shadow: 0 2px 5px rgb(164, 163, 163);
+  transform: translateY(2px);
+  padding-top: 10px;
+  padding-bottom: 10px;
+} */
+
+#profile-dropdown-loggedin {
+  z-index: 50;
+  width: 200px;
+  max-width: 230px;
+  word-wrap: break-word;
+  background-color: rgb(35, 32, 32);
+
+}
+
+#profile-dropdown-loggedout {
+  z-index: 50;
+  background-color: black;
+  width: 75px;
+}
+
+.start {
+  color: white;
+  background-color: black;
+  border: black;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.start:hover {
+  cursor: pointer;
+}
+
+
+
+.profile-dropdown {
+  position: absolute;
+  background-color: black;
+  padding: 10px;
+  width: 85px;
+  max-width: 180px;
+  top: 80px;
+  right: 35px;
+  /* border: 1px solid lightgrey; */
+  border-radius: 7px;
+}
+
+.text {
+  font-size: 16px;
+  text-decoration: none;
+  color: rgb(33, 34, 33);
+
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.email {
+  margin-top: 5px;
+  margin-bottom: 8px;
+  padding-bottom: 0;
+}
+
+.profile-button {
+  background-color: black;
+  border: black;
+  border-radius: 20px;
+  /* padding: 0px 20px; */
+  margin-bottom: 10px;
+
+}
+
+.fa-user-circle {
+  margin-top: 2px;
+  font-size: 28px;
+  color: white;
+}
+
+.fa-bars:hover,
+.fa-user-circle:hover {
+  color: rgba(14, 189, 101, 0.778);
+}
+
+.profile-button:hover {
+  cursor: pointer;
+  border: 1px solid rgba(14, 189, 101, 0.778);
+}
+
+.link:hover {
+  cursor: pointer;
+  color: rgba(14, 189, 101, 0.778);
+}
+
+.logout-button {
+  border: rgba(14, 189, 101, 0.778);
+  background-color: rgba(14, 189, 101, 0.778);
+  font-size: 12px;
+  /* color: white; */
+  border-radius: 5px;
+  padding: 8px 15px;
+  margin-right: auto;
+  margin-left: 60px;
+  margin-top: 12px;
+}
+
+.logout-button:hover {
+  cursor: pointer;
+  background-color: rgba(14, 189, 101, 0.778);
 }
