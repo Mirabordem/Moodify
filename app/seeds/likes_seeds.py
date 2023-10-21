@@ -1,9 +1,11 @@
-from app.models import db, User, environment, SCHEMA
+from app.models import db, User, environment, SCHEMA, Song
 from sqlalchemy.sql import text
-
+from random import sample
 
 # Adds a demo user, you can add other users here if you want
-def seed_users():
+def seed_likes():
+
+#for each user add a extend their liked songs with sample for range number of songs
     demo = User(
         username='Demo', email='demo@aa.io', password='password')
     marnie = User(
@@ -23,10 +25,10 @@ def seed_users():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_users():
+def undo_likes():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.likes RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM users"))
+        db.session.execute(text("DELETE FROM likes"))
 
     db.session.commit()
