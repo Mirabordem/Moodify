@@ -23,42 +23,6 @@ for (let id of playlistIds) {
     if (playlistsSample.length <= 4) playlistsSample.push(playlists[id])
 }
 
-const albumCards = albumsSample.map(album =>{
-    return (
-        <NavLink
-        className="card sample-card album-card"
-        key={album.id}
-        exact to={`albums/${album.id}`}
-        >
-            <div className="card-image-container">
-                <img src={album.coverImageUrl}/>
-            </div>
-            <div className="card-info-container">
-                <p>{album.title}</p>
-                <p>{album.artist}</p>
-            </div>
-        </NavLink>
-    )
-});
-
-const playlistCards = playlistsSample.map(playlist =>{
-    return (
-        <NavLink
-        className="card sample-card playlists-card"
-        key={playlist.id}
-        exact to={`playlistss/${playlist.id}`}
-        >
-            <div className="card-image-container">
-                <img src={playlist.coverImageUrl}/>
-            </div>
-            <div className="card-info-container">
-                <p>{playlist.name}</p>
-                {/* playlist description preview? */}
-                {/* number of tracks? */}
-            </div>
-        </NavLink>
-    )
-});
 
 
 

@@ -24,9 +24,6 @@
     box-shadow: 2px 2px 22px rgb(107, 106, 106);
 }
 
-.h1 {
-    color: white;
-}
 
 .signup-form {
     display: flex;
@@ -68,8 +65,10 @@ input {
     padding: 16px 20px;
     border: none;
     border-radius: 4px;
-    background-color: rgb(15, 199, 113);
+    background-color: rgb(95, 195, 146);
     color: white;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
     width: 100%;
     border-radius: 20px;
@@ -89,5 +88,5 @@ input {
 
 
 .sign-up-link a:hover {
-    color: rgb(33, 204, 6);
+    color: rgb(95, 195, 146);
 }

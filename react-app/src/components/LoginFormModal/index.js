@@ -47,7 +47,7 @@ function LoginFormModal() {
           />
         </label>
         <button className = 'login-button' type="submit">Log In</button>
-        <button className="demoUserLink" >Continue with Demo User</button>
+        <button className="demoUserLink" >Demo User</button>
             <ul className="errors-ul">
               {errors.map((error, idx) => (
                 <li key={idx}>{error}</li>

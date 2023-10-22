@@ -17,9 +17,10 @@
 
 .h1 {
     color: white;
-    font-size: 28px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-weight: 100;
+    font-size: 24px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    /* font-stretch: 100%; */
 }
 
 .login-form {
@@ -58,8 +59,10 @@ input {
     padding: 15px 20px;
     border-radius: 20px;
     border: none;
-    background-color: rgb(15, 199, 113);
+    background-color: rgb(95, 195, 146);
     color: white;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
     width: 100%;
 
@@ -71,11 +74,14 @@ input {
 
 .login-form button.demoUserLink {
     background-color: black;
-    border: 1px solid rgb(150, 149, 149);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    border: 1px solid rgb(203, 200, 200);
     padding: 15px;
 }
 
 .login-form button.demoUserLink:hover {
     background-color: black;
-    border: 1px solid white;
+    border: 1px solid rgb(150, 149, 149);
 }
