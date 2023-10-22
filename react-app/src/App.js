@@ -5,6 +5,16 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import Home from './components/Home'
+import SideMenu from './components/SideMenu'
+import AlbumDetails from './components/AlbumDetails'
+import Playlists from './components/Playlists'
+import MusicPlayer from './components/MusicPlayer'
+import IndividPlaylist from './components/IndividPlaylist'
+import NewAlbum from "./components/NewAlbum";
+import ProfilePage from "./components/ProfilePage";
+import NewPlaylist from "./components/NewPlaylist";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -16,16 +26,41 @@ function App() {
   return (
     <div className="container">
       <Navigation isLoaded={isLoaded} />
+      <div className='side-menu'>
+      <SideMenu isLoaded={isLoaded} />
+      </div>
       {isLoaded && (
         <Switch>
+          <Route exact path="/">
+            <Home/>
+          </Route>
+          <Route exact path="/profile">
+            <ProfilePage/>
+          </Route>
           <Route path="/login" >
             <LoginFormPage />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route exact path='/albums/new'>
+            <NewAlbum />
+          </Route>
+          <Route exact path='/albums/:id'>
+            <AlbumDetails />
+          </Route>
+          <Route exact path='/playlists'>
+            <Playlists />
+          </Route>
+          <Route path='/playlists/new'>
+            <NewPlaylist />
+          </Route>
+          <Route exact path='/playlists/:id'>
+            <IndividPlaylist />
+          </Route>
         </Switch>
       )}
+      <MusicPlayer />
     </div>
   );
 }

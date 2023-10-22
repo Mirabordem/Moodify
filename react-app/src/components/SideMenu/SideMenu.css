@@ -1,0 +1,42 @@
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 100px;
+    height: 100%;
+    background-color: black;
+    transition: left 0.3s;
+    z-index: 50;
+
+  }
+
+  .menu-toggle {
+    background-color: black;
+    font-size: 34px;
+    border: none;
+    width: 210px;
+    /* margin-top: 40px; */
+    color: white;
+    cursor: pointer;
+
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    padding: 10px;
+  }
+
+  a {
+    text-decoration: none;
+    width: 210px;
+    color: white;
+
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }

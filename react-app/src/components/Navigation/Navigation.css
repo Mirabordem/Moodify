@@ -6,12 +6,14 @@
 .nav-container {
   z-index: 8;
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
   background-color: black;
   padding: 10px 25px 18px 25px;
   padding-bottom: 8px;
-  border-bottom: 1px solid rgb(137, 136, 136);
+  /* border-bottom: 1px solid rgb(137, 136, 136); */
+  border: 2px solid red;
+  z-index: 10;
 }
 
 .Moodify-logo {
@@ -84,7 +86,7 @@
 
 
 .profile-dropdown {
-  position: absolute;
+  /* position: absolute; */
   background-color: black;
   padding: 10px;
   width: 85px;

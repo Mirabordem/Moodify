@@ -1,0 +1,18 @@
+.link-container {
+    text-align: center;
+}
+
+.link-container a {
+    text-decoration: none;
+    color: white;
+}
+
+
+
+
+
+
+
+.home-menu-content {
+    flex-grow: 1;
+}

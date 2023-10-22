@@ -3,15 +3,16 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+import OpenModalButton from "../OpenModalButton/index";
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 
 	return (
 		<div className='nav-container'>
-			<NavLink exact to="/">
+			{/* <NavLink exact to="/">
 				<img className="Moodify-logo" alt="" src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/ic66b618ce0da0dd7/version/1697907185/image.jpg'></img>
-			</NavLink>
+			</NavLink> */}
 		  {isLoaded && (
 			<div className='nav-profile'>
 				{sessionUser ? (
@@ -25,6 +26,7 @@ function Navigation({ isLoaded }){
 		  </div>
 	  );
 	}
+
 
 	export default Navigation;
 
