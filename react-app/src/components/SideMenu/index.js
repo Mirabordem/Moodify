@@ -13,9 +13,10 @@ export default function SideMenu() {
 
 
     return (
-        <>
+        <div className="side-menu">
+
         <h1>THIS IS THE SIDEMENU COMPONENT</h1>
-        </>
+        </div>
     )
 
     }

@@ -13,9 +13,9 @@ export default function MusicPlayer() {
 
 
     return (
-        <>
+        <div className='musicPlayer'>
         <h1>THIS IS THE MUSICPLAYER COMPONENT</h1>
-        </>
+        </div>
     )
 
     }

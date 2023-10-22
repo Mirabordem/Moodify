@@ -6,10 +6,11 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Home from './components/Home'
-import SideMenu from './components/Home'
-import AlbumDetails from './components/Home'
+import SideMenu from './components/SideMenu'
+import AlbumDetails from './components/AlbumDetails'
 import Playlists from './components/Playlists'
 import MusicPlayer from './components/MusicPlayer'
+import './components/SideMenu/sideMenu.css'
 
 
 function App() {
@@ -22,7 +23,9 @@ function App() {
   return (
     <div className="container">
       <Navigation isLoaded={isLoaded} />
+      <div className='side-menu'>
       <SideMenu isLoaded={isLoaded} />
+      </div>
       {isLoaded && (
         <Switch>
           <Route path="/login" >
@@ -34,22 +37,20 @@ function App() {
 
           <Route exact path='/'>
             <Home />
-
           </Route>
           <Route exact path='/albums/:id'>
-          <AlbumDetails />
+            <AlbumDetails />
           </Route>
           <Route exact path='/playlists'>
-          <Playlists />
+            <Playlists />
 
           </Route>
         </Switch>
       )}
 
       <MusicPlayer />
-    </>
-
+    </div>
   );
 }
-</div>
+
 export default App;
