@@ -12,7 +12,8 @@ import Playlists from './components/Playlists'
 import MusicPlayer from './components/MusicPlayer'
 import IndividPlaylist from './components/IndividPlaylist'
 import NewAlbum from "./components/NewAlbum";
-
+import ProfilePage from "./components/ProfilePage";
+import NewPlaylist from "./components/NewPlaylist";
 
 
 function App() {
@@ -30,6 +31,12 @@ function App() {
       </div>
       {isLoaded && (
         <Switch>
+          <Route exact path="/">
+            <Home/>
+          </Route>
+          <Route exact path="/profile">
+            <ProfilePage/>
+          </Route>
           <Route path="/login" >
             <LoginFormPage />
           </Route>
@@ -38,28 +45,21 @@ function App() {
           </Route>
           <Route exact path='/albums/new'>
             <NewAlbum />
-
-          </Route>
-
-          <Route exact path='/'>
-            <Home />
           </Route>
           <Route exact path='/albums/:id'>
             <AlbumDetails />
           </Route>
-          <Route exact path='/playlists/all'>
+          <Route exact path='/playlists'>
             <Playlists />
-
           </Route>
-
+          <Route path='/playlists/new'>
+            <NewPlaylist />
+          </Route>
           <Route exact path='/playlists/:id'>
             <IndividPlaylist />
-
-
           </Route>
         </Switch>
       )}
-
       <MusicPlayer />
     </div>
   );

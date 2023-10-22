@@ -13,7 +13,7 @@ html, body {
 
   body {
 
-    background: linear-gradient(black, grey);
+    background: linear-gradient(grey, black);
     margin: 0;
     padding: 0;
     overflow: hidden;
