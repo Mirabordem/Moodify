@@ -11,15 +11,12 @@
   background-color: black;
   padding: 10px 25px 18px 25px;
   padding-bottom: 8px;
-  /* border-bottom: 1px solid rgb(137, 136, 136); */
-  border: 2px solid red;
-  z-index: 10;
+  z-index: 1;
 }
 
 .Moodify-logo {
   width: 160px;
   height: 60px;
-  /* object-fit: contain; */
 }
 
 .nav-profile {
@@ -93,7 +90,6 @@
   max-width: 180px;
   top: 80px;
   right: 35px;
-  /* border: 1px solid lightgrey; */
   border-radius: 7px;
 }
 
@@ -117,7 +113,6 @@
   background-color: black;
   border: black;
   border-radius: 20px;
-  /* padding: 0px 20px; */
   margin-bottom: 10px;
 
 }
@@ -147,7 +142,6 @@
   border: rgba(14, 189, 101, 0.778);
   background-color: rgba(14, 189, 101, 0.778);
   font-size: 12px;
-  /* color: white; */
   border-radius: 5px;
   padding: 8px 15px;
   margin-right: auto;

@@ -1,4 +1,4 @@
-.side-menu {
+/* .side-menu {
     position: fixed;
     top: 0;
     left: -250px;
@@ -7,7 +7,7 @@
     background-color: black;
     transition: left 0.3s;
     z-index: 50;
-
+    border: 2px solid orange;
   }
 
   .menu-toggle {
@@ -15,7 +15,6 @@
     font-size: 34px;
     border: none;
     width: 210px;
-    /* margin-top: 40px; */
     color: white;
     cursor: pointer;
 
@@ -39,4 +38,57 @@
 
   a:hover {
     text-decoration: underline;
+  } */
+
+
+  /* .side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 150px;
+    height: 100%;
+    background-color: black;
+    transition: left 0.3s;
+    z-index: 20;
+  } */
+
+
+
+  .logo-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .Moodify-logo {
+    width: 210px;
+    height: 100px;
+  }
+
+  .menu-toggle {
+    background-color: black;
+    font-size: 30px;
+    border: none;
+    margin-top: 55px;
+    width: 210px;
+    color: white;
+  }
+
+  .ul-container {
+    width: 210px;
+    list-style-type: none;
+    padding: 5;
+  }
+
+  li {
+    padding: 8px;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 18px;
+    color: rgb(198, 196, 196);
+  }
+
+  a:hover {
+    cursor: pointer;
   }
