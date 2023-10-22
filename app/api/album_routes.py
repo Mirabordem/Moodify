@@ -15,8 +15,13 @@ def get_all_albums():
     """
     Query to get all albums. Returns list of album dictionaries.
     """
-    ic("GET ALL ALBUMS")
-    return {"albums": [album.to_dict() for album in Album.query.all()]}
+    albums = Album.query.all()
+    album_dict_list = [album.to_dict() for album in albums]
+    for album in album_dict_list:
+        song_instances = [song.to_dict() for song in album['albumSongs']]
+        album['albumSongs'] = [song['id'] for song in song_instances]
+
+    return album_dict_list
 
 
 
