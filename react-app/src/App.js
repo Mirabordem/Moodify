@@ -11,6 +11,7 @@ import AlbumDetails from './components/AlbumDetails'
 import Playlists from './components/Playlists'
 import MusicPlayer from './components/MusicPlayer'
 import IndividPlaylist from './components/IndividPlaylist'
+import NewAlbum from "./components/NewAlbum";
 
 
 
@@ -35,6 +36,10 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route exact path='/albums/new'>
+            <NewAlbum />
+
+          </Route>
 
           <Route exact path='/'>
             <Home />
@@ -44,7 +49,9 @@ function App() {
           </Route>
           <Route exact path='/playlists/all'>
             <Playlists />
+
           </Route>
+
           <Route exact path='/playlists/:id'>
             <IndividPlaylist />
 
