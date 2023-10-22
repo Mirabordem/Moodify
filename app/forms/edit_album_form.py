@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
-from wtforms.validators import DataRequired, IntegerField, SubmitField
+from wtforms import StringField,IntegerField, SubmitField
+from wtforms.validators import DataRequired
 
 
 
@@ -10,4 +10,3 @@ class EditAlbumForm(FlaskForm):
     artist = StringField("Artist", validators=[DataRequired()])
     cover_image_url = StringField("Cover Image URL")
     submit = SubmitField("Submit")
-

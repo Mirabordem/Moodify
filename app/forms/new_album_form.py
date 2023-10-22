@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
-from wtforms.validators import DataRequired, IntegerField, SubmitField
+from wtforms import StringField,IntegerField, SubmitField
+from wtforms.validators import DataRequired
 
 
 class CreateAlbumForm(FlaskForm):
