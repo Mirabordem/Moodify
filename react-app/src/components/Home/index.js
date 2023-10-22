@@ -14,7 +14,10 @@ return (
     <div className='main_window_container'>
 
     <h1 className='homeText'>THIS IS THE HOME COMPONENT</h1>
-
+     <p>
+        1. albums
+        2. side menu:  button- my playlist, 
+     </p>
     <div className='link-container'>
 
     <Link to={`/albums/${albumId}`}>im an album click me</Link>

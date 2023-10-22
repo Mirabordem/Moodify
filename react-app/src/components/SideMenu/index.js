@@ -21,10 +21,13 @@ export default function SideMenu() {
       </button>
       <ul className="ul-container">
         <li>
-          <NavLink to="/playlists">All Playlists</NavLink>
+          <NavLink to="/playlists">My Playlists</NavLink>
         </li>
+        {/* <li>
+          <NavLink to="/playlists/:id">Playlists - 1</NavLink>
+        </li> */}
         <li>
-          <NavLink to="/playlists/:id">My Playlist</NavLink>
+          <NavLink to="/albums">My Albums</NavLink>
         </li>
       </ul>
     </div>
