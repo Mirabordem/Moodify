@@ -12,7 +12,7 @@ export default function IndividPlaylist() {
 
 
     return (
-        <div className='try2'>
+        <div className='main_window_container'>
         <h1>THIS IS THE INDIVID PLAYLIST COMPONENT</h1>
         </div>
     )

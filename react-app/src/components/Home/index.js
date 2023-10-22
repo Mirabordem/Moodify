@@ -11,7 +11,7 @@ let albumId=1
 
 return (
 
-    <div className='try2'>
+    <div className='main_window_container'>
 
     <h1 className='homeText'>THIS IS THE HOME COMPONENT</h1>
 

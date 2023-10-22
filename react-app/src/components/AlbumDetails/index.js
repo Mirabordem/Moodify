@@ -10,7 +10,7 @@ export default function AlbumDetails() {
 
 
     return (
-        <div className='try2'>
+        <div className='main_window_container'>
         <h1>THIS IS THE ALBUMDETAILS COMPONENT</h1>
         </div>
     )

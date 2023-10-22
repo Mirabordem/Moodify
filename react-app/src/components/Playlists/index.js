@@ -12,10 +12,10 @@ export default function Playlists() {
 
 
     return (
-        <div className='try2'>
+        <div className='main_window_container'>
         <h1>THIS IS THE PLAYLIST COMPONENT</h1>
 
-        
+
         </div>
     )
 
