@@ -20,7 +20,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="container">
       <Navigation isLoaded={isLoaded} />
       <SideMenu isLoaded={isLoaded} />
       {isLoaded && (
@@ -45,9 +45,11 @@ function App() {
           </Route>
         </Switch>
       )}
+
       <MusicPlayer />
     </>
+
   );
 }
-
+</div>
 export default App;
