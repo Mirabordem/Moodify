@@ -39,7 +39,7 @@
 
 .new-album:hover {
   cursor: pointer;
-  color: rgba(14, 189, 101, 0.778);
+  color: rgb(95, 195, 146);
   background-color: white;
   border-radius: 20px;
   transition-delay: 0ms;
@@ -83,7 +83,7 @@
 
 
 .profile-dropdown {
-  /* position: absolute; */
+  position: absolute;
   background-color: black;
   padding: 10px;
   width: 85px;
@@ -125,22 +125,22 @@
 
 .fa-bars:hover,
 .fa-user-circle:hover {
-  color: rgba(14, 189, 101, 0.778);
+  color: rgb(95, 195, 146);
 }
 
 .profile-button:hover {
   cursor: pointer;
-  border: 1px solid rgba(14, 189, 101, 0.778);
+  border: 1px solid rgb(95, 195, 146);
 }
 
 .link:hover {
   cursor: pointer;
-  color: rgba(14, 189, 101, 0.778);
+  color: rgb(95, 195, 146);
 }
 
 .logout-button {
-  border: rgba(14, 189, 101, 0.778);
-  background-color: rgba(14, 189, 101, 0.778);
+  border: rgb(95, 195, 146);
+  background-color: rgb(95, 195, 146);
   font-size: 12px;
   border-radius: 5px;
   padding: 8px 15px;
@@ -151,5 +151,5 @@
 
 .logout-button:hover {
   cursor: pointer;
-  background-color: rgba(14, 189, 101, 0.778);
+  background-color: rgb(95, 195, 146);
 }
