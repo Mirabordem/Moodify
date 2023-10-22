@@ -5,21 +5,23 @@ from app.forms import CreateAlbumForm, EditAlbumForm, CreateSongForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.api.aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 from mutagen.mp3 import MP3
+from icecream import ic
 
 album_routes = Blueprint('albums', __name__)
 
 
-@album_routes.route('/')
+@album_routes.route('')
 def get_all_albums():
     """
     Query to get all albums. Returns list of album dictionaries.
     """
+    ic("GET ALL ALBUMS")
     return {"albums": [album.to_dict() for album in Album.query.all()]}
 
 
 
 
-@album_routes.route('/albums/:id')
+@album_routes.route('/:id')
 def get_album_by_id(id):
     """
     Query for an album by id. Returns album in a dictionary.
@@ -42,7 +44,7 @@ def get_user_albums():
 
 
 
-@album_routes.route('/albums/new', methods=['POST'])
+@album_routes.route('/new', methods=['POST'])
 @login_required
 def create_new_album():
     """
@@ -69,7 +71,7 @@ def create_new_album():
 
 
 
-@album_routes.route('/albums/:id/edit', methods=['PUT'])
+@album_routes.route('/:id/edit', methods=['PUT'])
 @login_required
 def edit_album(id):
     """
@@ -102,7 +104,7 @@ def edit_album(id):
     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 
-@album_routes.route('/albums/:id/delete', methods=['DELETE'])
+@album_routes.route('/:id/delete', methods=['DELETE'])
 @login_required
 def delete_album(id):
     """
@@ -127,7 +129,7 @@ def delete_album(id):
 
 
 
-@album_routes.route('/songs/new', methods=['POST'])
+@album_routes.route('/:id/songs/new', methods=['POST'])
 @login_required
 def create_album_song(id):
     """

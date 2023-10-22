@@ -40,6 +40,22 @@ export const deleteAlbum = (albumId) => {
 
 // thunks
 
+export const thunkGetAllAlbums = () => async (dispatch) => {
+    console.log("THUNK GET ALBUMS")
+    try {
+        const res = await fetch('/api/albums')
+
+        if (res.ok){
+            const albums = await res.json()
+            dispatch(getAllAlbums(albums))
+            return albums
+        }
+    } catch (err) {
+        const errors = await err.json()
+        return errors
+    }
+
+}
 
 // reducer
 const initialState = {};

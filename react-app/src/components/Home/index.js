@@ -4,26 +4,20 @@ import { Link, useHistory, NavLink, useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton/index";
 import { useModal } from '../../context/Modal';
 import "./home.css"
+import { thunkGetAllAlbums } from "../../store/albums";
 
 export default function Home() {
-let albumId=1
-// //get rid of above value when we start dynamic mapping
-const playlistIds = useSelector(state => state.user.userPlaylists)
 const albums = useSelector(state => state.albums)
-const playlists = useSelector(state => state.playlists)
+const dispatch = useDispatch()
 
 const albumsArray = Object.values(albums)
-const albumsSample = []
-for (let i = 0; i <= 4; i++) {
-    albumsSample.push(albumsArray[i])
+
+if (!albumsArray.length) {
+   dispatch(thunkGetAllAlbums())
+   return null
 }
 
-const playlistsSample = []
-for (let id of playlistIds) {
-    if (playlistsSample.length <= 4) playlistsSample.push(playlists[id])
-}
-
-const albumCards = albumsSample.map(album =>{
+const albumCards = albumsArray.map(album =>{
     return (
         <NavLink
         className="card sample-card album-card"
@@ -41,28 +35,6 @@ const albumCards = albumsSample.map(album =>{
     )
 });
 
-const playlistCards = playlistsSample.map(playlist =>{
-    return (
-        <NavLink
-        className="card sample-card playlists-card"
-        key={playlist.id}
-        exact to={`playlistss/${playlist.id}`}
-        >
-            <div className="card-image-container">
-                <img src={playlist.coverImageUrl}/>
-            </div>
-            <div className="card-info-container">
-                <p>{playlist.name}</p>
-                {/* playlist description preview? */}
-                {/* number of tracks? */}
-            </div>
-        </NavLink>
-    )
-});
-
-
-
-
 return (
 
     <div className='main_window_container'>
@@ -75,15 +47,6 @@ return (
             </div>
             <div className='card-map-div'>
                 {albumCards}
-            </div>
-        </div>
-        <div className='card-container sample-container'>
-        <div className="cards-list-title">
-                <h3>My Playlists</h3>
-                <NavLink exact to='/playlists'>All My Playlists</NavLink>
-            </div>
-            <div className='card-map-div'>
-              {playlistCards}
             </div>
         </div>
     </div>
