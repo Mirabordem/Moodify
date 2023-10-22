@@ -34,7 +34,9 @@
     width: 80%;
     position: relative;
 }
-
+.newAlbum-form input#file-upload-button {
+color: green;
+}
 
 .newAlbum-form input {
     display: flex;
@@ -83,3 +85,20 @@
     background-color: black;
     border: 1px solid white;
 }
+
+
+
+input[type="file"]::file-selector-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 40px;
+    border: 1px solid rgb(150, 149, 149);
+    border-radius: 4px;
+    color: white;
+    background-color: rgb(20, 20, 20);
+    color: green;
+    width:300px;
+    font-size: 17px;
+  }

@@ -13,7 +13,12 @@ export default function NewAlbum() {
     const sessionUser = useSelector((state) => state.session.user);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [albumCover,setAlbumCover] = useState(null)
     const [errors, setErrors] = useState([]);
+
+    const handleAlbumCoverChange = (e) => {
+        setAlbumCover(e.target.files[0]);
+      }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -63,10 +68,13 @@ export default function NewAlbum() {
           </label>
           <label className='caLabel'>
             Album Cover
+
+
           <input
-            type="text"
+            type="file"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleAlbumCoverChange}
+            accept='image/*'
             required
           />
         </label>
