@@ -1,0 +1,22 @@
+.side-menu {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 24%;
+    flex-direction: column;
+    height: 80%;
+    display: inline-flex;
+    color: white;
+    flex-grow: 1;
+}
+
+/* .side-menu-content {
+    flex-grow: 1;
+
+} */
+
+
+.container {
+    display: flex-box;
+    height: 100%;
+}
