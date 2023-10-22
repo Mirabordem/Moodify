@@ -10,6 +10,7 @@ import SideMenu from './components/SideMenu'
 import AlbumDetails from './components/AlbumDetails'
 import Playlists from './components/Playlists'
 import MusicPlayer from './components/MusicPlayer'
+import IndividPlaylist from './components/IndividPlaylist'
 import './components/SideMenu/sideMenu.css'
 
 
@@ -41,8 +42,12 @@ function App() {
           <Route exact path='/albums/:id'>
             <AlbumDetails />
           </Route>
-          <Route exact path='/playlists'>
+          <Route exact path='/playlists/all'>
             <Playlists />
+          </Route>
+          <Route exact path='/playlists/:id'>
+            <IndividPlaylist />
+
 
           </Route>
         </Switch>

@@ -12,9 +12,11 @@ export default function Playlists() {
 
 
     return (
-        <>
+        <div className='try2'>
         <h1>THIS IS THE PLAYLIST COMPONENT</h1>
-        </>
+
+        
+        </div>
     )
 
     }
