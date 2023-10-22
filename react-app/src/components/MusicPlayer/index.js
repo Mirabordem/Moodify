@@ -4,6 +4,7 @@ import { Link, useHistory, NavLink, useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton/index";
 import { useModal } from "../../context/Modal";
 import "./MusicPlayer.css";
+import { useSongPlayer } from "../../context/SongPlayer";
 
 /*
 what do we need?

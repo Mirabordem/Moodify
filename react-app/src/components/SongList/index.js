@@ -8,8 +8,12 @@ import { getAllAlbums } from "../../store/albums";
 import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
+import { useSongPlayer } from "../../context/SongPlayer";
 
 export default function SongList({ songs, artist }) {
+  const { songContextVal } = useSongPlayer();
+  const { isPlaying } = songContextVal;
+  console.log("here is songContextVal!!!!!!!", isPlaying);
   const songList = songs.map((song) => {
     const minutes = Math.trunc(song.songLength / 60);
     const seconds = song.songLength % 60;
