@@ -37,24 +37,24 @@ function App() {
           <Route exact path="/profile">
             <ProfilePage/>
           </Route>
-          <Route path="/login" >
+          {/* <Route path="/login" >
             <LoginFormPage />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
-          </Route>
-          <Route exact path='/albums/new'>
+          </Route> */}
+          {/* <Route exact path='/albums/new'>
             <NewAlbum />
-          </Route>
+          </Route> */}
           <Route exact path='/albums/:id'>
             <AlbumDetails />
           </Route>
           <Route exact path='/playlists'>
             <Playlists />
           </Route>
-          <Route path='/playlists/new'>
+          {/* <Route path='/playlists/new'>
             <NewPlaylist />
-          </Route>
+          </Route> */}
           <Route exact path='/playlists/:id'>
             <IndividPlaylist />
           </Route>
