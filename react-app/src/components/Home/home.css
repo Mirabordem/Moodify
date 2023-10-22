@@ -1,28 +1,11 @@
-/* .try2 {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 76%;
-    flex-direction: row;
-    height: 60%;
-    display: inline-flex;
-    justify-content: center;
-    color: white;
-
-}
-
-.homeText {
-    text-align: center;
-    width: 100%;
-} */
 .link-container {
     text-align: center;
-  }
+}
 
-  .link-container a {
+.link-container a {
     text-decoration: none;
     color: white;
-  }
+}
 
 
 

@@ -11,7 +11,7 @@ import AlbumDetails from './components/AlbumDetails'
 import Playlists from './components/Playlists'
 import MusicPlayer from './components/MusicPlayer'
 import IndividPlaylist from './components/IndividPlaylist'
-import './components/SideMenu/sideMenu.css'
+
 
 
 function App() {
