@@ -5,7 +5,6 @@ import "./SideMenu.css"
 
 
 export default function SideMenu() {
-  const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -14,47 +13,47 @@ export default function SideMenu() {
 
   return (
     <div className={`side-menu ${isOpen ? "open" : ""}`}>
-      <NavLink exact to="/">
-				<img className="Moodify-logo" alt="" src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/ic66b618ce0da0dd7/version/1697907185/image.jpg'></img>
-	  </NavLink>
+      <div className="logo-container">
+        <img className="Moodify-logo" src="https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/ic66b618ce0da0dd7/version/1697907185/image.jpg" alt="Your Logo" />
+      </div>
       <button className="menu-toggle" onClick={toggleMenu}>
         Your Library
       </button>
-      <ul>
+      <ul className="ul-container">
         <li>
-          <Link to="/playlists">All Playlists</Link>
+          <NavLink to="/playlists">All Playlists</NavLink>
         </li>
         <li>
-          <Link to="/playlists/:id">My Playlist</Link>
+          <NavLink to="/playlists/:id">My Playlist</NavLink>
         </li>
       </ul>
     </div>
   );
-}
+};
 
-// export default function SideMenu() {
-//     const history = useHistory()
+//   const history = useHistory();
+//   const [isOpen, setIsOpen] = useState(false);
 
-//     return (
-//         <div className="side-menu" >
+//   const toggleMenu = () => {
+//     setIsOpen(!isOpen);
+//   };
 
-//         <h1>THIS IS THE SIDEMENU COMPONENT</h1>
-
+//   return (
+//     <div className={`side-menu ${isOpen ? "open" : ""}`}>
+//       <NavLink exact to="/">
+// 				<img className="Moodify-logo" alt="" src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/ic66b618ce0da0dd7/version/1697907185/image.jpg'></img>
+// 	  </NavLink>
+//       <button className="menu-toggle" onClick={toggleMenu}>
+//         Your Library
+//       </button>
+//       <ul>
 //         <li>
-//             <button onClick={(e)=>{
-//                  history.push('/playlists/all');
-
-//             }}
-//             > All Playlists</button>
+//           <Link to="/playlists">All Playlists</Link>
+//         </li>
 //         <li>
-//         <button onClick={(e)=>{
-//                  history.push('/playlists/1');
-
-//             }}
-//             > replace w/ individ playlist</button>
+//           <Link to="/playlists/:id">My Playlist</Link>
 //         </li>
-//         </li>
-//         </div>
-//     )
-
-//     }
+//       </ul>
+//     </div>
+//   );
+// }

@@ -11,7 +11,7 @@ export default function AlbumDetails() {
 
     return (
         <div className='main_window_container'>
-        <h1>THIS IS THE ALBUMDETAILS COMPONENT</h1>
+        <h1>THIS IS THE ALBUM DETAILS COMPONENT</h1>
         </div>
     )
 
