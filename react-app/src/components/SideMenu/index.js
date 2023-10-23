@@ -11,12 +11,11 @@ import "./SideMenu.css";
 
 export default function SideMenu() {
   const [isOpen, setIsOpen] = useState(false);
-  const sessionUser = useSelector(state => state.session.user);
+  const sessionUser = useSelector((state) => state.session.user);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
 
   const user = useSelector((state) => state.session.user);
   const playlists = useSelector((state) => state.playlists);
@@ -47,14 +46,11 @@ export default function SideMenu() {
     if (playlists[id]?.name) {
       return (
         <NavLink to={`/playlists/${id}`}>
-          <li>
-            <p>{playlists[id]?.name}</p>
-          </li>
+          <li>{playlists[id]?.name}</li>
         </NavLink>
       );
     }
   });
-
 
   return (
     <div className={`side-menu ${isOpen ? "open" : ""}`}>
@@ -76,25 +72,30 @@ export default function SideMenu() {
             <i className="fas fa-list"></i> My Playlists
           </NavLink>
           {sessionUser?.id && (
-          <OpenModalButton
-          className="new-album-playlist"
-          buttonText="+"
-          modalComponent={<NewPlaylist formType="Create" userId={sessionUser.id} />}
-        />) }
-
+            <OpenModalButton
+              className="new-album-playlist"
+              buttonText="+"
+              modalComponent={
+                <NewPlaylist formType="Create" userId={sessionUser.id} />
+              }
+            />
+          )}
         </li>
         <li>
           <NavLink to="/albums">
-
             <i className="fas fa-music"></i>
             My Albums
-
           </NavLink>
-
-
         </li>
       </ul>
-      {<ul>{userPlaylistMap}</ul>}
+      {
+        <ul>
+          <NavLink to="/likes">
+            <li>Liked Songs</li>
+          </NavLink>
+          {userPlaylistMap}
+        </ul>
+      }
     </div>
   );
 }
