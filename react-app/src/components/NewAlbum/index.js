@@ -34,6 +34,7 @@ export default function NewAlbum() {
         console.log('this is e.target.files[0]',e.target.files[0])
 
         const ourPicture= e.target.files[0]
+        console.log('THIS IS OUR PICTURE in NEWALBUM COMPONENT',ourPicture)
         setAlbumCover(ourPicture)
     }
 

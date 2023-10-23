@@ -13,31 +13,33 @@ album_routes = Blueprint('albums', __name__)
 def create_new_album():
 
 
-    print('am i hitting th e route')
+    print('We are inside the albums/new route')
     something=request.form
-    title=something.get('title')
-    print(something)
-    print(title)
+    coverimagefile=something.get('cover_image_url')
+    print('THIS IS REQUEST.FORM*****',something)
+    print('before anything im trying to "get" cover_image_url which should be file. righ tnow is:',coverimagefile)
     # print('data.get cover image is',data.get('title'))
     # print('request data is this',data)
     """
     Creating a new Album.
     """
     try:
+        print('this request form',request.form)
         form = CreateAlbumForm()
         form['csrf_token'].data = request.cookies['csrf_token']
+        form.populate_obj(request.form)
+
         # form.data['user_id'] = current_user.id
         print('am i inside the try of the route?')
         if form.validate_on_submit():
-            print('is the form valid?')
             image= form.data['cover_image_url']
             print('what is the image?',form.data['cover_image_url'])
             image.filename = get_unique_filename(image.filename)
             upload = upload_file_to_s3(image)
-            print(upload)
+            print('THIS IS UPLOAD',upload)
 
-            if "url" not in upload:
-                return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+            # if "url" not in upload:
+            #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
             url = upload['url']
 
