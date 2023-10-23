@@ -11,4 +11,3 @@ class CreateSongForm(FlaskForm):
     track_number = IntegerField("Track Nr", validators=[DataRequired()])
     audio_url = FileField("Audio", validators=[FileAllowed(list(ALLOWED_AUDIO_EXTENSIONS)), FileRequired()])
     song_length = IntegerField("Duration", validators=[DataRequired()])
-    submit = SubmitField("Submit")

@@ -36,7 +36,7 @@ def create_new_playlist():
 
 
 
-@playlist_routes.route('/delete', methods=['DELETE'])
+@playlist_routes.route('/<int:id>/delete', methods=['DELETE'])
 @login_required
 def delete_playlist(id):
     """
@@ -52,18 +52,3 @@ def delete_playlist(id):
     db.session.delete(playlist)
     db.session.commit()
     return {'message': 'Successfully Deleted'}
-
-
-
-
-
-
-# @playlist_routes.route('/current')
-# @login_required
-# def get_user_playlists():
-#     """
-#     Query for playlists created by the current user. Return a list of playlist dictionaries.
-#     """
-#     user_playlists = Playlist.query.filter(Playlist.user_id == current_user.id)
-#     playlists_dict = [playlist.to_dict() for playlist in user_playlists]
-#     return playlists_dict

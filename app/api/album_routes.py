@@ -9,43 +9,47 @@ from icecream import ic
 
 album_routes = Blueprint('albums', __name__)
 
+
 @album_routes.route('/new', methods=['POST'])
 @login_required
 def create_new_album():
+    """
+    Creates new album. Returns album dictionary.
+    """
+    form = CreateAlbumForm()
 
-        form = CreateAlbumForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-        form['csrf_token'].data = request.cookies['csrf_token']
-        print('FORM.DATA IN THE ROUTE****',form.data)
+    # form.data['user_id'] = current_user.id
+    if form.validate_on_submit():
+        # print('WE ARE INSIDE FORM.VALIDATE')
+        image= form.data['cover_image_url']
+        # print('what is the image?',image)
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        # print('THIS IS UPLOAD',upload)
 
-        # form.data['user_id'] = current_user.id
-        print('am i inside the try of the route?')
-        if form.validate_on_submit():
-            print('WE ARE INSIDE FORM.VALIDATE')
-            image= form.data['cover_image_url']
-            print('what is the image?',image)
-            image.filename = get_unique_filename(image.filename)
-            upload = upload_file_to_s3(image)
-            print('THIS IS UPLOAD',upload)
+        # if "url" not in upload:
+        # return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
-            # if "url" not in upload:
-            #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+        url = upload['url']
 
-            url = upload['url']
+        new_album = Album (
+            title = form.data['title'],
+            release_date = form.data['release_date'],
+            artist = form.data['artist'],
+            cover_image_url = url,
+        )
+        db.session.add(new_album)
+        db.session.commit()
+
+        return new_album.to_dict()
+
+    print(form.errors)
+    return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 
-            new_album = Album (
-                title = form.data['title'],
-                release_date = form.data['release_date'],
-                artist = form.data['artist'],
-                cover_image_url = url,
-            )
-            db.session.add(new_album)
-            db.session.commit()
 
-            return new_album.to_dict()
-        print(form.errors)
-        return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 @album_routes.route('')
 def get_all_albums():
     """
@@ -62,7 +66,7 @@ def get_all_albums():
 
 
 
-@album_routes.route('/:id')
+@album_routes.route('/<int:id>')
 def get_album_by_id(id):
     """
     Query for an album by id. Returns album in a dictionary.
@@ -86,9 +90,7 @@ def get_user_albums():
 
 
 
-
-
-@album_routes.route('/:id/edit', methods=['PUT'])
+@album_routes.route('/<int:id>/edit', methods=['PUT'])
 @login_required
 def edit_album(id):
     """
@@ -116,14 +118,14 @@ def edit_album(id):
 
         db.session.commit()
 
-
-
         return album.to_dict()
 
     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 
-@album_routes.route('/:id/delete', methods=['DELETE'])
+
+
+@album_routes.route('/<int:id>/delete', methods=['DELETE'])
 @login_required
 def delete_album(id):
     """
@@ -148,7 +150,7 @@ def delete_album(id):
 
 
 
-@album_routes.route('/:id/songs/new', methods=['POST'])
+@album_routes.route('/<int:id>/songs/new', methods=['POST'])
 @login_required
 def create_album_song(id):
     """
@@ -156,7 +158,7 @@ def create_album_song(id):
     """
     form = CreateSongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    # print('form data:', form.data)
+
 
     if form.validate_on_submit():
         album = Album.query.get(id)
@@ -188,3 +190,21 @@ def create_album_song(id):
 
     print(validation_errors_to_error_messages(form.errors))
     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+
+
+
+@album_routes.route('/<int:id>/songs', methods=['GET'])
+def get_album_songs(id):
+    """
+    Retrieve songs within an album by its Id. Returns a list of song dictionaries.
+    """
+    album = Album.query.get(id)
+
+    if album is None:
+        return {'errors': 'Album not found'}, 404
+
+    album_songs = album.albumSongs
+    song_dict_list = [song.to_dict() for song in album_songs]
+
+    return song_dict_list

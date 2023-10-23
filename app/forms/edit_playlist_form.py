@@ -8,4 +8,4 @@ class EditPlaylistForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     cover_image_url = StringField("Cover Image Url")
     description = StringField("Description")
-    submit = SubmitField("Submit")
+    
