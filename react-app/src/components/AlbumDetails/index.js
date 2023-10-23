@@ -4,6 +4,10 @@ import { Link, useHistory, NavLink, useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton/index";
 import { useModal } from "../../context/Modal";
 import { thunkGetAllAlbums } from "../../store/albums";
+import { getAllAlbums } from "../../store/albums";
+import { getAllPlaylists } from "../../store/playlists";
+import { getAllSongs } from "../../store/songs";
+import fetchAll from "../utils";
 
 export default function AlbumDetails() {
   const { id } = useParams();
@@ -12,7 +16,8 @@ export default function AlbumDetails() {
   const album = useSelector((state) => state.albums[id]);
 
   if (!album) {
-    dispatch(thunkGetAllAlbums());
+    // dispatch(thunkGetAllAlbums());
+    fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
 
