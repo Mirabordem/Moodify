@@ -15,9 +15,13 @@ export default function SongList({
   setSongAdded,
   album,
   playlist,
-  likes,
 }) {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
+  let userLikedSongIds = [];
+  if (user) {
+    userLikedSongIds = user.likedSongs;
+  }
   const songs = useSelector((state) => state.songs);
   // const album = useSelector(state => state.albums[albumId])
   // const [songsForRender, setSongsForRender] = useState([])
@@ -39,6 +43,7 @@ export default function SongList({
   } = useSongPlayer();
 
   let songTracks = [];
+  // const [heart, setHeart] = useState(<i className="far fa-heart"></i>);
 
   useEffect(() => {
     setSongList(songTracks);
@@ -54,7 +59,7 @@ export default function SongList({
       songTracks.push(songs[songId]);
     }
   } else if (pageType === "likes") {
-    for (let likeId of likes) {
+    for (let likeId of userLikedSongIds) {
       songTracks.push(songs[likeId]);
     }
   } else {
@@ -91,7 +96,10 @@ export default function SongList({
     const minutes = Math.trunc(song.songLength / 60);
     const seconds = song.songLength % 60;
     const runTime = `${minutes}:${seconds}`;
-
+    let heart = <i className="far fa-heart"></i>;
+    if (userLikedSongIds.includes(song.id)) {
+      heart = <i class="fa-solid fa-heart"></i>;
+    }
     return (
       <li
         className="song-li"
@@ -105,9 +113,7 @@ export default function SongList({
           <span className="song-info3">{artist}</span>
         </div>
         <div className="song-info4">
-          <div className="song-actions-container">
-            <i className="far fa-heart"></i>
-          </div>
+          <div className="song-actions-container">{heart}</div>
           <span className="song-info">{runTime}</span>
           <button className="song-menu">
             <i className="fas fa-ellipsis-h"></i>

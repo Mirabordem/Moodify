@@ -42,7 +42,7 @@ export default function LikedSongs() {
         </div>
       </div>
       <div id="likes-id-song-list">
-        <SongList pageType={pageType} likes={userLikedSongIds} />
+        <SongList pageType={pageType} />
       </div>
     </div>
   );
