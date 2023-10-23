@@ -11,9 +11,20 @@ import fetchAll from "../utils";
 import { useSongPlayer } from "../../context/SongPlayer";
 
 export default function SongList({ songs, artist }) {
-  const { songContextVal } = useSongPlayer();
-  const { isPlaying } = songContextVal;
+  const {
+    isPlaying,
+    setIsPlaying,
+    nextSong,
+    setNextSong,
+    currentSong,
+    setCurrentSong,
+    prevSong,
+    setPrevSong, } = useSongPlayer();
+
+  setCurrentSong(songs[4])
+
   console.log("here is songContextVal!!!!!!!", isPlaying);
+
   const songList = songs.map((song) => {
     const minutes = Math.trunc(song.songLength / 60);
     const seconds = song.songLength % 60;

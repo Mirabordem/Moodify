@@ -9,7 +9,7 @@ import * as sessionActions from "./store/session";
 import App from "./App";
 
 import "./index.css";
-import { SongPlayerProvider } from "./context/SongPlayer";
+import SongPlayerProvider from "./context/SongPlayer";
 
 const store = configureStore();
 
