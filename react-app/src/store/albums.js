@@ -40,6 +40,29 @@ export const deleteAlbum = (albumId) => {
 
 // thunks
 
+export const ThunkCreateAlbum = (formData)=> async (dispatch)=> {
+    console.log('at least we hit our thunkCreateAlbum')
+        console.log('this is formDatainOurThunk', formData)
+        console.log('this is cover image url',formData.get('cover_image_url'))
+        const res = await fetch(`/api/albums/new`, {
+          method: 'POST',
+          body: formData
+        });
+        if (res.ok) {
+          const realNewAlbum = await res.json();
+          console.log('realNewAlbum returned from server is', realNewAlbum)
+
+          dispatch(createAlbum(realNewAlbum))
+
+
+        }
+        else {
+            console.log('THERE WAS AN ERROR IN MAKING THE POST')
+        }
+
+
+
+}
 
 // reducer
 const initialState = {};
