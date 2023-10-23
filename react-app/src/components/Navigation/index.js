@@ -10,9 +10,6 @@ function Navigation({ isLoaded }){
 
 	return (
 		<div className='nav-container'>
-			{/* <NavLink exact to="/">
-				<img className="Moodify-logo" alt="" src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/ic66b618ce0da0dd7/version/1697907185/image.jpg'></img>
-			</NavLink> */}
 		  {isLoaded && (
 			<div className='nav-profile'>
 				{sessionUser ? (
@@ -29,7 +26,3 @@ function Navigation({ isLoaded }){
 
 
 	export default Navigation;
-
-
-
-

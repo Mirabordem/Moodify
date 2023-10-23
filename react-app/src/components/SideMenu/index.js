@@ -14,7 +14,9 @@ export default function SideMenu() {
   return (
     <div className={`side-menu ${isOpen ? "open" : ""}`}>
       <div className="logo-container">
-        <img className="Moodify-logo" src="https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/ic66b618ce0da0dd7/version/1697907185/image.jpg" alt="Your Logo" />
+      <NavLink exact to="/">
+				<img className="Moodify-logo" alt="" src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/ic66b618ce0da0dd7/version/1697907185/image.jpg'></img>
+			</NavLink>
       </div>
       <button className="menu-toggle" onClick={toggleMenu}>
         Your Library
