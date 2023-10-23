@@ -19,11 +19,11 @@ export default function NewAlbum() {
     const [title, setTitle] = useState('')
     const [releaseDate, setReleaseDate] = useState('')
     const [artist, setArtist] = useState('')
-    const [coverImage, setCoverImage] = useState('')
-    const [userOwner, setUserOwner] = useState('')
+    // const [coverImage, setCoverImage] = useState('')
+    // const [userOwner, setUserOwner] = useState('')
     const [albumCover, setAlbumCover] = useState('')
-    const [albumOwner, setAlbumOwner] = useState('')
-    const [albumSongs, setAlbumSongs] = useState('')
+    // const [albumOwner, setAlbumOwner] = useState('')
+    // const [albumSongs, setAlbumSongs] = useState('')
     const [imageLoading,setImageLoading] = useState(false)
 
     const [errors, setErrors] = useState([]);
@@ -82,7 +82,7 @@ export default function NewAlbum() {
                 <label className='caLabel'>
                     Release Date
                     <input
-                        type="text"
+                        type="date"
                         value={releaseDate}
                         onChange={(e) => setReleaseDate(e.target.value)}
                         required

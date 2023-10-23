@@ -12,28 +12,17 @@ album_routes = Blueprint('albums', __name__)
 @login_required
 def create_new_album():
 
-
-    print('We are inside the albums/new route')
-    something=request.form
-    coverimagefile=something.get('cover_image_url')
-    print('THIS IS REQUEST.FORM*****',something)
-    print('before anything im trying to "get" cover_image_url which should be file. righ tnow is:',coverimagefile)
-    # print('data.get cover image is',data.get('title'))
-    # print('request data is this',data)
-    """
-    Creating a new Album.
-    """
-    try:
-        print('this request form',request.form)
         form = CreateAlbumForm()
+
         form['csrf_token'].data = request.cookies['csrf_token']
-        form.populate_obj(request.form)
+        print('FORM.DATA IN THE ROUTE****',form.data)
 
         # form.data['user_id'] = current_user.id
         print('am i inside the try of the route?')
         if form.validate_on_submit():
+            print('WE ARE INSIDE FORM.VALIDATE')
             image= form.data['cover_image_url']
-            print('what is the image?',form.data['cover_image_url'])
+            print('what is the image?',image)
             image.filename = get_unique_filename(image.filename)
             upload = upload_file_to_s3(image)
             print('THIS IS UPLOAD',upload)
@@ -54,9 +43,8 @@ def create_new_album():
             db.session.commit()
 
             return new_album.to_dict()
+        print(form.errors)
         return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
-    except Exception as e:
-        print('Error:',e)
 @album_routes.route('')
 def get_all_albums():
     """
