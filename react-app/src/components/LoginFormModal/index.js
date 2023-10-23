@@ -22,6 +22,11 @@ function LoginFormModal() {
   };
 
 
+  const demoUserLogIn = () => {
+    setEmail('demo@aa.io')
+    setPassword('password')
+  }
+
   return (
     <div className="login-container">
       <h1 className="h1">Log in</h1>
@@ -47,7 +52,7 @@ function LoginFormModal() {
           />
         </label>
         <button className = 'login-button' type="submit">Log In</button>
-        <button className="demoUserLink" >Demo User</button>
+        <button className="demoUserLink" onClick={demoUserLogIn}>Demo User</button>
             <ul className="errors-ul">
               {errors.map((error, idx) => (
                 <li key={idx}>{error}</li>
