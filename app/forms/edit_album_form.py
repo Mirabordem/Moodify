@@ -1,12 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,IntegerField, SubmitField
+from flask_wtf.file import FileField
+from wtforms import StringField,IntegerField, SubmitField,DateField
 from wtforms.validators import DataRequired
 
 
 
 class EditAlbumForm(FlaskForm):
-    title = StringField("Title", validators=[DataRequired()])
-    release_date = IntegerField("Release Date", validators=[DataRequired()])
-    artist = StringField("Artist", validators=[DataRequired()])
-    cover_image_url = StringField("Cover Image URL")
-    submit = SubmitField("Submit")
+    title = StringField("Title")
+    release_date = DateField("Release Date")
+    artist = StringField("Artist")
+    cover_image_url = FileField("Image File")

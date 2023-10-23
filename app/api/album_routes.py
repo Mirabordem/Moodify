@@ -16,17 +16,12 @@ def create_new_album():
         form = CreateAlbumForm()
 
         form['csrf_token'].data = request.cookies['csrf_token']
-        print('FORM.DATA IN THE ROUTE****',form.data)
-
-        # form.data['user_id'] = current_user.id
-        print('am i inside the try of the route?')
         if form.validate_on_submit():
-            print('WE ARE INSIDE FORM.VALIDATE')
             image= form.data['cover_image_url']
-            print('what is the image?',image)
             image.filename = get_unique_filename(image.filename)
+            url='http://www.justAtest1.jpg'
 
-            #uncomment this code when we actually want to upload to aws
+            ##uncomment this code when we actually want to upload to aws
             # upload = upload_file_to_s3(image)
             # print('THIS IS UPLOAD',upload)
 
@@ -35,7 +30,7 @@ def create_new_album():
 
             # url = upload['url']
 
-            url='http://www.justAtest1.jpg'
+
 
 
             new_album = Album (
@@ -43,6 +38,7 @@ def create_new_album():
                 release_date = form.data['release_date'],
                 artist = form.data['artist'],
                 cover_image_url = url,
+                user_owner= current_user.id
             )
             db.session.add(new_album)
             db.session.commit()
@@ -92,37 +88,50 @@ def get_user_albums():
 
 
 
-@album_routes.route('/:id/edit', methods=['PUT'])
+@album_routes.route('/<int:id>/edit', methods=['PUT'])
 @login_required
 def edit_album(id):
-    """
-    Editing an Album.
-    """
+    print('atleast we hitting our route,our id is',id)
     form = EditAlbumForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    # form.process(formdata=request.form, data={'cover_image_file': request.files.get('cover_image_file')})
+
 
     album = Album.query.get(id)
+    print('album is',album)
 
     if album is None:
         return {'errors': 'Album not found'}, 404
-    elif album.user_id != current_user.id:
+    elif album.user_owner != current_user.id:
         return {'errors': 'forbidden'}, 403
 
     if form.validate_on_submit():
+
+        ##uncomment this code when we actually want to upload to aws
+        # upload = upload_file_to_s3(image)
+        # print('THIS IS UPLOAD',upload)
+
+        # # if "url" not in upload:
+        # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+
+        # url = upload['url']
+
+
+
+        print(form.data)
+        url = form.data['cover_image_url']
+
         data = form.data
+
         album.title = data['title']
         album.release_date = data['release_date']
         album.artist = data['artist']
-        if data['cover_image_url'] == '':
-            album.cover_image_url = 'https://cdn-icons-png.flaticon.com/512/287/287422.png'
-        else:
-            album.cover_image_url = data['cover_image_url']
+        album.cover_image_url =url
 
+        print('album after changes is now',album)
         db.session.commit()
-
-
-
         return album.to_dict()
+    print(form.errors)
 
     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 

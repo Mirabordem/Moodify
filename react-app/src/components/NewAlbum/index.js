@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from '../../context/Modal';
 import './newAlbum.css';
-import { ThunkCreateAlbum } from "../../store/albums";
+import { ThunkCreateAlbum,ThunkEditAlbum } from "../../store/albums";
 
 export default function NewAlbum({ formType, albumId }) {
     const dispatch = useDispatch();
@@ -38,19 +38,26 @@ export default function NewAlbum({ formType, albumId }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let formData = new FormData();
+        formData.append('cover_image_url', albumCover);
+        formData.append('title', title);
+        formData.append('release_date', releaseDate);
+        formData.append('artist', artist);
         if (formType === "Create") {
-            let formData = new FormData();
-            formData.append('cover_image_url', albumCover);
-            formData.append('title', title);
-            formData.append('release_date', releaseDate);
-            formData.append('artist', artist);
+            console.log('WE ARE HITTING O UR FORMTYPE=CREATE CONDITION')
+
             let test = await dispatch(ThunkCreateAlbum(formData));
             if (test) {
                 history.push(`/albums/${test.id}`);
                 closeModal();
             }
         }
-        else if (formType ===)
+        else if (formType ==="Edit"){
+            console.log('WE ARE HITTING OUR FORMTYPE=EDIT CONDITION')
+            console.log('albumId is',albumId)
+            let test2= await dispatch(ThunkEditAlbum(formData,albumId));
+
+        }
 
     };
 

@@ -85,6 +85,37 @@ export const ThunkCreateAlbum = (formData) => async (dispatch) => {
 
 }
 
+export const ThunkEditAlbum = (formData,albumId) => async (dispatch) => {
+    console.log('at least we hit our thunkEDITAlbum')
+    console.log('this is formDatainOurThunk', formData)
+    
+    console.log('this is cover image url', formData.get('cover_image_url'))
+    const res = await fetch(`/api/albums/${albumId}/edit`, {
+        method: 'PUT',
+        body: formData
+    });
+    if (res.ok) {
+        const realNewAlbum = await res.json();
+        console.log('realNewAlbum returned from server is', realNewAlbum)
+
+        // await dispatch(createAlbum(realNewAlbum))
+        return realNewAlbum
+
+
+
+    }
+    else {
+        console.log('THERE WAS AN ERROR IN MAKING THE POST')
+        const errors= await res.json()
+        return {errors}
+    }
+
+
+
+}
+
+
+
 // reducer
 const initialState = {};
 const albumReducer = (state = initialState, action) => {
