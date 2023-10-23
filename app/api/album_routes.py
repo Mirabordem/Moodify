@@ -9,7 +9,43 @@ from icecream import ic
 
 album_routes = Blueprint('albums', __name__)
 
+@album_routes.route('/new', methods=['POST'])
+@login_required
+def create_new_album():
 
+        form = CreateAlbumForm()
+
+        form['csrf_token'].data = request.cookies['csrf_token']
+        print('FORM.DATA IN THE ROUTE****',form.data)
+
+        # form.data['user_id'] = current_user.id
+        print('am i inside the try of the route?')
+        if form.validate_on_submit():
+            print('WE ARE INSIDE FORM.VALIDATE')
+            image= form.data['cover_image_url']
+            print('what is the image?',image)
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            print('THIS IS UPLOAD',upload)
+
+            # if "url" not in upload:
+            #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+
+            url = upload['url']
+
+
+            new_album = Album (
+                title = form.data['title'],
+                release_date = form.data['release_date'],
+                artist = form.data['artist'],
+                cover_image_url = url,
+            )
+            db.session.add(new_album)
+            db.session.commit()
+
+            return new_album.to_dict()
+        print(form.errors)
+        return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 @album_routes.route('')
 def get_all_albums():
     """
@@ -49,30 +85,6 @@ def get_user_albums():
 
 
 
-@album_routes.route('/new', methods=['POST'])
-@login_required
-def create_new_album():
-    """
-    Creating a new Album.
-    """
-    form = CreateAlbumForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    # form.data['user_id'] = current_user.id
-
-    if form.validate_on_submit():
-        data = form.data
-        new_album = Album (
-            user_id = current_user.id,
-            title = data['title'],
-            release_date = data['release_date'],
-            artist = data['artist'],
-            cover_image_url = 'https://cdn-icons-png.flaticon.com/512/287/287422.png' if not data['cover_image_url'] == '' else data['cover_image_url'],
-        )
-        db.session.add(new_album)
-        db.session.commit()
-
-        return new_album.to_dict()
-    return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 
 
@@ -103,6 +115,8 @@ def edit_album(id):
             album.cover_image_url = data['cover_image_url']
 
         db.session.commit()
+
+
 
         return album.to_dict()
 

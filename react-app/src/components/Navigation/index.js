@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import OpenModalButton from "../OpenModalButton/index";
+import NewAlbum from '../NewAlbum';
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
@@ -13,9 +14,13 @@ function Navigation({ isLoaded }){
 		  {isLoaded && (
 			<div className='nav-profile'>
 				{sessionUser ? (
-					<NavLink className='new-album' to='/albums/new'>
-						Create Album
-					</NavLink>
+					
+
+<OpenModalButton
+className="new-album"
+buttonText="Create Album"
+modalComponent={<NewAlbum/>}
+/>
 				) : null}
 			  <ProfileButton user={sessionUser} />
 			  </div>

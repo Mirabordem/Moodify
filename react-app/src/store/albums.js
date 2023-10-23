@@ -45,7 +45,7 @@ export const thunkGetAllAlbums = () => async (dispatch) => {
 
     const res = await fetch('/api/albums')
 
-    if (res.ok){
+    if (res.ok) {
         const albums = await res.json()
         dispatch(getAllAlbums(albums))
         return albums
@@ -53,13 +53,37 @@ export const thunkGetAllAlbums = () => async (dispatch) => {
         const errors = res.json()
         return errors
     }
+}
+
+
+export const ThunkCreateAlbum = (formData) => async (dispatch) => {
+    console.log('at least we hit our thunkCreateAlbum')
+    console.log('this is formDatainOurThunk', formData)
+    console.log('this is cover image url', formData.get('cover_image_url'))
+    const res = await fetch(`/api/albums/new`, {
+        method: 'POST',
+        body: formData
+    });
+    if (res.ok) {
+        const realNewAlbum = await res.json();
+        console.log('realNewAlbum returned from server is', realNewAlbum)
+
+        dispatch(createAlbum(realNewAlbum))
+
+
+    }
+    else {
+        console.log('THERE WAS AN ERROR IN MAKING THE POST')
+    }
+
+
 
 }
 
 // reducer
 const initialState = {};
 const albumReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case ALL_ALBUMS:
             const albumsObj = {};
             action.albums.forEach(album => {
@@ -67,11 +91,11 @@ const albumReducer = (state = initialState, action) => {
             })
             return albumsObj
         case ADD_ALBUM:
-            return {...state, [action.album.id]: action.album}
+            return { ...state, [action.album.id]: action.album }
         case UPDATE_ALBUM:
-            return {...state, [action.album.id]: action.album}
+            return { ...state, [action.album.id]: action.album }
         case DELETE_ALBUM:
-            const newState = {...state}
+            const newState = { ...state }
             delete newState[action.albumId]
             return newState
         default:
