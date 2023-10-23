@@ -14,7 +14,6 @@ import SongList from "../SongList";
 import CreateSong from "../CreateSongModal";
 import DeleteAlbumModal from "../DeleteAlbumModal";
 
-
 export default function AlbumDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -46,14 +45,14 @@ export default function AlbumDetails() {
         <div id="album-id-info-words">
           <p className="info-album-p">Album</p>
           <div>
-
-          <p className="album-title-page">{album.title}</p>
-
+            <p className="album-title-page">{album.title}</p>
           </div>
 
-          <p className="album-release-info">{album.artist}, {album.releaseDate}, Amount of songs here, Length of album here</p>
+          <p className="album-release-info">
+            {album.artist}, {album.releaseDate}, Amount of songs here, Length of
+            album here
+          </p>
           {/* <p className="amount-songs">Amount of songs here, Length of album here</p> */}
-
         </div>
       </div>
 
@@ -63,14 +62,14 @@ export default function AlbumDetails() {
           className="new-album"
           buttonText="Edit Album"
           modalComponent={<NewAlbum formType="Edit" albumId={id} />}
-          />
+        />
         <OpenModalButton
           buttonText="add-Song"
           modalComponent={<CreateSong albumId={id} />}
         />
         <OpenModalButton
           buttonText="Delete"
-          modalComponent={<DeleteAlbumModal />}
+          modalComponent={<DeleteAlbumModal albumId={id} />}
         />
         <h5>Additional functions here if you are album owner</h5>
       </div>

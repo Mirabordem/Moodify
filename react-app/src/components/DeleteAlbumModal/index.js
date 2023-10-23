@@ -4,11 +4,11 @@ import { useModal } from "../../context/Modal";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { ThunkDeleteAlbum } from "../../store/albums";
 
-function DeleteAlbumModal() {
+function DeleteAlbumModal({ albumId }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const history = useHistory();
-  const { id } = useParams();
+  const id = albumId;
   console.log("here is id", id);
   const album = useSelector((state) => state.albums[id]);
 

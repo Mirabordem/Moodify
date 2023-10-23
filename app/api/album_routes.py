@@ -144,11 +144,11 @@ def delete_album(id):
 
     if album is None:
         return {'errors': 'Album not found'}, 404
-    elif album.user_id != current_user.id:
+    elif album.user_owner != current_user.id:
         return {'errors': 'forbidden'}, 403
 
 # removing songs in deleted album:
-    songs = album.to_dict()['songs']
+    songs = album.to_dict()['albumSongs']
     for song in songs:
         remove_file_from_s3(song['song_url'])
 
