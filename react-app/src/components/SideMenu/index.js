@@ -30,6 +30,16 @@ export default function SideMenu() {
     console.log(Object.values(user.userPlaylists));
   }
 
+  let likedSongs = null;
+
+  if (user?.likedSongs.length) {
+    likedSongs = (
+      <NavLink to="/likes">
+        <li>Liked Songs</li>
+      </NavLink>
+    );
+  }
+
   // if (user?.userPlaylists) {
   //   let userPlaylists = Object.values(user.userPlaylists);
   // } else {
@@ -90,9 +100,7 @@ export default function SideMenu() {
       </ul>
       {
         <ul>
-          <NavLink to="/likes">
-            <li>Liked Songs</li>
-          </NavLink>
+          {likedSongs}
           {userPlaylistMap}
         </ul>
       }

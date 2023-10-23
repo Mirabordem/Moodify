@@ -11,8 +11,11 @@ export default function LikedSongs() {
   const user = useSelector((state) => state.session.user);
   let userLikedSongIds = [];
 
+  let history = useHistory();
   if (user) {
     userLikedSongIds = user.likedSongs;
+  } else {
+    history.push("/");
   }
 
   const dispatch = useDispatch();
