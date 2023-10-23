@@ -7,6 +7,7 @@ import { thunkGetAllAlbums } from "../../store/albums";
 import { getAllAlbums } from "../../store/albums";
 import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";
+import NewAlbum from "../NewAlbum";
 import fetchAll from "../utils";
 
 export default function AlbumDetails() {
@@ -67,6 +68,11 @@ export default function AlbumDetails() {
       </div>
       <div id="album-id-functions">
         <button>Play album from beginning</button>
+        <OpenModalButton
+className="new-album"
+buttonText="Edit Album"
+modalComponent={<NewAlbum formType="Edit" albumId={id} />}
+/>
         <h5>Additional functions here if you are album owner</h5>
       </div>
       <div id="album-id-song-list">

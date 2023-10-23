@@ -25,13 +25,17 @@ def create_new_album():
             image= form.data['cover_image_url']
             print('what is the image?',image)
             image.filename = get_unique_filename(image.filename)
-            upload = upload_file_to_s3(image)
-            print('THIS IS UPLOAD',upload)
 
-            # if "url" not in upload:
-            #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+            #uncomment this code when we actually want to upload to aws
+            # upload = upload_file_to_s3(image)
+            # print('THIS IS UPLOAD',upload)
 
-            url = upload['url']
+            # # if "url" not in upload:
+            # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+
+            # url = upload['url']
+
+            url='http://www.justAtest1.jpg'
 
 
             new_album = Album (

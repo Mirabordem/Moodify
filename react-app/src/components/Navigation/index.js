@@ -14,12 +14,12 @@ function Navigation({ isLoaded }){
 		  {isLoaded && (
 			<div className='nav-profile'>
 				{sessionUser ? (
-					
+
 
 <OpenModalButton
 className="new-album"
 buttonText="Create Album"
-modalComponent={<NewAlbum/>}
+modalComponent={<NewAlbum formType="Create" />}
 />
 				) : null}
 			  <ProfileButton user={sessionUser} />
