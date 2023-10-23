@@ -18,8 +18,9 @@ We need context for isPlaying, nextSong, currentSong, prevSong other two are cal
 */
 
 export default function MusicPlayer() {
-  const audio = useRef()
-  const [songProgress, setSongProgress] = useState()
+  //   const [skipped, setSkipped] = useState(false);
+  const audio = useRef();
+  const [songProgress, setSongProgress] = useState();
   const {
     isPlaying,
     setIsPlaying,
@@ -28,31 +29,73 @@ export default function MusicPlayer() {
     currentSong,
     setCurrentSong,
     prevSong,
-    setPrevSong, } = useSongPlayer();
-    console.log("🚀 ~ file: index.js:32 ~ MusicPlayer ~ isPlaying:", isPlaying)
+    setPrevSong,
+    songList,
+    setSongList,
+    playAnyway,
+    setPlayAnyway,
+    currentSongIndex,
+    setCurrentSongIndex,
+  } = useSongPlayer();
 
   useEffect(() => {
-    if(isPlaying) {
-      audio.current.play()
+    if (isPlaying) {
+      audio.current.play();
+    } else {
+      audio.current.pause();
     }
-    else {
-      audio.current.pause()
+    if (playAnyway) {
+      audio.current.play();
+      setPlayAnyway(false);
     }
+  }, [isPlaying, playAnyway]);
 
-  }, [isPlaying])
+  //   useEffect(() => {
+  //     if (isPlaying) {
+  //       audio.current.play();
+  //     } else {
+  //       audio.current.pause();
+  //     }
+  //   }, []);
 
-  console.log(isPlaying)
+  const playNext = () => {
+    if (nextSong) {
+      setPrevSong(currentSong);
+      setCurrentSong(nextSong);
+      if (currentSongIndex !== songList.length - 1) {
+        setNextSong(songList[currentSongIndex + 1]);
+        setCurrentSongIndex(currentSongIndex + 1);
+      }
+    }
+    if (isPlaying === true) {
+      setPlayAnyway(true);
+    }
+    setIsPlaying(true);
+  };
 
-  // const playPause = e => {
-  //   setIsPlaying(!isPlaying)
-  // }
+  const playPrev = () => {
+    if (prevSong) {
+      setNextSong(currentSong);
+      setCurrentSong(prevSong);
+      if (currentSongIndex !== 0) {
+        setPrevSong(songList[currentSongIndex - 1]);
+        setCurrentSongIndex(currentSongIndex - 1);
+      }
+    }
+    if (isPlaying === true) {
+      setPlayAnyway(true);
+    }
+    setIsPlaying(true);
+  };
 
   return (
     <div className="musicPlayer">
-      <audio src={currentSong.audioUrl} ref={audio}/>
-      <span>Prev</span>
-      <button onClick={() => setIsPlaying(!isPlaying)}>{!isPlaying ? 'Play' : 'Pause'}</button>
-      <span>Next</span>
+      <audio src={currentSong.audioUrl} ref={audio} />
+      <span onClick={() => playPrev()}>Prev</span>
+      <button onClick={() => setIsPlaying(!isPlaying)}>
+        {!isPlaying ? "Play" : "Pause"}
+      </button>
+      <span onClick={() => playNext()}>Next</span>
       <ReactSlider />
     </div>
   );

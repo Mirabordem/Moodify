@@ -19,18 +19,43 @@ export default function SongList({ songs, artist }) {
     currentSong,
     setCurrentSong,
     prevSong,
-    setPrevSong, } = useSongPlayer();
+    setPrevSong,
+    songList,
+    setSongList,
+    playAnyway,
+    setPlayAnyway,
+    currentSongIndex,
+    setCurrentSongIndex,
+  } = useSongPlayer();
 
-  setCurrentSong(songs[4])
+  useEffect(() => {
+    setSongList(songs);
+  }, []);
 
-  console.log("here is songContextVal!!!!!!!", isPlaying);
+  const setSongs = (song) => {
+    setCurrentSong(song);
+    const index = songs.findIndex((item) => item.name === song.name);
+    setCurrentSongIndex(index);
+    if (index === 0) {
+      setNextSong(songList[index + 1]);
+    } else if (index === songList.length - 1) {
+      setPrevSong(songList[index - 1]);
+    } else {
+      setPrevSong(songList[index - 1]);
+      setNextSong(songList[index + 1]);
+    }
+    if (isPlaying === true) {
+      setPlayAnyway(true);
+    }
+    setIsPlaying(true);
+  };
 
-  const songList = songs.map((song) => {
+  const songListMap = songs.map((song) => {
     const minutes = Math.trunc(song.songLength / 60);
     const seconds = song.songLength % 60;
     const runTime = `${minutes}:${seconds}`;
     return (
-      <li className="song-li" key={song.id}>
+      <li className="song-li" key={song.id} onClick={() => setSongs(song)}>
         <span className="song-info">{song.trackNumber}</span>
         <span className="song-info">{song.name}</span>
         <span className="song-info">{artist}</span>
@@ -49,7 +74,7 @@ export default function SongList({ songs, artist }) {
 
   return (
     <div id="album-id-song-list">
-      <ul>{songList}</ul>
+      <ul>{songListMap}</ul>
     </div>
   );
 }
