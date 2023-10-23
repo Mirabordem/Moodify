@@ -7,6 +7,7 @@ import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
 import SongList from "../SongList";
+import DeletePlaylistModal from "../DeletePlaylistModal";
 
 export default function PlaylistDetails() {
   const { id } = useParams();
@@ -55,7 +56,7 @@ export default function PlaylistDetails() {
         />
         <OpenModalButton
           buttonText="Delete"
-          //   modalComponent={<DeleteAlbumModal albumId={id} />}
+          modalComponent={<DeletePlaylistModal playlistId={id} />}
         />
       </div>
       <div id="playlist-id-song-list">

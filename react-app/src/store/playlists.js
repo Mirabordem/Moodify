@@ -1,55 +1,60 @@
-
-
-const ALL_PLAYLISTS = "playlists/getPlaylists"
+const ALL_PLAYLISTS = "playlists/getPlaylists";
 // const ONE_PLAYLIST = "playlists/onePlaylist"
-const ADD_PLAYLIST = "playlists/createPlaylist"
+const ADD_PLAYLIST = "playlists/createPlaylist";
 // const UPDATE_PLAYLIST = "playlists/updatePlaylist"
-const DELETE_PLAYLIST = "playlists/deletePlaylist"
-
-
+const DELETE_PLAYLIST = "playlists/deletePlaylist";
 
 export const getAllPlaylists = (playlists) => {
-    return {
-        type: ALL_PLAYLISTS,
-        playlists
-    }
-}
+  return {
+    type: ALL_PLAYLISTS,
+    playlists,
+  };
+};
 
 export const createPlaylist = (playlist) => {
-    return {
-        type: ADD_PLAYLIST,
-        playlist
-    }
-}
+  return {
+    type: ADD_PLAYLIST,
+    playlist,
+  };
+};
 
 export const deletePlaylist = (playlistId) => {
-    return {
-        type: DELETE_PLAYLIST,
-        playlistId
-    }
-}
+  return {
+    type: DELETE_PLAYLIST,
+    playlistId,
+  };
+};
 
 // thunks
 
-const initialState = {}
+export const ThunkDeletePlaylist = (id) => async (dispatch) => {
+  console.log(id);
+  const response = await fetch(`/api/playlists/${id}/delete`, {
+    method: "DELETE",
+  });
+  dispatch(deletePlaylist());
+  return response;
+};
+
+//reducer
+const initialState = {};
 const playlistReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case ALL_PLAYLISTS:
-            const playlistsObj = {}
-            action.playlists.forEach(playlist => {
-                playlistsObj[playlist.id] = playlist
-            })
-            return playlistsObj
-        case ADD_PLAYLIST:
-            return {...state, [action.playlist.id]: action.playlist}
-        case DELETE_PLAYLIST:
-            const newState = {...state}
-            delete newState[action.playlistId]
-            return newState
-        default:
-            return state
-    }
-}
+  switch (action.type) {
+    case ALL_PLAYLISTS:
+      const playlistsObj = {};
+      action.playlists.forEach((playlist) => {
+        playlistsObj[playlist.id] = playlist;
+      });
+      return playlistsObj;
+    case ADD_PLAYLIST:
+      return { ...state, [action.playlist.id]: action.playlist };
+    case DELETE_PLAYLIST:
+      const newState = { ...state };
+      delete newState[action.playlistId];
+      return newState;
+    default:
+      return state;
+  }
+};
 
-
-export default playlistReducer
+export default playlistReducer;
