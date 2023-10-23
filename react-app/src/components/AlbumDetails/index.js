@@ -14,12 +14,38 @@ export default function AlbumDetails() {
   const dispatch = useDispatch();
 
   const album = useSelector((state) => state.albums[id]);
+  const songs = useSelector(state => state.songs);
 
-  if (!album) {
+  if (!album || !Object.values(songs).length) {
     // dispatch(thunkGetAllAlbums());
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
+
+  const album_tracks = []
+  for (let songId of album.albumSongs) {
+    album_tracks.push(songs[songId])
+  }
+  console.log("🚀 ~ file: index.js:26 ~ AlbumDetails ~ album_tracks:", album_tracks)
+
+
+  const song_list = album_tracks.map(song => {
+    const minutes = Math.trunc(song.songLength/60);
+    const seconds = song.songLength % 60;
+    const runTime = `${minutes}:${seconds}`
+    return (
+      <li
+      className='song-li'
+      key={song.id}>
+        <span className='song-info'>{song.trackNumber}</span>
+        <span className='song-info'>{song.name}</span>
+        <span className='song-info'>{album.artist}</span>
+        <span className='song-info'><i class="fa-regular fa-heart"></i></span>
+        <span className='song-info'>{runTime}</span>
+        <span><button className='song-menu'><i class="fa-solid fa-ellipsis"></i></button></span>
+      </li>
+    )
+  })
 
   return (
     <div className="main_window_container">
@@ -39,13 +65,15 @@ export default function AlbumDetails() {
           </div>
         </div>
       </div>
-      {/* <div id="album-id-functions">
+      <div id="album-id-functions">
         <button>Play album from beginning</button>
         <h5>Additional functions here if you are album owner</h5>
       </div>
       <div id="album-id-song-list">
-        <h5>List of songs and their components here</h5>
-      </div> */}
+          <ul>
+            {song_list}
+          </ul>
+      </div>
     </div>
   );
 }
