@@ -11,7 +11,9 @@ import NewAlbum from "../NewAlbum";
 import fetchAll from "../utils";
 import "./AlbumDetails.css";
 import SongList from "../SongList";
+import CreateSong from "../CreateSongModal";
 import DeleteAlbumModal from "../DeleteAlbumModal";
+
 
 export default function AlbumDetails() {
   const { id } = useParams();
@@ -63,6 +65,10 @@ export default function AlbumDetails() {
           className="new-album"
           buttonText="Edit Album"
           modalComponent={<NewAlbum formType="Edit" albumId={id} />}
+          />
+        <OpenModalButton
+          buttonText="add-Song"
+          modalComponent={<CreateSong albumId={id} />}
         />
         <OpenModalButton
           buttonText="Delete"
