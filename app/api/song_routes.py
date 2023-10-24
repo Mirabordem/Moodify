@@ -4,6 +4,7 @@ from app.models import db, Song, likes
 from app.forms import EditSongForm, CreateSongForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.api.aws_helpers import remove_file_from_s3
+from icecream import ic
 
 song_routes = Blueprint('song', __name__)
 
@@ -85,7 +86,7 @@ def delete_song(id):
 
 
 
-@song_routes.route('/<int:id>/like', methods=['POST'])
+@song_routes.route('/<int:id>/like')
 @login_required
 def add_song_like(id):
     """
@@ -93,24 +94,32 @@ def add_song_like(id):
     """
     song = Song.query.get(id).to_dict()
 
+    # for like in current_user["liked_songs"]:
+    #     if like == song.id:
+    #         return { "errors": "User likes this song" }, 405
 
-    for like in song["likes"]:
-        if like["user_id"] == current_user.id:
-            return { "errors": "User likes this song" }, 405
+    if song in current_user.to_dict()['likedSongs']:
+        return { "errors": "User likes this song" }, 405
 
-    like = likes(
-        user_id=current_user.id,
-        song_id=id
-    )
+    # like = likes(
+    #     user_id=current_user.id,
+    #     song_id=id
+    # )
 
-    db.session.add(like)
+    # ic(current_user)
+    # ic(current_user.liked_songs)
+    # current_user.liked_songs.append(song)
+
+    current_user.add_like(song)
+
+    # db.session.add()
     db.session.commit()
-    return like.to_dict()
+    return current_user.to_dict()
 
 
 
 
-@song_routes.route('/<int:id>/unlike', methods=['DELETE'])
+@song_routes.route('/<int:id>/unlike')
 @login_required
 def remove_song_like(id):
     """
@@ -127,6 +136,6 @@ def remove_song_like(id):
     if like:
         db.session.delete(like)
         db.session.commit()
-        return {"message": "Like successfully deleted"}
+        return current_user.to_dict()
     else:
         return { "errors": "User has never liked this song" }, 405

@@ -7,6 +7,7 @@ import { getAllAlbums } from "../../store/albums";
 import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
+import { ThunkAddLike, ThunkDeleteLike } from "../../store/session";
 
 export default function SongList({
   pageType,
@@ -43,7 +44,10 @@ export default function SongList({
   } = useSongPlayer();
 
   let songTracks = [];
-  // const [heart, setHeart] = useState(<i className="far fa-heart"></i>);
+
+  let emptyHeart = null;
+  let filledHeart = null;
+  // const [heart, setHeart] = useState(null);
 
   useEffect(() => {
     setSongList(songTracks);
@@ -93,13 +97,32 @@ export default function SongList({
   };
 
   const songListMap = songTracks.map((song) => {
+    const handleLike = (e) => {
+      e.stopPropagation();
+      if (user) {
+        const id = song.id;
+        dispatch(ThunkAddLike(id));
+      }
+      heart = filledHeart;
+    };
+    const handleDislike = (e) => {
+      e.stopPropagation();
+      if (user) {
+        const isSongId = (element) => element == song.id;
+        let songIdIndex = user.likedSongs.findIndex(isSongId);
+        user.likedSongs.splice(songIdIndex, 1);
+      }
+      // heart = emptyHeart;
+    };
     const minutes = Math.trunc(song.songLength / 60);
     const seconds = song.songLength % 60;
     const runTime = `${minutes}:${seconds}`;
-    let heart = <i className="far fa-heart"></i>;
+    emptyHeart = <i className="far fa-heart" onClick={handleLike}></i>;
+    filledHeart = <i class="fa-solid fa-heart" onClick={handleDislike}></i>;
+    let heart = null;
     if (userLikedSongIds.includes(song.id)) {
-      heart = <i class="fa-solid fa-heart"></i>;
-    }
+      heart = filledHeart;
+    } else heart = emptyHeart;
     return (
       <li
         className="song-li"

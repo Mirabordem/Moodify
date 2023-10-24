@@ -39,3 +39,7 @@ class User(db.Model, UserMixin):
             "userAlbums": self.users_albums,
             "likedSongs": self.liked_songs
         }
+
+
+    def add_like(self, song):
+        self.liked_songs.append(song)
