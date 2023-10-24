@@ -40,6 +40,26 @@ export const deleteSong = (songId) => {
 
 // thunks
 
+export const thunkCreateSong = (newSong, albumId) => async dispatch => {
+    try{
+        const res = await fetch(`/api/albums/${albumId}/songs/new`, {
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: newSong
+        });
+        if(res.ok){
+            const newSong = res.json()
+            dispatch(createSong(newSong))
+            return newSong
+        }
+    } catch (err) {
+        const errors = err.json()
+        return errors
+    }
+
+
+}
+
 
 // reducer
 
