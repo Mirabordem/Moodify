@@ -38,24 +38,22 @@ export default function AlbumDetails() {
   );
 
   return (
-    <div className="page-container">
+    <div className="album-page-container">
       <div className="album-id-top-info">
         {/* <div className="album-id-cover-img"> */}
         <img className="album-id-cover-img" src={album.coverImageUrl} />
         {/* </div> */}
         <div id="album-id-info-words">
-          <p>Album</p>
+          <p className="info-album-p">Album</p>
           <div>
-            <p className="album-title">{album.title}</p>
+
+          <p className="album-title-page">{album.title}</p>
+
           </div>
-          <div id="album-id-tiny-info">
-            <h5>{album.artist}</h5>
-            <h5>{album.releaseDate}</h5>
-            <h5 className="amount-songs">
-              Amount of songs here, Length of album here
-            </h5>
-            {/* <h5>Length of album here</h5> */}
-          </div>
+
+          <p className="album-release-info">{album.artist}, {album.releaseDate}, Amount of songs here, Length of album here</p>
+          {/* <p className="amount-songs">Amount of songs here, Length of album here</p> */}
+
         </div>
       </div>
 
