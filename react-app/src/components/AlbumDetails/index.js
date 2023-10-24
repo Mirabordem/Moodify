@@ -10,6 +10,7 @@ import { getAllSongs } from "../../store/songs";
 import NewAlbum from "../NewAlbum";
 import fetchAll from "../utils";
 import "./AlbumDetails.css";
+import SongList from "../SongList";
 
 
 
@@ -34,28 +35,6 @@ export default function AlbumDetails() {
     "🚀 ~ file: index.js:26 ~ AlbumDetails ~ album_tracks:",
     album_tracks
   );
-
-  const song_list = album_tracks.map((song) => {
-    const minutes = Math.trunc(song.songLength / 60);
-    const seconds = song.songLength % 60;
-    const runTime = `${minutes}:${seconds}`;
-    return (
-      <li className="song-li" key={song.id}>
-        <span className="song-info">{song.trackNumber}</span>
-        <span className="song-info">{song.name}</span>
-        <span className="song-info">{album.artist}</span>
-        <span className="song-info">
-          <i class="fa-regular fa-heart"></i>
-        </span>
-        <span className="song-info">{runTime}</span>
-        <span>
-          <button className="song-menu">
-            <i class="fa-solid fa-ellipsis"></i>
-          </button>
-        </span>
-      </li>
-    );
-  });
 
   return (
     <div className="page-container">
@@ -87,7 +66,7 @@ export default function AlbumDetails() {
         <h5>Additional functions here if you are album owner</h5>
       </div>
       <div id="album-id-song-list">
-        <ul>{song_list}</ul>
+        <SongList songs={album_tracks} artist={album.artist} />
       </div>
     </div>
   );
