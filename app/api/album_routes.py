@@ -20,33 +20,33 @@ def create_new_album():
 
     form['csrf_token'].data = request.cookies['csrf_token']
 
-        form['csrf_token'].data = request.cookies['csrf_token']
-        if form.validate_on_submit():
-            image= form.data['cover_image_url']
-            image.filename = get_unique_filename(image.filename)
-            url='https://i.imgur.com/8LMyVdU.jpg'
 
-            ##KEEP THIS. uncomment this code when we actually want to upload to aws
-            # upload = upload_file_to_s3(image)
-            # print('THIS IS UPLOAD',upload)
+    if form.validate_on_submit():
+        image= form.data['cover_image_url']
+        image.filename = get_unique_filename(image.filename)
+        url='https://i.imgur.com/8LMyVdU.jpg'
 
-            # # if "url" not in upload:
-            # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+        ##KEEP THIS. uncomment this code when we actually want to upload to aws
+        # upload = upload_file_to_s3(image)
+        # print('THIS IS UPLOAD',upload)
 
-            # url = upload['url']
+        # # if "url" not in upload:
+        # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
-
+        # url = upload['url']
 
 
-            new_album = Album (
-                title = form.data['title'],
-                release_date = form.data['release_date'],
-                artist = form.data['artist'],
-                cover_image_url = url,
-                user_owner= current_user.id
-            )
-            db.session.add(new_album)
-            db.session.commit()
+
+
+        new_album = Album (
+            title = form.data['title'],
+            release_date = form.data['release_date'],
+            artist = form.data['artist'],
+            cover_image_url = url,
+            user_owner= current_user.id
+        )
+        db.session.add(new_album)
+        db.session.commit()
 
 @album_routes.route('')
 def get_all_albums():

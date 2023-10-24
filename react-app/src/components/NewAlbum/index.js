@@ -130,16 +130,16 @@ export default function NewAlbum({ formType, albumId }) {
     const [didPicChange, setDidPicChange] = useState(false)
 
 
-    const album = useSelector(state => state.albums[albumId]);
+    // const album = useSelector(state => state.albums[albumId]);
 
 
-    const [title, setTitle] = useState('');
-    const [releaseDate, setReleaseDate] = useState('');
-    const [artist, setArtist] = useState('');
-    const [albumCover, setAlbumCover] = useState('');
-    const [imageLoading, setImageLoading] = useState(false);
-    const [errors, setErrors] = useState([]);
-    const [ourId, setOurId] = useState(albumId ? albumId : null)
+    // const [title, setTitle] = useState('');
+    // const [releaseDate, setReleaseDate] = useState('');
+    // const [artist, setArtist] = useState('');
+    // const [albumCover, setAlbumCover] = useState('');
+    // const [imageLoading, setImageLoading] = useState(false);
+    // const [errors, setErrors] = useState([]);
+    // const [ourId, setOurId] = useState(albumId ? albumId : null)
 
 
     useEffect(() => {
