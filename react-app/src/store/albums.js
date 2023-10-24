@@ -95,10 +95,11 @@ export const ThunkEditAlbum = (formData,albumId) => async (dispatch) => {
     });
     if (res.ok) {
         const realNewAlbum = await res.json();
+        const returnAlbum={...realNewAlbum}
         console.log('realNewAlbum returned from server is', realNewAlbum)
 
-        // await dispatch(createAlbum(realNewAlbum))
-        return realNewAlbum
+        await dispatch(updateAlbum(realNewAlbum))
+        return returnAlbum
 
 
 

@@ -19,9 +19,9 @@ def create_new_album():
         if form.validate_on_submit():
             image= form.data['cover_image_url']
             image.filename = get_unique_filename(image.filename)
-            url='http://www.justAtest1.jpg'
+            url='https://i.imgur.com/8LMyVdU.jpg'
 
-            ##uncomment this code when we actually want to upload to aws
+            ##KEEP THIS. uncomment this code when we actually want to upload to aws
             # upload = upload_file_to_s3(image)
             # print('THIS IS UPLOAD',upload)
 
@@ -98,7 +98,9 @@ def edit_album(id):
 
 
     album = Album.query.get(id)
+
     print('album is',album)
+    album2= album.to_dict()
 
     if album is None:
         return {'errors': 'Album not found'}, 404
@@ -107,28 +109,34 @@ def edit_album(id):
 
     if form.validate_on_submit():
 
-        ##uncomment this code when we actually want to upload to aws
-        # upload = upload_file_to_s3(image)
-        # print('THIS IS UPLOAD',upload)
-
-        # # if "url" not in upload:
-        # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
-
-        # url = upload['url']
-
 
 
         print(form.data)
-        image = form.data['cover_image_url']
-        image.filename = get_unique_filename(image.filename)
-        url="http://www.justAtest2.jpg"
+        if form.data['cover_image_url']:
+
+            image = form.data['cover_image_url']
+            image.filename = get_unique_filename(image.filename)
+            url="https://i.imgur.com/sG9LYzh.jpg"
+
+            ##KEEP THIS. uncomment this code when we actually want to upload to aws
+            # upload = upload_file_to_s3(image)
+            # print('THIS IS UPLOAD',upload)
+
+            # # if "url" not in upload:
+            # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+
+            # url = upload['url']
+
+
+
+            album.cover_image_url =url
 
         data = form.data
 
         album.title = data['title']
         album.release_date = data['release_date']
         album.artist = data['artist']
-        album.cover_image_url =url
+
 
         print('album after changes is now',album)
         db.session.commit()
