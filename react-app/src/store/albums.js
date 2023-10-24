@@ -57,9 +57,6 @@ export const thunkGetAllAlbums = () => async (dispatch) => {
 
 
 export const ThunkCreateAlbum = (formData) => async (dispatch) => {
-    console.log('at least we hit our thunkCreateAlbum')
-    console.log('this is formDatainOurThunk', formData)
-    console.log('this is cover image url', formData.get('cover_image_url'))
     const res = await fetch(`/api/albums/new`, {
         method: 'POST',
         body: formData
@@ -86,9 +83,6 @@ export const ThunkCreateAlbum = (formData) => async (dispatch) => {
 }
 
 export const ThunkEditAlbum = (formData,albumId) => async (dispatch) => {
-    console.log('at least we hit our thunkEDITAlbum')
-    console.log('this is formDatainOurThunk', formData)
-    console.log('this is cover image url', formData.get('cover_image_url'))
     const res = await fetch(`/api/albums/${albumId}/edit`, {
         method: 'PUT',
         body: formData
@@ -96,8 +90,6 @@ export const ThunkEditAlbum = (formData,albumId) => async (dispatch) => {
     if (res.ok) {
         const realNewAlbum = await res.json();
         const returnAlbum={...realNewAlbum}
-        console.log('realNewAlbum returned from server is', realNewAlbum)
-
         await dispatch(updateAlbum(realNewAlbum))
         return returnAlbum
 

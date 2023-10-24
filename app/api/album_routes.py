@@ -91,16 +91,10 @@ def get_user_albums():
 @album_routes.route('/<int:id>/edit', methods=['PUT'])
 @login_required
 def edit_album(id):
-    print('atleast we hitting our route,our id is',id)
     form = EditAlbumForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    # form.process(formdata=request.form, data={'cover_image_file': request.files.get('cover_image_file')})
-
 
     album = Album.query.get(id)
-
-    print('album is',album)
-    album2= album.to_dict()
 
     if album is None:
         return {'errors': 'Album not found'}, 404
@@ -108,37 +102,22 @@ def edit_album(id):
         return {'errors': 'forbidden'}, 403
 
     if form.validate_on_submit():
-
-
-
-        print(form.data)
         if form.data['cover_image_url']:
-
             image = form.data['cover_image_url']
             image.filename = get_unique_filename(image.filename)
             url="https://i.imgur.com/sG9LYzh.jpg"
 
             ##KEEP THIS. uncomment this code when we actually want to upload to aws
             # upload = upload_file_to_s3(image)
-            # print('THIS IS UPLOAD',upload)
-
             # # if "url" not in upload:
             # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
-
             # url = upload['url']
 
-
-
             album.cover_image_url =url
-
         data = form.data
-
         album.title = data['title']
         album.release_date = data['release_date']
         album.artist = data['artist']
-
-
-        print('album after changes is now',album)
         db.session.commit()
         return album.to_dict()
     print(form.errors)

@@ -17,9 +17,9 @@ export default function NewAlbum({ formType, albumId }) {
     const [artist, setArtist] = useState('');
     const [albumCover, setAlbumCover] = useState('');
     const [didPicChange, setDidPicChange] = useState(false)
-    const [imageLoading, setImageLoading] = useState(false);
+
     const [errors, setErrors] = useState([]);
-    const [ourId, setOurId] = useState(albumId ? albumId : null)
+
 
     useEffect(() => {
         if (formType === 'Edit' && album) {
@@ -46,7 +46,6 @@ export default function NewAlbum({ formType, albumId }) {
         formData.append('artist', artist);
 
         if (formType === "Create") {
-            console.log('WE ARE HITTING O UR FORMTYPE=CREATE CONDITION')
             formData.append('cover_image_url', albumCover);
             let test = await dispatch(ThunkCreateAlbum(formData));
             if (test) {
@@ -59,8 +58,6 @@ export default function NewAlbum({ formType, albumId }) {
                 formData.append('cover_image_url', albumCover);
 
             }
-            console.log('WE ARE HITTING OUR FORMTYPE=EDIT CONDITION')
-            console.log('albumId is', albumId)
             let test2 = await dispatch(ThunkEditAlbum(formData, albumId));
 
             if (test2) {
