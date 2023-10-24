@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, NavLink, useParams } from "react-router-dom";
+import { getAllAlbums } from "../../store/albums";
+import { getAllPlaylists } from "../../store/playlists";
+import { getAllSongs } from "../../store/songs";
+import fetchAll from "../utils";
 import NewPlaylist from "../NewPlaylist";
 import OpenModalButton from "../OpenModalButton/index";
-
 import "./SideMenu.css";
 
 export default function SideMenu() {
@@ -18,7 +21,11 @@ export default function SideMenu() {
   const user = useSelector((state) => state.session.user);
   const playlists = useSelector((state) => state.playlists);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {}, [user]);
+
+  useEffect(() => {}, [playlists]);
 
   if (user) {
     console.log(Object.values(user.userPlaylists));
@@ -33,16 +40,19 @@ export default function SideMenu() {
   let userPlaylists = [];
   if (user?.userPlaylists) {
     userPlaylists = Object.values(user.userPlaylists);
+    console.log(userPlaylists);
   }
 
   const userPlaylistMap = userPlaylists.map((id) => {
-    return (
-      <NavLink to={`/playlists/${id}`}>
-        <li>
-          <p>{playlists[id].name}</p>
-        </li>
-      </NavLink>
-    );
+    if (playlists[id]?.name) {
+      return (
+        <NavLink to={`/playlists/${id}`}>
+          <li>
+            <p>{playlists[id]?.name}</p>
+          </li>
+        </NavLink>
+      );
+    }
   });
 
 

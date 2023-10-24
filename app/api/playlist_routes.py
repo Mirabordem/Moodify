@@ -7,6 +7,7 @@ from app.api.auth_routes import validation_errors_to_error_messages
 from mutagen.mp3 import MP3
 from icecream import ic
 
+
 playlist_routes = Blueprint('playlists', __name__)
 
 

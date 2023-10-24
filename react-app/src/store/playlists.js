@@ -1,6 +1,4 @@
-
-
-const ALL_PLAYLISTS = "playlists/getPlaylists"
+const ALL_PLAYLISTS = "playlists/getPlaylists";
 // const ONE_PLAYLIST = "playlists/onePlaylist"
 const ADD_PLAYLIST = "playlists/createPlaylist"
 const UPDATE_PLAYLIST = "playlists/updatePlaylist"
@@ -9,18 +7,18 @@ const DELETE_PLAYLIST = "playlists/deletePlaylist"
 
 
 export const getAllPlaylists = (playlists) => {
-    return {
-        type: ALL_PLAYLISTS,
-        playlists
-    }
-}
+  return {
+    type: ALL_PLAYLISTS,
+    playlists,
+  };
+};
 
 export const createPlaylist = (playlist) => {
-    return {
-        type: ADD_PLAYLIST,
-        playlist
-    }
-}
+  return {
+    type: ADD_PLAYLIST,
+    playlist,
+  };
+};
 
 export const updatePlaylist = (playlist) => {
     return {
@@ -30,13 +28,22 @@ export const updatePlaylist = (playlist) => {
 }
 
 export const deletePlaylist = (playlistId) => {
-    return {
-        type: DELETE_PLAYLIST,
-        playlistId
-    }
-}
+  return {
+    type: DELETE_PLAYLIST,
+    playlistId,
+  };
+};
 
 // thunks
+
+export const ThunkDeletePlaylist = (id) => async (dispatch) => {
+  console.log(id);
+  const response = await fetch(`/api/playlists/${id}/delete`, {
+    method: "DELETE",
+  });
+  dispatch(deletePlaylist());
+  return response;
+};
 
 export const ThunkCreatePlaylist = (formData) => async (dispatch) => {
     const res = await fetch(`/api/playlists/new`, {
@@ -73,9 +80,6 @@ export const ThunkEditPlaylist = (formData,playlistId) => async (dispatch) => {
         const errors= await res.json()
         return {errors}
     }
-
-
-
 }
 
 const initialState = {}
@@ -102,3 +106,4 @@ const playlistReducer = (state = initialState, action) => {
 
 
 export default playlistReducer
+
