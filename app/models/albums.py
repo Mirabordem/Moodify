@@ -27,5 +27,5 @@ class Album(db.Model):
             "artist": self.artist,
             "coverImageUrl": self.cover_image_url,
             "userOwner": self.user_owner,
-            "albumSongs": self.album_songs
+            "albumSongs": [song.id for song in self.album_songs]
         }

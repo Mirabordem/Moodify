@@ -17,15 +17,15 @@ def get_all():
     """
     albums = Album.query.all()
     album_dict_list = [album.to_dict() for album in albums]
-    for album in album_dict_list:
-        song_instances = [song.to_dict() for song in album['albumSongs']]
-        album['albumSongs'] = [song['id'] for song in song_instances]
+    # for album in album_dict_list:
+    #     song_instances = [song.to_dict() for song in album['albumSongs']]
+    #     album['albumSongs'] = [song['id'] for song in song_instances]
 
     playlists = Playlist.query.all()
     playlist_dict_list = [playlist.to_dict() for playlist in playlists]
-    for playlist in playlist_dict_list:
-        song_instances = [song.to_dict() for song in playlist['songsOnPlaylist']]
-        playlist['songsOnPlaylist'] = [song['id'] for song in song_instances]
+    # for playlist in playlist_dict_list:
+    #     song_instances = [song.to_dict() for song in playlist['songsOnPlaylist']]
+    #     playlist['songsOnPlaylist'] = [song['id'] for song in song_instances]
 
     songs = Song.query.all()
     song_dict_list = [song.to_dict() for song in songs]

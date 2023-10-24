@@ -27,5 +27,5 @@ class Playlist(db.Model):
             "coverImageUrl": self.cover_image_url,
             "description": self.description,
             "userId": self.user_id,
-            "songsOnPlaylist": self.songs_on_playlist
+            "songsOnPlaylist": [song.id for song in self.songs_on_playlist]
         }

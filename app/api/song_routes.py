@@ -92,27 +92,14 @@ def add_song_like(id):
     """
     Adds like to a selected song. Returns likes for the song as a list of like dictionaries.
     """
-    song = Song.query.get(id).to_dict()
 
-    # for like in current_user["liked_songs"]:
-    #     if like == song.id:
-    #         return { "errors": "User likes this song" }, 405
+    song = Song.query.get(id)
 
-    if song in current_user.to_dict()['likedSongs']:
+    if song in current_user.liked_songs:
         return { "errors": "User likes this song" }, 405
 
-    # like = likes(
-    #     user_id=current_user.id,
-    #     song_id=id
-    # )
+    current_user.liked_songs.append(song)
 
-    # ic(current_user)
-    # ic(current_user.liked_songs)
-    # current_user.liked_songs.append(song)
-
-    current_user.add_like(song)
-
-    # db.session.add()
     db.session.commit()
     return current_user.to_dict()
 
@@ -125,17 +112,15 @@ def remove_song_like(id):
     """
     Removes like from a selected song. Returns a message if successful.
     """
-    user_id = current_user.id
-    song_id = id
 
-    like = likes.query.filter(
-        likes.c.user_id == user_id,
-        likes.c.song_id == song_id
-    ).first()
+    song = Song.query.get(id)
 
-    if like:
-        db.session.delete(like)
-        db.session.commit()
-        return current_user.to_dict()
-    else:
+    try:
+        idx = current_user.liked_songs.index(song)
+    except ValueError:
         return { "errors": "User has never liked this song" }, 405
+
+    current_user.liked_songs.pop(idx)
+
+    db.session.commit()
+    return current_user.to_dict()

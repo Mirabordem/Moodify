@@ -43,20 +43,20 @@ def login():
         user = User.query.filter(User.email == form.data['email']).first()
         login_user(user)
 
-        user_obj = user.to_dict()
+        # user_obj = user.to_dict()
 
-        song_instances = [song.to_dict() for song in user_obj['likedSongs']]
-        user_obj['likedSongs'] = [song['id'] for song in song_instances]
+        # song_instances = [song.to_dict() for song in user_obj['likedSongs']]
+        # user_obj['likedSongs'] = [song['id'] for song in song_instances]
 
-        album_instances = [album.to_dict() for album in user_obj['userAlbums']]
-        user_obj['userAlbums'] = [album['id'] for album in album_instances]
+        # album_instances = [album.to_dict() for album in user_obj['userAlbums']]
+        # user_obj['userAlbums'] = [album['id'] for album in album_instances]
 
-        playlist_instances = [playlist.to_dict() for playlist in user_obj['userPlaylists']]
-        user_obj['userPlaylists'] = [playlist['id'] for playlist in playlist_instances]
+        # playlist_instances = [playlist.to_dict() for playlist in user_obj['userPlaylists']]
+        # user_obj['userPlaylists'] = [playlist['id'] for playlist in playlist_instances]
 
         # ic(user_obj['likedSongs'])
         # ic(user_obj)
-        return user_obj
+        return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

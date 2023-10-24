@@ -60,9 +60,9 @@ def get_all_albums():
     """
     albums = Album.query.all()
     album_dict_list = [album.to_dict() for album in albums]
-    for album in album_dict_list:
-        song_instances = [song.to_dict() for song in album['albumSongs']]
-        album['albumSongs'] = [song['id'] for song in song_instances]
+    # for album in album_dict_list:
+    #     song_instances = [song.to_dict() for song in album['albumSongs']]
+    #     album['albumSongs'] = [song['id'] for song in song_instances]
 
     return album_dict_list
 

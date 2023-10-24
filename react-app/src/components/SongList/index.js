@@ -108,11 +108,10 @@ export default function SongList({
     const handleDislike = (e) => {
       e.stopPropagation();
       if (user) {
-        const isSongId = (element) => element == song.id;
-        let songIdIndex = user.likedSongs.findIndex(isSongId);
-        user.likedSongs.splice(songIdIndex, 1);
+        const id = song.id;
+        dispatch(ThunkDeleteLike(id));
       }
-      // heart = emptyHeart;
+      heart = emptyHeart;
     };
     const minutes = Math.trunc(song.songLength / 60);
     const seconds = song.songLength % 60;

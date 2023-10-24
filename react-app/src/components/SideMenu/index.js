@@ -55,7 +55,7 @@ export default function SideMenu() {
   const userPlaylistMap = userPlaylists.map((id) => {
     if (playlists[id]?.name) {
       return (
-        <NavLink to={`/playlists/${id}`}>
+        <NavLink key={id} to={`/playlists/${id}`}>
           <li>{playlists[id]?.name}</li>
         </NavLink>
       );
