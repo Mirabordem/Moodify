@@ -114,13 +114,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useModal } from '../../context/Modal';
 import './newAlbum.css';
-import { ThunkCreateAlbum } from "../../store/albums";
-
+import { ThunkCreateAlbum, ThunkEditAlbum } from "../../store/albums";
 
 export default function NewAlbum({ formType, albumId }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const { closeModal } = useModal();
+
+    const album = useSelector(state => state.albums[albumId]);
+
+    const [title, setTitle] = useState('');
+    const [releaseDate, setReleaseDate] = useState('');
+    const [artist, setArtist] = useState('');
+    const [albumCover, setAlbumCover] = useState('');
+    const [didPicChange, setDidPicChange] = useState(false)
 
 
     const album = useSelector(state => state.albums[albumId]);
@@ -145,24 +152,51 @@ export default function NewAlbum({ formType, albumId }) {
     }, [formType, album]);
 
 
+    useEffect(() => {
+        if (formType === 'Edit' && album) {
+            setAlbumCover(album.coverImageUrl);
+            setTitle(album.title);
+            setArtist(album.artist);
+            const releaseDate = new Date(album.releaseDate);
+            const formattedDate = releaseDate.toISOString().split('T')[0];
+            setReleaseDate(formattedDate);
+        }
+    }, [formType, album]);
+
     const handleAlbumCoverChange = (e) => {
         const ourPicture = e.target.files[0];
         setAlbumCover(ourPicture);
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         let formData = new FormData();
-        formData.append('cover_image_url', albumCover);
+
         formData.append('title', title);
         formData.append('release_date', releaseDate);
         formData.append('artist', artist);
-        let test = await dispatch(ThunkCreateAlbum(formData));
-        if (test) {
-            history.push(`/albums/${test.id}`);
-            closeModal();
+
+        if (formType === "Create") {
+            formData.append('cover_image_url', albumCover);
+            let test = await dispatch(ThunkCreateAlbum(formData));
+            if (test) {
+                history.push(`/albums/${test.id}`);
+                closeModal();
+            }
         }
+        else if (formType === "Edit") {
+            if (didPicChange) {
+                formData.append('cover_image_url', albumCover);
+
+            }
+            let test2 = await dispatch(ThunkEditAlbum(formData, albumId));
+
+            if (test2) {
+                closeModal();
+            }
+
+        }
+
     };
 
 
@@ -170,7 +204,14 @@ export default function NewAlbum({ formType, albumId }) {
 
 
         <div className="newAlbum-container">
-            <h1 className='h1'>Create Album</h1>
+            {formType === 'Edit' && (
+                <h1 className='h1'>Edit Album</h1>
+            )}
+
+            {formType === 'Create' && (
+                <h1 className='h1'>Create Album</h1>
+            )}
+
             <form onSubmit={handleSubmit} encType="multipart/form-data" className='newAlbum-form'>
                 {/* <ul>
                     {errors.map((error, idx) => (
@@ -219,17 +260,16 @@ export default function NewAlbum({ formType, albumId }) {
                     <input
                         type="file"
                         onChange={(e) => {
-
+                            setDidPicChange(true)
 
                             handleAlbumCoverChange(e)
                         }}
                         accept='image/*'
-                        required
+                        required={formType === 'Create'}
                     />
                 </label>
 
-
-                <button type="submit">Create Album</button>
+                <button type="submit">{formType === 'Create' ? 'Create Album' : 'Edit Album'}</button>
             </form>
         </div>
     )

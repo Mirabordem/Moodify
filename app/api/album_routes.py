@@ -20,35 +20,33 @@ def create_new_album():
 
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    # form.data['user_id'] = current_user.id
-    if form.validate_on_submit():
-        # print('WE ARE INSIDE FORM.VALIDATE')
-        image= form.data['cover_image_url']
-        # print('what is the image?',image)
-        image.filename = get_unique_filename(image.filename)
-        upload = upload_file_to_s3(image)
-        # print('THIS IS UPLOAD',upload)
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            image= form.data['cover_image_url']
+            image.filename = get_unique_filename(image.filename)
+            url='https://i.imgur.com/8LMyVdU.jpg'
 
-        # if "url" not in upload:
-        # return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+            ##KEEP THIS. uncomment this code when we actually want to upload to aws
+            # upload = upload_file_to_s3(image)
+            # print('THIS IS UPLOAD',upload)
 
-        url = upload['url']
+            # # if "url" not in upload:
+            # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
-        new_album = Album (
-            title = form.data['title'],
-            release_date = form.data['release_date'],
-            artist = form.data['artist'],
-            cover_image_url = url,
-        )
-        db.session.add(new_album)
-        db.session.commit()
-
-        return new_album.to_dict()
-
-    print(form.errors)
-    return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+            # url = upload['url']
 
 
+
+
+            new_album = Album (
+                title = form.data['title'],
+                release_date = form.data['release_date'],
+                artist = form.data['artist'],
+                cover_image_url = url,
+                user_owner= current_user.id
+            )
+            db.session.add(new_album)
+            db.session.commit()
 
 @album_routes.route('')
 def get_all_albums():
@@ -90,12 +88,11 @@ def get_user_albums():
 
 
 
+
+
 @album_routes.route('/<int:id>/edit', methods=['PUT'])
 @login_required
 def edit_album(id):
-    """
-    Editing an Album.
-    """
     form = EditAlbumForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -103,22 +100,29 @@ def edit_album(id):
 
     if album is None:
         return {'errors': 'Album not found'}, 404
-    elif album.user_id != current_user.id:
+    elif album.user_owner != current_user.id:
         return {'errors': 'forbidden'}, 403
 
     if form.validate_on_submit():
+        if form.data['cover_image_url']:
+            image = form.data['cover_image_url']
+            image.filename = get_unique_filename(image.filename)
+            url="https://i.imgur.com/sG9LYzh.jpg"
+
+            ##KEEP THIS. uncomment this code when we actually want to upload to aws
+            # upload = upload_file_to_s3(image)
+            # # if "url" not in upload:
+            # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+            # url = upload['url']
+
+            album.cover_image_url =url
         data = form.data
         album.title = data['title']
         album.release_date = data['release_date']
         album.artist = data['artist']
-        if data['cover_image_url'] == '':
-            album.cover_image_url = 'https://cdn-icons-png.flaticon.com/512/287/287422.png'
-        else:
-            album.cover_image_url = data['cover_image_url']
-
         db.session.commit()
-
         return album.to_dict()
+    print(form.errors)
 
     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 

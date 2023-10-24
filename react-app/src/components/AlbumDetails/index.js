@@ -83,7 +83,7 @@ export default function AlbumDetails() {
           className="new-album"
           buttonText="Edit Album"
           modalComponent={<NewAlbum formType="Edit" albumId={id} />}
-        />
+          />
         <h5>Additional functions here if you are album owner</h5>
       </div>
       <div id="album-id-song-list">
