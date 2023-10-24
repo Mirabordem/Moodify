@@ -6,28 +6,27 @@ import './Navigation.css';
 import OpenModalButton from "../OpenModalButton/index";
 import NewAlbum from '../NewAlbum';
 
-function Navigation({ isLoaded }){
-	const sessionUser = useSelector(state => state.session.user);
+function Navigation({ isLoaded }) {
+  const sessionUser = useSelector(state => state.session.user);
 
-	return (
-		<div className='nav-container'>
-		  {isLoaded && (
-			<div className='nav-profile'>
-				{sessionUser ? (
-					
+  return (
+    <div className='nav-container'>
+      {isLoaded && (
+        <div className='nav-profile'>
+          {sessionUser ? (
+            <OpenModalButton
+              className="new-album"
+              buttonText="Create Album"
+              modalComponent={<NewAlbum />}
+            />
+          ) : null}
+          <ProfileButton user={sessionUser} />
+        </div>
+      )}
+    </div>
+  );
+}
 
-<OpenModalButton
-className="new-album"
-buttonText="Create Album"
-modalComponent={<NewAlbum/>}
-/>
-				) : null}
-			  <ProfileButton user={sessionUser} />
-			  </div>
-		  )}
-		  </div>
-	  );
-	}
+export default Navigation;
 
 
-	export default Navigation;

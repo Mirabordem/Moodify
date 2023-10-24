@@ -1,94 +1,46 @@
-/* .side-menu {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    width: 100px;
-    height: 100%;
-    background-color: black;
-    transition: left 0.3s;
-    z-index: 50;
-    border: 2px solid orange;
-  }
-
-  .menu-toggle {
-    background-color: black;
-    font-size: 34px;
-    border: none;
-    width: 210px;
-    color: white;
-    cursor: pointer;
-
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    padding: 10px;
-  }
-
-  a {
-    text-decoration: none;
-    width: 210px;
-    color: white;
-
-  }
-
-  a:hover {
-    text-decoration: underline;
-  } */
-
-
-  /* .side-menu {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    width: 150px;
-    height: 100%;
-    background-color: black;
-    transition: left 0.3s;
-    z-index: 20;
-  } */
-
-
-
-  .logo-container {
+.logo-container {
     text-align: center;
     margin: 20px 0;
-  }
+}
 
-  .Moodify-logo {
+.Moodify-logo {
     width: 210px;
     height: 100px;
-  }
+}
 
-  .menu-toggle {
+.menu-toggle {
     background-color: black;
     font-size: 30px;
     border: none;
     margin-top: 55px;
     width: 210px;
     color: white;
-  }
+}
 
-  .ul-container {
+.ul-container {
     width: 210px;
     list-style-type: none;
     padding: 5;
-  }
+}
 
-  li {
+li {
     padding: 8px;
-  }
+}
 
-  a {
+a {
     text-decoration: none;
     font-size: 18px;
     color: rgb(198, 196, 196);
-  }
+}
 
-  a:hover {
+a:hover {
     cursor: pointer;
-  }
+}
+
+.fa-list {
+    margin-right: 10px;
+}
+
+.fa-music {
+    margin-right: 13px;
+}

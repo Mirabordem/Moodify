@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, NavLink, useParams } from "react-router-dom";
-import OpenModalButton from "../OpenModalButton/index";
-import { useModal } from "../../context/Modal";
+import { NavLink } from "react-router-dom";
 import "./home.css";
 import { getAllAlbums } from "../../store/albums";
 import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
+import SideMenu from "../SideMenu";
 
 export default function Home() {
   const albums = useSelector((state) => state.albums);
@@ -20,7 +19,6 @@ export default function Home() {
   }, []);
 
   if (!albumsArray.length) {
-    //    dispatch(thunkGetAllAlbums())
     return null;
   }
 
@@ -32,29 +30,37 @@ export default function Home() {
         exact
         to={`albums/${album.id}`}
       >
-        <div className="card-image-container">
-          <img src={album.coverImageUrl} />
+        <div className="card-image">
+          <img className="album-image" src={album.coverImageUrl} alt={`Cover for ${album.title}`} />
         </div>
         <div className="card-info-container">
-          <p>{album.title}</p>
-          <p>{album.artist}</p>
+          <p className="album-title">{album.title}</p>
+          <p className="album-title">{album.artist}</p>
         </div>
       </NavLink>
     );
   });
 
   return (
-    <div className="main_window_container">
-      <h1 className="homeText">Welcome to Moodify!</h1>
-      <div className="card-container cample-container">
-        <div className="cards-list-title">
-          <h3>Albums</h3>
-          <NavLink exact to="/albums">
-            All albums
-          </NavLink>
+    <div className="page-container">
+      <SideMenu />
+      <div className="content-container">
+        <div className="main_window_container">
+          <div className="homeText">
+            <h1>Welcome to Moodify!</h1>
+          </div>
+          <div className="home-h3">
+            <NavLink exact to="/albums" className="homeAlbums">
+              All Albums
+            </NavLink>
+          </div>
+          <div className="album-cards-container">
+            {albumCards}
+          </div>
         </div>
-        <div className="card-map-div">{albumCards}</div>
       </div>
     </div>
   );
 }
+
+
