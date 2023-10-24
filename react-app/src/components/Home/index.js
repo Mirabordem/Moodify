@@ -34,7 +34,7 @@ export default function Home() {
           <img className="album-image" src={album.coverImageUrl} alt={`Cover for ${album.title}`} />
         </div>
         <div className="card-info-container">
-          <p className="album-title">{album.title}</p>
+          <p className="album-title1">{album.title}</p>
           <p className="album-title">{album.artist}</p>
         </div>
       </NavLink>
@@ -62,5 +62,3 @@ export default function Home() {
     </div>
   );
 }
-
-

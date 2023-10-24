@@ -4,7 +4,8 @@
     flex-direction: column;
     padding-left: 210px;
     min-height: 100vh;
-    background: linear-gradient(rgb(73, 72, 72), black);
+    padding-right: 50px;
+    background: linear-gradient(rgb(80, 79, 79), black);
 }
 
 .content-container {
@@ -32,7 +33,7 @@
 }
 
 .homeAlbums {
-    color: rgb(198, 196, 196);
+    color: rgb(223, 221, 221);
     font-size: 28px;
     font-weight: 400;
     margin-left: 50px;
@@ -45,6 +46,7 @@
     gap: 20px;
     margin-left: 20px;
     padding-right: 20px;
+    /* background: linear-gradient(rgb(80, 79, 79), black); */
 }
 
 .card-image {
@@ -69,7 +71,7 @@
     max-width: 300px;
     width: calc(20% - 4px);
     margin: 0 2px;
-    background: linear-gradient(black, rgb(73, 72, 72));
+    background: linear-gradient(black, rgb(106, 106, 106));
     border-radius: 10px;
     cursor: pointer;
     width: 100%;
@@ -85,5 +87,15 @@
     margin-left: 20px;
     margin-bottom: 0;
     margin-top: 2px;
+    /* border: 2px solid orange; */
+}
+
+.album-title1 {
+    margin-left: 20px;
+    margin-bottom: 0;
+    margin-top: 2px;
+    font-weight: bold;
+    font-stretch: expanded;
+    color: rgb(223, 221, 221);
     /* border: 2px solid orange; */
 }

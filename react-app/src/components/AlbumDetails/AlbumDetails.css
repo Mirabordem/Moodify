@@ -1,0 +1,36 @@
+.song-li {
+
+}
+
+.album-id-top-info {
+    margin-top: 120px;
+    margin-left: 70px;
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.album-id-cover-img {
+    /* border: 2px solid red; */
+    margin-right: 40px;
+    margin-bottom: 30px;
+    width: 250px;
+    height: 250px;
+}
+
+#album-id-info-words {
+    border: 2px solid green;
+    width: 600px;
+}
+
+.amount-songs {
+    color: rgb(223, 221, 221);
+    font-weight: 100;
+}
+
+/* .album-title {
+    font-size: 46px;
+    font-weight: 300;
+    padding-left: 0;
+} */
