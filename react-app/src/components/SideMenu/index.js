@@ -5,14 +5,18 @@ import { getAllAlbums } from "../../store/albums";
 import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
+import NewPlaylist from "../NewPlaylist";
+import OpenModalButton from "../OpenModalButton/index";
 import "./SideMenu.css";
 
 export default function SideMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const sessionUser = useSelector(state => state.session.user);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
 
   const user = useSelector((state) => state.session.user);
   const playlists = useSelector((state) => state.playlists);
@@ -51,6 +55,7 @@ export default function SideMenu() {
     }
   });
 
+
   return (
     <div className={`side-menu ${isOpen ? "open" : ""}`}>
       <div className="logo-container">
@@ -70,12 +75,23 @@ export default function SideMenu() {
           <NavLink to="/playlists">
             <i className="fas fa-list"></i> My Playlists
           </NavLink>
+          {sessionUser?.id && (
+          <OpenModalButton
+          className="new-album-playlist"
+          buttonText="+"
+          modalComponent={<NewPlaylist formType="Create" userId={sessionUser.id} />}
+        />) }
+
         </li>
         <li>
           <NavLink to="/albums">
+
             <i className="fas fa-music"></i>
             My Albums
+
           </NavLink>
+
+
         </li>
       </ul>
       {<ul>{userPlaylistMap}</ul>}
