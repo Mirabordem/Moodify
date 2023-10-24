@@ -62,7 +62,7 @@ def get_all_albums():
 
 
 
-@album_routes.route('/:id')
+@album_routes.route('/<int:id>')
 def get_album_by_id(id):
     """
     Query for an album by id. Returns album in a dictionary.
@@ -119,7 +119,9 @@ def edit_album(id):
 
 
         print(form.data)
-        url = form.data['cover_image_url']
+        image = form.data['cover_image_url']
+        image.filename = get_unique_filename(image.filename)
+        url="http://www.justAtest2.jpg"
 
         data = form.data
 
