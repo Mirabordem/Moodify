@@ -14,10 +14,37 @@ export default function SideMenu() {
     setIsOpen(!isOpen);
   };
 
-  useEffect(() => {
 
+  const user = useSelector((state) => state.session.user);
+  const playlists = useSelector((state) => state.playlists);
 
-  }, [sessionUser]);
+  useEffect(() => {}, [user]);
+
+  if (user) {
+    console.log(Object.values(user.userPlaylists));
+  }
+
+  // if (user?.userPlaylists) {
+  //   let userPlaylists = Object.values(user.userPlaylists);
+  // } else {
+  //   let userPlaylists = null;
+  // }
+
+  let userPlaylists = [];
+  if (user?.userPlaylists) {
+    userPlaylists = Object.values(user.userPlaylists);
+  }
+
+  const userPlaylistMap = userPlaylists.map((id) => {
+    return (
+      <NavLink to={`/playlists/${id}`}>
+        <li>
+          <p>{playlists[id].name}</p>
+        </li>
+      </NavLink>
+    );
+  });
+
 
   return (
     <div className={`side-menu ${isOpen ? "open" : ""}`}>
@@ -36,7 +63,7 @@ export default function SideMenu() {
       <ul className="ul-container">
         <li>
           <NavLink to="/playlists">
-          <i className="fas fa-list"></i> My Playlists
+            <i className="fas fa-list"></i> My Playlists
           </NavLink>
           {sessionUser?.id && (
           <OpenModalButton
@@ -48,13 +75,16 @@ export default function SideMenu() {
         </li>
         <li>
           <NavLink to="/albums">
-          <i className="fas fa-music"></i>
-          My Albums
+
+            <i className="fas fa-music"></i>
+            My Albums
+
           </NavLink>
 
 
         </li>
       </ul>
+      {<ul>{userPlaylistMap}</ul>}
     </div>
   );
 }
