@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
 import { useModal } from '../../context/Modal';
 import { useDispatch } from "react-redux";
@@ -9,9 +9,15 @@ export default function CreateSong({albumId}) {
     const {id} = useParams()
     const {closeModal} = useModal()
     const [name, setname] = useState('')
-    const [trackNumber, setTrackNumber] = useState(0)
+    const [trackNumber, setTrackNumber] = useState(1)
     const [audioUrl, setAudioUrl] = useState('')
     const [songLength, setSongLength] = useState(1)
+
+    console.log(audioUrl)
+
+    useEffect(() => {
+
+    })
 
     const submitSong = async e => {
         e.preventDefault()
@@ -43,22 +49,25 @@ export default function CreateSong({albumId}) {
                 <label>
                     <input
                     type="number"
+                    min={1}
                     value={trackNumber}
                     onChange={e => setTrackNumber(e.target.value)}
                     />
                 </label>
                 <label>
                     <input
-                    type="file"
-                    value={audioUrl}
-                    onChange={e => setAudioUrl(e.target.value)}
-                    />
-                </label>
-                <label>
-                    <input
                     type="number"
+                    min={1}
                     value={songLength}
                     onChange={e => setSongLength(e.target.value)}
+                    />
+                </label>
+                <label >
+                    Choose Audio File
+                    <input
+                    type="file"
+                    accept='audio/*'
+                    onChange={e => setAudioUrl(e.target.files[0])}
                     />
                 </label>
                 <button type="submit">Add Song</button>
