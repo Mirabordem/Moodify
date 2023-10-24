@@ -48,6 +48,11 @@ def create_new_album():
         db.session.add(new_album)
         db.session.commit()
 
+        return new_album.to_dict()
+    print(form.errors)
+    return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+
+
 @album_routes.route('')
 def get_all_albums():
     """
