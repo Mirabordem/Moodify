@@ -83,31 +83,5 @@ function ProfileButton({ user }) {
  );
 }
 
-//           <>
-//             <li>{user.username}</li>
-//             <li>{user.email}</li>
-//             <li>
-//               <button onClick={handleLogout}>Log Out</button>
-//             </li>
-//           </>
-//         ) : (
-//           <>
-//             <OpenModalButton
-//               buttonText="Log In"
-//               onItemClick={closeMenu}
-//               modalComponent={<LoginFormModal />}
-//             />
-
-//             <OpenModalButton
-//               buttonText="Sign Up"
-//               onItemClick={closeMenu}
-//               modalComponent={<SignupFormModal />}
-//             />
-//           </>
-//         )}
-//       </ul>
-//     </>
-//   );
-// }
 
 export default ProfileButton;
