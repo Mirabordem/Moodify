@@ -4,7 +4,7 @@ import { useModal } from '../../context/Modal';
 import { useDispatch } from "react-redux";
 import { thunkCreateSong } from "../../store/songs";
 
-export default function CreateSong() {
+export default function CreateSong({albumId}) {
     const dispatch = useDispatch()
     const {id} = useParams()
     const {closeModal} = useModal()
