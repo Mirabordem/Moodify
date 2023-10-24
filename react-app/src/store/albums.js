@@ -64,21 +64,14 @@ export const ThunkCreateAlbum = (formData) => async (dispatch) => {
     if (res.ok) {
         const realNewAlbum = await res.json();
         const returnAlbum={...realNewAlbum}
-        console.log('realNewAlbum returned from server is', realNewAlbum)
-
         await dispatch(createAlbum(realNewAlbum))
         return returnAlbum
-
-
-
     }
     else {
         console.log('THERE WAS AN ERROR IN MAKING THE POST')
         const errors= await res.json()
         return errors
     }
-
-
 
 }
 
@@ -92,9 +85,6 @@ export const ThunkEditAlbum = (formData,albumId) => async (dispatch) => {
         const returnAlbum={...realNewAlbum}
         await dispatch(updateAlbum(realNewAlbum))
         return returnAlbum
-
-
-
     }
     else {
         console.log('THERE WAS AN ERROR IN MAKING THE POST')
