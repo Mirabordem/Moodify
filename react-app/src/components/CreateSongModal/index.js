@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkCreateSong } from "../../store/songs";
 import { useSongPlayer } from "../../context/SongPlayer";
 
-export default function CreateSong({formtype, albumId}) {
+export default function CreateSong({formtype, albumId, songId}) {
     const dispatch = useDispatch()
     const {id} = useParams()
     const {songAdded, setSongAdded} = useSongPlayer()
