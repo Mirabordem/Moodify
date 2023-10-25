@@ -13,66 +13,76 @@ import "./AlbumDetails.css";
 import SongList from "../SongList";
 import CreateSong from "../CreateSongModal";
 import DeleteAlbumModal from "../DeleteAlbumModal";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
+
+
 
 
 export default function AlbumDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
-
   const album = useSelector((state) => state.albums[id]);
   const songs = useSelector((state) => state.songs);
 
+
   if (!album || !Object.values(songs).length) {
-    // dispatch(thunkGetAllAlbums());
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
 
   const album_tracks = [];
+  let totalAlbumLength = 0;
+
   for (let songId of album.albumSongs) {
-    album_tracks.push(songs[songId]);
+    const song = songs[songId];
+    album_tracks.push(song);
+    totalAlbumLength += song.songLength;
   }
-  console.log(
-    "🚀 ~ file: index.js:26 ~ AlbumDetails ~ album_tracks:",
-    album_tracks
-  );
+
+  const minutes = Math.trunc(totalAlbumLength / 60);
+  const releaseDate = new Date(album.releaseDate);
+  const releaseYear = releaseDate.getFullYear();
+  const totalNumberOfSongs = album_tracks.length;
 
   return (
     <div className="album-page-container">
       <div className="album-id-top-info">
-        {/* <div className="album-id-cover-img"> */}
         <img className="album-id-cover-img" src={album.coverImageUrl} />
-        {/* </div> */}
         <div id="album-id-info-words">
           <p className="info-album-p">Album</p>
           <div>
-
-          <p className="album-title-page">{album.title}</p>
-
+            <p className="album-title-page">{album.title}</p>
           </div>
-
-          <p className="album-release-info">{album.artist}, {album.releaseDate}, Amount of songs here, Length of album here</p>
-          {/* <p className="amount-songs">Amount of songs here, Length of album here</p> */}
-
+          <p className="album-release-info">
+            {album.artist} • {releaseYear} • {totalNumberOfSongs} songs •{" "}
+            {minutes} min
+          </p>
         </div>
       </div>
 
-      <div id="album-id-functions">
-        <button>Play album from beginning</button>
+      <div className="album-id-functions-3">
+      <button style={{ background: 'transparent', border: 'none' }}>
+          <img className="green-button-image"
+            src="https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/ifd4a620d55cdf9ab/version/1698195083/image.png"
+            alt="Play Music"
+          />
+        </button>
+
+
         <OpenModalButton
           className="new-album"
           buttonText="Edit Album"
-          modalComponent={<NewAlbum formType="Edit" albumId={id} />}
-          />
+          // modalComponent={<NewAlbum formType="Edit" albumId={id} />}
+        />
         <OpenModalButton
-          buttonText="add-Song"
-          modalComponent={<CreateSong albumId={id} />}
+          buttonText="Add Song"
+          // modalComponent={<CreateSong albumId={id} />}
         />
         <OpenModalButton
           buttonText="Delete"
-          modalComponent={<DeleteAlbumModal />}
+          // modalComponent={<DeleteAlbumModal />}
         />
-        <h5>Additional functions here if you are album owner</h5>
       </div>
       <div id="album-id-song-list">
         <SongList songs={album_tracks} artist={album.artist} />

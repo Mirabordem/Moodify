@@ -63,8 +63,9 @@
 }
 
 .album-image {
+    margin-top: 10px;
     width: 85%;
-    height: 85%;
+    height: 90%;
 }
 
 .card {
