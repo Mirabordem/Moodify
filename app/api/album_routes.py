@@ -144,11 +144,11 @@ def delete_album(id):
 
     if album is None:
         return {'errors': 'Album not found'}, 404
-    elif album.user_id != current_user.id:
+    elif album.user_owner != current_user.id:
         return {'errors': 'forbidden'}, 403
 
 # removing songs in deleted album:
-    songs = album.to_dict()['songs']
+    songs = album.to_dict()['albumSongs']
     for song in songs:
         remove_file_from_s3(song['song_url'])
 
@@ -165,37 +165,43 @@ def create_album_song(id):
     """
     Create Song for Album.
     """
+
+    print()
     form = CreateSongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-
+    album = Album.query.get(id)
+    if album is None:
+        return {'errors': 'Album not found'}, 404
+    elif album.user_owner != current_user.id:
+        return {'errors': 'forbidden'}, 403
+        print("BEFORE VALIDATION <<<<<<<<<<<<")
     if form.validate_on_submit():
-        album = Album.query.get(id)
+        print("VALID FORM >>>>>>>>>>>>>>")
+        data = form.data
 
-        if album is None or album.user_id != current_user.id:
-            return { 'errors': 'Album not found'}, 404
+##KEEP THIS. uncomment this code when we actually want to upload to aws
+        # song = data["audio_url"]
+        # song.filename = get_unique_filename(song.filename)
+        # upload = upload_file_to_s3(song)
+        # print(upload)
+        # if 'url' not in upload:
+        #     return { 'errors': 'upload error'}
 
-        song = form.data['song']
-        audio = MP3(song)
-        song.filename = get_unique_filename(song.filename)
-        song.seek(0)
-        upload = upload_file_to_s3(song)
-
-
-        if 'url' not in upload:
-            return { 'errors': 'upload error'}
-
-        newSong = Song (
-            name = form.data['name'],
-            album_id = form.data['album.id'],
-            track_number = form.data['track_number'],
-            audio_url = form.data['audio_url'],
-            song_length = form.data['song_length']
+        new_song = Song (
+            name = data['name'],
+            album_id = album.id,
+            track_number = data['track_number'],
+            audio_url = "https://moodifybucket.s3.us-east-2.amazonaws.com/1434107b49fc4fe0affff24gsfffffssrsssr9ffdwffff9ffdffb9ggs1f8517c.mp3",
+            song_length = data['song_length']
         )
-        db.session.add(newSong)
+        db.session.add(new_song)
         db.session.commit()
+        ("POST DATABASE COMMIT!!!!!!!!!!!!!!")
 
-        return newSong.to_dict()
+        ic(new_song.to_dict())
+        print(new_song.to_dict())
+        return new_song.to_dict()
 
     print(validation_errors_to_error_messages(form.errors))
     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400
@@ -203,17 +209,17 @@ def create_album_song(id):
 
 
 
-@album_routes.route('/<int:id>/songs', methods=['GET'])
-def get_album_songs(id):
-    """
-    Retrieve songs within an album by its Id. Returns a list of song dictionaries.
-    """
-    album = Album.query.get(id)
+# @album_routes.route('/<int:id>/songs', methods=['GET'])
+# def get_album_songs(id):
+#     """
+#     Retrieve songs within an album by its Id. Returns a list of song dictionaries.
+#     """
+#     album = Album.query.get(id)
 
-    if album is None:
-        return {'errors': 'Album not found'}, 404
+#     if album is None:
+#         return {'errors': 'Album not found'}, 404
 
-    album_songs = album.albumSongs
-    song_dict_list = [song.to_dict() for song in album_songs]
+#     album_songs = album.albumSongs
+#     song_dict_list = [song.to_dict() for song in album_songs]
 
-    return song_dict_list
+#     return song_dict_list

@@ -12,6 +12,7 @@ export default function SongPlayerProvider({ children }) {
   const [prevSong, setPrevSong] = useState({});
   const [songList, setSongList] = useState([]);
   const [currentSongIndex, setCurrentSongIndex] = useState();
+  const [songAdded, setSongAdded] = useState(false)
 
   return (
     <>
@@ -31,6 +32,8 @@ export default function SongPlayerProvider({ children }) {
           setPlayAnyway,
           currentSongIndex,
           setCurrentSongIndex,
+          songAdded,
+          setSongAdded
         }}
       >
         {children}

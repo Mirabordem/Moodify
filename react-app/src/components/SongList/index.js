@@ -7,7 +7,11 @@ import './SongList.css';
 
 
 
-export default function SongList({ songs, artist }) {
+export default function SongList({pageType, artist, songAdded, setSongAdded, album, playlist }) {
+  const dispatch = useDispatch()
+  const songs = useSelector(state => state.songs)
+  // const album = useSelector(state => state.albums[albumId])
+  // const [songsForRender, setSongsForRender] = useState([])
   const {
     isPlaying,
     setIsPlaying,
@@ -25,13 +29,32 @@ export default function SongList({ songs, artist }) {
     setCurrentSongIndex,
   } = useSongPlayer();
 
+  let songTracks = []
+
   useEffect(() => {
-    setSongList(songs);
-  }, []);
+    setSongList(songTracks);
+  }, [songs]);
+
+  if (!Object.values(songs).length) {
+    fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
+    return null;
+  }
+
+  if(pageType !== 'playlist') {
+    for (let songId of album.albumSongs) {
+      songTracks.push(songs[songId])
+    }
+  } else {
+    for (let songId of playlist.songsOnPlaylist) {
+      songTracks.push(songs[songId]);
+    }
+  }
 
   const setSongs = (song) => {
     setCurrentSong(song);
+
     const index = songs.findIndex((item) => item.id === song.id);
+
     setCurrentSongIndex(index);
 
     if (index === 0) {
@@ -51,7 +74,7 @@ export default function SongList({ songs, artist }) {
     setIsPlaying(true);
   };
 
-  const songListMap = songs.map((song) => {
+  const songListMap = songTracks.map((song) => {
     const minutes = Math.trunc(song.songLength / 60);
     const seconds = song.songLength % 60;
     const runTime = `${minutes}:${seconds}`;

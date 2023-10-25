@@ -18,7 +18,6 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 
 
 
-
 export default function AlbumDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -30,6 +29,7 @@ export default function AlbumDetails() {
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
+
 
   const album_tracks = [];
   let totalAlbumLength = 0;
@@ -45,6 +45,7 @@ export default function AlbumDetails() {
   const releaseYear = releaseDate.getFullYear();
   const totalNumberOfSongs = album_tracks.length;
 
+
   return (
     <div className="album-page-container">
       <div className="album-id-top-info">
@@ -54,6 +55,7 @@ export default function AlbumDetails() {
           <div>
             <p className="album-title-page">{album.title}</p>
           </div>
+
           <p className="album-release-info">
             {album.artist} • {releaseYear} • {totalNumberOfSongs} songs •{" "}
             {minutes} min
@@ -73,6 +75,7 @@ export default function AlbumDetails() {
         <OpenModalButton
           className="new-album"
           buttonText="Edit Album"
+
           // modalComponent={<NewAlbum formType="Edit" albumId={id} />}
         />
         <OpenModalButton
@@ -82,10 +85,15 @@ export default function AlbumDetails() {
         <OpenModalButton
           buttonText="Delete"
           // modalComponent={<DeleteAlbumModal />}
+
         />
       </div>
       <div id="album-id-song-list">
-        <SongList songs={album_tracks} artist={album.artist} />
+        <SongList
+        // songs={album_tracks}
+        artist={album.artist}
+        album={album}
+        />
       </div>
     </div>
   );
