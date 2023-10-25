@@ -22,14 +22,34 @@ export default function AlbumDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const album = useSelector((state) => state.albums[id]);
-
-
   const songs = useSelector((state) => state.songs);
+  const [minutes, setMinutes] = useState(0)
+  const [releaseDate, setReleaseDate] = useState(0)
+  const [releaseYear, setReleaseYear] = useState(0)
+  const [totalNumberOfSongs, setTotalNumberOfSongs] = useState(0)
+  const [albumTracks, setAlbumTracks]= useState([])
+  const [totalAlbumLength, setTotalAlbumLength] = useState(0)
 
+  useEffect(() => {
+   const newAlbumTracks = []
+   const newAlbumLength = totalAlbumLength
+    for (let songId of album.albumSongs) {
+      const song = songs[songId];
+      newAlbumTracks.push(song);
+      totalAlbumLength += song.songLength;
+    }
+    setAlbumTracks(newAlbumTracks)
+    setTotalAlbumLength(newAlbumLength)
+    const mins = Math.trunc(newAlbumLength / 60);
+    setMinutes(mins)
+    const relDate = new Date(album.releaseDate);
+    setReleaseDate(relDate)
+    const relYear = relDate.getFullYear();
+    setReleaseYear(relYear)
+    const totalSongs = album_tracks.length;
+    setTotalNumberOfSongs(totalSongs)
+  }, [minutes, releaseDate, releaseYear, totalNumberOfSongs])
 
-//   if (!album || !Object.values(songs).length) {
-
-//   const songs = useSelector((state) => state.songs);
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
     // dispatch(thunkGetAllAlbums());
@@ -37,22 +57,6 @@ export default function AlbumDetails() {
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
-
-
-  const album_tracks = [];
-  let totalAlbumLength = 0;
-
-  for (let songId of album.albumSongs) {
-    const song = songs[songId];
-    album_tracks.push(song);
-    totalAlbumLength += song.songLength;
-  }
-
-  const minutes = Math.trunc(totalAlbumLength / 60);
-  const releaseDate = new Date(album.releaseDate);
-  const releaseYear = releaseDate.getFullYear();
-  const totalNumberOfSongs = album_tracks.length;
-
 
   return (
     <div className="album-page-container">
