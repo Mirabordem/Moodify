@@ -3,6 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import OpenModalButton from "../OpenModalButton/index";
 import { useSongPlayer } from "../../context/SongPlayer";
 import './SongList.css';
+import { getAllAlbums } from "../../store/albums";
+import { getAllPlaylists } from "../../store/playlists";
+import { getAllSongs } from "../../store/songs";
+import fetchAll from "../utils";
+
 
 
 
@@ -53,6 +58,7 @@ export default function SongList({pageType, artist, songAdded, setSongAdded, alb
   const setSongs = (song) => {
     setCurrentSong(song);
 
+    if (Array.isArray(songs)) {
     const index = songs.findIndex((item) => item.id === song.id);
 
     setCurrentSongIndex(index);
@@ -73,6 +79,7 @@ export default function SongList({pageType, artist, songAdded, setSongAdded, alb
     }
     setIsPlaying(true);
   };
+}
 
   const songListMap = songTracks.map((song) => {
     const minutes = Math.trunc(song.songLength / 60);
