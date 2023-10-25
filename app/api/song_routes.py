@@ -73,7 +73,13 @@ def edit_song(id):
 
         db.session.commit()
 
-        return current_song.to_dict()
+        updated_album_obj = Album.query.get(album_of_song['id']).to_dict()
+        song_instances = [song.to_dict() for song in updated_album_obj['albumSongs']]
+        updated_album_obj['albumSongs'] = [song['id'] for song in song_instances]
+        current_song_obj = current_song.to_dict()
+
+        return {'song': current_song_obj, 'album': updated_album_obj}
+
 
     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400
 
