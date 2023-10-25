@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Song, likes
+from app.models import db, Song, likes, Album
 from app.forms import EditSongForm, CreateSongForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.api.aws_helpers import remove_file_from_s3
@@ -9,29 +9,29 @@ song_routes = Blueprint('song', __name__)
 
 
 
-@song_routes.route('/new', methods=['POST'])
-@login_required
-def create_new_song():
-    """
-    Creates a new song. Returns a song dictionary.
-    """
-    form = CreateSongForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+# @song_routes.route('/new', methods=['POST'])
+# @login_required
+# def create_new_song():
+#     """
+#     Creates a new song. Returns a song dictionary.
+#     """
+#     form = CreateSongForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
 
-    if form.validate_on_submit():
-        new_song = Song(
-            name = form.data['name'],
-            album_id = form.data['album_id'],
-            track_number = form.data['track_number'],
-            audio_url = form.data['audio_url'],
-            song_length = form.data['song_length']
-        )
+#     if form.validate_on_submit():
+#         new_song = Song(
+#             name = form.data['name'],
+#             album_id = form.data['album_id'],
+#             track_number = form.data['track_number'],
+#             audio_url = form.data['audio_url'],
+#             song_length = form.data['song_length']
+#         )
 
-        db.session.add(new_song)
-        db.session.commit()
-        return new_song.to_dict()
+#         db.session.add(new_song)
+#         db.session.commit()
+#         return new_song.to_dict()
 
-    return { 'errors': validation_errors_to_error_messages(form.errors)}, 400
+#     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 
@@ -45,14 +45,31 @@ def edit_song(id):
     form = EditSongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    if form.validate_on_submit():
-        current_song = Song.query.get(id)
+    current_song = Song.query.get(id)
+    if current_song is None:
+        return {'errors': 'Song not found'}, 404
+    album_of_song = Album.query.get(current_song['album_id'])
+    if album_of_song.user_owner != current_user.id:
+        return {'errors': 'forbidden'}, 403
 
-        current_song.name = form.data['name'],
-        current_song.album_id = form.data['album_id'],
-        current_song.track_number = form.data['track_number'],
-        current_song.audio_url = form.data['audio_url'],
-        current_song.song_length = form.data['song_length']
+
+    if form.validate_on_submit():
+        data = form.data
+        if data["audio_url"]:
+            # song = data["audio_url"]
+            # song.filename = get_unique_filename(song.filename)
+            # upload = upload_file_to_s3(song)
+            # print(upload)
+            # if 'url' not in upload:
+            #     return { 'errors': 'upload error'}
+            # current_song.audio_url = upload['url']
+
+            current_song.audio_url = 'https://moodifybucket.s3.us-east-2.amazonaws.com/bubkas.mp3'
+
+        current_song.name = data['name'],
+        current_song.album_id = data['album_id'],
+        current_song.track_number = data['track_number'],
+        current_song.song_length = data['song_length']
 
         db.session.commit()
 

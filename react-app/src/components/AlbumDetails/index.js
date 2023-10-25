@@ -21,15 +21,48 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 export default function AlbumDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  // const albums = useSelector(state => state.albums)
   const album = useSelector((state) => state.albums[id]);
-
-
   const songs = useSelector((state) => state.songs);
+  const [minutes, setMinutes] = useState(0)
+  const [releaseDate, setReleaseDate] = useState(0)
+  const [releaseYear, setReleaseYear] = useState(0)
+  const [totalNumberOfSongs, setTotalNumberOfSongs] = useState(album?.albumSongs.length)
+  // const [albumTracks, setAlbumTracks]= useState([])
+  const [totalAlbumLength, setTotalAlbumLength] = useState(0)
+  const [newSongs, setNewSongs] = useState(true)
 
 
-//   if (!album || !Object.values(songs).length) {
+  // useEffect(() => {
+  //     setLoadOnce(false)
+  //   }, [])
 
-//   const songs = useSelector((state) => state.songs);
+  useEffect(() => {
+   let newAlbumLength = totalAlbumLength
+    // console.log('IN THE USEEFFECT>>>>>>>>>>')
+   if(album && newSongs) {
+    // console.log('HIT IF STATEMENT!!!!')
+     for (let songId of album.albumSongs) {
+       const song = songs[songId];
+      //  newAlbumTracks.push(song);
+       newAlbumLength += song.songLength;
+     }
+     setTotalAlbumLength(newAlbumLength)
+     const mins = Math.trunc(newAlbumLength / 60);
+     setMinutes(mins)
+     const relDate = new Date(album?.releaseDate);
+     setReleaseDate(relDate)
+     const relYear = relDate.getFullYear();
+     setReleaseYear(relYear)
+     // const totalSongs = newAlbumTracks.length;
+     setTotalNumberOfSongs(album?.albumSongs.length)
+     setNewSongs(false)
+
+   }
+
+    // setAlbumTracks(newAlbumTracks)
+  }, [minutes, releaseDate, releaseYear, totalNumberOfSongs, totalAlbumLength, newSongs, setNewSongs])
+
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
     // dispatch(thunkGetAllAlbums());
@@ -39,20 +72,16 @@ export default function AlbumDetails() {
   }
 
 
-  const album_tracks = [];
-  let totalAlbumLength = 0;
-
+  let defaultAlbumLength = 0;
   for (let songId of album.albumSongs) {
     const song = songs[songId];
-    album_tracks.push(song);
-    totalAlbumLength += song.songLength;
+    defaultAlbumLength += song.songLength;
   }
 
-  const minutes = Math.trunc(totalAlbumLength / 60);
-  const releaseDate = new Date(album.releaseDate);
-  const releaseYear = releaseDate.getFullYear();
-  const totalNumberOfSongs = album_tracks.length;
-
+  const defaultMinutes = Math.trunc(defaultAlbumLength / 60);
+  const defaultReleaseDate = new Date(album.releaseDate);
+  const defaultReleaseYear = defaultReleaseDate.getFullYear();
+  const defaultTotalSongs = album.albumSongs.length;
 
   return (
     <div className="album-page-container">
@@ -65,8 +94,8 @@ export default function AlbumDetails() {
           </div>
 
           <p className="album-release-info">
-            {album.artist} • {releaseYear} • {totalNumberOfSongs} songs •{" "}
-            {minutes} min
+            {album.artist} • {releaseYear ? releaseYear : defaultReleaseYear} • {totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs •{" "}
+            {minutes ? minutes : defaultMinutes} min
           </p>
 
 
@@ -92,7 +121,7 @@ export default function AlbumDetails() {
         />
         <OpenModalButton
           buttonText="Add Song"
-          // modalComponent={<CreateSong albumId={id} />}
+          modalComponent={<CreateSong albumId={id} />}
         />
         <OpenModalButton
           buttonText="Delete"

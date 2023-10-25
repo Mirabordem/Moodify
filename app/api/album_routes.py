@@ -192,7 +192,7 @@ def create_album_song(id):
             name = data['name'],
             album_id = album.id,
             track_number = data['track_number'],
-            audio_url = "https://moodifybucket.s3.us-east-2.amazonaws.com/1434107b49fc4fe0affff24gsfffffssrsssr9ffdwffff9ffdffb9ggs1f8517c.mp3",
+            audio_url = "https://moodifybucket.s3.us-east-2.amazonaws.com/1434107b49fc4fe0asdfsdfffff24gdfsdsdffsfffffssrsssr9ffdwffff9ffdffb9ggs1f8517c.mp3",
             song_length = data['song_length']
         )
         db.session.add(new_song)
@@ -201,7 +201,11 @@ def create_album_song(id):
 
         ic(new_song.to_dict())
         print(new_song.to_dict())
-        return new_song.to_dict()
+        updated_album_obj = Album.query.get(id).to_dict()
+        song_instances = [song.to_dict() for song in updated_album_obj['albumSongs']]
+        updated_album_obj['albumSongs'] = [song['id'] for song in song_instances]
+        new_song_obj = new_song.to_dict()
+        return {'song': new_song_obj, 'album': updated_album_obj}
 
     print(validation_errors_to_error_messages(form.errors))
     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400

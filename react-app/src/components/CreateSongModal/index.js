@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkCreateSong } from "../../store/songs";
 import { useSongPlayer } from "../../context/SongPlayer";
 
-export default function CreateSong({albumId}) {
+export default function CreateSong({formtype, albumId}) {
     const dispatch = useDispatch()
     const {id} = useParams()
     const {songAdded, setSongAdded} = useSongPlayer()
@@ -14,6 +14,7 @@ export default function CreateSong({albumId}) {
     const [trackNumber, setTrackNumber] = useState(1)
     const [audioUrl, setAudioUrl] = useState('')
     const [songLength, setSongLength] = useState(1)
+    const [changeAudioURL, setChangeAudioURL] = useState(false)
 
     console.log(audioUrl)
     // setSongAdded(false)
@@ -21,21 +22,33 @@ export default function CreateSong({albumId}) {
     const submitSong = async e => {
         e.preventDefault()
 
-        const newSong = new FormData()
 
+        if(formtype !== 'edit') {
+            const newSong = new FormData()
             newSong.append('name', name)
             newSong.append('track_number', trackNumber)
-            newSong.append("audio_url", audioUrl)
             newSong.append("song_length", songLength)
+            newSong.append("audio_url", audioUrl)
 
-        const data = await dispatch(thunkCreateSong(newSong, albumId))
-        setSongAdded(!songAdded)
+            const data = await dispatch(thunkCreateSong(newSong, albumId))
+
+            setSongAdded(!songAdded)
+        } else {
+            const updatedSong = FormData()
+            if(changeAudioURL) updatedSong.append("audio_url", audioUrl);
+            updatedSong.append('name', name)
+            updatedSong.append('track_number', trackNumber)
+            updatedSong.append("song_length", songLength)
+
+            // fetch / thunnk here
+        }
+
         closeModal()
     }
 
     return (
         <div>
-            <h1>Add Song to Album</h1>
+            <h1>{formpage === 'edit' ? 'Update Song' : 'Add Song to Album'}</h1>
             <form
             onSubmit={submitSong}
             encType="multipart/form-data"
@@ -71,7 +84,7 @@ export default function CreateSong({albumId}) {
                     onChange={e => setAudioUrl(e.target.files[0])}
                     />
                 </label>
-                <button type="submit">Add Song</button>
+                <button type="submit">{formtype === 'edit' ? 'Update Song' : 'Add Song'}</button>
             </form>
         </div>
     )
