@@ -44,11 +44,12 @@ export const thunkCreateSong = (newSong, albumId) => async dispatch => {
     try{
         const res = await fetch(`/api/albums/${albumId}/songs/new`, {
             method: "POST",
-            headers: {"Content-Type":"application/json"},
+            // headers: {"Content-Type":"multipart/form-data"},
             body: newSong
         });
         if(res.ok){
-            const newSong = res.json()
+            const newSong = await res.json()
+            console.log("🚀 ~ file: songs.js:52 ~ thunkCreateSong ~ newSong:", newSong)
             dispatch(createSong(newSong))
             return newSong
         }

@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
 import { useModal } from '../../context/Modal';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { thunkCreateSong } from "../../store/songs";
+import { useSongPlayer } from "../../context/SongPlayer";
 
 export default function CreateSong({albumId}) {
     const dispatch = useDispatch()
     const {id} = useParams()
+    const {songAdded, setSongAdded} = useSongPlayer()
     const {closeModal} = useModal()
     const [name, setname] = useState('')
     const [trackNumber, setTrackNumber] = useState(1)
@@ -14,10 +16,7 @@ export default function CreateSong({albumId}) {
     const [songLength, setSongLength] = useState(1)
 
     console.log(audioUrl)
-
-    useEffect(() => {
-
-    })
+    // setSongAdded(false)
 
     const submitSong = async e => {
         e.preventDefault()
@@ -30,6 +29,7 @@ export default function CreateSong({albumId}) {
             newSong.append("song_length", songLength)
 
         const data = await dispatch(thunkCreateSong(newSong, albumId))
+        setSongAdded(!songAdded)
         closeModal()
     }
 
@@ -38,6 +38,7 @@ export default function CreateSong({albumId}) {
             <h1>Add Song to Album</h1>
             <form
             onSubmit={submitSong}
+            encType="multipart/form-data"
             >
                 <label>
                     <input

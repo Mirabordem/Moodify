@@ -10,7 +10,11 @@ import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
 import { useSongPlayer } from "../../context/SongPlayer";
 
-export default function SongList({ songs, artist }) {
+export default function SongList({artist, songAdded, setSongAdded, albumId }) {
+  const dispatch = useDispatch()
+  const songs = useSelector(state => state.songs)
+  const album = useSelector(state => state.albums[albumId])
+  // const [songsForRender, setSongsForRender] = useState([])
   const {
     isPlaying,
     setIsPlaying,
@@ -29,12 +33,25 @@ export default function SongList({ songs, artist }) {
   } = useSongPlayer();
 
   useEffect(() => {
-    setSongList(songs);
-  }, []);
+    // setSongsForRender(songs);
+  }, [songs]);
+
+  if (!Object.values(songs).length) {
+    fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
+    return null;
+  }
+
+
+  const albumTracks = [];
+  for (let songId of album.albumSongs) {
+    albumTracks.push(songs[songId]);
+  }
+
+  let songsForRender = albumTracks
 
   const setSongs = (song) => {
     setCurrentSong(song);
-    const index = songs.findIndex((item) => item.name === song.name);
+    const index = songsForRender.findIndex((item) => item.name === song.name);
     setCurrentSongIndex(index);
     if (index === 0) {
       setNextSong(songList[index + 1]);
@@ -50,7 +67,7 @@ export default function SongList({ songs, artist }) {
     setIsPlaying(true);
   };
 
-  const songListMap = songs.map((song) => {
+  const songListMap = songsForRender.map((song) => {
     const minutes = Math.trunc(song.songLength / 60);
     const seconds = song.songLength % 60;
     const runTime = `${minutes}:${seconds}`;
