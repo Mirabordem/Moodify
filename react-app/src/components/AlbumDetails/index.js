@@ -31,7 +31,6 @@ export default function AlbumDetails() {
   // const [albumTracks, setAlbumTracks]= useState([])
   const [totalAlbumLength, setTotalAlbumLength] = useState(0)
   const [newSongs, setNewSongs] = useState(true)
-  const [loadOnce,setLoadOnce] = useState(false)
 
 
   // useEffect(() => {
@@ -40,9 +39,9 @@ export default function AlbumDetails() {
 
   useEffect(() => {
    let newAlbumLength = totalAlbumLength
-    console.log('IN THE USEEFFECT>>>>>>>>>>')
-   if(album?.title && newSongs) {
-    console.log('HIT IF STATEMENT!!!!')
+    // console.log('IN THE USEEFFECT>>>>>>>>>>')
+   if(album && newSongs) {
+    // console.log('HIT IF STATEMENT!!!!')
      for (let songId of album.albumSongs) {
        const song = songs[songId];
       //  newAlbumTracks.push(song);
@@ -59,19 +58,10 @@ export default function AlbumDetails() {
      setTotalNumberOfSongs(album?.albumSongs.length)
      setNewSongs(false)
 
-   } else {
-     setLoadOnce(true)
-     console.log("🚀 ~ file: index.js:62 ~ useEffect ~ loadOnce:", loadOnce)
    }
 
     // setAlbumTracks(newAlbumTracks)
-  }, [minutes, releaseDate, releaseYear, totalNumberOfSongs, totalAlbumLength, newSongs, loadOnce, setLoadOnce, setNewSongs])
-
-
-
-  console.log("🚀 ~ file: index.js:61 ~ AlbumDetails ~ loadOnce:", loadOnce)
-
-  console.log("🚀 ~ file: index.js:54 ~ AlbumDetails ~ setNewSongs:", newSongs)
+  }, [minutes, releaseDate, releaseYear, totalNumberOfSongs, totalAlbumLength, newSongs, setNewSongs])
 
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
@@ -80,6 +70,18 @@ export default function AlbumDetails() {
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
+
+
+  let defaultAlbumLength = 0;
+  for (let songId of album.albumSongs) {
+    const song = songs[songId];
+    defaultAlbumLength += song.songLength;
+  }
+
+  const defaultMinutes = Math.trunc(defaultAlbumLength / 60);
+  const defaultReleaseDate = new Date(album.releaseDate);
+  const defaultReleaseYear = defaultReleaseDate.getFullYear();
+  const defaultTotalSongs = album.albumSongs.length;
 
   return (
     <div className="album-page-container">
@@ -92,8 +94,8 @@ export default function AlbumDetails() {
           </div>
 
           <p className="album-release-info">
-            {album.artist} • {releaseYear} • {totalNumberOfSongs} songs •{" "}
-            {minutes} min
+            {album.artist} • {releaseYear ? releaseYear : defaultReleaseYear} • {totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs •{" "}
+            {minutes ? minutes : defaultMinutes} min
           </p>
 
 
