@@ -75,7 +75,7 @@ export default function AlbumDetails() {
         <SongList
         // songs={album_tracks}
         artist={album.artist}
-        albumId={id}
+        album={album}
         />
       </div>
     </div>

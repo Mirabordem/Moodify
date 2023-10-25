@@ -19,6 +19,7 @@ We need context for isPlaying, nextSong, currentSong, prevSong other two are cal
 export default function MusicPlayer() {
   //   const [skipped, setSkipped] = useState(false);
   const audio = useRef();
+  // const user = useSelector(state => state.user)
   const [songProgress, setSongProgress] = useState();
   const {
     isPlaying,
@@ -49,13 +50,20 @@ export default function MusicPlayer() {
     }
   }, [isPlaying, playAnyway]);
 
-  //   useEffect(() => {
-  //     if (isPlaying) {
-  //       audio.current.play();
-  //     } else {
-  //       audio.current.pause();
-  //     }
-  //   }, []);
+//   useEffect(() => {
+//     if (isPlaying && user) {
+//       audio.current.play();
+//     } else if (!isPlaying && user) {
+//       audio.current.pause();
+//     } else if (isPlaying && !user) {
+//       alert("Sign in to play songs")
+//     }
+//     if (playAnyway && user) {
+//       audio.current.play();
+//       setPlayAnyway(false);
+//     }
+
+// }, [isPlaying, playAnyway, user]);
 
   const playNext = () => {
     if (nextSong) {

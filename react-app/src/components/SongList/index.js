@@ -10,10 +10,10 @@ import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
 import { useSongPlayer } from "../../context/SongPlayer";
 
-export default function SongList({artist, songAdded, setSongAdded, albumId }) {
+export default function SongList({pageType, artist, songAdded, setSongAdded, album, playlist }) {
   const dispatch = useDispatch()
   const songs = useSelector(state => state.songs)
-  const album = useSelector(state => state.albums[albumId])
+  // const album = useSelector(state => state.albums[albumId])
   // const [songsForRender, setSongsForRender] = useState([])
   const {
     isPlaying,
@@ -32,8 +32,10 @@ export default function SongList({artist, songAdded, setSongAdded, albumId }) {
     setCurrentSongIndex,
   } = useSongPlayer();
 
+  let songTracks = []
+
   useEffect(() => {
-    // setSongsForRender(songs);
+    setSongList(songTracks);
   }, [songs]);
 
   if (!Object.values(songs).length) {
@@ -41,17 +43,19 @@ export default function SongList({artist, songAdded, setSongAdded, albumId }) {
     return null;
   }
 
-
-  const albumTracks = [];
-  for (let songId of album.albumSongs) {
-    albumTracks.push(songs[songId]);
+  if(pageType !== 'playlist') {
+    for (let songId of album.albumSongs) {
+      songTracks.push(songs[songId])
+    }
+  } else {
+    for (let songId of playlist.songsOnPlaylist) {
+      songTracks.push(songs[songId]);
+    }
   }
-
-  let songsForRender = albumTracks
 
   const setSongs = (song) => {
     setCurrentSong(song);
-    const index = songsForRender.findIndex((item) => item.name === song.name);
+    const index = songTracks.findIndex((item) => item.name === song.name);
     setCurrentSongIndex(index);
     if (index === 0) {
       setNextSong(songList[index + 1]);
@@ -67,7 +71,7 @@ export default function SongList({artist, songAdded, setSongAdded, albumId }) {
     setIsPlaying(true);
   };
 
-  const songListMap = songsForRender.map((song) => {
+  const songListMap = songTracks.map((song) => {
     const minutes = Math.trunc(song.songLength / 60);
     const seconds = song.songLength % 60;
     const runTime = `${minutes}:${seconds}`;

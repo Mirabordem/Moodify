@@ -15,6 +15,7 @@ export default function PlaylistDetails() {
 
   const playlist = useSelector((state) => state.playlists[id]);
   const songs = useSelector((state) => state.songs);
+  const [pageType, setPageType] = useState('playlist')
 
   if (!playlist || !Object.values(songs).length) {
     // dispatch(thunkGetAllAlbums());
@@ -60,7 +61,7 @@ export default function PlaylistDetails() {
         />
       </div>
       <div id="playlist-id-song-list">
-        <SongList songs={playlist_tracks} />
+        <SongList pageType={pageType} playlist={playlist}/>
       </div>
     </div>
   );
