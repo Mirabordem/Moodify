@@ -111,7 +111,7 @@ export default function SongList({
           </div>
           <span className="song-info">{runTime}</span>
           <div className="song-menu">
-            <SongUpdateButton user={sessionUser} />
+            <SongUpdateButton user={sessionUser} songId={song.id} />
           </div>
         </div>
       </li>

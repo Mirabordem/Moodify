@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkCreateSong } from "../../store/songs";
 import { useSongPlayer } from "../../context/SongPlayer";
 
-export default function CreateSong({formtype, albumId, songId}) {
+export default function CreateSong({formType, albumId, songId}) {
     const dispatch = useDispatch()
     const {id} = useParams()
     const {songAdded, setSongAdded} = useSongPlayer()
@@ -23,7 +23,7 @@ export default function CreateSong({formtype, albumId, songId}) {
         e.preventDefault()
 
 
-        if(formtype !== 'edit') {
+        if(formType !== 'edit') {
             const newSong = new FormData()
             newSong.append('name', name)
             newSong.append('track_number', trackNumber)
@@ -48,7 +48,7 @@ export default function CreateSong({formtype, albumId, songId}) {
 
     return (
         <div>
-            <h1>{formpage === 'edit' ? 'Update Song' : 'Add Song to Album'}</h1>
+            <h1>{formType === 'edit' ? 'Update Song' : 'Add Song to Album'}</h1>
             <form
             onSubmit={submitSong}
             encType="multipart/form-data"
@@ -84,7 +84,7 @@ export default function CreateSong({formtype, albumId, songId}) {
                     onChange={e => setAudioUrl(e.target.files[0])}
                     />
                 </label>
-                <button type="submit">{formtype === 'edit' ? 'Update Song' : 'Add Song'}</button>
+                <button type="submit">{formType === 'edit' ? 'Update Song' : 'Add Song'}</button>
             </form>
         </div>
     )
