@@ -9,7 +9,6 @@ import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
 
 
-
 export default function SongList({pageType, artist, songAdded, setSongAdded, album, playlist }) {
   const dispatch = useDispatch()
   const songs = useSelector(state => state.songs)
@@ -56,6 +55,7 @@ export default function SongList({pageType, artist, songAdded, setSongAdded, alb
   const setSongs = (song) => {
     setCurrentSong(song);
 
+
     const index = songTracks.findIndex((item) => item.name === song.name);
 
     setCurrentSongIndex(index);
@@ -76,6 +76,7 @@ export default function SongList({pageType, artist, songAdded, setSongAdded, alb
     }
     setIsPlaying(true);
   };
+}
 
   const songListMap = songTracks.map((song) => {
     const minutes = Math.trunc(song.songLength / 60);

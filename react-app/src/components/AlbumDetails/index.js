@@ -23,6 +23,7 @@ export default function AlbumDetails() {
   const dispatch = useDispatch();
   const album = useSelector((state) => state.albums[id]);
 
+
   const songs = useSelector((state) => state.songs);
 
 
@@ -32,6 +33,7 @@ export default function AlbumDetails() {
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
     // dispatch(thunkGetAllAlbums());
+
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
@@ -67,6 +69,7 @@ export default function AlbumDetails() {
             {minutes} min
           </p>
 
+
         </div>
       </div>
 
@@ -83,17 +86,19 @@ export default function AlbumDetails() {
           className="new-album"
           buttonText="Edit Album"
 
+
           modalComponent={<NewAlbum formType="Edit" albumId={id} />}
+
         />
         <OpenModalButton
-          buttonText="add-Song"
-          modalComponent={<CreateSong
-            albumId={id}
-            />}
+          buttonText="Add Song"
+          // modalComponent={<CreateSong albumId={id} />}
         />
         <OpenModalButton
           buttonText="Delete"
+
           modalComponent={<DeleteAlbumModal albumId={id} />}
+
 
         />
       </div>
