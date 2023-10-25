@@ -57,7 +57,7 @@ export default function SongList({
 
   useEffect(() => {
     setSongList(songTracks);
-  }, [songs]);
+  }, [songs, album]);
 
   if (!Object.values(songs).length) {
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
