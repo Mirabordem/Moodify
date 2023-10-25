@@ -1,3 +1,4 @@
+import { updateAlbum } from "./albums"
 
 
 const ALL_SONGS = 'songs/allSongs'
@@ -48,10 +49,10 @@ export const thunkCreateSong = (newSong, albumId) => async dispatch => {
             body: newSong
         });
         if(res.ok){
-            const newSong = await res.json()
-            console.log("🚀 ~ file: songs.js:52 ~ thunkCreateSong ~ newSong:", newSong)
-            dispatch(createSong(newSong))
-            return newSong
+            const newData = await res.json()
+            dispatch(createSong(newData.song))
+            dispatch(updateAlbum(newData.album))
+            return newData
         }
     } catch (err) {
         const errors = err.json()

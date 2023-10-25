@@ -121,7 +121,7 @@ export default function AlbumDetails() {
         />
         <OpenModalButton
           buttonText="Add Song"
-          // modalComponent={<CreateSong albumId={id} />}
+          modalComponent={<CreateSong albumId={id} />}
         />
         <OpenModalButton
           buttonText="Delete"
