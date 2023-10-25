@@ -76,7 +76,7 @@ export default function SongList({pageType, artist, songAdded, setSongAdded, alb
     }
     setIsPlaying(true);
   };
-}
+
 
   const songListMap = songTracks.map((song) => {
     const minutes = Math.trunc(song.songLength / 60);
