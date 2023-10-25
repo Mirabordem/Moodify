@@ -57,9 +57,17 @@ export const thunkCreateSong = (newSong, albumId) => async dispatch => {
         const errors = err.json()
         return errors
     }
-
-
 }
+
+
+export const ThunkDeleteSong = (id) => async (dispatch) => {
+    const response = await fetch(`/api/songs/${id}/delete`, {
+      method: "DELETE",
+    });
+    dispatch(deleteSong());
+    return response;
+  };
+
 
 
 // reducer
