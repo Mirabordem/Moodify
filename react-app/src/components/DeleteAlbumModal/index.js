@@ -9,7 +9,7 @@ function DeleteAlbumModal({ albumId }) {
   const { closeModal } = useModal();
   const history = useHistory();
   const id = albumId;
-  console.log("here is id", id);
+  // console.log("here is id", id);
   const album = useSelector((state) => state.albums[id]);
 
   const handleDelete = (e) => {

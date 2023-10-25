@@ -49,15 +49,6 @@ function ProfileButton({ user }) {
              Hello, <strong>{user.username}!</strong>
            </p>
            <p className="email"> {user.email}</p>
-           {/* <NavLink
-             style={{ color: "black", textDecoration: "none" }}
-             onClick={closeMenu}
-             to="/user/:id/profile"
-           >
-             <div className="link">
-                Your profile
-             </div>
-           </NavLink> */}
            <div className="line"></div>
            <button className="logout-button" onClick={handleLogout}>
              Log Out

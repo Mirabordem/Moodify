@@ -29,10 +29,9 @@ function LoginFormModal() {
 
   return (
     <div className="login-container">
-      <h1 className="h1">Log in</h1>
+      <h1 className="new-h1">Log in</h1>
       <form onSubmit={handleSubmit} className="login-form">
-        <label >
-          Email
+        <label className="login-label">
           <input
             className="placeholder"
             type="text"
@@ -42,7 +41,6 @@ function LoginFormModal() {
           />
         </label>
         <label >
-          Password
           <input
             className="placeholder"
             type="password"

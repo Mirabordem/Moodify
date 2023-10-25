@@ -76,9 +76,9 @@
 }
 
 .start {
-  color: white;
+  color: rgb(198, 188, 193);
   background-color: black;
-  border: black;
+  border: rgb(53, 50, 50);
   font-size: 16px;
   padding: 5px 10px;
 }
@@ -97,7 +97,6 @@
   top: 60px;
   right: 60px;
   border-radius: 7px;
-  /* box-shadow: 1px 1px 15px rgb(107, 106, 106); */
 }
 
 
