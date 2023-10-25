@@ -151,6 +151,7 @@ export default function SongList({
       } else {
         displayNumber = <span className="song-info1">{song.trackNumber}</span>;
       }
+
       return (
         <li
           className="song-li"
@@ -168,13 +169,15 @@ export default function SongList({
 
             <span className="song-info">{runTime}</span>
             <div className="song-menu">
-              <SongUpdateButton
-                user={user}
-                songId={song.id}
-                pageType={pageType}
-                playlistId={playlist?.id}
-                albumOwner={album?.userOwner}
-              />
+              {
+                <SongUpdateButton
+                  user={user}
+                  songId={song.id}
+                  pageType={pageType}
+                  playlistId={playlist?.id}
+                  albumOwner={album?.userOwner}
+                />
+              }
             </div>
           </div>
         </li>
