@@ -21,34 +21,57 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 export default function AlbumDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  // const albums = useSelector(state => state.albums)
   const album = useSelector((state) => state.albums[id]);
   const songs = useSelector((state) => state.songs);
   const [minutes, setMinutes] = useState(0)
   const [releaseDate, setReleaseDate] = useState(0)
   const [releaseYear, setReleaseYear] = useState(0)
-  const [totalNumberOfSongs, setTotalNumberOfSongs] = useState(0)
-  const [albumTracks, setAlbumTracks]= useState([])
+  const [totalNumberOfSongs, setTotalNumberOfSongs] = useState(album?.albumSongs.length)
+  // const [albumTracks, setAlbumTracks]= useState([])
   const [totalAlbumLength, setTotalAlbumLength] = useState(0)
+  const [newSongs, setNewSongs] = useState(true)
+  const [loadOnce,setLoadOnce] = useState(false)
+
+
+  // useEffect(() => {
+  //     setLoadOnce(false)
+  //   }, [])
 
   useEffect(() => {
-   const newAlbumTracks = []
-   const newAlbumLength = totalAlbumLength
-    for (let songId of album.albumSongs) {
-      const song = songs[songId];
-      newAlbumTracks.push(song);
-      totalAlbumLength += song.songLength;
-    }
-    setAlbumTracks(newAlbumTracks)
-    setTotalAlbumLength(newAlbumLength)
-    const mins = Math.trunc(newAlbumLength / 60);
-    setMinutes(mins)
-    const relDate = new Date(album.releaseDate);
-    setReleaseDate(relDate)
-    const relYear = relDate.getFullYear();
-    setReleaseYear(relYear)
-    const totalSongs = album_tracks.length;
-    setTotalNumberOfSongs(totalSongs)
-  }, [minutes, releaseDate, releaseYear, totalNumberOfSongs])
+   let newAlbumLength = totalAlbumLength
+    console.log('IN THE USEEFFECT>>>>>>>>>>')
+   if(album?.title && newSongs) {
+    console.log('HIT IF STATEMENT!!!!')
+     for (let songId of album.albumSongs) {
+       const song = songs[songId];
+      //  newAlbumTracks.push(song);
+       newAlbumLength += song.songLength;
+     }
+     setTotalAlbumLength(newAlbumLength)
+     const mins = Math.trunc(newAlbumLength / 60);
+     setMinutes(mins)
+     const relDate = new Date(album?.releaseDate);
+     setReleaseDate(relDate)
+     const relYear = relDate.getFullYear();
+     setReleaseYear(relYear)
+     // const totalSongs = newAlbumTracks.length;
+     setTotalNumberOfSongs(album?.albumSongs.length)
+     setNewSongs(false)
+
+   } else {
+     setLoadOnce(true)
+     console.log("🚀 ~ file: index.js:62 ~ useEffect ~ loadOnce:", loadOnce)
+   }
+
+    // setAlbumTracks(newAlbumTracks)
+  }, [minutes, releaseDate, releaseYear, totalNumberOfSongs, totalAlbumLength, newSongs, loadOnce, setLoadOnce, setNewSongs])
+
+
+
+  console.log("🚀 ~ file: index.js:61 ~ AlbumDetails ~ loadOnce:", loadOnce)
+
+  console.log("🚀 ~ file: index.js:54 ~ AlbumDetails ~ setNewSongs:", newSongs)
 
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
