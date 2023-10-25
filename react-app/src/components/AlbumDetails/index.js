@@ -19,22 +19,18 @@ export default function AlbumDetails() {
   const dispatch = useDispatch();
 
   const album = useSelector((state) => state.albums[id]);
-  const songs = useSelector((state) => state.songs);
-
-  if (!album || !Object.values(songs).length) {
+  // const songs = useSelector((state) => state.songs);
+  //took out song length conditional below
+  if (!album) {
     // dispatch(thunkGetAllAlbums());
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
 
-  const album_tracks = [];
-  for (let songId of album.albumSongs) {
-    album_tracks.push(songs[songId]);
-  }
-  console.log(
-    "🚀 ~ file: index.js:26 ~ AlbumDetails ~ album_tracks:",
-    album_tracks
-  );
+  // const album_tracks = [];
+  // for (let songId of album.albumSongs) {
+  //   album_tracks.push(songs[songId]);
+  // }
 
   return (
     <div className="album-page-container">
@@ -65,7 +61,9 @@ export default function AlbumDetails() {
         />
         <OpenModalButton
           buttonText="add-Song"
-          modalComponent={<CreateSong albumId={id} />}
+          modalComponent={<CreateSong
+            albumId={id}
+            />}
         />
         <OpenModalButton
           buttonText="Delete"
@@ -74,7 +72,11 @@ export default function AlbumDetails() {
         <h5>Additional functions here if you are album owner</h5>
       </div>
       <div id="album-id-song-list">
-        <SongList songs={album_tracks} artist={album.artist} />
+        <SongList
+        // songs={album_tracks}
+        artist={album.artist}
+        albumId={id}
+        />
       </div>
     </div>
   );

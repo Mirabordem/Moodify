@@ -7,7 +7,7 @@ from ..api.aws_helpers import ALLOWED_AUDIO_EXTENSIONS
 
 class CreateSongForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
-    album_id = IntegerField("Album Id", validators=[DataRequired()])
+    album_id = IntegerField("Album Id")
     track_number = IntegerField("Track Nr", validators=[DataRequired()])
     audio_url = FileField("Audio", validators=[FileAllowed(list(ALLOWED_AUDIO_EXTENSIONS)), FileRequired()])
     song_length = IntegerField("Duration", validators=[DataRequired()])
