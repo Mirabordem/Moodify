@@ -105,3 +105,57 @@
 .song-li:hover .song-actions-container {
     visibility: visible;
 }
+
+
+
+.song-update-dropdown1 {
+    /* border: 2px solid red; */
+    z-index: 3000;
+    /* top: 100%;
+    right: 0; */
+  }
+
+.song-update-button {
+    /* border: 2px solid red; */
+    background-color: rgb(74, 68, 71);
+    width: 100%;
+}
+
+.dropdown1 {
+      /* border: 2px solid red; */
+    /* background-color: rgb(74, 68, 71); */
+    background-color: black;
+    border-radius: 10px;
+    width: 110px;
+    height: 60px;
+    position: absolute;
+    margin-bottom: 150px;
+}
+
+
+
+
+
+
+
+
+
+
+/* .song-update-dropdown.hidden {
+    display: none;
+  }
+
+.song-update-dropdown.active {
+    display: block;
+  }
+
+.song-update-dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+  }
+
+.song-update-dropdown a:hover {
+    background-color: #f2f2f2;
+  } */
