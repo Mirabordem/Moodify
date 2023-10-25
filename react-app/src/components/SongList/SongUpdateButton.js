@@ -3,14 +3,16 @@ import { useDispatch } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
 import DeleteSongModal from "../DeleteSongModal";
 import EditSongModal from "../EditSongModal";
+import CreateSong from "../CreateSongModal";
 
-export default function SongUpdateButton({ user }) {
+export default function SongUpdateButton({ user, songId }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
-  const openMenu = () => {
-    setShowMenu(!showMenu);
-  };
+  // const openMenu = e => {
+  //   e.stopImmediatePropagation()()
+  //   setShowMenu(!showMenu);
+  // };
 
   useEffect(() => {
     const closeMenu = (e) => {
@@ -28,7 +30,10 @@ export default function SongUpdateButton({ user }) {
 
   return (
     <div className="song-update-dropdown1" ref={ulRef}>
-      <button className="song-update-button" onClick={openMenu}>
+      <button className="song-update-button" onClick={e => {
+        e.stopPropagation()
+        setShowMenu(!showMenu);
+      }}>
         <i className="fas fa-ellipsis-h"></i>
       </button>
       <div className={ulClassName}>
@@ -36,7 +41,7 @@ export default function SongUpdateButton({ user }) {
           <div className="dropdown1">
             <OpenModalButton
               buttonText="Edit Song"
-              modalComponent={<EditSongModal />}
+              modalComponent={<CreateSong formtype="edit" songId={songId} />}
             />
             <OpenModalButton
               buttonText="Delete Song"
