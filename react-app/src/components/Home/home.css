@@ -1,0 +1,102 @@
+.page-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    padding-left: 210px;
+    min-height: 100vh;
+    padding-right: 50px;
+    background: linear-gradient(rgb(80, 79, 79), black);
+}
+
+.content-container {
+    width: 100%;
+    padding: 20px;
+}
+
+.homeText {
+    height: 60px;
+    width: 100%;
+    margin-top: 40px;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    font-weight: lighter;
+}
+
+.home-h3 {
+    height: 60px;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.homeAlbums {
+    color: rgb(223, 221, 221);
+    font-size: 28px;
+    font-weight: 400;
+    margin-left: 50px;
+}
+
+
+.album-cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-left: 20px;
+    padding-right: 20px;
+    /* background: linear-gradient(rgb(80, 79, 79), black); */
+}
+
+.card-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 260px;
+    max-height: 300px;
+    max-width: 300px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    /* border: 2px solid red; */
+}
+
+.album-image {
+    margin-top: 10px;
+    width: 85%;
+    height: 90%;
+}
+
+.card {
+    max-width: 300px;
+    width: calc(20% - 4px);
+    margin: 0 2px;
+    background: linear-gradient(black, rgb(106, 106, 106));
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    /* border: 2px solid blue; */
+}
+
+.card-info-container {
+    display: block;
+    height: 60px;
+}
+
+.album-title {
+    margin-left: 20px;
+    margin-bottom: 0;
+    margin-top: 2px;
+    /* border: 2px solid orange; */
+}
+
+.album-title1 {
+    margin-left: 20px;
+    margin-bottom: 0;
+    margin-top: 2px;
+    font-weight: bold;
+    font-stretch: expanded;
+    color: rgb(223, 221, 221);
+    /* border: 2px solid orange; */
+}

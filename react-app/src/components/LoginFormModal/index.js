@@ -21,37 +21,46 @@ function LoginFormModal() {
     }
   };
 
+
+  const demoUserLogIn = () => {
+    setEmail('demo@aa.io')
+    setPassword('password')
+  }
+
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <label>
-          Email
+    <div className="login-container">
+      <h1 className="new-h1">Log in</h1>
+      <form onSubmit={handleSubmit} className="login-form">
+        <label className="login-label">
           <input
+            className="placeholder"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+            placeholder="Email"
           />
         </label>
-        <label>
-          Password
+        <label >
           <input
+            className="placeholder"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
+            placeholder="Password"
           />
         </label>
-        <button type="submit">Log In</button>
+        <button className = 'login-button' type="submit">Log In</button>
+        <button className="demoUserLink" onClick={demoUserLogIn}>Demo User</button>
+            <ul className="errors-ul">
+              {errors.map((error, idx) => (
+                <li key={idx}>{error}</li>
+              ))}
+            </ul>
       </form>
-    </>
+    </div>
   );
 }
+
+
 
 export default LoginFormModal;

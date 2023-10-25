@@ -1,0 +1,90 @@
+.errors-ul {
+    color:red;
+    font-size:small;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 0, 0);
+    height: 400px;
+    width: 400px;
+    padding: 10px;
+    box-shadow: 2px 2px 22px rgb(107, 106, 106);
+}
+
+.h1 {
+    color: white;
+    font-size: 24px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 80%;
+    position: relative;
+}
+
+
+.login-form input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 40px;
+    border: 1px solid rgb(150, 149, 149);
+    border-radius: 4px;
+    color: white;
+    background-color: rgb(20, 20, 20);
+}
+
+.login-form input::placeholder {
+    color: rgb(150, 149, 149);
+    align-self: center;
+}
+
+input {
+    text-align: center;
+}
+
+.login-form button {
+    margin-top: 20px;
+    padding: 15px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(95, 195, 146);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+
+}
+
+.login-form button.login-button:hover {
+    transform: scale(1.05)
+}
+
+.login-form button.demoUserLink {
+    background-color: black;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    border: 1px solid rgb(203, 200, 200);
+    padding: 15px;
+}
+
+.login-form button.demoUserLink:hover {
+    background-color: black;
+    border: 1px solid rgb(150, 149, 149);
+}
+
+.login-label {
+    margin-bottom: 20px;
+}
