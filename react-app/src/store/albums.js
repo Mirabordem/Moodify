@@ -87,8 +87,6 @@ export const ThunkEditAlbum = (formData,albumId) => async (dispatch) => {
         return {errors}
     }
 
-
-
 }
 
 // export const ThunkEditAlbum = (formData, albumId) => async (dispatch) => {

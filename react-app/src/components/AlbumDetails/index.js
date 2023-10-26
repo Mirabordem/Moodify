@@ -8,8 +8,7 @@ import fetchAll from "../utils";
 import "./AlbumDetails.css";
 import SongList from "../SongList";
 import AlbumUpdateButton from "./AlbumUpdateButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+
 
 
 
@@ -46,7 +45,6 @@ export default function AlbumDetails() {
      setReleaseDate(relDate)
      const relYear = relDate.getFullYear();
      setReleaseYear(relYear)
-     // const totalSongs = newAlbumTracks.length;
      setTotalNumberOfSongs(album?.albumSongs.length)
      setNewSongs(false)
 
@@ -107,7 +105,6 @@ export default function AlbumDetails() {
 
       <div id="album-id-song-list">
         <SongList
-        // songs={album_tracks}
         artist={album.artist}
         album={album}
         />
