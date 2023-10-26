@@ -44,12 +44,7 @@ export default function PlaylistDetails() {
 
   console.log('picture right before the return is',picture)
   return (
-    <div className="playlist-page-container"
-    style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
-    }}>
+    <div className="playlist-page-container">
       <div className="playlist-id-top-info">
         <img className="playlist-id-cover-img"
         src={picture}
