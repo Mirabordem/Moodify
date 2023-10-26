@@ -149,7 +149,7 @@ export default function SongList({
           <div className="song-actions-container">{heart}</div>
           <span className="song-info">{runTime}</span>
           <div className="song-menu">
-            <SongUpdateButton user={user} songId={song.id} />
+            <SongUpdateButton user={user} songId={song.id} pageType={pageType} playlistId={playlist.id} />
           </div>
 
         </div>
@@ -169,5 +169,3 @@ export default function SongList({
     </div>
   );
 }
-
-

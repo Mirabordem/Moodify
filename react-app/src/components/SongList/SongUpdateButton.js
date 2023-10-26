@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import OpenModalButton from "../OpenModalButton";
 import DeleteSongModal from "../DeleteSongModal";
 import CreateSong from "../CreateSongModal";
-import { ThunkAddSongToPlaylist } from "../../store/playlists"
+import { ThunkAddSongToPlaylist, ThunkRemoveSongToPlaylist } from "../../store/playlists"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 
 
 
-export default function SongUpdateButton({ user, songId }) {
+export default function SongUpdateButton({ user, songId, pageType, playlistId }) {
   const [showMenu, setShowMenu] = useState(false);
   const [showNestedMenu, setShowNestedMenu] = useState(false);
   const playlists = useSelector(state => state.playlists)
@@ -35,16 +35,17 @@ export default function SongUpdateButton({ user, songId }) {
       <button
         style={{cursor: 'pointer'}}
         className='start'
-        onClick={ async e => {
+        onClick={ e => {
           e.stopPropagation();
           // console.log("user is:" user)
             if (user) {
-              const updatedPlaylist = await dispatch(ThunkAddSongToPlaylist(playlist.id, songId));
-
+              dispatch(ThunkAddSongToPlaylist(playlist.id, songId));
+              setShowNestedMenu(false)
           }
         }}>
           {<><span className="menu-icon"></span> {playlist.name}</>}
       </button>
+
     )
   })
 
@@ -62,7 +63,7 @@ export default function SongUpdateButton({ user, songId }) {
         <i className="fas fa-ellipsis-h"></i>
       </button>
       <div className={ulClassName}>
-        {user ? (
+        {user && pageType === 'album' ?
           <div className="dropdown1">
             <OpenModalButton
               buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Song</>}
@@ -88,8 +89,18 @@ export default function SongUpdateButton({ user, songId }) {
                   {playlistsMap}
                 </div>
               </div>
-          </div>
-        ) : null}
+          </div >
+          :
+          <div className="dropdown1">
+              <button
+            style={{cursor: 'pointer'}}
+            className='start'
+            onClick={e => {
+              e.stopPropagation()
+              setShowMenu(!showNestedMenu);
+              dispatch(ThunkRemoveSongToPlaylist(playlistId, songId))
+            }}> Remove Song from Playist</button>
+          </div>}
       </div>
     </div>
   );
