@@ -23,8 +23,10 @@ export default function AlbumDetails() {
   const [totalNumberOfSongs, setTotalNumberOfSongs] = useState(album?.albumSongs.length)
   const [totalAlbumLength, setTotalAlbumLength] = useState(0)
   const [newSongs, setNewSongs] = useState(true)
-  const sessionUser = useSelector((state) => state.session.user);
+
+  const user = useSelector((state) => state.session.user);
   const [pageType, setPageType] = useState('album')
+
 
 
 
@@ -89,20 +91,17 @@ export default function AlbumDetails() {
             {album.artist} • {releaseYear ? releaseYear : defaultReleaseYear} • {totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs •{" "}
             {minutes ? minutes : defaultMinutes} min
           </p>
-
-
         </div>
       </div>
 
       <div className="album-id-functions-3">
-
       <button
           className="play-button"
           // onClick={playFirstSong}
         >
           <span className="play-arrow"></span>
         </button>
-        <AlbumUpdateButton user={sessionUser} albumId={album.id} />
+        <AlbumUpdateButton user={user} albumId={album.id} />
       </div>
 
       <div id="album-id-song-list">
