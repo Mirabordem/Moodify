@@ -41,18 +41,21 @@ def create_new_playlist():
                 # name = form.data['name'],
                 # description = form.data['description'],
                 # user_id = current_user.id
+            else:
+                url='replace'
 
-                new_playlist = Playlist (
-                name = form.data['name'],
-                cover_image_url = url,
-                description = form.data['description'],
-                user_id= current_user.id
-                )
-                db.session.add(new_playlist)
-                db.session.commit()
 
-                return new_playlist.to_dict()
-        print(form.errors)
+            new_playlist = Playlist (
+            name = form.data['name'],
+            cover_image_url = url,
+            description = form.data['description'],
+            user_id= current_user.id
+            )
+            db.session.add(new_playlist)
+            db.session.commit()
+
+            return new_playlist.to_dict()
+    print(form.errors)
 
     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400
 
