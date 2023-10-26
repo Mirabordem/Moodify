@@ -1,18 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
 import DeleteSongModal from "../DeleteSongModal";
-import EditSongModal from "../EditSongModal";
 import CreateSong from "../CreateSongModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+
+
 
 export default function SongUpdateButton({ user, songId }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
-  // const openMenu = e => {
-  //   e.stopImmediatePropagation()()
-  //   setShowMenu(!showMenu);
-  // };
 
   useEffect(() => {
     const closeMenu = (e) => {
@@ -40,11 +38,15 @@ export default function SongUpdateButton({ user, songId }) {
         {user ? (
           <div className="dropdown1">
             <OpenModalButton
-              buttonText="Edit Song"
+
+              buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Song</>}
               modalComponent={<CreateSong formtype="edit" songId={songId} />}
+
+
             />
+            <div className="horizontal-line1"></div>
             <OpenModalButton
-              buttonText="Delete Song"
+              buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faTrash} /></span> Delete Song</>}
               modalComponent={<DeleteSongModal />}
             />
           </div>

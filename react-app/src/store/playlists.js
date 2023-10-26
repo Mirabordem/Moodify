@@ -1,10 +1,8 @@
 const ALL_PLAYLISTS = "playlists/getPlaylists";
 // const ONE_PLAYLIST = "playlists/onePlaylist"
-const ADD_PLAYLIST = "playlists/createPlaylist"
-const UPDATE_PLAYLIST = "playlists/updatePlaylist"
-const DELETE_PLAYLIST = "playlists/deletePlaylist"
-
-
+const ADD_PLAYLIST = "playlists/createPlaylist";
+const UPDATE_PLAYLIST = "playlists/updatePlaylist";
+const DELETE_PLAYLIST = "playlists/deletePlaylist";
 
 export const getAllPlaylists = (playlists) => {
   return {
@@ -21,11 +19,11 @@ export const createPlaylist = (playlist) => {
 };
 
 export const updatePlaylist = (playlist) => {
-    return {
-        type: UPDATE_PLAYLIST,
-        playlist
-    }
-}
+  return {
+    type: UPDATE_PLAYLIST,
+    playlist,
+  };
+};
 
 export const deletePlaylist = (playlistId) => {
   return {
@@ -41,69 +39,64 @@ export const ThunkDeletePlaylist = (id) => async (dispatch) => {
   const response = await fetch(`/api/playlists/${id}/delete`, {
     method: "DELETE",
   });
-  dispatch(deletePlaylist());
+  await dispatch(deletePlaylist());
   return response;
 };
 
 export const ThunkCreatePlaylist = (formData) => async (dispatch) => {
-    const res = await fetch(`/api/playlists/new`, {
-        method: 'POST',
-        body: formData
-    });
-    if (res.ok) {
-        const realNewPlaylist = await res.json();
-        const returnPlaylist={...realNewPlaylist}
-        await dispatch(createPlaylist(realNewPlaylist))
-        return returnPlaylist
-    }
-    else {
-        console.log('THERE WAS AN ERROR IN MAKING THE POST')
-        const errors= await res.json()
-        return errors
-    }
+  const res = await fetch(`/api/playlists/new`, {
+    method: "POST",
+    body: formData,
+  });
+  if (res.ok) {
+    const realNewPlaylist = await res.json();
+    const returnPlaylist = { ...realNewPlaylist };
+    await dispatch(createPlaylist(realNewPlaylist));
+    return returnPlaylist;
+  } else {
+    console.log("THERE WAS AN ERROR IN MAKING THE POST");
+    const errors = await res.json();
+    return errors;
+  }
+};
 
-}
+export const ThunkEditPlaylist = (formData, playlistId) => async (dispatch) => {
+  const res = await fetch(`/api/playlists/${playlistId}/edit`, {
+    method: "PUT",
+    body: formData,
+  });
+  if (res.ok) {
+    const realNewPlaylist = await res.json();
+    const returnPlaylist = { ...realNewPlaylist };
+    await dispatch(updatePlaylist(realNewPlaylist));
+    return returnPlaylist;
+  } else {
+    console.log("THERE WAS AN ERROR IN MAKING THE POST");
+    const errors = await res.json();
+    return { errors };
+  }
+};
 
-export const ThunkEditPlaylist = (formData,playlistId) => async (dispatch) => {
-    const res = await fetch(`/api/playlists/${playlistId}/edit`, {
-        method: 'PUT',
-        body: formData
-    });
-    if (res.ok) {
-        const realNewPlaylist = await res.json();
-        const returnPlaylist={...realNewPlaylist}
-        await dispatch(updatePlaylist(realNewPlaylist))
-        return returnPlaylist
-    }
-    else {
-        console.log('THERE WAS AN ERROR IN MAKING THE POST')
-        const errors= await res.json()
-        return {errors}
-    }
-}
-
-const initialState = {}
+const initialState = {};
 const playlistReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case ALL_PLAYLISTS:
-            const playlistsObj = {}
-            action.playlists.forEach(playlist => {
-                playlistsObj[playlist.id] = playlist
-            })
-            return playlistsObj
-        case ADD_PLAYLIST:
-            return {...state, [action.playlist.id]: action.playlist}
-        case UPDATE_PLAYLIST:
-            return {...state, [action.playlist.id]: action.playlist}
-        case DELETE_PLAYLIST:
-            const newState = {...state}
-            delete newState[action.playlistId]
-            return newState
-        default:
-            return state
-    }
-}
+  switch (action.type) {
+    case ALL_PLAYLISTS:
+      const playlistsObj = {};
+      action.playlists.forEach((playlist) => {
+        playlistsObj[playlist.id] = playlist;
+      });
+      return playlistsObj;
+    case ADD_PLAYLIST:
+      return { ...state, [action.playlist.id]: action.playlist };
+    case UPDATE_PLAYLIST:
+      return { ...state, [action.playlist.id]: action.playlist };
+    case DELETE_PLAYLIST:
+      const newState = { ...state };
+      delete newState[action.playlistId];
+      return newState;
+    default:
+      return state;
+  }
+};
 
-
-export default playlistReducer
-
+export default playlistReducer;

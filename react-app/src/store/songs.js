@@ -62,7 +62,7 @@ export const thunkCreateSong = (newSong, albumId) => async dispatch => {
 
 export const thunkUpdateSong = (updatedSong, songId) => async dispatch => {
     try{
-        const res = await fetch(`songs/${songId}`, {
+        const res = await fetch(`/api/songs/${songId}`, {
             method: "PUT",
             // headers: {"Content-Type":"multipart/form-data"},
             body: updatedSong

@@ -7,9 +7,11 @@ import { getAllAlbums } from "../../store/albums";
 import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
+import { ThunkAddLike, ThunkDeleteLike } from "../../store/session";
 import DeleteSongModal from "../DeleteAlbumModal";
 import SongUpdateButton from "./SongUpdateButton";
 import { sessionUser } from "../Navigation";
+
 
 export default function SongList({
   pageType,
@@ -20,8 +22,13 @@ export default function SongList({
   playlist,
 }) {
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.session.user);
+  let userLikedSongIds = [];
+  if (user) {
+    userLikedSongIds = user.likedSongs;
+  }
   const songs = useSelector((state) => state.songs);
-  const sessionUser = useSelector((state) => state.session.user);
 
   // const album = useSelector(state => state.albums[albumId])
   // const [songsForRender, setSongsForRender] = useState([])
@@ -44,6 +51,10 @@ export default function SongList({
 
   let songTracks = [];
 
+  let emptyHeart = null;
+  let filledHeart = null;
+
+
   useEffect(() => {
     setSongList(songTracks);
   }, [songs]);
@@ -53,12 +64,17 @@ export default function SongList({
     return null;
   }
 
-  if (pageType !== "playlist") {
-    for (let songId of album.albumSongs) {
+
+  if (pageType === "playlist") {
+    for (let songId of playlist.songsOnPlaylist) {
       songTracks.push(songs[songId]);
     }
+  } else if (pageType === "likes") {
+    for (let likeId of userLikedSongIds) {
+      songTracks.push(songs[likeId]);
+    }
   } else {
-    for (let songId of playlist.songsOnPlaylist) {
+    for (let songId of album.albumSongs) {
       songTracks.push(songs[songId]);
     }
   }
@@ -87,11 +103,34 @@ export default function SongList({
     setIsPlaying(true);
   };
 
-
   const songListMap = songTracks.map((song) => {
+    const handleLike = (e) => {
+      e.stopPropagation();
+      if (user) {
+        const id = song.id;
+        dispatch(ThunkAddLike(id));
+      }
+      heart = filledHeart;
+    };
+    const handleDislike = (e) => {
+      e.stopPropagation();
+      if (user) {
+        const id = song.id;
+        dispatch(ThunkDeleteLike(id));
+      }
+      heart = emptyHeart;
+    };
     const minutes = Math.trunc(song.songLength / 60);
     const seconds = song.songLength % 60;
-    const runTime = `${minutes}:${seconds}`;
+
+    emptyHeart = <i className="far fa-heart" onClick={handleLike}></i>;
+    filledHeart = <i class="fa-solid fa-heart" onClick={handleDislike}></i>;
+    let heart = null;
+    if (userLikedSongIds.includes(song.id)) {
+      heart = filledHeart;
+    } else heart = emptyHeart;
+
+    const runTime = `${minutes}:${seconds < 10 ? '0': ''}${seconds}`;
 
     return (
       <li
@@ -106,13 +145,13 @@ export default function SongList({
           <span className="song-info3">{artist}</span>
         </div>
         <div className="song-info4">
-          <div className="song-actions-container">
-            <i className="far fa-heart"></i>
-          </div>
+
+          <div className="song-actions-container">{heart}</div>
           <span className="song-info">{runTime}</span>
           <div className="song-menu">
-            <SongUpdateButton user={sessionUser} songId={song.id} />
+            <SongUpdateButton user={user} songId={song.id} />
           </div>
+
         </div>
       </li>
     );
@@ -130,3 +169,5 @@ export default function SongList({
     </div>
   );
 }
+
+

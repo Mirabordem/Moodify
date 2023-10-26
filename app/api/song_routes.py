@@ -4,6 +4,7 @@ from app.models import db, Song, likes, Album
 from app.forms import EditSongForm, CreateSongForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.api.aws_helpers import remove_file_from_s3
+from icecream import ic
 
 song_routes = Blueprint('song', __name__)
 
@@ -46,16 +47,21 @@ def edit_song(id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     current_song = Song.query.get(id)
+    curr_song_dict = current_song.to_dict()
+    ic(current_song)
+    ic(current_song.to_dict())
     if current_song is None:
         return {'errors': 'Song not found'}, 404
-    album_of_song = Album.query.get(current_song['album_id'])
+    album_of_song = Album.query.get(curr_song_dict['albumId'])
     if album_of_song.user_owner != current_user.id:
         return {'errors': 'forbidden'}, 403
 
 
     if form.validate_on_submit():
         data = form.data
+        ic(data["audio_url"])
         if data["audio_url"]:
+            print("HIT THE IF BLOCK")
             # song = data["audio_url"]
             # song.filename = get_unique_filename(song.filename)
             # upload = upload_file_to_s3(song)
@@ -64,16 +70,23 @@ def edit_song(id):
             #     return { 'errors': 'upload error'}
             # current_song.audio_url = upload['url']
 
-            current_song.audio_url = 'https://moodifybucket.s3.us-east-2.amazonaws.com/bubkas.mp3'
+            # current_song.audio_url = 'https://moodifybucket.s3.us-east-2.amazonaws.com/bubkas.mp3'
 
-        current_song.name = data['name'],
-        current_song.album_id = data['album_id'],
-        current_song.track_number = data['track_number'],
+        current_song.name = data['name']
+        ic(data['name'])
+        print(data['name'])
+
+        current_song.track_number = data['track_number']
+
         current_song.song_length = data['song_length']
+
+        ic(current_song.to_dict())
 
         db.session.commit()
 
-        updated_album_obj = Album.query.get(album_of_song['id']).to_dict()
+        print('Did we make it beyond the commit?????????')
+
+        updated_album_obj = Album.query.get(album_of_song.id).to_dict()
         song_instances = [song.to_dict() for song in updated_album_obj['albumSongs']]
         updated_album_obj['albumSongs'] = [song['id'] for song in song_instances]
         current_song_obj = current_song.to_dict()
@@ -108,48 +121,41 @@ def delete_song(id):
 
 
 
-@song_routes.route('/<int:id>/like', methods=['POST'])
+@song_routes.route('/<int:id>/like')
 @login_required
 def add_song_like(id):
     """
     Adds like to a selected song. Returns likes for the song as a list of like dictionaries.
     """
-    song = Song.query.get(id).to_dict()
 
+    song = Song.query.get(id)
 
-    for like in song["likes"]:
-        if like["user_id"] == current_user.id:
-            return { "errors": "User likes this song" }, 405
+    if song in current_user.liked_songs:
+        return { "errors": "User likes this song" }, 405
 
-    like = likes(
-        user_id=current_user.id,
-        song_id=id
-    )
+    current_user.liked_songs.append(song)
 
-    db.session.add(like)
     db.session.commit()
-    return like.to_dict()
+    return current_user.to_dict()
 
 
 
 
-@song_routes.route('/<int:id>/unlike', methods=['DELETE'])
+@song_routes.route('/<int:id>/unlike')
 @login_required
 def remove_song_like(id):
     """
     Removes like from a selected song. Returns a message if successful.
     """
-    user_id = current_user.id
-    song_id = id
 
-    like = likes.query.filter(
-        likes.c.user_id == user_id,
-        likes.c.song_id == song_id
-    ).first()
+    song = Song.query.get(id)
 
-    if like:
-        db.session.delete(like)
-        db.session.commit()
-        return {"message": "Like successfully deleted"}
-    else:
+    try:
+        idx = current_user.liked_songs.index(song)
+    except ValueError:
         return { "errors": "User has never liked this song" }, 405
+
+    current_user.liked_songs.pop(idx)
+
+    db.session.commit()
+    return current_user.to_dict()

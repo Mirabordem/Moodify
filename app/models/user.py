@@ -35,7 +35,11 @@ class User(db.Model, UserMixin):
             "id": self.id,
             "username": self.username,
             "email": self.email,
-            "userPlaylists": self.users_playlists,
-            "userAlbums": self.users_albums,
-            "likedSongs": self.liked_songs
+            "userPlaylists": [playlist.id for playlist in self.users_playlists],
+            "userAlbums": [album.id for album in self.users_albums],
+            "likedSongs": [song.id for song in self.liked_songs]
         }
+
+
+    # def add_like(self, song):
+    #     self.liked_songs.append(song)
