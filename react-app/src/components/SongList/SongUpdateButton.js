@@ -12,6 +12,7 @@ export default function SongUpdateButton({ user, songId }) {
   const ulRef = useRef();
 
 
+
   useEffect(() => {
     const closeMenu = (e) => {
       if (ulRef.current && !ulRef.current.contains(e.target)) {
@@ -47,7 +48,7 @@ export default function SongUpdateButton({ user, songId }) {
             <div className="horizontal-line1"></div>
             <OpenModalButton
               buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faTrash} /></span> Delete Song</>}
-              modalComponent={<DeleteSongModal />}
+              modalComponent={<DeleteSongModal songId={songId}/>}
             />
           </div>
         ) : null}

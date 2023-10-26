@@ -8,11 +8,16 @@ function DeleteSongModal({ songId }) {
   const { closeModal } = useModal();
   const id = songId;
 
+  console.log('inside deleteSongModal SONG ID IS',songId)
+
   const song = useSelector((state) => state.songs[id]);
 
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
-    dispatch(ThunkDeleteSong(id)).then(closeModal());
+    let test=await dispatch(ThunkDeleteSong(songId));
+    if (test){
+      closeModal()
+    }
   };
 
   return (

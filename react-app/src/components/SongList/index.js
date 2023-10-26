@@ -104,6 +104,7 @@ export default function SongList({
   };
 
   const songListMap = songTracks.map((song) => {
+    if (song){
     const handleLike = (e) => {
       e.stopPropagation();
       if (user) {
@@ -154,7 +155,7 @@ export default function SongList({
 
         </div>
       </li>
-    );
+    )}
   });
 
   return (
@@ -169,5 +170,3 @@ export default function SongList({
     </div>
   );
 }
-
-

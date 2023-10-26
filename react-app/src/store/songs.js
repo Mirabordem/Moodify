@@ -80,12 +80,25 @@ export const thunkUpdateSong = (updatedSong, songId) => async dispatch => {
 }
 
 
-export const ThunkDeleteSong = (id) => async (dispatch) => {
-    const response = await fetch(`/api/songs/${id}/delete`, {
-      method: "DELETE",
-    });
-    dispatch(deleteSong());
-    return response;
+export const ThunkDeleteSong = (songId) => async (dispatch) => {
+    console.log('HITTING THUNKDELETE_SONG')
+    console.log('inside thunk delete song songId is',songId)
+
+        const response = await fetch(`/api/songs/${songId}/delete`, {
+          method: "DELETE",
+        });
+        if (response.ok){
+            const song= await response.json()
+
+            await dispatch(deleteSong(songId));
+            return song
+        }
+
+//   catch (error) {
+//         const err=await error.json()
+//         return err
+
+//     }
   };
 
 
