@@ -40,7 +40,7 @@ export default function SongUpdateButton({ user, songId }) {
             <OpenModalButton
 
               buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Song</>}
-              modalComponent={<CreateSong formtype="edit" songId={songId} />}
+              modalComponent={<CreateSong formType="edit" songId={songId} />}
 
 
             />

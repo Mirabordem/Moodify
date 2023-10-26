@@ -27,7 +27,7 @@ def create_new_playlist():
 
                 image = form.data['cover_image_url']
                 image.filename = get_unique_filename(image.filename)
-                url='https://i.imgur.com/8LMyVdU.jpg'
+                url='https://i.imgur.com/wzh4JdR.jpg'
 
                 ##KEEP THIS. uncomment this code when we actually want to upload to aws
                 # upload = upload_file_to_s3(image)
@@ -38,11 +38,8 @@ def create_new_playlist():
 
                 # url = upload['url']
 
-                # name = form.data['name'],
-                # description = form.data['description'],
-                # user_id = current_user.id
             else:
-                url='replace'
+                url=None
 
 
             new_playlist = Playlist (

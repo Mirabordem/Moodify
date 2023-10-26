@@ -79,11 +79,11 @@ return (
 
         <div className="new_playlist_container">
             {formType === 'Edit' && (
-                <h1 className='h1'>Edit Album</h1>
+                <h1 className='h1'>Edit Playlist</h1>
             )}
 
             {formType === 'Create' && (
-                <h1 className='h1'>Create Album</h1>
+                <h1 className='h1'>Create Playlist</h1>
             )}
 
             <form onSubmit={handleSubmit} encType="multipart/form-data" className='newPlaylist-form'>
