@@ -10,9 +10,12 @@ function DeleteSongModal({ songId }) {
 
   const song = useSelector((state) => state.songs[id]);
 
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
-    dispatch(ThunkDeleteSong(id)).then(closeModal());
+    let test=await dispatch(ThunkDeleteSong(songId));
+    if (test){
+      closeModal()
+    }
   };
 
   return (
