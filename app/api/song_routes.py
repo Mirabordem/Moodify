@@ -105,27 +105,17 @@ def delete_song(id):
     """
     Deletes a song.
     """
-    print('THIS IS ID IN OUR ROUTE',id)
     selected_song = Song.query.get(id)
     selected_song_dict=selected_song.to_dict()
 
-    print('INSIDE OUR ROUTE, SELECTED_SONG IS',selected_song)
-    print('selected_song_to_dict is',selected_song_dict)
-
-    print('thisGetsUsOurAlbumId',selected_song_dict['albumId'])
     albumId=selected_song_dict['albumId']
     targetAlbum=Album.query.get(albumId)
     targetAlbumToDict= targetAlbum.to_dict()
-    print('targetAlbum is',targetAlbum)
-    print('targetAlbumToDict is',targetAlbumToDict)
-    print('targetAlbumToDict user owner is',targetAlbumToDict['userOwner'])
     userOwner= targetAlbumToDict['userOwner']
-    print('current_user.id is',current_user.id)
 
     if userOwner != current_user.id:
         return { 'errors': 'Song not found' }
     else:
-        print('THE AWS SONG WE WILL BE REMOVING IS',selected_song_dict['audioUrl'])
 
         ##Uncomment this when we actually want to remove from aws
         # remove_file_from_s3(selected_song_dict['audioUrl'])
