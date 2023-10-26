@@ -8,6 +8,10 @@ import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
 import { ThunkAddLike, ThunkDeleteLike } from "../../store/session";
+import DeleteSongModal from "../DeleteAlbumModal";
+import SongUpdateButton from "./SongUpdateButton";
+import { sessionUser } from "../Navigation";
+
 
 export default function SongList({
   pageType,
@@ -18,12 +22,14 @@ export default function SongList({
   playlist,
 }) {
   const dispatch = useDispatch();
+
   const user = useSelector((state) => state.session.user);
   let userLikedSongIds = [];
   if (user) {
     userLikedSongIds = user.likedSongs;
   }
   const songs = useSelector((state) => state.songs);
+
   // const album = useSelector(state => state.albums[albumId])
   // const [songsForRender, setSongsForRender] = useState([])
   const {
@@ -47,7 +53,7 @@ export default function SongList({
 
   let emptyHeart = null;
   let filledHeart = null;
-  // const [heart, setHeart] = useState(null);
+
 
   useEffect(() => {
     setSongList(songTracks);
@@ -57,6 +63,7 @@ export default function SongList({
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
+
 
   if (pageType === "playlist") {
     for (let songId of playlist.songsOnPlaylist) {
@@ -115,13 +122,16 @@ export default function SongList({
     };
     const minutes = Math.trunc(song.songLength / 60);
     const seconds = song.songLength % 60;
-    const runTime = `${minutes}:${seconds}`;
+
     emptyHeart = <i className="far fa-heart" onClick={handleLike}></i>;
     filledHeart = <i class="fa-solid fa-heart" onClick={handleDislike}></i>;
     let heart = null;
     if (userLikedSongIds.includes(song.id)) {
       heart = filledHeart;
     } else heart = emptyHeart;
+
+    const runTime = `${minutes}:${seconds < 10 ? '0': ''}${seconds}`;
+
     return (
       <li
         className="song-li"
@@ -135,11 +145,13 @@ export default function SongList({
           <span className="song-info3">{artist}</span>
         </div>
         <div className="song-info4">
+
           <div className="song-actions-container">{heart}</div>
           <span className="song-info">{runTime}</span>
-          <button className="song-menu">
-            <i className="fas fa-ellipsis-h"></i>
-          </button>
+          <div className="song-menu">
+            <SongUpdateButton user={user} songId={song.id} />
+          </div>
+
         </div>
       </li>
     );
@@ -157,3 +169,5 @@ export default function SongList({
     </div>
   );
 }
+
+

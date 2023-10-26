@@ -31,7 +31,10 @@ export default function PlaylistDetails() {
   return (
     <div className="playlist-page-container">
       <div className="playlist-id-top-info">
-        <img className="playlist-id-cover-img" src={playlist.coverImageUrl} />
+        <img className="playlist-id-cover-img"
+        src={playlist.coverImageUrl === 'replace' ? 'http://www.dog1.jpg' : playlist.coverImageUrl}
+        alt="Playlist Cover"
+      />
         <div id="playlist-id-info-words">
           <p className="info-playlist-p">Playlist</p>
           <div>

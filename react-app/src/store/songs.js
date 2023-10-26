@@ -1,3 +1,4 @@
+import { updateAlbum } from "./albums"
 
 
 const ALL_SONGS = 'songs/allSongs'
@@ -48,18 +49,45 @@ export const thunkCreateSong = (newSong, albumId) => async dispatch => {
             body: newSong
         });
         if(res.ok){
-            const newSong = await res.json()
-            console.log("🚀 ~ file: songs.js:52 ~ thunkCreateSong ~ newSong:", newSong)
-            dispatch(createSong(newSong))
-            return newSong
+            const newData = await res.json()
+            dispatch(createSong(newData.song))
+            dispatch(updateAlbum(newData.album))
+            return newData
         }
     } catch (err) {
         const errors = err.json()
         return errors
     }
-
-
 }
+
+export const thunkUpdateSong = (updatedSong, songId) => async dispatch => {
+    try{
+        const res = await fetch(`/api/songs/${songId}`, {
+            method: "PUT",
+            // headers: {"Content-Type":"multipart/form-data"},
+            body: updatedSong
+        });
+        if(res.ok){
+            const newData = await res.json()
+            dispatch(createSong(newData.song))
+            dispatch(updateAlbum(newData.album))
+            return newData
+        }
+    } catch (err) {
+        const errors = err.json()
+        return errors
+    }
+}
+
+
+export const ThunkDeleteSong = (id) => async (dispatch) => {
+    const response = await fetch(`/api/songs/${id}/delete`, {
+      method: "DELETE",
+    });
+    dispatch(deleteSong());
+    return response;
+  };
+
 
 
 // reducer

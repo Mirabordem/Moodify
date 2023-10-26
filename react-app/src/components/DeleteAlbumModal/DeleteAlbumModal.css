@@ -1,0 +1,15 @@
+.dm-title-txt {
+    border: 2px solid red;
+}
+
+.dm-confirm-txt {
+    border: 2px solid green;
+}
+
+.dm-delete-button {
+    border: 2px solid blue;
+}
+
+.dm-close-delete-button {
+    border: 2px solid orange;
+}

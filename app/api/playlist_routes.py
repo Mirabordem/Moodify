@@ -23,22 +23,27 @@ def create_new_playlist():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-            image = form.data['cover_image_url']
-            image.filename = get_unique_filename(image.filename)
-            url='https://i.imgur.com/8LMyVdU.jpg'
+            if form.data['cover_image_url']:
 
-            ##KEEP THIS. uncomment this code when we actually want to upload to aws
-            # upload = upload_file_to_s3(image)
-            # print('THIS IS UPLOAD',upload)
+                image = form.data['cover_image_url']
+                image.filename = get_unique_filename(image.filename)
+                url='https://i.imgur.com/8LMyVdU.jpg'
 
-            # # if "url" not in upload:
-            # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+                ##KEEP THIS. uncomment this code when we actually want to upload to aws
+                # upload = upload_file_to_s3(image)
+                # print('THIS IS UPLOAD',upload)
 
-            # url = upload['url']
+                # # if "url" not in upload:
+                # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
-            # name = form.data['name'],
-            # description = form.data['description'],
-            # user_id = current_user.id
+                # url = upload['url']
+
+                # name = form.data['name'],
+                # description = form.data['description'],
+                # user_id = current_user.id
+            else:
+                url='replace'
+
 
             new_playlist = Playlist (
             name = form.data['name'],

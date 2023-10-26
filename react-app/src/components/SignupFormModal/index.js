@@ -59,10 +59,9 @@ function SignupFormModal() {
 
 	return (
 		<div className="signup-container">
-			<h1 className="h1">Sign up</h1>
+			<div className="new-h1">Sign up</div>
 			<form onSubmit={handleSubmit} className="signup-form">
-				<label>
-					Email
+				<label className="login-label">
 					{validationObject.email && <span className="signup-error">{validationObject.email}</span>}
 					<input
 						type="text"
@@ -71,8 +70,7 @@ function SignupFormModal() {
 						placeholder="Email"
 					/>
 				</label>
-				<label>
-					Username
+				<label className="login-label">
 					{validationObject.username && <span className="signup-error">{validationObject.username}</span>}
 					<input
 						type="text"
@@ -81,8 +79,7 @@ function SignupFormModal() {
 						placeholder="Username"
 					/>
 				</label>
-				<label>
-					Password
+				<label className="login-label">
 					{validationObject.password && <span className="signup-error">{validationObject.password}</span>}
 					<input
 						type="password"
@@ -91,8 +88,7 @@ function SignupFormModal() {
 						placeholder="Password"
 					/>
 				</label>
-				<label>
-					Confirm Password
+				<label className="login-label">
 					{validationObject.confirmPassword && (<span className="signup-error">{validationObject.confirmPassword}</span>)}
 					<input
 						type="password"

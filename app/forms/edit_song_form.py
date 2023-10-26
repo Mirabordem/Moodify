@@ -7,9 +7,8 @@ from ..api.aws_helpers import ALLOWED_AUDIO_EXTENSIONS
 
 
 class EditSongForm(FlaskForm):
-    name = StringField("Name", validators=[DataRequired()])
-    album_id = IntegerField("Album Id", validators=[DataRequired()])
-    track_number = IntegerField("Track Nr", validators=[DataRequired()])
-    audio_url = FileField("Audio", validators=[FileAllowed(list(ALLOWED_AUDIO_EXTENSIONS)), FileRequired()])
-    song_length = IntegerField("Duration", validators=[DataRequired()])
-    
+    name = StringField("Name")
+    album_id = IntegerField("Album Id")
+    track_number = IntegerField("Track Nr")
+    audio_url = FileField("Audio", validators=[FileAllowed(list(ALLOWED_AUDIO_EXTENSIONS))])
+    song_length = IntegerField("Duration")
