@@ -24,6 +24,7 @@ export default function AlbumDetails() {
   const [totalAlbumLength, setTotalAlbumLength] = useState(0)
   const [newSongs, setNewSongs] = useState(true)
   const sessionUser = useSelector((state) => state.session.user);
+  const [pageType, setPageType] = useState('album')
 
 
 
@@ -108,6 +109,7 @@ export default function AlbumDetails() {
         <SongList
         artist={album.artist}
         album={album}
+        pageType={pageType}
         />
       </div>
     </div>

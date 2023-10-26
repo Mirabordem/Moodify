@@ -128,3 +128,22 @@ def add_song_to_playlist(playlistId, songId):
 
     db.session.commit()
     return playlist.to_dict()
+
+
+@playlist_routes.route('/<int:playlistId>/songs/<int:songId>/remove')
+@login_required
+def remove_song_to_playlist(playlistId, songId):
+    """
+    Adds like to a selected song. Returns likes for the song as a list of like dictionaries.
+    """
+    song = Song.query.get(songId)
+    playlist = Playlist.query.get(playlistId)
+
+    if song not in playlist.songs_on_playlist:
+        return { "errors": "Song already on playlist" }, 405
+
+    idx = playlist.songs_on_playlist.index(song)
+    playlist.songs_on_playlist.pop(idx)
+
+    db.session.commit()
+    return playlist.to_dict()
