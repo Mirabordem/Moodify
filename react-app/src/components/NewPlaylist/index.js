@@ -44,9 +44,11 @@ export default function NewPlaylist({formType,userId}) {
 
 
         if (formType === "Create") {
+            if (didPicChange) {
+                formData.append('cover_image_url', albumCover);
+            }
             formData.append('user_id', userId);
 
-            formData.append('cover_image_url', albumCover);
             let test = await dispatch(ThunkCreatePlaylist(formData));
             console.log('PLAYLIST TEST CAME BACK LIKE',test)
             if (test) {
@@ -125,7 +127,7 @@ return (
                             handleAlbumCoverChange(e)
                         }}
                         accept='image/*'
-                        required={formType === 'Create'}
+                        // required={formType === 'Create'}
                     />
                 </label>
 
