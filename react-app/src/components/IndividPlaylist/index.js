@@ -43,7 +43,6 @@ export default function PlaylistDetails() {
     picture = 'https://i.imgur.com/UFYut0H.jpg'
   }
 
-  console.log('picture right before the return is',picture)
   return (
     <div className="playlist-page-container">
       <div className="playlist-id-top-info">
