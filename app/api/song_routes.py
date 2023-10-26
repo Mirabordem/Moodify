@@ -121,48 +121,41 @@ def delete_song(id):
 
 
 
-@song_routes.route('/<int:id>/like', methods=['POST'])
+@song_routes.route('/<int:id>/like')
 @login_required
 def add_song_like(id):
     """
     Adds like to a selected song. Returns likes for the song as a list of like dictionaries.
     """
-    song = Song.query.get(id).to_dict()
 
+    song = Song.query.get(id)
 
-    for like in song["likes"]:
-        if like["user_id"] == current_user.id:
-            return { "errors": "User likes this song" }, 405
+    if song in current_user.liked_songs:
+        return { "errors": "User likes this song" }, 405
 
-    like = likes(
-        user_id=current_user.id,
-        song_id=id
-    )
+    current_user.liked_songs.append(song)
 
-    db.session.add(like)
     db.session.commit()
-    return like.to_dict()
+    return current_user.to_dict()
 
 
 
 
-@song_routes.route('/<int:id>/unlike', methods=['DELETE'])
+@song_routes.route('/<int:id>/unlike')
 @login_required
 def remove_song_like(id):
     """
     Removes like from a selected song. Returns a message if successful.
     """
-    user_id = current_user.id
-    song_id = id
 
-    like = likes.query.filter(
-        likes.c.user_id == user_id,
-        likes.c.song_id == song_id
-    ).first()
+    song = Song.query.get(id)
 
-    if like:
-        db.session.delete(like)
-        db.session.commit()
-        return {"message": "Like successfully deleted"}
-    else:
+    try:
+        idx = current_user.liked_songs.index(song)
+    except ValueError:
         return { "errors": "User has never liked this song" }, 405
+
+    current_user.liked_songs.pop(idx)
+
+    db.session.commit()
+    return current_user.to_dict()
