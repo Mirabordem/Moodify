@@ -1,18 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import OpenModalButton from "../OpenModalButton";
-import DeleteAlbumModal from "../DeleteAlbumModal";
-import NewAlbum from "../NewAlbum";
-import CreateSong from "../CreateSongModal";
+import DeletePlaylistModal from "../DeletePlaylistModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 
 
-export default function AlbumUpdateButton({ user, albumId }) {
+export default function PlaylistUpdateButton({ user, playlistId }) {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
-
-
 
     useEffect(() => {
       const closeMenu = (e) => {
@@ -26,8 +22,6 @@ export default function AlbumUpdateButton({ user, albumId }) {
       return () => document.removeEventListener("click", closeMenu);
     }, []);
 
-   
-
     const ulClassName = "album-update-dropdown" + (showMenu ? "" : " hidden");
 
     return (
@@ -37,26 +31,15 @@ export default function AlbumUpdateButton({ user, albumId }) {
           setShowMenu(!showMenu);
         }}>
             <div className="album-dots-container">
-          <span className="album-big-dots">...</span>
+          <span className="album-big-dots1">...</span>
           </div>
         </button>
         <div className={ulClassName}>
           {user ? (
             <div className="dropdown2">
               <OpenModalButton
-                className="new-album"
-                buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Album</>}
-                modalComponent={<NewAlbum formType="Edit" albumId={albumId} />}
-              />
-              <div className="horizontal-line2"></div>
-              <OpenModalButton
-                buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faPlus} /></span> Add Song</>}
-                modalComponent={<CreateSong albumId={albumId} />}
-              />
-              <div className="horizontal-line2"></div>
-              <OpenModalButton
                 buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faTrash} /></span> Delete Album</>}
-                modalComponent={<DeleteAlbumModal albumId={albumId} />}
+                modalComponent={<DeletePlaylistModal playlistId={playlistId} />}
               />
             </div>
           ) : null}

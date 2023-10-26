@@ -23,7 +23,10 @@ export default function AlbumDetails() {
   const [totalNumberOfSongs, setTotalNumberOfSongs] = useState(album?.albumSongs.length)
   const [totalAlbumLength, setTotalAlbumLength] = useState(0)
   const [newSongs, setNewSongs] = useState(true)
-  const sessionUser = useSelector((state) => state.session.user);
+
+  const user = useSelector((state) => state.session.user);
+  const [pageType, setPageType] = useState('album')
+
 
 
 
@@ -32,11 +35,11 @@ export default function AlbumDetails() {
    let newAlbumLength = totalAlbumLength
     // console.log('IN THE USEEFFECT>>>>>>>>>>')
    if(album && newSongs) {
-    // console.log('HIT IF STATEMENT!!!!')
+
      for (let songId of album.albumSongs) {
        const song = songs[songId];
       //  newAlbumTracks.push(song);
-       newAlbumLength += song.songLength;
+       newAlbumLength += song?.songLength;
      }
      setTotalAlbumLength(newAlbumLength)
      const mins = Math.trunc(newAlbumLength / 60);
@@ -51,7 +54,7 @@ export default function AlbumDetails() {
    }
 
     // setAlbumTracks(newAlbumTracks)
-  }, [minutes, releaseDate, releaseYear, totalNumberOfSongs, totalAlbumLength, newSongs, setNewSongs])
+  }, [minutes, releaseDate, releaseYear, totalNumberOfSongs, totalAlbumLength, newSongs, setNewSongs,songs,album])
 
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
@@ -65,7 +68,8 @@ export default function AlbumDetails() {
   let defaultAlbumLength = 0;
   for (let songId of album.albumSongs) {
     const song = songs[songId];
-    defaultAlbumLength += song.songLength;
+    if (song){
+    defaultAlbumLength += song.songLength;}
   }
 
   const defaultMinutes = Math.trunc(defaultAlbumLength / 60);
@@ -87,26 +91,24 @@ export default function AlbumDetails() {
             {album.artist} • {releaseYear ? releaseYear : defaultReleaseYear} • {totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs •{" "}
             {minutes ? minutes : defaultMinutes} min
           </p>
-
-
         </div>
       </div>
 
       <div className="album-id-functions-3">
-
       <button
           className="play-button"
           // onClick={playFirstSong}
         >
           <span className="play-arrow"></span>
         </button>
-        <AlbumUpdateButton user={sessionUser} albumId={album.id} />
+        <AlbumUpdateButton user={user} albumId={album.id} />
       </div>
 
       <div id="album-id-song-list">
         <SongList
         artist={album.artist}
         album={album}
+        pageType={pageType}
         />
       </div>
     </div>

@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, NavLink, useParams } from "react-router-dom";
-import OpenModalButton from "../OpenModalButton/index";
+import { useParams } from "react-router-dom";
 import { getAllAlbums } from "../../store/albums";
 import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
 import SongList from "../SongList";
-import DeletePlaylistModal from "../DeletePlaylistModal";
+import "./IndividPlaylist.css";
+import IndividPlaylistButton from "../SideMenu/IndividPlaylistButton";
+
+
 
 export default function PlaylistDetails() {
   const { id } = useParams();
@@ -17,6 +19,7 @@ export default function PlaylistDetails() {
   const songs = useSelector((state) => state.songs);
   const albums = useSelector((state)=> state.albums)
   const [pageType, setPageType] = useState('playlist')
+  const user = useSelector((state) => state.session.user);
 
   if (!playlist || !Object.values(songs).length) {
     // dispatch(thunkGetAllAlbums());
@@ -44,43 +47,46 @@ export default function PlaylistDetails() {
   }
 
   return (
-    <div className="playlist-page-container">
-      <div className="playlist-id-top-info">
+    <div className="album-page-container">
+      <div className="album-id-top-info">
         <img className="playlist-id-cover-img"
-        src={picture}
+        // src={picture}
+        src={playlist.coverImageUrl}
         alt="Playlist Cover"
       />
-        <div id="playlist-id-info-words">
-          <p className="info-playlist-p">Playlist</p>
+        <div id="album-id-info-words">
+          <p className="info-album-p">Playlist</p>
           <div>
-            <p className="playlist-title-page">{playlist.title}</p>
+            <p className="album-title-page">{playlist.title}</p>
           </div>
-          <p className="playlist-release-info">
+
+          <p className="album-release-info">
             {playlist.description}, Amount of songs here, Length of playlist
             here
           </p>
         </div>
       </div>
 
-      <div id="playlist-id-functions">
-        <button>Play playlist from beginning</button>
-        {/* <OpenModalButton
-          className="new-album"
-          buttonText="Edit Album"
-        //   modalComponent={<NewAlbum formType="Edit" albumId={id} />}
-        /> */}
-        <OpenModalButton
-          buttonText="add-Song"
-          //   modalComponent={<CreateSong albumId={id} />}
-        />
-        <OpenModalButton
-          buttonText="Delete"
-          modalComponent={<DeletePlaylistModal playlistId={id} />}
-        />
+      <div id="album-id-functions-3">
+      <button
+          className="play-button"
+          // onClick={playFirstSong}
+        >
+          <span className="play-arrow"></span>
+        </button>
+        {/* <IndividPlaylistButton user={user} playlistId={playlist.id} /> */}
       </div>
+
+
+
       <div id="playlist-id-song-list">
-        <SongList pageType={pageType} playlist={playlist}/>
+        <SongList
+        pageType={pageType}
+        playlist={playlist}/>
       </div>
+
+
+
     </div>
   );
 }

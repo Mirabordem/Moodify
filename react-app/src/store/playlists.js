@@ -35,7 +35,6 @@ export const deletePlaylist = (playlistId) => {
 // thunks
 
 export const ThunkDeletePlaylist = (id) => async (dispatch) => {
-  console.log(id);
   const response = await fetch(`/api/playlists/${id}/delete`, {
     method: "DELETE",
   });
@@ -76,6 +75,36 @@ export const ThunkEditPlaylist = (formData, playlistId) => async (dispatch) => {
     return { errors };
   }
 };
+
+export const ThunkAddSongToPlaylist = (playlistId, songId) => async dispatch => {
+  try {
+    const res = await fetch(`/api/playlists/${playlistId}/songs/${songId}`)
+
+    if (res.ok) {
+      const playlist = await res.json()
+      dispatch(updatePlaylist(playlist))
+      return playlist
+    }
+  } catch (err) {
+    const errors = await err.json()
+    return errors
+  }
+}
+
+export const ThunkRemoveSongToPlaylist = (playlistId, songId) => async dispatch => {
+  try {
+    const res = await fetch(`/api/playlists/${playlistId}/songs/${songId}/remove`)
+
+    if (res.ok) {
+      const playlist = await res.json()
+      dispatch(updatePlaylist(playlist))
+      return playlist
+    }
+  } catch (err) {
+    const errors = await err.json()
+    return errors
+  }
+}
 
 const initialState = {};
 const playlistReducer = (state = initialState, action) => {
