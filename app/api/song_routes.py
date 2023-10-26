@@ -4,6 +4,7 @@ from app.models import db, Song, likes, Album
 from app.forms import EditSongForm, CreateSongForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.api.aws_helpers import remove_file_from_s3
+from icecream import ic
 
 song_routes = Blueprint('song', __name__)
 
@@ -46,16 +47,21 @@ def edit_song(id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     current_song = Song.query.get(id)
+    curr_song_dict = current_song.to_dict()
+    ic(current_song)
+    ic(current_song.to_dict())
     if current_song is None:
         return {'errors': 'Song not found'}, 404
-    album_of_song = Album.query.get(current_song['album_id'])
+    album_of_song = Album.query.get(curr_song_dict['albumId'])
     if album_of_song.user_owner != current_user.id:
         return {'errors': 'forbidden'}, 403
 
 
     if form.validate_on_submit():
         data = form.data
+        ic(data["audio_url"])
         if data["audio_url"]:
+            print("HIT THE IF BLOCK")
             # song = data["audio_url"]
             # song.filename = get_unique_filename(song.filename)
             # upload = upload_file_to_s3(song)
@@ -64,16 +70,23 @@ def edit_song(id):
             #     return { 'errors': 'upload error'}
             # current_song.audio_url = upload['url']
 
-            current_song.audio_url = 'https://moodifybucket.s3.us-east-2.amazonaws.com/bubkas.mp3'
+            # current_song.audio_url = 'https://moodifybucket.s3.us-east-2.amazonaws.com/bubkas.mp3'
 
-        current_song.name = data['name'],
-        current_song.album_id = data['album_id'],
-        current_song.track_number = data['track_number'],
+        current_song.name = data['name']
+        ic(data['name'])
+        print(data['name'])
+
+        current_song.track_number = data['track_number']
+
         current_song.song_length = data['song_length']
+
+        ic(current_song.to_dict())
 
         db.session.commit()
 
-        updated_album_obj = Album.query.get(album_of_song['id']).to_dict()
+        print('Did we make it beyond the commit?????????')
+
+        updated_album_obj = Album.query.get(album_of_song.id).to_dict()
         song_instances = [song.to_dict() for song in updated_album_obj['albumSongs']]
         updated_album_obj['albumSongs'] = [song['id'] for song in song_instances]
         current_song_obj = current_song.to_dict()

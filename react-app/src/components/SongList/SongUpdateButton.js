@@ -41,7 +41,7 @@ export default function SongUpdateButton({ user, songId }) {
           <div className="dropdown1">
             <OpenModalButton
               buttonText="Edit Song"
-              modalComponent={<CreateSong formtype="edit" songId={songId} />}
+              modalComponent={<CreateSong formType="edit" songId={songId} />}
             />
             <OpenModalButton
               buttonText="Delete Song"

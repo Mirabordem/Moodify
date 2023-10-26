@@ -2,23 +2,30 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
 import { useModal } from '../../context/Modal';
 import { useDispatch, useSelector } from "react-redux";
-import { thunkCreateSong } from "../../store/songs";
+import { thunkCreateSong, thunkUpdateSong } from "../../store/songs";
 import { useSongPlayer } from "../../context/SongPlayer";
 
 export default function CreateSong({formType, albumId, songId}) {
     const dispatch = useDispatch()
     const {id} = useParams()
     const {songAdded, setSongAdded} = useSongPlayer()
+    const currentSong = useSelector(state => state.songs[songId])
     const {closeModal} = useModal()
-    const [name, setname] = useState('')
+    const [name, setName] = useState('')
     const [trackNumber, setTrackNumber] = useState(1)
     const [audioUrl, setAudioUrl] = useState('')
     const [songLength, setSongLength] = useState(1)
     const [changeAudioURL, setChangeAudioURL] = useState(false)
 
-    console.log(audioUrl)
-    // setSongAdded(false)
-
+    useEffect(() => {
+        if (formType === 'edit' && currentSong) {
+            setName(currentSong.name)
+            setTrackNumber(currentSong.trackNumber)
+            setAudioUrl(currentSong.audioUrl)
+            setSongLength(currentSong.songLength)
+        }
+    }, [currentSong])
+    console.log("FORM TYPE!!!", formType)
     const submitSong = async e => {
         e.preventDefault()
 
@@ -34,13 +41,13 @@ export default function CreateSong({formType, albumId, songId}) {
 
             setSongAdded(!songAdded)
         } else {
-            const updatedSong = FormData()
+            const updatedSong = new FormData()
             if(changeAudioURL) updatedSong.append("audio_url", audioUrl);
             updatedSong.append('name', name)
             updatedSong.append('track_number', trackNumber)
             updatedSong.append("song_length", songLength)
 
-            // fetch / thunnk here
+            const result = await dispatch(thunkUpdateSong(updatedSong, songId))
         }
 
         closeModal()
@@ -48,7 +55,7 @@ export default function CreateSong({formType, albumId, songId}) {
 
     return (
         <div>
-            <h1>{formType === 'edit' ? 'Update Song' : 'Add Song to Album'}</h1>
+            <h1 style={{color:"green"}}>{formType === 'edit' ? 'Update Song' : 'Add Song to Album'}</h1>
             <form
             onSubmit={submitSong}
             encType="multipart/form-data"
@@ -57,7 +64,7 @@ export default function CreateSong({formType, albumId, songId}) {
                     <input
                     type="text"
                     value={name}
-                    onChange={e => setname(e.target.value)}
+                    onChange={e => setName(e.target.value)}
                     />
                 </label>
                 <label>

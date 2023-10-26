@@ -91,7 +91,7 @@ export default function SongList({
   const songListMap = songTracks.map((song) => {
     const minutes = Math.trunc(song.songLength / 60);
     const seconds = song.songLength % 60;
-    const runTime = `${minutes}:${seconds}`;
+    const runTime = `${minutes}:${seconds < 10 ? '0': ''}${seconds}`;
 
     return (
       <li
