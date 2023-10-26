@@ -77,6 +77,21 @@ export const ThunkEditPlaylist = (formData, playlistId) => async (dispatch) => {
   }
 };
 
+export const ThunkAddSongToPlaylist = (playlistId, songId) => async dispatch => {
+  try {
+    const res = await fetch(`/api/playlists/${playlistId}/songs/${songId}`)
+
+    if (res.ok) {
+      const playlist = await res.json()
+      dispatch(updatePlaylist(playlist))
+      return playlist
+    }
+  } catch (err) {
+    const errors = await err.json()
+    return errors
+  }
+}
+
 const initialState = {};
 const playlistReducer = (state = initialState, action) => {
   switch (action.type) {

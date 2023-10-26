@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import OpenModalButton from "../OpenModalButton";
 import DeleteSongModal from "../DeleteSongModal";
 import CreateSong from "../CreateSongModal";
+import { ThunkAddSongToPlaylist } from "../../store/playlists"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
@@ -12,6 +13,7 @@ export default function SongUpdateButton({ user, songId }) {
   const [showMenu, setShowMenu] = useState(false);
   const [showNestedMenu, setShowNestedMenu] = useState(false);
   const playlists = useSelector(state => state.playlists)
+  const dispatch = useDispatch()
   const ulRef = useRef();
 
   useEffect(() => {
@@ -33,8 +35,13 @@ export default function SongUpdateButton({ user, songId }) {
       <button
         style={{cursor: 'pointer'}}
         className='start'
-        onClick={e => {
+        onClick={ async e => {
           e.stopPropagation();
+          // console.log("user is:" user)
+            if (user) {
+              const updatedPlaylist = await dispatch(ThunkAddSongToPlaylist(playlist.id, songId));
+
+          }
         }}>
           {<><span className="menu-icon"></span> {playlist.name}</>}
       </button>
