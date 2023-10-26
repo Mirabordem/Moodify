@@ -25,7 +25,6 @@ export default function CreateSong({formType, albumId, songId}) {
             setSongLength(currentSong.songLength)
         }
     }, [currentSong])
-    console.log("FORM TYPE!!!", formType)
     const submitSong = async e => {
         e.preventDefault()
 

@@ -104,6 +104,7 @@ export default function SongList({
   };
 
   const songListMap = songTracks.map((song) => {
+    if (song){
     const handleLike = (e) => {
       e.stopPropagation();
       if (user) {
@@ -149,12 +150,12 @@ export default function SongList({
           <div className="song-actions-container">{heart}</div>
           <span className="song-info">{runTime}</span>
           <div className="song-menu">
-            <SongUpdateButton user={user} songId={song.id} />
+            <SongUpdateButton user={user} songId={song.id} pageType={pageType} playlistId={playlist.id} />
           </div>
 
         </div>
       </li>
-    );
+    )}
   });
 
   return (
@@ -169,5 +170,3 @@ export default function SongList({
     </div>
   );
 }
-
-

@@ -106,16 +106,24 @@ def delete_song(id):
     Deletes a song.
     """
     selected_song = Song.query.get(id)
+    selected_song_dict=selected_song.to_dict()
 
-    if selected_song.to_dict()['user_id'] != current_user.id:
-        return { 'errors': 'Song not found' }, 404
+    albumId=selected_song_dict['albumId']
+    targetAlbum=Album.query.get(albumId)
+    targetAlbumToDict= targetAlbum.to_dict()
+    userOwner= targetAlbumToDict['userOwner']
 
-    remove_file_from_s3(selected_song.to_dict()['audio_url'])
+    if userOwner != current_user.id:
+        return { 'errors': 'Song not found' }
+    else:
 
-    db.session.delete(selected_song)
-    db.session.commit()
+        ##Uncomment this when we actually want to remove from aws
+        # remove_file_from_s3(selected_song_dict['audioUrl'])
 
-    return { 'message': 'Deleted Successfully' }
+        db.session.delete(selected_song)
+        db.session.commit()
+
+        return  {'message': 'successfuly deleted'}
 
 
 
