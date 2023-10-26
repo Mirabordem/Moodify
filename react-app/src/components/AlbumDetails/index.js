@@ -32,7 +32,7 @@ export default function AlbumDetails() {
    let newAlbumLength = totalAlbumLength
     // console.log('IN THE USEEFFECT>>>>>>>>>>')
    if(album && newSongs) {
-    // console.log('HIT IF STATEMENT!!!!')
+
      for (let songId of album.albumSongs) {
        const song = songs[songId];
       //  newAlbumTracks.push(song);

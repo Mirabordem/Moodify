@@ -8,8 +8,6 @@ function DeleteSongModal({ songId }) {
   const { closeModal } = useModal();
   const id = songId;
 
-  console.log('inside deleteSongModal SONG ID IS',songId)
-
   const song = useSelector((state) => state.songs[id]);
 
   const handleDelete = async (e) => {

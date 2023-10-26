@@ -50,7 +50,6 @@ export default function NewPlaylist({formType,userId}) {
             formData.append('user_id', userId);
 
             let test = await dispatch(ThunkCreatePlaylist(formData));
-            console.log('PLAYLIST TEST CAME BACK LIKE',test)
             if (test) {
                 history.push(`/playlists/${test.id}`);
                 closeModal();

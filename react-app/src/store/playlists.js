@@ -35,7 +35,6 @@ export const deletePlaylist = (playlistId) => {
 // thunks
 
 export const ThunkDeletePlaylist = (id) => async (dispatch) => {
-  console.log(id);
   const response = await fetch(`/api/playlists/${id}/delete`, {
     method: "DELETE",
   });
