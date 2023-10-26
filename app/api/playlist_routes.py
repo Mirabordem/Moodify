@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Playlist
+from app.models import db, Playlist, Song
 from app.forms import CreatePlaylistForm,EditPlaylistForm
 from app.api.aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 from app.api.auth_routes import validation_errors_to_error_messages
@@ -110,3 +110,21 @@ def delete_playlist(id):
     db.session.delete(playlist)
     db.session.commit()
     return {'message': 'Successfully Deleted'}
+
+
+@playlist_routes.route('/<int:playlistId>/songs/<int:songId>')
+@login_required
+def add_song_to_playlist(playlistId, songId):
+    """
+    Adds like to a selected song. Returns likes for the song as a list of like dictionaries.
+    """
+    song = Song.query.get(songId)
+    playlist = Playlist.query.get(playlistId)
+
+    if song in playlist.songs_on_playlist:
+        return { "errors": "Song already on playlist" }, 405
+
+    playlist.songs_on_playlist.append(song)
+
+    db.session.commit()
+    return playlist.to_dict()
