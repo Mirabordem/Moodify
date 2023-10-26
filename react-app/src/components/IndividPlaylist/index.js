@@ -39,6 +39,7 @@ export default function PlaylistDetails() {
 
   }
   else {
+    //below is the default picture for new playlists. we can replace this easily
     picture = 'https://i.imgur.com/UFYut0H.jpg'
   }
 
