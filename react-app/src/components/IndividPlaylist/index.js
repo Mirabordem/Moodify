@@ -15,6 +15,7 @@ export default function PlaylistDetails() {
 
   const playlist = useSelector((state) => state.playlists[id]);
   const songs = useSelector((state) => state.songs);
+  const albums = useSelector((state)=> state.albums)
   const [pageType, setPageType] = useState('playlist')
 
   if (!playlist || !Object.values(songs).length) {
@@ -28,11 +29,30 @@ export default function PlaylistDetails() {
     playlist_tracks.push(songs[songId]);
   }
 
+  let picture
+  if (playlist.coverImageUrl!==null){
+    picture=playlist.coverImageUrl
+  }
+  else if (playlist?.coverImageUrl=== null && playlist?.songsOnPlaylist.length>0){
+
+    picture=albums[songs[playlist.songsOnPlaylist[0]].albumId].coverImageUrl
+
+  }
+  else {
+    picture = 'https://i.imgur.com/UFYut0H.jpg'
+  }
+
+  console.log('picture right before the return is',picture)
   return (
-    <div className="playlist-page-container">
+    <div className="playlist-page-container"
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}>
       <div className="playlist-id-top-info">
         <img className="playlist-id-cover-img"
-        src={playlist.coverImageUrl === 'replace' ? 'http://www.dog1.jpg' : playlist.coverImageUrl}
+        src={picture}
         alt="Playlist Cover"
       />
         <div id="playlist-id-info-words">

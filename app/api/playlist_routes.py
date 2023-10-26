@@ -42,7 +42,7 @@ def create_new_playlist():
                 # description = form.data['description'],
                 # user_id = current_user.id
             else:
-                url='replace'
+                url=None
 
 
             new_playlist = Playlist (
