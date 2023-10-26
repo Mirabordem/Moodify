@@ -38,8 +38,11 @@ export default function SongUpdateButton({ user, songId }) {
         {user ? (
           <div className="dropdown1">
             <OpenModalButton
+
               buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Song</>}
               modalComponent={<CreateSong formtype="edit" songId={songId} />}
+
+
             />
             <div className="horizontal-line1"></div>
             <OpenModalButton
