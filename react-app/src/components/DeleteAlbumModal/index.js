@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { ThunkDeleteAlbum } from "../../store/albums";
+import "./DeleteAlbumModal.css";
 
 function DeleteAlbumModal({ albumId }) {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function DeleteAlbumModal({ albumId }) {
   };
 
   return (
-    <>
+    <div className="signup-container">
       <h1 className="dm-title-txt">Confirm Delete</h1>
       <h3 className="dm-confirm-txt">
         Are you sure you want to remove this album?
@@ -30,7 +31,7 @@ function DeleteAlbumModal({ albumId }) {
       <button className="dm-close-delete-button" onClick={closeModal}>
         No (Keep Album)
       </button>
-    </>
+    </div>
   );
 }
 
