@@ -1,41 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, NavLink, useParams } from "react-router-dom";
-import OpenModalButton from "../OpenModalButton/index";
-import { useModal } from "../../context/Modal";
-import { thunkGetAllAlbums } from "../../store/albums";
+import { useParams } from "react-router-dom";
 import { getAllAlbums } from "../../store/albums";
 import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";
-import NewAlbum from "../NewAlbum";
 import fetchAll from "../utils";
 import "./AlbumDetails.css";
 import SongList from "../SongList";
-import CreateSong from "../CreateSongModal";
-import DeleteAlbumModal from "../DeleteAlbumModal";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisH } from '@fortawesome/free-solid-svg-icons';
+import AlbumUpdateButton from "./AlbumUpdateButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 
 
 
 export default function AlbumDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  // const albums = useSelector(state => state.albums)
   const album = useSelector((state) => state.albums[id]);
   const songs = useSelector((state) => state.songs);
   const [minutes, setMinutes] = useState(0)
   const [releaseDate, setReleaseDate] = useState(0)
   const [releaseYear, setReleaseYear] = useState(0)
   const [totalNumberOfSongs, setTotalNumberOfSongs] = useState(album?.albumSongs.length)
-  // const [albumTracks, setAlbumTracks]= useState([])
   const [totalAlbumLength, setTotalAlbumLength] = useState(0)
   const [newSongs, setNewSongs] = useState(true)
+  const sessionUser = useSelector((state) => state.session.user);
 
 
-  // useEffect(() => {
-  //     setLoadOnce(false)
-  //   }, [])
+
 
   useEffect(() => {
    let newAlbumLength = totalAlbumLength
@@ -103,34 +95,16 @@ export default function AlbumDetails() {
       </div>
 
       <div className="album-id-functions-3">
-      <button style={{ background: 'transparent', border: 'none' }}>
-          <img className="green-button-image"
-            src="https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/ifd4a620d55cdf9ab/version/1698195083/image.png"
-            alt="Play Music"
-          />
+
+      <button
+          className="play-button"
+          // onClick={playFirstSong}
+        >
+          <span className="play-arrow"></span>
         </button>
-
-
-        <OpenModalButton
-          className="new-album"
-          buttonText="Edit Album"
-
-
-          modalComponent={<NewAlbum formType="Edit" albumId={id} />}
-
-        />
-        <OpenModalButton
-          buttonText="Add Song"
-          modalComponent={<CreateSong albumId={id} />}
-        />
-        <OpenModalButton
-          buttonText="Delete"
-
-          modalComponent={<DeleteAlbumModal albumId={id} />}
-
-
-        />
+        <AlbumUpdateButton user={sessionUser} albumId={album.id} />
       </div>
+
       <div id="album-id-song-list">
         <SongList
         // songs={album_tracks}
