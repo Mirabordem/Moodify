@@ -36,14 +36,14 @@ def create_new_album():
         # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
         # url = upload['url']
-        if os.environ.get('FLASK_ENV') == 'production':
-                upload = upload_file_to_s3(image)
-                print(upload)
-                if 'url' not in upload:
-                    return { 'errors': 'upload error'}
-                url = upload['url']
-        else:
-            url="https://i.imgur.com/8LMyVdU.jpg"
+        # if os.environ.get('FLASK_ENV') == 'production':
+        upload = upload_file_to_s3(image)
+        print(upload)
+        if 'url' not in upload:
+            return { 'errors': 'upload error'}
+        url = upload['url']
+        # else:
+        #     url="https://i.imgur.com/8LMyVdU.jpg"
 
 
 

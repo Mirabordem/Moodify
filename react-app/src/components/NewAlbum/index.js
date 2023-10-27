@@ -48,7 +48,7 @@ export default function NewAlbum({ formType, albumId }) {
         if (formType === "Create") {
             formData.append('cover_image_url', albumCover);
             let test = await dispatch(ThunkCreateAlbum(formData));
-            if (test) {
+            if (test.title) {
                 history.push(`/albums/${test.id}`);
                 closeModal();
             }
