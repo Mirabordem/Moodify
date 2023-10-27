@@ -75,15 +75,18 @@ Moodify, a unique and captivating take on the Spotify design, offers an experien
 While retaining the functional elegance of its predecessor, Moodify introduces a distinctive twist with its own signature logo and favicon. The color palette harmonizes with the mood and theme of the platform, creating a seamless and visually engaging atmosphere. Discover music in a new light with Moodify, where a touch of personality meets the rhythm of your favorite tunes.
 
 # Screenshots
+<img width="1422" alt="landing-page" src="https://github.com/Mirabordem/Moodify/assets/130639536/1320c417-d85d-4982-b1b0-90244cc99330">
 
-![image](./react-app/public/landing-page.png)
+
 
 
 # Documentation
 
 Moodify's Redux store is a marvel of efficiency and organization. It follows a flat, normalized, and DRY (Don't Repeat Yourself) structure where each resource meticulously catalogues its relationship with songs, using unique IDs. This intelligent design allows for lightning-fast data retrieval and rendering as you seamlessly navigate from one page to another. With Moodify's Redux store, you'll experience a smooth and remarkably quick data pull, ensuring a seamless and enjoyable user experience.
 
-![image](./react-app/public/Redux-Store.png)
+<img width="311" alt="Redux-Store" src="https://github.com/Mirabordem/Moodify/assets/130639536/219336af-1e41-4a97-bc1d-940d357a8d69">
+
+
 
 
 ## Installation Instructions
