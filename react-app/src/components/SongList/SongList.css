@@ -81,10 +81,11 @@
 
 }
 .song-actions-container {
-    visibility: hidden;
+    /* visibility: hidden; */
     width: 15px;
     margin-top: 30px;
 }
+
 
 .song-li:hover .song-actions-container {
     visibility: visible;

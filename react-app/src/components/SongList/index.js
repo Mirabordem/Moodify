@@ -106,6 +106,7 @@ export default function SongList({
 
   const songListMap = songTracks.map((song) => {
     if (song){
+
     const handleLike = (e) => {
       e.stopPropagation();
       if (user) {
@@ -122,16 +123,21 @@ export default function SongList({
       }
       heart = emptyHeart;
     };
-    const minutes = Math.trunc(song.songLength / 60);
-    const seconds = song.songLength % 60;
 
-    emptyHeart = <i className="far fa-heart" onClick={handleLike}></i>;
-    filledHeart = <i class="fa-solid fa-heart" onClick={handleDislike}></i>;
+    emptyHeart = <i className="far fa-heart empty-heart1" onClick={handleLike}></i>;
+
+    filledHeart = (
+      <i className="fas fa-heart" style={{ color: 'rgb(95, 195, 146)' }} onClick={handleDislike}></i>
+    );
+
     let heart = null;
     if (userLikedSongIds.includes(song.id)) {
       heart = filledHeart;
     } else heart = emptyHeart;
 
+
+    const minutes = Math.trunc(song.songLength / 60);
+    const seconds = song.songLength % 60;
     const runTime = `${minutes}:${seconds < 10 ? '0': ''}${seconds}`;
 
     return (
@@ -149,6 +155,7 @@ export default function SongList({
         <div className="song-info4">
 
           <div className="song-actions-container">{heart}</div>
+
           <span className="song-info">{runTime}</span>
           <div className="song-menu">
             <SongUpdateButton user={user} songId={song.id} pageType={pageType} playlistId={playlist?.id} />
