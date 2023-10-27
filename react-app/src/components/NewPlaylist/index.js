@@ -16,7 +16,7 @@ export default function NewPlaylist({formType,userId}) {
     const [albumCover, setAlbumCover]= useState();
     const [description,setDescription]=useState("")
     const [didPicChange, setDidPicChange] = useState(false)
-    const [errors,setErrors] = useState(false)
+    const [errors, setErrors] = useState({})
 
     // const playlist = useSelector(state => state.albums[albumId]);
 
@@ -49,10 +49,12 @@ export default function NewPlaylist({formType,userId}) {
             }
             formData.append('user_id', userId);
 
-            let test = await dispatch(ThunkCreatePlaylist(formData));
-            if (test) {
-                history.push(`/playlists/${test.id}`);
+            let data = await dispatch(ThunkCreatePlaylist(formData));
+            if (data) {
+                history.push(`/playlists/${data.id}`);
                 closeModal();
+            } else if (data.errors) {
+                setErrors(data.errors)
             }
         }
         // else if (formType === "Edit") {
@@ -91,6 +93,7 @@ return (
                         <li key={idx}>{error}</li>
                     ))}
                 </ul> */}
+                {errors.message && <p className="add-playlist-errors">{errors.message}</p>}
                 <label className='login-label'>
                     <input
                         type="text"
@@ -100,6 +103,7 @@ return (
                         placeholder="Name"
                     />
                 </label>
+                {errors.title && <p className="add-playlist-errors">{errors.title}</p>}
                 <label className='login-label'>
                     {/* Description */}
                     <input
@@ -110,6 +114,7 @@ return (
                         placeholder="Description"
                     />
                 </label>
+                {errors.description && <p className="add-playlist-errors">{errors.description}</p>}
                 <label className='login-label'>
                     {formType === 'Edit' && (
                         <div>
@@ -131,7 +136,7 @@ return (
                         placeholder="Playlist Cover"
                     />
                 </label>
-
+                {errors.cover_image_url && <p className="add-playlist-errors">{errors.cover_image_url}</p>}
                 <button className="signup-button" type="submit">{formType === 'Create' ? 'Create Playlist' : 'Edit Playlist'}</button>
             </form>
         </div>

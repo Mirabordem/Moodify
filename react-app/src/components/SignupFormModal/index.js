@@ -13,6 +13,7 @@ function SignupFormModal() {
 	// const [errors, setErrors] = useState([]);
 	const [validationObject, setValidationObject] = useState({});
 	const { closeModal } = useModal();
+	const [errors, setErrors] = useState({})
 
 
 	const handleSubmit = async (e) => {
@@ -50,8 +51,8 @@ function SignupFormModal() {
 			return;
 		}
 		const data = await dispatch(signUp(username, email, password));
-		if (data) {
-			setValidationObject(data);
+		if (data.errors) {
+			setValidationObject(data.errors);
 		} else {
 			closeModal();
 		}

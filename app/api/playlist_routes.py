@@ -66,9 +66,9 @@ def delete_playlist(id):
     playlist = Playlist.query.get(id)
 
     if playlist is None:
-        return {'errors': {'message':'Playlist not found'}}, 404
+        return {'errors': {'error':'Playlist not found'}}, 404
     elif playlist.user_id != current_user.id:
-        return {'errors': {'message':"Playlist does not belong to current user"}}, 403
+        return {'errors': {'error':"Playlist does not belong to current user"}}, 403
 
     db.session.delete(playlist)
     db.session.commit()
