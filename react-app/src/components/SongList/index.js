@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -11,15 +12,19 @@ import fetchAll from "../utils";
 import { ThunkAddLike, ThunkDeleteLike } from "../../store/session";
 import DeleteSongModal from "../DeleteAlbumModal";
 import SongUpdateButton from "./SongUpdateButton";
+import { sessionUser } from "../Navigation";
 
 
-export default function PlaylistDetails({
+
+
+export default function SongList({
   pageType,
   artist,
+  songAdded,
+  setSongAdded,
   album,
   playlist,
 }) {
-  const { id } = useParams();
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
@@ -29,6 +34,8 @@ export default function PlaylistDetails({
   }
   const songs = useSelector((state) => state.songs);
 
+  // const album = useSelector(state => state.albums[albumId])
+  // const [songsForRender, setSongsForRender] = useState([])
   const {
     isPlaying,
     setIsPlaying,
@@ -48,9 +55,12 @@ export default function PlaylistDetails({
 
   let songTracks = [];
 
+  let emptyHeart = null;
+  let filledHeart = null;
+
   useEffect(() => {
     setSongList(songTracks);
-  }, [songs, album]);
+  }, [songs]);
 
   if (!Object.values(songs).length) {
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
@@ -95,14 +105,7 @@ export default function PlaylistDetails({
     setIsPlaying(true);
   };
 
-  const emptyHeartClass = "far fa-heart";
-  const filledHeartClass = "fa-solid fa-heart";
-
-  const emptyHeart = <i className={emptyHeartClass}></i>;
-  const filledHeart = <i className={filledHeartClass}></i>;
-
   const songListMap = songTracks.map((song) => {
-
     if (song){
 
     const handleLike = (e) => {
@@ -157,25 +160,11 @@ export default function PlaylistDetails({
           <span className="song-info">{runTime}</span>
           <div className="song-menu">
             <SongUpdateButton user={user} songId={song.id} pageType={pageType} playlistId={playlist?.id} />
+          </div>
 
-          </div>
-          <div className="song-info4">
-            <div className="song-actions-container">
-              {heart}
-            </div>
-            <span className="song-info">{runTime}</span>
-            <div className="song-menu">
-              <SongUpdateButton
-                user={user}
-                songId={song.id}
-                pageType={pageType}
-                playlistId={playlist?.id}
-              />
-            </div>
-          </div>
-        </li>
-      );
-    }
+        </div>
+      </li>
+    )}
   });
 
   return (
