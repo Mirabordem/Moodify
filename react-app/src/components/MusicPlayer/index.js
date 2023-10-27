@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactSlider from "react-slider";
 import { useSongPlayer } from "../../context/SongPlayer";
+import { useSelector } from "react-redux";
 
 /*
 what do we need?
@@ -46,20 +47,22 @@ export default function MusicPlayer() {
     }
   }, [isPlaying, playAnyway]);
 
-//   useEffect(() => {
-//     if (isPlaying && user) {
-//       audio.current.play();
-//     } else if (!isPlaying && user) {
-//       audio.current.pause();
-//     } else if (isPlaying && !user) {
-//       alert("Sign in to play songs")
-//     }
-//     if (playAnyway && user) {
-//       audio.current.play();
-//       setPlayAnyway(false);
-//     }
+  const albums = useSelector((state) => state.albums);
 
-// }, [isPlaying, playAnyway, user]);
+  //   useEffect(() => {
+  //     if (isPlaying && user) {
+  //       audio.current.play();
+  //     } else if (!isPlaying && user) {
+  //       audio.current.pause();
+  //     } else if (isPlaying && !user) {
+  //       alert("Sign in to play songs")
+  //     }
+  //     if (playAnyway && user) {
+  //       audio.current.play();
+  //       setPlayAnyway(false);
+  //     }
+
+  // }, [isPlaying, playAnyway, user]);
 
   const playNext = () => {
     if (nextSong) {
@@ -93,9 +96,19 @@ export default function MusicPlayer() {
 
   return (
     <div className="musicPlayer">
-      <audio src={currentSong.audioUrl} ref={audio} onEnded={() => playNext()}/>
+      <audio
+        src={currentSong.audioUrl}
+        ref={audio}
+        onEnded={() => playNext()}
+      />
+      <div>
+        <p>{currentSong?.name}</p>
+        <p>{albums[currentSong?.albumId]?.artist}</p>
+      </div>
       <span onClick={() => playPrev()}>Prev</span>
-      <button onClick={() => setIsPlaying(!isPlaying)}>
+      <button onClick={() =>  {
+        if(songList.length && currentSong.name) setIsPlaying(!isPlaying)
+      }}>
         {!isPlaying ? "Play" : "Pause"}
       </button>
       <span onClick={() => playNext()}>Next</span>
