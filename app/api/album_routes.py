@@ -6,6 +6,8 @@ from app.api.auth_routes import validation_errors_to_error_messages
 from app.api.aws_helpers import get_unique_filename, upload_file_to_s3, remove_file_from_s3
 from mutagen.mp3 import MP3
 from icecream import ic
+from random import randint
+import os
 
 album_routes = Blueprint('albums', __name__)
 
@@ -34,7 +36,14 @@ def create_new_album():
         # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
         # url = upload['url']
-
+        if os.environ.get('FLASK_ENV') == 'production':
+                upload = upload_file_to_s3(image)
+                print(upload)
+                if 'url' not in upload:
+                    return { 'errors': 'upload error'}
+                url = upload['url']
+        else:
+            url="https://i.imgur.com/8LMyVdU.jpg"
 
 
 
@@ -112,13 +121,22 @@ def edit_album(id):
         if form.data['cover_image_url']:
             image = form.data['cover_image_url']
             image.filename = get_unique_filename(image.filename)
-            url="https://i.imgur.com/sG9LYzh.jpg"
+
 
             ##KEEP THIS. uncomment this code when we actually want to upload to aws
             # upload = upload_file_to_s3(image)
             # # if "url" not in upload:
             # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
             # url = upload['url']
+
+            if os.environ.get('FLASK_ENV') == 'production':
+                upload = upload_file_to_s3(image)
+                print(upload)
+                if 'url' not in upload:
+                    return { 'errors': 'upload error'}
+                url = upload['url']
+            else:
+                url="https://i.imgur.com/sG9LYzh.jpg"
 
             album.cover_image_url =url
         data = form.data
@@ -149,8 +167,10 @@ def delete_album(id):
 
 # removing songs in deleted album:
     songs = album.to_dict()['albumSongs']
-    for song in songs:
-        remove_file_from_s3(song['song_url'])
+    if os.environ.get('FLASK_ENV') == 'production':
+        for song in songs:
+            remove_file_from_s3(song['song_url'])
+        remove_file_from_s3(album.image_url)
 
     db.session.delete(album)
     db.session.commit()
@@ -175,29 +195,29 @@ def create_album_song(id):
         return {'errors': 'Album not found'}, 404
     elif album.user_owner != current_user.id:
         return {'errors': 'forbidden'}, 403
-        print("BEFORE VALIDATION <<<<<<<<<<<<")
     if form.validate_on_submit():
-        print("VALID FORM >>>>>>>>>>>>>>")
         data = form.data
 
-##KEEP THIS. uncomment this code when we actually want to upload to aws
-        # song = data["audio_url"]
-        # song.filename = get_unique_filename(song.filename)
-        # upload = upload_file_to_s3(song)
-        # print(upload)
-        # if 'url' not in upload:
-        #     return { 'errors': 'upload error'}
+    song = data["audio_url"]
+    song.filename = get_unique_filename(song.filename)
+    if os.environ.get('FLASK_ENV') == 'production':
+        upload = upload_file_to_s3(song)
+        print(upload)
+        if 'url' not in upload:
+            return { 'errors': 'upload error'}
+        url = upload['url']
+    else:
+        url = f'{song.filename}.mp3'
 
         new_song = Song (
             name = data['name'],
             album_id = album.id,
             track_number = data['track_number'],
-            audio_url = "https://moodifybucket.s3.us-east-2.amazonaws.com/1434107b49fc4fe0asdfsdfffff24gdfsdsdffsfffffssrsssr9ffdwffff9ffdffb9ggs1f8517c.mp3",
+            audio_url = url,
             song_length = data['song_length']
         )
         db.session.add(new_song)
         db.session.commit()
-        ("POST DATABASE COMMIT!!!!!!!!!!!!!!")
 
         ic(new_song.to_dict())
         print(new_song.to_dict())
