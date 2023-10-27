@@ -8,6 +8,7 @@ import fetchAll from "../utils";
 import "./AlbumDetails.css";
 import SongList from "../SongList";
 import AlbumUpdateButton from "./AlbumUpdateButton";
+import { useSongPlayer } from "../../context/SongPlayer";
 
 
 
@@ -23,13 +24,16 @@ export default function AlbumDetails() {
   const [totalNumberOfSongs, setTotalNumberOfSongs] = useState(album?.albumSongs.length)
   const [totalAlbumLength, setTotalAlbumLength] = useState(0)
   const [newSongs, setNewSongs] = useState(true)
-
   const user = useSelector((state) => state.session.user);
   const [pageType, setPageType] = useState('album')
-
-
-
-
+  const {
+    setIsPlaying,
+    setNextSong,
+    currentSong,
+    setCurrentSong,
+    songList,
+    isPlaying,
+  } = useSongPlayer()
 
   useEffect(() => {
    let newAlbumLength = totalAlbumLength
@@ -62,6 +66,14 @@ export default function AlbumDetails() {
 
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
+  }
+
+  const bigPlay = e => {
+    if(!currentSong) {
+      setCurrentSong(songList[0])
+      setNextSong(songList[1])
+    }
+    setIsPlaying(!isPlaying)
   }
 
 
@@ -97,8 +109,9 @@ export default function AlbumDetails() {
       <div className="album-id-functions-3">
       <button
           className="play-button"
-          // onClick={playFirstSong}
+          onClick={bigPlay}
         >
+          {/* conditionally render play arrow and pause bars with isPlaying variable */}
           <span className="play-arrow"></span>
         </button>
         <AlbumUpdateButton user={user} albumId={album.id} />
