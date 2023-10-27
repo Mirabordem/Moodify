@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, NavLink, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { getAllAlbums } from "../../store/albums";
 import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";

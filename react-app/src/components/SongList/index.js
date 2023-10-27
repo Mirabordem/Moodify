@@ -11,10 +11,6 @@ import fetchAll from "../utils";
 import { ThunkAddLike, ThunkDeleteLike } from "../../store/session";
 import DeleteSongModal from "../DeleteAlbumModal";
 import SongUpdateButton from "./SongUpdateButton";
-import { sessionUser } from "../Navigation";
-
-
-
 
 
 export default function PlaylistDetails({

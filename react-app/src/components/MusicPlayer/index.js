@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactSlider from "react-slider";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, NavLink, useParams } from "react-router-dom";
-import OpenModalButton from "../OpenModalButton/index";
-import { useModal } from "../../context/Modal";
 import { useSongPlayer } from "../../context/SongPlayer";
 
 /*
