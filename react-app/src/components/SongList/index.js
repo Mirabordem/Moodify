@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -13,9 +12,6 @@ import { ThunkAddLike, ThunkDeleteLike } from "../../store/session";
 import DeleteSongModal from "../DeleteAlbumModal";
 import SongUpdateButton from "./SongUpdateButton";
 import { sessionUser } from "../Navigation";
-
-
-
 
 export default function SongList({
   pageType,
@@ -106,65 +102,84 @@ export default function SongList({
   };
 
   const songListMap = songTracks.map((song) => {
-    if (song){
+    if (song) {
+      const handleLike = (e) => {
+        e.stopPropagation();
+        if (user) {
+          const id = song.id;
+          dispatch(ThunkAddLike(id));
+        }
+        heart = filledHeart;
+      };
+      const handleDislike = (e) => {
+        e.stopPropagation();
+        if (user) {
+          const id = song.id;
+          dispatch(ThunkDeleteLike(id));
+        }
+        heart = emptyHeart;
+      };
 
-    const handleLike = (e) => {
-      e.stopPropagation();
-      if (user) {
-        const id = song.id;
-        dispatch(ThunkAddLike(id));
+      emptyHeart = (
+        <i className="far fa-heart empty-heart1" onClick={handleLike}></i>
+      );
+
+      filledHeart = (
+        <i
+          className="fas fa-heart"
+          style={{ color: "rgb(95, 195, 146)" }}
+          onClick={handleDislike}
+        ></i>
+      );
+
+      let heart = null;
+      if (userLikedSongIds.includes(song.id)) {
+        heart = filledHeart;
+      } else heart = emptyHeart;
+
+      const minutes = Math.trunc(song.songLength / 60);
+      const seconds = song.songLength % 60;
+      const runTime = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+
+      let displayNumber = null;
+      if (pageType !== "album") {
+        const displayNumberIndex =
+          songTracks.findIndex((item) => item.name === song.name) + 1;
+        displayNumber = (
+          <span className="song-info1">{displayNumberIndex}</span>
+        );
+      } else {
+        displayNumber = <span className="song-info1">{song.trackNumber}</span>;
       }
-      heart = filledHeart;
-    };
-    const handleDislike = (e) => {
-      e.stopPropagation();
-      if (user) {
-        const id = song.id;
-        dispatch(ThunkDeleteLike(id));
-      }
-      heart = emptyHeart;
-    };
-
-    emptyHeart = <i className="far fa-heart empty-heart1" onClick={handleLike}></i>;
-
-    filledHeart = (
-      <i className="fas fa-heart" style={{ color: 'rgb(95, 195, 146)' }} onClick={handleDislike}></i>
-    );
-
-    let heart = null;
-    if (userLikedSongIds.includes(song.id)) {
-      heart = filledHeart;
-    } else heart = emptyHeart;
-
-
-    const minutes = Math.trunc(song.songLength / 60);
-    const seconds = song.songLength % 60;
-    const runTime = `${minutes}:${seconds < 10 ? '0': ''}${seconds}`;
-
-    return (
-      <li
-        className="song-li"
-        style={{ listStyle: "none" }}
-        key={song.id}
-        onClick={() => setSongs(song)}
-      >
-        <span className="song-info1">{song.trackNumber}</span>
-        <div className="vertical-title">
-          <span className="song-info2">{song.name}</span>
-          <span className="song-info3">{artist}</span>
-        </div>
-        <div className="song-info4">
-
-          <div className="song-actions-container">{heart}</div>
-
-          <span className="song-info">{runTime}</span>
-          <div className="song-menu">
-            <SongUpdateButton user={user} songId={song.id} pageType={pageType} playlistId={playlist?.id} albumOwner={album?.userOwner}/>
+      return (
+        <li
+          className="song-li"
+          style={{ listStyle: "none" }}
+          key={song.id}
+          onClick={() => setSongs(song)}
+        >
+          <span className="song-info1">{displayNumber}</span>
+          <div className="vertical-title">
+            <span className="song-info2">{song.name}</span>
+            <span className="song-info3">{artist}</span>
           </div>
+          <div className="song-info4">
+            <div className="song-actions-container">{heart}</div>
 
-        </div>
-      </li>
-    )}
+            <span className="song-info">{runTime}</span>
+            <div className="song-menu">
+              <SongUpdateButton
+                user={user}
+                songId={song.id}
+                pageType={pageType}
+                playlistId={playlist?.id}
+                albumOwner={album?.userOwner}
+              />
+            </div>
+          </div>
+        </li>
+      );
+    }
   });
 
   return (
