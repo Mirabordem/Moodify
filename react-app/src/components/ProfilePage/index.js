@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, NavLink, useParams } from "react-router-dom";
+import React from "react";
 import "./ProfilePage.css"
 
 

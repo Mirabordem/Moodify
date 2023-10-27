@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllAlbums } from "../store/albums";
-import { getAllPlaylists } from "../store/playlists";
-import { getAllSongs } from "../store/songs";
+
 
 const fetchAll = (dispatch, getAllAlbums, getAllPlaylists, getAllSongs) => {
   fetch("/api/all")
