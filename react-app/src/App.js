@@ -11,6 +11,7 @@ import MusicPlayer from "./components/MusicPlayer";
 import IndividPlaylist from "./components/IndividPlaylist";
 import ProfilePage from "./components/ProfilePage";
 import LikedSongs from "./components/LikedSongs";
+import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ function App() {
           </Route>
         </Switch>
       )}
+        <Footer />
       <MusicPlayer />
     </div>
   );
