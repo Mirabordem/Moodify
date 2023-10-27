@@ -77,47 +77,48 @@ export default function NewPlaylist({formType,userId}) {
 return (
 
 
-        <div className="new_playlist_container">
+        <div className="signup-container3">
             {formType === 'Edit' && (
-                <h1 className='h1'>Edit Playlist</h1>
+                <div className="new-h1">Edit Playlist</div>
             )}
 
             {formType === 'Create' && (
-                <h1 className='h1'>Create Playlist</h1>
+                <div className='new-h1'>Create Playlist</div>
             )}
 
-            <form onSubmit={handleSubmit} encType="multipart/form-data" className='newPlaylist-form'>
+            <form onSubmit={handleSubmit} encType="multipart/form-data" className='signup-form'>
                 {/* <ul>
                     {errors.map((error, idx) => (
                         <li key={idx}>{error}</li>
                     ))}
                 </ul> */}
-                <label className='caLabel'>
-                    Name
+                <label className='login-label'>
                     <input
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
+                        placeholder="Name"
                     />
                 </label>
-                <label className='caLabel'>
-                    Description
+                <label className='login-label'>
+                    {/* Description */}
                     <input
                         type="text"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
+                        placeholder="Description"
                     />
                 </label>
-                <label className='caLabel'>
+                <label className='login-label'>
                     {formType === 'Edit' && (
                         <div>
                             <p>Current Album Cover:</p>
                             <img src={albumCover} alt='Album Cover' style={{ maxWidth: '200px', maxHeight: '200px' }} />
                         </div>
                     )}
-                    Playlist Cover
+                    {/* Playlist Cover */}
 
                     <input
                         type="file"
@@ -128,10 +129,11 @@ return (
                         }}
                         accept='image/*'
                         // required={formType === 'Create'}
+                        placeholder="Playlist Cover"
                     />
                 </label>
 
-                <button type="submit">{formType === 'Create' ? 'Create Playlist' : 'Edit Playlist'}</button>
+                <button className="signup-button" type="submit">{formType === 'Create' ? 'Create Playlist' : 'Edit Playlist'}</button>
             </form>
         </div>
     )

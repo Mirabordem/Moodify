@@ -26,7 +26,7 @@ export default function AlbumUpdateButton({ user, albumId }) {
       return () => document.removeEventListener("click", closeMenu);
     }, []);
 
-   
+
 
     const ulClassName = "album-update-dropdown" + (showMenu ? "" : " hidden");
 
@@ -42,7 +42,7 @@ export default function AlbumUpdateButton({ user, albumId }) {
         </button>
         <div className={ulClassName}>
           {user ? (
-            <div className="dropdown2">
+            <div className="dropdown5">
               <OpenModalButton
                 className="new-album"
                 buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Album</>}

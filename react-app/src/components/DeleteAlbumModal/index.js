@@ -20,15 +20,15 @@ function DeleteAlbumModal({ albumId }) {
   };
 
   return (
-    <div className="signup-container">
-      <h1 className="dm-title-txt">Confirm Delete</h1>
-      <h3 className="dm-confirm-txt">
+    <div className="signup-container5">
+      <div className="new-h1">Confirm Delete</div>
+      <div className="txt1">
         Are you sure you want to remove this album?
-      </h3>
-      <button className="dm-delete-button" onClick={handleDelete}>
+      </div>
+      <button className="signup-button" onClick={handleDelete}>
         Yes (Delete Album)
       </button>
-      <button className="dm-close-delete-button" onClick={closeModal}>
+      <button className="signup-button" onClick={closeModal}>
         No (Keep Album)
       </button>
     </div>

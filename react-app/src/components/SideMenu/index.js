@@ -8,9 +8,7 @@ import fetchAll from "../utils";
 import NewPlaylist from "../NewPlaylist";
 import OpenModalButton from "../OpenModalButton/index";
 import "./SideMenu.css";
-import IndividPlaylistButton from './IndividPlaylistButton';
-
-
+import IndividPlaylistButton from "./IndividPlaylistButton";
 
 export default function SideMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,10 +51,13 @@ export default function SideMenu() {
     if (playlists[id]?.name) {
       return (
         <div key={id} className="playlist-menu-container">
+          <div>
+            <IndividPlaylistButton user={user} playlistId={id} />
+          </div>
           <NavLink to={`/playlists/${id}`}>
-            <li>{playlists[id]?.name}</li>
+            <li className="li1" >{playlists[id]?.name}
+            </li>
           </NavLink>
-          {/* <IndividPlaylistButton user={user} playlistId={id} /> */}
         </div>
       );
     }
@@ -77,48 +78,53 @@ export default function SideMenu() {
         Your Library
       </button>
       <ul className="ul-container">
-      <li>
-          <NavLink to="/albums">
+        <li>
+          <NavLink to="/albums" className="loved-songs">
             <i className="fas fa-music"></i>
             My Albums
           </NavLink>
         </li>
+
         <li>
-          <NavLink to="/playlists">
-            <i className="fas fa-list"></i> My Playlists
+          <NavLink to="/likes" className="loved-songs">
+            <i className="fas fa-heart"></i> Loved Songs
           </NavLink>
+        </li>
+        <li className="playlist-heather">
+          <i className="fas fa-list"></i> My Playlists
           {sessionUser?.id && (
             <OpenModalButton
               className="new-album-playlist1"
-              buttonText={<span style={{ color: 'rgb(95, 195, 146)', marginLeft: '8px', fontSize: '22px' }}>+</span>}
+              buttonText={
+                <span
+                  style={{
+                    color: "rgb(95, 195, 146)",
+                    marginLeft: "8px",
+                    fontSize: "22px",
+                    transition: "color 0.3s",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.color = "rgb(166, 149, 157)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.color = "rgb(95, 195, 146)"; 
+                  }}
+                >
+                  +
+                </span>
+              }
               modalComponent={
                 <NewPlaylist formType="Create" userId={sessionUser.id} />
               }
             />
           )}
         </li>
-        <li>
-      <NavLink to="/likes">
-        <i className="fas fa-heart"></i> Loved Songs
-      </NavLink>
-    </li>
-
+        <div className="horizontal-line4"></div>
       </ul>
-      <ul>
-       {userPlaylistMap}
-       {/* <IndividPlaylistButton user={user} playlistId={id} /> */}
-       {/* <IndividPlaylistButton user={user} /> */}
-      </ul>
+      <ul>{userPlaylistMap}</ul>
     </div>
   );
 }
-
-
-
-
-
-
-
 
 // import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
@@ -228,9 +234,6 @@ export default function SideMenu() {
 //           {userPlaylistMap}
 //         </ul>
 //       }
-
-
-
 
 //     </div>
 //   );

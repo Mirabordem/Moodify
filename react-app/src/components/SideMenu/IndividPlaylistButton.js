@@ -25,13 +25,13 @@ export default function PlaylistUpdateButton({ user, playlistId }) {
     const ulClassName = "album-update-dropdown" + (showMenu ? "" : " hidden");
 
     return (
-      <div className="album-update-dropdown1" ref={ulRef}>
+      <div className="album-update-dropdown13" ref={ulRef}>
         <button style={{ background: 'transparent', border: 'none', color: '#000' }} onClick={(e) => {
           e.stopPropagation();
           setShowMenu(!showMenu);
         }}>
-            <div className="album-dots-container">
-          <span className="album-big-dots1">...</span>
+            <div className="album-dots-container1">
+          <span className="album-big-dots2">...</span>
           </div>
         </button>
         <div className={ulClassName}>
