@@ -12,9 +12,10 @@ function DeleteAlbumModal({ albumId }) {
   const id = albumId;
   const album = useSelector((state) => state.albums[id]);
 
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
-    dispatch(ThunkDeleteAlbum(id)).then(closeModal());
+    await dispatch(ThunkDeleteAlbum(id));
+    closeModal()
     history.push(`/`);
   };
 
