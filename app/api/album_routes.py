@@ -36,14 +36,13 @@ def create_new_album():
         # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
         # url = upload['url']
-        # if os.environ.get('FLASK_ENV') == 'production':
+        # when we remove this if statement it for sure workks
+
         upload = upload_file_to_s3(image)
-        print(upload)
-        if 'url' not in upload:
-            return { 'errors': 'upload error'}
+
+        print('THIS IS UPLOAD IN OUR CREATE ALBUM',upload)
         url = upload['url']
-        # else:
-        #     url="https://i.imgur.com/8LMyVdU.jpg"
+
 
 
 
