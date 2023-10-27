@@ -9,12 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 
-export default function SongUpdateButton({ user, songId, pageType, playlistId }) {
+export default function SongUpdateButton({ user, songId, pageType, playlistId,albumOwner }) {
   const [showMenu, setShowMenu] = useState(false);
   const [showNestedMenu, setShowNestedMenu] = useState(false);
   const playlists = useSelector(state => state.playlists)
   const dispatch = useDispatch()
   const ulRef = useRef();
+
+  console.log('USER id IN SONG UPDATE BUTTON IS',user.id)
+  console.log('ALBUM  IN SONG UPDATE BUTTON IS',albumOwner)
 
 
   useEffect(() => {
@@ -64,8 +67,9 @@ export default function SongUpdateButton({ user, songId, pageType, playlistId })
         <i className="fas fa-ellipsis-h"></i>
       </button>
       <div className={ulClassName}>
-        {user && pageType === 'album' ?
+        {user && pageType === 'album' && user.id===albumOwner  ?
           <div className="dropdown1">
+            {}
             <OpenModalButton
               buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Song</>}
               modalComponent={<CreateSong formType="edit" songId={songId} />}
