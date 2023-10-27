@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, NavLink, useParams } from "react-router-dom";
-import { getAllAlbums } from "../../store/albums";
-import { getAllPlaylists } from "../../store/playlists";
-import { getAllSongs } from "../../store/songs";
-import fetchAll from "../utils";
+import { NavLink } from "react-router-dom";
 import NewPlaylist from "../NewPlaylist";
 import OpenModalButton from "../OpenModalButton/index";
 import "./SideMenu.css";
@@ -107,7 +103,7 @@ export default function SideMenu() {
                     e.target.style.color = "rgb(166, 149, 157)";
                   }}
                   onMouseLeave={(e) => {
-                    e.target.style.color = "rgb(95, 195, 146)"; 
+                    e.target.style.color = "rgb(95, 195, 146)";
                   }}
                 >
                   +

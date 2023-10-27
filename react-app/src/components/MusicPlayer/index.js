@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactSlider from "react-slider";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, NavLink, useParams } from "react-router-dom";
-import OpenModalButton from "../OpenModalButton/index";
-import { useModal } from "../../context/Modal";
 import { useSongPlayer } from "../../context/SongPlayer";
 
 /*
@@ -97,7 +93,7 @@ export default function MusicPlayer() {
 
   return (
     <div className="musicPlayer">
-      <audio src={currentSong.audioUrl} ref={audio} />
+      <audio src={currentSong.audioUrl} ref={audio} onEnded={() => playNext()}/>
       <span onClick={() => playPrev()}>Prev</span>
       <button onClick={() => setIsPlaying(!isPlaying)}>
         {!isPlaying ? "Play" : "Pause"}
