@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 from app.models import db, Song, likes, Album
 from app.forms import EditSongForm, CreateSongForm
 from app.api.auth_routes import validation_errors_to_error_messages
-from app.api.aws_helpers import remove_file_from_s3
+from app.api.aws_helpers import remove_file_from_s3,get_unique_filename,upload_file_to_s3
 from icecream import ic
 import os
 
@@ -126,10 +126,17 @@ def delete_song(id):
         if os.environ.get('FLASK_ENV') == 'production':
             remove_file_from_s3(selected_song_dict['audioUrl'])
 
+        ic(targetAlbum.album_songs)
+
         db.session.delete(selected_song)
         db.session.commit()
 
-        return  {'message': 'successfuly deleted'}
+        ic(targetAlbum.album_songs)
+
+        # idx = targetAlbum.album_songs.index(selected_song)
+        # targetAlbum.album_songs.pop(idx)
+
+        return  {'message': 'successfuly deleted', 'album': targetAlbum.to_dict()}
 
 
 

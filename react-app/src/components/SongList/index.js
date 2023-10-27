@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton/index";
 import { useSongPlayer } from "../../context/SongPlayer";
 import "./SongList.css";
@@ -13,14 +14,16 @@ import SongUpdateButton from "./SongUpdateButton";
 import { sessionUser } from "../Navigation";
 
 
-export default function SongList({
+
+
+
+export default function PlaylistDetails({
   pageType,
   artist,
-  songAdded,
-  setSongAdded,
   album,
   playlist,
 }) {
+  const { id } = useParams();
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
@@ -30,8 +33,6 @@ export default function SongList({
   }
   const songs = useSelector((state) => state.songs);
 
-  // const album = useSelector(state => state.albums[albumId])
-  // const [songsForRender, setSongsForRender] = useState([])
   const {
     isPlaying,
     setIsPlaying,
@@ -51,19 +52,14 @@ export default function SongList({
 
   let songTracks = [];
 
-  let emptyHeart = null;
-  let filledHeart = null;
-
-
   useEffect(() => {
     setSongList(songTracks);
-  }, [songs]);
+  }, [songs, album]);
 
   if (!Object.values(songs).length) {
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
-
 
   if (pageType === "playlist") {
     for (let songId of playlist.songsOnPlaylist) {
@@ -103,59 +99,70 @@ export default function SongList({
     setIsPlaying(true);
   };
 
+  const emptyHeartClass = "far fa-heart";
+  const filledHeartClass = "fa-solid fa-heart";
+
+  const emptyHeart = <i className={emptyHeartClass}></i>;
+  const filledHeart = <i className={filledHeartClass}></i>;
+
   const songListMap = songTracks.map((song) => {
-    if (song){
-    const handleLike = (e) => {
-      e.stopPropagation();
-      if (user) {
-        const id = song.id;
-        dispatch(ThunkAddLike(id));
-      }
-      heart = filledHeart;
-    };
-    const handleDislike = (e) => {
-      e.stopPropagation();
-      if (user) {
-        const id = song.id;
-        dispatch(ThunkDeleteLike(id));
-      }
-      heart = emptyHeart;
-    };
-    const minutes = Math.trunc(song.songLength / 60);
-    const seconds = song.songLength % 60;
+    if (song) {
+      let heart;
 
-    emptyHeart = <i className="far fa-heart" onClick={handleLike}></i>;
-    filledHeart = <i class="fa-solid fa-heart" onClick={handleDislike}></i>;
-    let heart = null;
-    if (userLikedSongIds.includes(song.id)) {
-      heart = filledHeart;
-    } else heart = emptyHeart;
+      const handleLike = (e) => {
+        e.stopPropagation();
+        if (user) {
+          const id = song.id;
+          dispatch(ThunkAddLike(id)); // Ensure ThunkAddLike is defined
+        }
+        heart = filledHeart;
+      };
 
-    const runTime = `${minutes}:${seconds < 10 ? '0': ''}${seconds}`;
+      const handleDislike = (e) => {
+        e.stopPropagation();
+        if (user) {
+          const id = song.id;
+          dispatch(ThunkDeleteLike(id)); // Ensure ThunkDeleteLike is defined
+        }
+        heart = emptyHeart;
+      };
 
-    return (
-      <li
-        className="song-li"
-        style={{ listStyle: "none" }}
-        key={song.id}
-        onClick={() => setSongs(song)}
-      >
-        <span className="song-info1">{song.trackNumber}</span>
-        <div className="vertical-title">
-          <span className="song-info2">{song.name}</span>
-          <span className="song-info3">{artist}</span>
-        </div>
-        <div className="song-info4">
+      const minutes = Math.trunc(song.songLength / 60);
+      const seconds = song.songLength % 60;
 
-          <div className="song-actions-container">{heart}</div>
-          <span className="song-info">{runTime}</span>
-          <div className="song-menu">
-            <SongUpdateButton songId={song?.id} pageType={pageType} playlistId={playlist?.id} albumOwner={album?.userOwner} />
+      // Remove this line: heart = userLikedSongIds.includes(song.id) ? filledHeart : emptyHeart;
+
+      const runTime = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+
+      return (
+        <li
+          className="song-li"
+          style={{ listStyle: "none" }}
+          key={song.id}
+          onClick={() => setSongs(song)}
+        >
+          <span className="song-info1">{song.trackNumber}</span>
+          <div className="vertical-title">
+            <span className="song-info2">{song.name}</span>
+            <span className="song-info3">{artist}</span>
           </div>
-
-        </div>
-      </li>
-    )}
+          <div className="song-info4">
+            <div className="song-actions-container">
+              {heart}
+            </div>
+            <span className="song-info">{runTime}</span>
+            <div className="song-menu">
+              <SongUpdateButton
+                user={user}
+                songId={song.id}
+                pageType={pageType}
+                playlistId={playlist?.id}
+              />
+            </div>
+          </div>
+        </li>
+      );
+    }
   });
 
   return (
