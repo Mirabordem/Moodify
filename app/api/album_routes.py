@@ -110,6 +110,9 @@ def edit_album(id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     album = Album.query.get(id)
+    album_to_dict=album.to_dict()
+
+    ic(album_to_dict)
 
     if album is None:
         return {'errors': 'Album not found'}, 404
@@ -117,31 +120,41 @@ def edit_album(id):
         return {'errors': 'forbidden'}, 403
 
     if form.validate_on_submit():
+        ic (form.data)
+
         if form.data['cover_image_url']:
             image = form.data['cover_image_url']
             image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
 
+            if "url" not in upload:
+                return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+            url = upload['url']
+            ic(url)
 
-            ##KEEP THIS. uncomment this code when we actually want to upload to aws
+            # if os.environ.get('FLASK_ENV') == 'production':
+            # image= form.data['cover_image_url']
             # upload = upload_file_to_s3(image)
-            # # if "url" not in upload:
-            # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+            # print(upload)
+            # if 'url' not in upload:
+            #     return { 'errors': 'upload error'}
             # url = upload['url']
+        elif album_to_dict['coverImageUrl']:
+            url=album_to_dict['coverImageUrl']
 
-            if os.environ.get('FLASK_ENV') == 'production':
-                upload = upload_file_to_s3(image)
-                print(upload)
-                if 'url' not in upload:
-                    return { 'errors': 'upload error'}
-                url = upload['url']
-            else:
-                url="https://i.imgur.com/sG9LYzh.jpg"
 
-            album.cover_image_url =url
+
+        elif not album_to_dict['coverImageUrl']:
+            url="https://i.imgur.com/sG9LYzh.jpg"
+
+        album.cover_image_url =url
         data = form.data
-        album.title = data['title']
-        album.release_date = data['release_date']
-        album.artist = data['artist']
+        if data["title"]:
+            album.title = data['title']
+        if data["release_date"]:
+            album.release_date = data['release_date']
+        if data["artist"]:
+            album.artist = data['artist']
         db.session.commit()
         return album.to_dict()
     print(form.errors)
