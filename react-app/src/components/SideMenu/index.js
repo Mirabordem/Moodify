@@ -58,6 +58,62 @@ export default function SideMenu() {
     }
   });
 
+  let sideMenuOptions = null;
+  if (user) {
+    sideMenuOptions = (
+      <div>
+        <button className="menu-toggle" onClick={toggleMenu}>
+          Your Library
+        </button>
+        <ul className="ul-container">
+          {/* <li>
+          <NavLink to="/albums" className="loved-songs">
+            <i className="fas fa-music"></i>
+            My Albums
+          </NavLink>
+        </li> */}
+
+          <li>
+            <NavLink to="/likes" className="loved-songs">
+              <i className="fas fa-heart"></i> Loved Songs
+            </NavLink>
+          </li>
+          <li className="playlist-heather">
+            <i className="fas fa-list"></i> My Playlists
+            {sessionUser?.id && (
+              <OpenModalButton
+                className="new-album-playlist1"
+                buttonText={
+                  <span
+                    style={{
+                      color: "rgb(95, 195, 146)",
+                      marginLeft: "8px",
+                      fontSize: "22px",
+                      transition: "color 0.3s",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.color = "rgb(166, 149, 157)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.color = "rgb(95, 195, 146)";
+                    }}
+                  >
+                    +
+                  </span>
+                }
+                modalComponent={
+                  <NewPlaylist formType="Create" userId={sessionUser.id} />
+                }
+              />
+            )}
+          </li>
+          <div className="horizontal-line4"></div>
+        </ul>
+        <ul>{userPlaylistMap}</ul>
+      </div>
+    );
+  }
+
   return (
     <div className={`side-menu ${isOpen ? "open" : ""}`}>
       <div className="logo-container">
@@ -69,54 +125,7 @@ export default function SideMenu() {
           />
         </NavLink>
       </div>
-      <button className="menu-toggle" onClick={toggleMenu}>
-        Your Library
-      </button>
-      <ul className="ul-container">
-        {/* <li>
-          <NavLink to="/albums" className="loved-songs">
-            <i className="fas fa-music"></i>
-            My Albums
-          </NavLink>
-        </li> */}
-
-        <li>
-          <NavLink to="/likes" className="loved-songs">
-            <i className="fas fa-heart"></i> Loved Songs
-          </NavLink>
-        </li>
-        <li className="playlist-heather">
-          <i className="fas fa-list"></i> My Playlists
-          {sessionUser?.id && (
-            <OpenModalButton
-              className="new-album-playlist1"
-              buttonText={
-                <span
-                  style={{
-                    color: "rgb(95, 195, 146)",
-                    marginLeft: "8px",
-                    fontSize: "22px",
-                    transition: "color 0.3s",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.color = "rgb(166, 149, 157)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.color = "rgb(95, 195, 146)";
-                  }}
-                >
-                  +
-                </span>
-              }
-              modalComponent={
-                <NewPlaylist formType="Create" userId={sessionUser.id} />
-              }
-            />
-          )}
-        </li>
-        <div className="horizontal-line4"></div>
-      </ul>
-      <ul>{userPlaylistMap}</ul>
+      {sideMenuOptions}
     </div>
   );
 }
