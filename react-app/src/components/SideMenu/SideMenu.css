@@ -18,9 +18,11 @@
 }
 
 .ul-container {
-    width: 210px;
+     /* border: 2px solid purple; */
+    width: 180px;
     list-style-type: none;
-    padding: 5;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 li {
@@ -53,7 +55,101 @@ a:hover {
     margin-right: 10px;
 }
 
-/* .container .new-album-playlist1 {
-    font-size: 24px !important;
-    margin-left: 50px !important;
-  } */
+.loved-songs:hover {
+    color: rgb(95, 195, 146);
+    cursor: pointer;
+}
+
+.li1 {
+    /* border: 2px solid green; */
+    font-size: 16px;
+    list-style: none;
+    color: rgb(141, 129, 135);
+
+}
+
+.li1:hover {
+    cursor: pointer;
+    color: rgb(95, 195, 146);
+}
+
+.playlist-heather {
+    /* border: 2px solid red; */
+    height: 20px;
+    margin-top: 35px;
+    color: rgb(198, 196, 196);
+    font-size: 17px;
+}
+
+.album-update-dropdown1 {
+    z-index: 3000;
+}
+
+.album-big-dots2 {
+    /* border: 2px solid red; */
+    font-size: 18px;
+    /* color: rgb(166, 149, 157); */
+    color: rgb(95, 195, 146);
+    margin-bottom: 300px;
+    z-index: 3000;
+}
+
+.album-big-dots2:hover {
+    cursor: pointer;
+    /* color: rgb(95, 195, 146); */
+    color: rgb(166, 149, 157);
+}
+
+.album-dots-container1 {
+    margin-bottom: 30px;
+}
+
+.dropdown3 {
+    /* border: 2px solid red; */
+  /* background-color: rgb(26, 24, 25); */
+  background-color: rgb(44, 41, 41);
+  border-radius: 10px;
+  width: 150px;
+  height: 140px;
+  position: absolute;
+  margin-bottom: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+
+.menu-icon {
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+
+.horizontal-line2 {
+    border-top: 1px solid rgb(83, 74, 78);
+    margin: 10px 0;
+    width: 90%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.horizontal-line4 {
+    border-top: 1px solid rgb(51, 45, 48);
+    width: 90%;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+
+
+
+.playlist-menu-container {
+    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    align-items: normal;
+    height: 30px;
+}

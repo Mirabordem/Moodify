@@ -150,7 +150,7 @@ export default function SongList({
           <div className="song-actions-container">{heart}</div>
           <span className="song-info">{runTime}</span>
           <div className="song-menu">
-            <SongUpdateButton user={user} songId={song.id} pageType={pageType} playlistId={playlist?.id} />
+            <SongUpdateButton songId={song?.id} pageType={pageType} playlistId={playlist?.id} albumOwner={album?.userOwner} />
           </div>
 
         </div>

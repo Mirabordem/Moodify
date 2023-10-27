@@ -72,62 +72,63 @@ export default function NewAlbum({ formType, albumId }) {
     return (
 
 
-        <div className="newAlbum-container">
+        <div className="signup-container6">
             {formType === 'Edit' && (
-                <h1 className='h1'>Edit Album</h1>
+                <div className='new-h5'>Edit Album</div>
             )}
 
             {formType === 'Create' && (
-                <h1 className='h1'>Create Album</h1>
+                <div className='new-h5'>Create Album</div>
             )}
 
-            <form onSubmit={handleSubmit} encType="multipart/form-data" className='newAlbum-form'>
+            <form onSubmit={handleSubmit} encType="multipart/form-data" className='signup-form5'>
                 {/* <ul>
                     {errors.map((error, idx) => (
                         <li key={idx}>{error}</li>
                     ))}
                 </ul> */}
-                <label className='caLabel'>
-                    Title
+                <label className="login-label">
                     <input
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
+                        placeholder="Title"
                     />
                 </label>
-                <label className='caLabel'>
-                    Release Date
+                <label className="login-label">
                     <input
                         type="date"
                         value={releaseDate}
                         onChange={(e) => setReleaseDate(e.target.value)}
                         required
+                        placeholder="Release Date"
                     />
                 </label>
-                <label className='caLabel'>
-                    Artist
+                <label className="login-label">
                     <input
                         type="text"
                         value={artist}
                         onChange={(e) => setArtist(e.target.value)}
                         required
+                        placeholder="Artist"
                     />
                 </label>
-                <label className='caLabel'>
+                <label className="login-label">
                     {formType === 'Edit' && (
                         <div>
-                            <p>Current Album Cover:</p>
-                            <img src={albumCover} alt='Album Cover' style={{ maxWidth: '200px', maxHeight: '200px' }} />
+                            <p className="cac-1">Current Album Cover:</p>
+                            <img className="cac-2" src={albumCover} alt='Album Cover' style={{ maxWidth: '200px', maxHeight: '200px' }} />
                         </div>
                     )}
-                    Album Cover
-
-
-
-
+                    </label>
+                    <label class="custom-file-input">
+                       Choose File
                     <input
+                        className="cac-2"
                         type="file"
+                        id="fileInput"
+                        class="hidden-file-input"
                         onChange={(e) => {
                             setDidPicChange(true)
 
@@ -135,10 +136,11 @@ export default function NewAlbum({ formType, albumId }) {
                         }}
                         accept='image/*'
                         required={formType === 'Create'}
+                        placeholder="Album Cover"
                     />
                 </label>
 
-                <button type="submit">{formType === 'Create' ? 'Create Album' : 'Edit Album'}</button>
+                <button className="signup-button" type="submit">{formType === 'Create' ? 'Create Album' : 'Edit Album'}</button>
             </form>
         </div>
     )
