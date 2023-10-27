@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton/index";
 import { useSongPlayer } from "../../context/SongPlayer";
 import "./SongList.css";
@@ -11,6 +12,8 @@ import { ThunkAddLike, ThunkDeleteLike } from "../../store/session";
 import DeleteSongModal from "../DeleteAlbumModal";
 import SongUpdateButton from "./SongUpdateButton";
 import { sessionUser } from "../Navigation";
+
+
 
 
 export default function SongList({
@@ -54,7 +57,6 @@ export default function SongList({
   let emptyHeart = null;
   let filledHeart = null;
 
-
   useEffect(() => {
     setSongList(songTracks);
   }, [songs]);
@@ -63,7 +65,6 @@ export default function SongList({
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
-
 
   if (pageType === "playlist") {
     for (let songId of playlist.songsOnPlaylist) {

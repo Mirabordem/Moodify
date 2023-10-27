@@ -63,76 +63,117 @@ export default function SongUpdateButton({ songId, pageType, playlistId, albumOw
 
   return (
     <div className="song-update-dropdown1" ref={ulRef}>
-      <button className="song-update-button" onClick={e => {
+      <button style={{ background: 'transparent', border: 'none', color: '#000' }} className="song-update-button" onClick={e => {
         e.stopPropagation()
         setShowMenu(!showMenu);
       }}>
         <i className="fas fa-ellipsis-h"></i>
       </button>
       <div className={ulClassName}>
-        <div className="dropdown1">
-          {user2 && pageType === 'album' && user2.id === albumOwner && (
-            <>
-              <OpenModalButton
-                buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Song</>}
-                modalComponent={<CreateSong formType="edit" songId={songId} />}
-              />
-              <div className="horizontal-line1"></div>
-              <OpenModalButton
-                buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faTrash} /></span> Delete Song</>}
-                modalComponent={<DeleteSongModal songId={songId} />}
-              />
-              <div className="horizontal-line1"></div>
-            </>
-          )}
-          {user2 && pageType === 'album' ? (<>
-            <button
-              style={{ cursor: 'pointer' }}
-              className='start'
-              onClick={e => {
-                e.stopPropagation()
-                setShowNestedMenu(!showNestedMenu);
-              }}>
-              <span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Add Song to Playlist
-            </button>
-            <div className={nestedUlClassName}>
-              <div className="dropdown1">
-                {playlistsMap}
-              </div>
-            </div>
-          </>
-          ) : (<div>
-            <div className="profile-small-button">
-              <OpenModalButton
-                buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faSignInAlt} /></span> Login</>}
 
-                modalComponent={<LoginFormModal />}
-              />
-            </div>
+        {user && pageType === 'album' ?
+          <div className="dropdown1a">
+            <OpenModalButton
+              buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Song</>}
+              modalComponent={<CreateSong formType="edit" songId={songId} />}
+            />
             <div className="horizontal-line1"></div>
-            <div className="profile-small-button">
-              <OpenModalButton
-                buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faUserPlus} /></span> Sign Up</>}
-
-                modalComponent={<SignupFormModal />}
-              />
-            </div>
-          </div>
-
-          )}
-          {user2 && pageType !== 'album' && (
+            <OpenModalButton
+              buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faTrash} /></span> Delete Song</>}
+              modalComponent={<DeleteSongModal songId={songId}/>}
+            />
+            <div className="horizontal-line1"></div>
             <button
-              style={{ cursor: 'pointer' }}
-              className='start'
-              onClick={e => {
-                e.stopPropagation()
-                setShowMenu(!showNestedMenu);
-                dispatch(ThunkRemoveSongToPlaylist(playlistId, songId))
-              }}>
-              Remove Song from Playlist
+            style={{cursor: 'pointer'}}
+            className='start'
+            onClick={e => {
+              e.stopPropagation()
+              setShowNestedMenu(!showNestedMenu);
+            }}>
+              {<><span className="menu-icon1"><FontAwesomeIcon icon={faPlus} /></span> Add Song to Playlist</>}
             </button>
-          )}
-        </div>
+              <div className={nestedUlClassName}>
+                <div className="dropdown6">
+                  {playlistsMap}
+                </div>
+              </div>
+          </div >
+          :
+          <div className="dropdown1">
+              <button
+            style={{cursor: 'pointer'}}
+            className='start'
+            onClick={e => {
+              e.stopPropagation()
+              setShowMenu(!showNestedMenu);
+              dispatch(ThunkRemoveSongToPlaylist(playlistId, songId))
+            }}> Remove Song from Playlist</button>
+          </div>}
+
+//         <div className="dropdown1">
+//           {user2 && pageType === 'album' && user2.id === albumOwner && (
+//             <>
+//               <OpenModalButton
+//                 buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Song</>}
+//                 modalComponent={<CreateSong formType="edit" songId={songId} />}
+//               />
+//               <div className="horizontal-line1"></div>
+//               <OpenModalButton
+//                 buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faTrash} /></span> Delete Song</>}
+//                 modalComponent={<DeleteSongModal songId={songId} />}
+//               />
+//               <div className="horizontal-line1"></div>
+//             </>
+//           )}
+//           {user2 && pageType === 'album' ? (<>
+//             <button
+//               style={{ cursor: 'pointer' }}
+//               className='start'
+//               onClick={e => {
+//                 e.stopPropagation()
+//                 setShowNestedMenu(!showNestedMenu);
+//               }}>
+//               <span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Add Song to Playlist
+//             </button>
+//             <div className={nestedUlClassName}>
+//               <div className="dropdown1">
+//                 {playlistsMap}
+//               </div>
+//             </div>
+//           </>
+//           ) : (<div>
+//             <div className="profile-small-button">
+//               <OpenModalButton
+//                 buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faSignInAlt} /></span> Login</>}
+
+//                 modalComponent={<LoginFormModal />}
+//               />
+//             </div>
+//             <div className="horizontal-line1"></div>
+//             <div className="profile-small-button">
+//               <OpenModalButton
+//                 buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faUserPlus} /></span> Sign Up</>}
+
+//                 modalComponent={<SignupFormModal />}
+//               />
+//             </div>
+//           </div>
+
+//           )}
+//           {user2 && pageType !== 'album' && (
+//             <button
+//               style={{ cursor: 'pointer' }}
+//               className='start'
+//               onClick={e => {
+//                 e.stopPropagation()
+//                 setShowMenu(!showNestedMenu);
+//                 dispatch(ThunkRemoveSongToPlaylist(playlistId, songId))
+//               }}>
+//               Remove Song from Playlist
+//             </button>
+//           )}
+//         </div>
+
       </div>
     </div>
   );
