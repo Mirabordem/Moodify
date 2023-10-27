@@ -126,10 +126,17 @@ def delete_song(id):
         if os.environ.get('FLASK_ENV') == 'production':
             remove_file_from_s3(selected_song_dict['audioUrl'])
 
+        ic(targetAlbum.album_songs)
+
         db.session.delete(selected_song)
         db.session.commit()
 
-        return  {'message': 'successfuly deleted'}
+        ic(targetAlbum.album_songs)
+
+        # idx = targetAlbum.album_songs.index(selected_song)
+        # targetAlbum.album_songs.pop(idx)
+
+        return  {'message': 'successfuly deleted', 'album': targetAlbum.to_dict()}
 
 
 

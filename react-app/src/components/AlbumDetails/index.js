@@ -10,22 +10,21 @@ import SongList from "../SongList";
 import AlbumUpdateButton from "./AlbumUpdateButton";
 import { useSongPlayer } from "../../context/SongPlayer";
 
-
-
-
 export default function AlbumDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const album = useSelector((state) => state.albums[id]);
   const songs = useSelector((state) => state.songs);
-  const [minutes, setMinutes] = useState(0)
-  const [releaseDate, setReleaseDate] = useState(0)
-  const [releaseYear, setReleaseYear] = useState(0)
-  const [totalNumberOfSongs, setTotalNumberOfSongs] = useState(album?.albumSongs.length)
-  const [totalAlbumLength, setTotalAlbumLength] = useState(0)
-  const [newSongs, setNewSongs] = useState(true)
+  const [minutes, setMinutes] = useState(0);
+  const [releaseDate, setReleaseDate] = useState(0);
+  const [releaseYear, setReleaseYear] = useState(0);
+  const [totalNumberOfSongs, setTotalNumberOfSongs] = useState(
+    album?.albumSongs.length
+  );
+  const [totalAlbumLength, setTotalAlbumLength] = useState(0);
+  const [newSongs, setNewSongs] = useState(true);
   const user = useSelector((state) => state.session.user);
-  const [pageType, setPageType] = useState('album')
+  const [pageType, setPageType] = useState("album");
   const {
     setIsPlaying,
     setNextSong,
@@ -33,32 +32,41 @@ export default function AlbumDetails() {
     setCurrentSong,
     songList,
     isPlaying,
-  } = useSongPlayer()
+  } = useSongPlayer();
 
   useEffect(() => {
-   let newAlbumLength = totalAlbumLength
+    let newNumberOfSongs = totalNumberOfSongs;
+    let newAlbumLength = totalAlbumLength;
     // console.log('IN THE USEEFFECT>>>>>>>>>>')
-   if(album && newSongs) {
-
-     for (let songId of album.albumSongs) {
-       const song = songs[songId];
-      //  newAlbumTracks.push(song);
-       newAlbumLength += song?.songLength;
-     }
-     setTotalAlbumLength(newAlbumLength)
-     const mins = Math.trunc(newAlbumLength / 60);
-     setMinutes(mins)
-     const relDate = new Date(album?.releaseDate);
-     setReleaseDate(relDate)
-     const relYear = relDate.getFullYear();
-     setReleaseYear(relYear)
-     setTotalNumberOfSongs(album?.albumSongs.length)
-     setNewSongs(false)
-
-   }
+    if (album && newSongs) {
+      for (let songId of album.albumSongs) {
+        const song = songs[songId];
+        //  newAlbumTracks.push(song);
+        newAlbumLength += song?.songLength;
+      }
+      setTotalAlbumLength(newAlbumLength);
+      const mins = Math.trunc(newAlbumLength / 60);
+      setMinutes(mins);
+      const relDate = new Date(album?.releaseDate);
+      setReleaseDate(relDate);
+      const relYear = relDate.getFullYear();
+      setReleaseYear(relYear);
+      setTotalNumberOfSongs(newNumberOfSongs);
+      setNewSongs(false);
+    }
 
     // setAlbumTracks(newAlbumTracks)
-  }, [minutes, releaseDate, releaseYear, totalNumberOfSongs, totalAlbumLength, newSongs, setNewSongs,songs,album])
+  }, [
+    minutes,
+    releaseDate,
+    releaseYear,
+    totalNumberOfSongs,
+    totalAlbumLength,
+    newSongs,
+    setNewSongs,
+    songs,
+    album,
+  ]);
 
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
@@ -73,15 +81,15 @@ export default function AlbumDetails() {
       setCurrentSong(songList[0])
       setNextSong(songList[1])
     }
-    setIsPlaying(!isPlaying)
-  }
-
+    setIsPlaying(!isPlaying);
+  };
 
   let defaultAlbumLength = 0;
   for (let songId of album.albumSongs) {
     const song = songs[songId];
-    if (song){
-    defaultAlbumLength += song.songLength;}
+    if (song) {
+      defaultAlbumLength += song.songLength;
+    }
   }
 
   const defaultMinutes = Math.trunc(defaultAlbumLength / 60);
@@ -100,17 +108,15 @@ export default function AlbumDetails() {
           </div>
 
           <p className="album-release-info">
-            {album.artist} • {releaseYear ? releaseYear : defaultReleaseYear} • {totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs •{" "}
-            {minutes ? minutes : defaultMinutes} min
+            {album.artist} • {releaseYear ? releaseYear : defaultReleaseYear} •{" "}
+            {totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs
+            • {minutes ? minutes : defaultMinutes} min
           </p>
         </div>
       </div>
 
       <div className="album-id-functions-3">
-      <button
-          className="play-button"
-          onClick={bigPlay}
-        >
+        <button className="play-button" onClick={bigPlay}>
           {/* conditionally render play arrow and pause bars with isPlaying variable */}
           <span className="play-arrow"></span>
         </button>
@@ -118,11 +124,7 @@ export default function AlbumDetails() {
       </div>
 
       <div id="album-id-song-list">
-        <SongList
-        artist={album.artist}
-        album={album}
-        pageType={pageType}
-        />
+        <SongList artist={album.artist} album={album} pageType={pageType} />
       </div>
     </div>
   );
