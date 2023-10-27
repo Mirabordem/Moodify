@@ -31,4 +31,3 @@ def get_all():
     song_dict_list = [song.to_dict() for song in songs]
 
     return {"albums": album_dict_list, "playlists": playlist_dict_list, "songs": song_dict_list}
-    # return {albums: {"album": "this is an album"}, playlists: {"playlists": "this is a playlist"}, songs: {"songs": "this is a song"}}

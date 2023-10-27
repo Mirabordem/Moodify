@@ -9,35 +9,6 @@ import os
 
 song_routes = Blueprint('song', __name__)
 
-
-
-# @song_routes.route('/new', methods=['POST'])
-# @login_required
-# def create_new_song():
-#     """
-#     Creates a new song. Returns a song dictionary.
-#     """
-#     form = CreateSongForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-
-#     if form.validate_on_submit():
-#         new_song = Song(
-#             name = form.data['name'],
-#             album_id = form.data['album_id'],
-#             track_number = form.data['track_number'],
-#             audio_url = form.data['audio_url'],
-#             song_length = form.data['song_length']
-#         )
-
-#         db.session.add(new_song)
-#         db.session.commit()
-#         return new_song.to_dict()
-
-#     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400
-
-
-
-
 @song_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def edit_song(id):
@@ -52,11 +23,10 @@ def edit_song(id):
     ic(current_song)
     ic(current_song.to_dict())
     if current_song is None:
-        return {'errors': 'Song not found'}, 404
+        return {'errors': {'message': 'Song not found'}}, 404
     album_of_song = Album.query.get(curr_song_dict['albumId'])
     if album_of_song.user_owner != current_user.id:
-        return {'errors': 'forbidden'}, 403
-
+        return {'errors': {'message': "Song does not belong to current user"}}, 403
 
     if form.validate_on_submit():
         data = form.data
@@ -73,7 +43,7 @@ def edit_song(id):
                 upload = upload_file_to_s3(song)
                 print(upload)
                 if 'url' not in upload:
-                    return { 'errors': 'upload error'}
+                    return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
                 current_song.audio_url = upload['url']
             else:
                 current_song.audio_url = f'{song.filename}.mp3'
@@ -152,7 +122,7 @@ def add_song_like(id):
     song = Song.query.get(id)
 
     if song in current_user.liked_songs:
-        return { "errors": "User likes this song" }, 405
+        return { "errors": {"message":"User likes this song"} }, 405
 
     current_user.liked_songs.append(song)
 
@@ -174,7 +144,7 @@ def remove_song_like(id):
     try:
         idx = current_user.liked_songs.index(song)
     except ValueError:
-        return { "errors": "User has never liked this song" }, 405
+        return { "errors": {"message" : "User does not like this song"} }, 405
 
     current_user.liked_songs.pop(idx)
 
