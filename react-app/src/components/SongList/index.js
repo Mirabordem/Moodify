@@ -102,45 +102,62 @@ export default function PlaylistDetails({
   const filledHeart = <i className={filledHeartClass}></i>;
 
   const songListMap = songTracks.map((song) => {
-    if (song) {
-      let heart;
 
-      const handleLike = (e) => {
-        e.stopPropagation();
-        if (user) {
-          const id = song.id;
-          dispatch(ThunkAddLike(id)); // Ensure ThunkAddLike is defined
-        }
-        heart = filledHeart;
-      };
+    if (song){
 
-      const handleDislike = (e) => {
-        e.stopPropagation();
-        if (user) {
-          const id = song.id;
-          dispatch(ThunkDeleteLike(id)); // Ensure ThunkDeleteLike is defined
-        }
-        heart = emptyHeart;
-      };
+    const handleLike = (e) => {
+      e.stopPropagation();
+      if (user) {
+        const id = song.id;
+        dispatch(ThunkAddLike(id));
+      }
+      heart = filledHeart;
+    };
+    const handleDislike = (e) => {
+      e.stopPropagation();
+      if (user) {
+        const id = song.id;
+        dispatch(ThunkDeleteLike(id));
+      }
+      heart = emptyHeart;
+    };
 
-      const minutes = Math.trunc(song.songLength / 60);
-      const seconds = song.songLength % 60;
+    emptyHeart = <i className="far fa-heart empty-heart1" onClick={handleLike}></i>;
 
-      // Remove this line: heart = userLikedSongIds.includes(song.id) ? filledHeart : emptyHeart;
+    filledHeart = (
+      <i className="fas fa-heart" style={{ color: 'rgb(95, 195, 146)' }} onClick={handleDislike}></i>
+    );
 
-      const runTime = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    let heart = null;
+    if (userLikedSongIds.includes(song.id)) {
+      heart = filledHeart;
+    } else heart = emptyHeart;
 
-      return (
-        <li
-          className="song-li"
-          style={{ listStyle: "none" }}
-          key={song.id}
-          onClick={() => setSongs(song)}
-        >
-          <span className="song-info1">{song.trackNumber}</span>
-          <div className="vertical-title">
-            <span className="song-info2">{song.name}</span>
-            <span className="song-info3">{artist}</span>
+
+    const minutes = Math.trunc(song.songLength / 60);
+    const seconds = song.songLength % 60;
+    const runTime = `${minutes}:${seconds < 10 ? '0': ''}${seconds}`;
+
+    return (
+      <li
+        className="song-li"
+        style={{ listStyle: "none" }}
+        key={song.id}
+        onClick={() => setSongs(song)}
+      >
+        <span className="song-info1">{song.trackNumber}</span>
+        <div className="vertical-title">
+          <span className="song-info2">{song.name}</span>
+          <span className="song-info3">{artist}</span>
+        </div>
+        <div className="song-info4">
+
+          <div className="song-actions-container">{heart}</div>
+
+          <span className="song-info">{runTime}</span>
+          <div className="song-menu">
+            <SongUpdateButton user={user} songId={song.id} pageType={pageType} playlistId={playlist?.id} />
+
           </div>
           <div className="song-info4">
             <div className="song-actions-container">

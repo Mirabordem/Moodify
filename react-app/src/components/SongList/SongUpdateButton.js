@@ -57,7 +57,7 @@ export default function SongUpdateButton({ user, songId, pageType, playlistId })
 
   return (
     <div className="song-update-dropdown1" ref={ulRef}>
-      <button style={{ background: 'transparent', border: 'none', color: '#000' }} className="song-update-button" onClick={e => {
+      <button style={{ background: 'transparent', color: '#000' }} className="song-update-button" onClick={e => {
         e.stopPropagation()
         setShowMenu(!showMenu);
       }}>
