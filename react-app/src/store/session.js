@@ -118,9 +118,9 @@ export const ThunkAddLike = (id) => async (dispatch) => {
       await dispatch(createLike(user));
       return user;
     }
-  } catch (error) {
-    const err = await error.json();
-    return err;
+  } catch (err) {
+    const errors = await err.json();
+    return errors;
   }
 };
 
@@ -132,9 +132,9 @@ export const ThunkDeleteLike = (id) => async (dispatch) => {
       await dispatch(deleteLike(user));
       return user;
     }
-  } catch (error) {
-    const err = await error.json();
-    return err;
+  } catch (err) {
+    const errors = await err.json();
+    return errors;
   }
 };
 
