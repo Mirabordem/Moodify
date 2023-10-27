@@ -12,12 +12,14 @@ import { useDispatch, useSelector } from "react-redux";
 export default function SongUpdateButton({ user, songId, pageType, playlistId,albumOwner }) {
   const [showMenu, setShowMenu] = useState(false);
   const [showNestedMenu, setShowNestedMenu] = useState(false);
+  const user2 = useSelector((state) => state.session.user);
   const playlists = useSelector(state => state.playlists)
   const dispatch = useDispatch()
   const ulRef = useRef();
 
-  console.log('USER id IN SONG UPDATE BUTTON IS',user.id)
+  console.log('USER id IN SONG UPDATE BUTTON IS',user?.id)
   console.log('ALBUM  IN SONG UPDATE BUTTON IS',albumOwner)
+  console.log('user2 is',user2)
 
 
   useEffect(() => {
@@ -31,7 +33,7 @@ export default function SongUpdateButton({ user, songId, pageType, playlistId,al
     document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
-  }, []);
+  }, [user2]);
 
   const currUserPlaylists = Object.values(playlists).filter(playlist => user?.userPlaylists.includes(playlist.id))
   const playlistsMap = currUserPlaylists.map(playlist => {
@@ -67,45 +69,48 @@ export default function SongUpdateButton({ user, songId, pageType, playlistId,al
         <i className="fas fa-ellipsis-h"></i>
       </button>
       <div className={ulClassName}>
-        {user && pageType === 'album' && user.id===albumOwner  ?
-          <div className="dropdown1">
-            {}
-            <OpenModalButton
-              buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Song</>}
-              modalComponent={<CreateSong formType="edit" songId={songId} />}
-            />
-            <div className="horizontal-line1"></div>
-            <OpenModalButton
-              buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faTrash} /></span> Delete Song</>}
-              modalComponent={<DeleteSongModal songId={songId}/>}
-            />
-            <div className="horizontal-line1"></div>
-            <button
-            style={{cursor: 'pointer'}}
+      <div className="dropdown1">
+      {user2 && pageType === 'album' && user2.id === albumOwner && (
+            <>
+              <OpenModalButton
+                buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Song</>}
+                modalComponent={<CreateSong formType="edit" songId={songId} />}
+              />
+              <div className="horizontal-line1"></div>
+              <OpenModalButton
+                buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faTrash} /></span> Delete Song</>}
+                modalComponent={<DeleteSongModal songId={songId}/>}
+              />
+              <div className="horizontal-line1"></div>
+            </>
+          )}
+          <button
+            style={{ cursor: 'pointer' }}
             className='start'
             onClick={e => {
               e.stopPropagation()
               setShowNestedMenu(!showNestedMenu);
             }}>
-              {<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Add Song to Playlist</>}
+            <span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Add Song to Playlist
+          </button>
+          <div className={nestedUlClassName}>
+            <div className="dropdown1">
+              {playlistsMap}
+            </div>
+          </div>
+          {user && pageType !== 'album' && (
+            <button
+              style={{ cursor: 'pointer' }}
+              className='start'
+              onClick={e => {
+                e.stopPropagation()
+                setShowMenu(!showNestedMenu);
+                dispatch(ThunkRemoveSongToPlaylist(playlistId, songId))
+              }}>
+              Remove Song from Playlist
             </button>
-              <div className={nestedUlClassName}>
-                <div className="dropdown1">
-                  {playlistsMap}
-                </div>
-              </div>
-          </div >
-          :
-          <div className="dropdown1">
-              <button
-            style={{cursor: 'pointer'}}
-            className='start'
-            onClick={e => {
-              e.stopPropagation()
-              setShowMenu(!showNestedMenu);
-              dispatch(ThunkRemoveSongToPlaylist(playlistId, songId))
-            }}> Remove Song from Playist</button>
-          </div>}
+          )}
+        </div>
       </div>
     </div>
   );
