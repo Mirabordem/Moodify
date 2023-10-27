@@ -77,11 +77,13 @@ export default function AlbumDetails() {
   }
 
   const bigPlay = e => {
-    if(!currentSong.name) {
-      setCurrentSong(songList[0])
-      setNextSong(songList[1])
+    if(songList.length) {
+      if(!currentSong.name) {
+        setCurrentSong(songList[0])
+        setNextSong(songList[1])
+      }
+      setIsPlaying(!isPlaying);
     }
-    setIsPlaying(!isPlaying);
   };
 
   let defaultAlbumLength = 0;

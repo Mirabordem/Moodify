@@ -66,12 +66,14 @@ export default function PlaylistDetails() {
 
 
   const bigPlay = e => {
-    if(!currentSong.name) {
-      setCurrentSong(songList[0])
-      setNextSong(songList[1])
+    if(songList.length) {
+      if(!currentSong.name) {
+        setCurrentSong(songList[0])
+        setNextSong(songList[1])
+      }
+      setIsPlaying(!isPlaying);
     }
-    setIsPlaying(!isPlaying)
-  }
+  };
 
   if (!playlist || !Object.values(songs).length) {
     // dispatch(thunkGetAllAlbums());
