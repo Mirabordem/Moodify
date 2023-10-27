@@ -51,8 +51,7 @@ export default function SideMenu() {
             <IndividPlaylistButton user={user} playlistId={id} />
           </div>
           <NavLink to={`/playlists/${id}`}>
-            <li className="li1" >{playlists[id]?.name}
-            </li>
+            <li className="li1">{playlists[id]?.name}</li>
           </NavLink>
         </div>
       );
@@ -74,12 +73,12 @@ export default function SideMenu() {
         Your Library
       </button>
       <ul className="ul-container">
-        <li>
+        {/* <li>
           <NavLink to="/albums" className="loved-songs">
             <i className="fas fa-music"></i>
             My Albums
           </NavLink>
-        </li>
+        </li> */}
 
         <li>
           <NavLink to="/likes" className="loved-songs">
