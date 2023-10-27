@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getAllAlbums } from "../../store/albums";
@@ -17,13 +17,16 @@ export default function PlaylistDetails() {
 
   const playlist = useSelector((state) => state.playlists[id]);
   const songs = useSelector((state) => state.songs);
-  const albums = useSelector((state) => state.albums);
   const [pageType, setPageType] = useState("playlist");
   const user = useSelector((state) => state.session.user);
   const playlists = useSelector((state) => state.playlists);
-  const [newSongs, setNewSongs] = useState(true)
-  // const [totalNumberOfSongs, setTotalNumberOfSongs] = useState(playlist?.playlistSongs.length)
-  const [totalPlaylistLength, setTotalPlaylistLength] = useState(0)
+  const [minutes, setMinutes] = useState(0);
+  const [totalNumberOfSongs, setTotalNumberOfSongs] = useState(
+    playlist?.songsOnPlaylist.length
+  );
+  const [totalPlaylistLength, setTotalPlaylistLength] = useState(0);
+  const [newSongs, setNewSongs] = useState(true);
+
   const {
     setIsPlaying,
     setNextSong,
@@ -32,6 +35,34 @@ export default function PlaylistDetails() {
     songList,
     isPlaying,
   } = useSongPlayer()
+
+  useEffect(() => {
+    let newNumberOfSongs = totalNumberOfSongs;
+    let newPlaylistLength = totalPlaylistLength;
+    // console.log('IN THE USEEFFECT>>>>>>>>>>')
+    if (playlist && newSongs) {
+      for (let songId of playlist.songsOnPlaylist) {
+        const song = songs[songId];
+        //  newAlbumTracks.push(song);
+        newPlaylistLength += song?.songLength;
+      }
+      setTotalPlaylistLength(newPlaylistLength);
+      const mins = Math.trunc(newPlaylistLength / 60);
+      setMinutes(mins);
+      setTotalNumberOfSongs(newNumberOfSongs);
+      setNewSongs(false);
+    }
+
+    // setAlbumTracks(newAlbumTracks)
+  }, [
+    minutes,
+    totalNumberOfSongs,
+    totalPlaylistLength,
+    newSongs,
+    setNewSongs,
+    songs,
+    playlist
+  ]);
 
 
   const bigPlay = e => {
@@ -48,11 +79,21 @@ export default function PlaylistDetails() {
     return null;
   }
 
-  const playlist_tracks = [];
+  // const playlist_tracks = [];
+  // for (let songId of playlist.songsOnPlaylist) {
+  //   playlist_tracks.push(songs[songId]);
+  // }
+
+  let defaultPlaylistLength = 0;
   for (let songId of playlist.songsOnPlaylist) {
-    playlist_tracks.push(songs[songId]);
+    const song = songs[songId];
+    if (song) {
+      defaultPlaylistLength += song.songLength;
+    }
   }
 
+  const defaultMinutes = Math.trunc(defaultPlaylistLength / 60);
+  const defaultTotalSongs = playlist.songsOnPlaylist.length;
 
 
   let picture = playlist.coverImageUrl || 'https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/if3eb5db5d38cc3d3/version/1698413261/image.png';
@@ -75,8 +116,7 @@ export default function PlaylistDetails() {
           <p className="album-release-info">
             {playlist.description}
           </p>
-          <p className="album-release-info1">Number of songs, Length of playlist
-            here</p>
+          <p className="album-release-info1">{totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs • {minutes ? minutes : defaultMinutes} min</p>
         </div>
       </div>
 
