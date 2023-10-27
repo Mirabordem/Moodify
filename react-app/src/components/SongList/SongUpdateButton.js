@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import OpenModalButton from "../OpenModalButton";
 import DeleteSongModal from "../DeleteSongModal";
+import SignupFormModal from "../SignupFormModal";
 import CreateSong from "../CreateSongModal";
 import { ThunkAddSongToPlaylist, ThunkRemoveSongToPlaylist } from "../../store/playlists"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
+import { faSignInAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -84,6 +86,7 @@ export default function SongUpdateButton({ user, songId, pageType, playlistId,al
               <div className="horizontal-line1"></div>
             </>
           )}
+          {user2 && pageType === 'album' ? (<>
           <button
             style={{ cursor: 'pointer' }}
             className='start'
@@ -98,6 +101,15 @@ export default function SongUpdateButton({ user, songId, pageType, playlistId,al
               {playlistsMap}
             </div>
           </div>
+          </>
+          ) : (<div className="profile-small-button">
+          <OpenModalButton
+            buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faUserPlus} /></span> Sign Up</>}
+            modalComponent={<SignupFormModal />}
+          />
+          </div>
+
+          )}
           {user && pageType !== 'album' && (
             <button
               style={{ cursor: 'pointer' }}
