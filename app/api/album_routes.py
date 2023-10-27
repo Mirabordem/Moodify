@@ -178,11 +178,14 @@ def delete_album(id):
         return {'errors': 'forbidden'}, 403
 
 # removing songs in deleted album:
-    songs = album.to_dict()['albumSongs']
+    songs = album.album_songs
     if os.environ.get('FLASK_ENV') == 'production':
         for song in songs:
             remove_file_from_s3(song['song_url'])
         remove_file_from_s3(album.image_url)
+    for song in songs:
+        db.session.delete(song)
+
 
     db.session.delete(album)
     db.session.commit()
