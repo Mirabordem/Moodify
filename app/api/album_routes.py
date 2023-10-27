@@ -197,16 +197,19 @@ def create_album_song(id):
     if form.validate_on_submit():
         data = form.data
 
-    song = data["audio_url"]
-    song.filename = get_unique_filename(song.filename)
-    if os.environ.get('FLASK_ENV') == 'production':
+        song = data["audio_url"]
+        ic(song)
+        song.filename = get_unique_filename(song.filename)
+        # if os.environ.get('FLASK_ENV') == 'production':
+        url='test'
         upload = upload_file_to_s3(song)
         print(upload)
         if 'url' not in upload:
             return { 'errors': 'upload error'}
         url = upload['url']
-    else:
-        url = f'{song.filename}.mp3'
+
+        # else:
+        # url = f'{song.filename}.mp3'
 
         new_song = Song (
             name = data['name'],
@@ -220,8 +223,11 @@ def create_album_song(id):
 
         ic(new_song.to_dict())
         print(new_song.to_dict())
-        updated_album_obj = Album.query.get(id).to_dict()
-        song_instances = [song.to_dict() for song in updated_album_obj['albumSongs']]
+        ic(Album.query.get(id))
+        updated_album = Album.query.get(id)
+        updated_album_obj = updated_album.to_dict()
+        ic(updated_album_obj)
+        song_instances = [Song.query.get(song_id).to_dict() for song_id in updated_album_obj['albumSongs']]
         updated_album_obj['albumSongs'] = [song['id'] for song in song_instances]
         new_song_obj = new_song.to_dict()
         return {'song': new_song_obj, 'album': updated_album_obj}
