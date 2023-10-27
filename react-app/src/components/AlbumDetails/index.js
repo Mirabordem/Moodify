@@ -76,10 +76,10 @@ export default function AlbumDetails() {
     return null;
   }
 
-  const bigPlay = (e) => {
-    if (!currentSong) {
-      setCurrentSong(songList[0]);
-      setNextSong(songList[1]);
+  const bigPlay = e => {
+    if(!currentSong.name) {
+      setCurrentSong(songList[0])
+      setNextSong(songList[1])
     }
     setIsPlaying(!isPlaying);
   };

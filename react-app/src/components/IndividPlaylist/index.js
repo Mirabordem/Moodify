@@ -7,7 +7,7 @@ import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
 import SongList from "../SongList";
 import "./IndividPlaylist.css";
-import IndividPlaylistButton from "../SideMenu/IndividPlaylistButton";
+import { useSongPlayer } from "../../context/SongPlayer";
 
 
 
@@ -17,9 +17,30 @@ export default function PlaylistDetails() {
 
   const playlist = useSelector((state) => state.playlists[id]);
   const songs = useSelector((state) => state.songs);
-  const albums = useSelector((state)=> state.albums)
-  const [pageType, setPageType] = useState('playlist')
+  const albums = useSelector((state) => state.albums);
+  const [pageType, setPageType] = useState("playlist");
   const user = useSelector((state) => state.session.user);
+  const playlists = useSelector((state) => state.playlists);
+  const [newSongs, setNewSongs] = useState(true)
+  // const [totalNumberOfSongs, setTotalNumberOfSongs] = useState(playlist?.playlistSongs.length)
+  const [totalPlaylistLength, setTotalPlaylistLength] = useState(0)
+  const {
+    setIsPlaying,
+    setNextSong,
+    currentSong,
+    setCurrentSong,
+    songList,
+    isPlaying,
+  } = useSongPlayer()
+
+
+  const bigPlay = e => {
+    if(!currentSong.name) {
+      setCurrentSong(songList[0])
+      setNextSong(songList[1])
+    }
+    setIsPlaying(!isPlaying)
+  }
 
   if (!playlist || !Object.values(songs).length) {
     // dispatch(thunkGetAllAlbums());
@@ -32,61 +53,141 @@ export default function PlaylistDetails() {
     playlist_tracks.push(songs[songId]);
   }
 
-  let picture
-  if (playlist.coverImageUrl!==null){
-    picture=playlist.coverImageUrl
-  }
-  else if (playlist?.coverImageUrl=== null && playlist?.songsOnPlaylist.length>0){
 
-    picture=albums[songs[playlist.songsOnPlaylist[0]].albumId].coverImageUrl
 
-  }
-  else {
-    //below is the default picture for new playlists. we can replace this easily
-    picture = 'https://i.imgur.com/UFYut0H.jpg'
-  }
+  let picture = playlist.coverImageUrl || 'https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/if3eb5db5d38cc3d3/version/1698413261/image.png';
 
   return (
     <div className="album-page-container">
       <div className="album-id-top-info">
-        <img className="playlist-id-cover-img"
-        // src={picture}
-        src={playlist.coverImageUrl}
-        alt="Playlist Cover"
-      />
+        <img
+          className="playlist-id-cover-img"
+          src={picture}
+          alt="Playlist Cover"
+        />
         <div id="album-id-info-words">
-          <p className="info-album-p">Playlist</p>
+          {/* <p className="info-album-p">Playlist</p> */}
           <div>
-            <p className="album-title-page">{playlist.title}</p>
+          <p className="album-title-page1">{playlists[id]?.name}</p>
+            {/* <p className="album-title-page">{playlist.title}</p> */}
           </div>
 
           <p className="album-release-info">
-            {playlist.description}, Amount of songs here, Length of playlist
-            here
+            {playlist.description}
           </p>
+          <p className="album-release-info1">Number of songs, Length of playlist
+            here</p>
         </div>
       </div>
 
-      <div id="album-id-functions-3">
+      <div id="album-id-functions-4">
       <button
+          className="play-button"
+          onClick={bigPlay}
+        >
+          {/* conditionally render play arrow and pause bars with isPlaying variable */}
+          <span className="play-arrow"></span>
+        </button>
+        {/* <button
           className="play-button"
           // onClick={playFirstSong}
         >
           <span className="play-arrow"></span>
-        </button>
+        </button> */}
         {/* <IndividPlaylistButton user={user} playlistId={playlist.id} /> */}
       </div>
 
-
-
       <div id="playlist-id-song-list">
-        <SongList
-        pageType={pageType}
-        playlist={playlist}/>
+        <SongList pageType={pageType} playlist={playlist} />
       </div>
-
-
-
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+// export default function PlaylistDetails() {
+//   const { id } = useParams();
+//   const dispatch = useDispatch();
+
+//   const playlist = useSelector((state) => state.playlists[id]);
+//   const songs = useSelector((state) => state.songs);
+//   const albums = useSelector((state)=> state.albums)
+//   const [pageType, setPageType] = useState('playlist')
+//   const user = useSelector((state) => state.session.user);
+
+//   if (!playlist || !Object.values(songs).length) {
+//     // dispatch(thunkGetAllAlbums());
+//     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
+//     return null;
+//   }
+
+//   const playlist_tracks = [];
+//   for (let songId of playlist.songsOnPlaylist) {
+//     playlist_tracks.push(songs[songId]);
+//   }
+
+//   let picture
+//   if (playlist.coverImageUrl!==null){
+//     picture=playlist.coverImageUrl
+//   }
+//   else if (playlist?.coverImageUrl=== null && playlist?.songsOnPlaylist.length>0){
+
+//     picture=albums[songs[playlist.songsOnPlaylist[0]].albumId].coverImageUrl
+
+//   }
+//   else {
+//     //below is the default picture for new playlists. we can replace this easily
+//     picture = 'https://i.imgur.com/UFYut0H.jpg'
+//   }
+
+//   return (
+//     <div className="album-page-container">
+//       <div className="album-id-top-info">
+//         <img className="playlist-id-cover-img"
+//         // src={picture}
+//         src={playlist.coverImageUrl}
+//         alt="Playlist Cover"
+//       />
+//         <div id="album-id-info-words">
+//           <p className="info-album-p">Playlist</p>
+//           <div>
+//             <p className="album-title-page">{playlist.title}</p>
+//           </div>
+
+//           <p className="album-release-info">
+//             {playlist.description}, Amount of songs here, Length of playlist
+//             here
+//           </p>
+//         </div>
+//       </div>
+
+//       <div id="album-id-functions-3">
+//       <button
+//           className="play-button"
+//           // onClick={playFirstSong}
+//         >
+//           <span className="play-arrow"></span>
+//         </button>
+//         {/* <IndividPlaylistButton user={user} playlistId={playlist.id} /> */}
+//       </div>
+
+
+
+//       <div id="playlist-id-song-list">
+//         <SongList
+//         pageType={pageType}
+//         playlist={playlist}/>
+//       </div>
+
+
+
+//     </div>
+//   );
+// }

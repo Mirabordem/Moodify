@@ -3,8 +3,9 @@ from flask_login import login_required, current_user
 from app.models import db, Song, likes, Album
 from app.forms import EditSongForm, CreateSongForm
 from app.api.auth_routes import validation_errors_to_error_messages
-from app.api.aws_helpers import remove_file_from_s3
+from app.api.aws_helpers import remove_file_from_s3,get_unique_filename,upload_file_to_s3
 from icecream import ic
+import os
 
 song_routes = Blueprint('song', __name__)
 
@@ -62,15 +63,20 @@ def edit_song(id):
         ic(data["audio_url"])
         if data["audio_url"]:
             print("HIT THE IF BLOCK")
-            # song = data["audio_url"]
-            # song.filename = get_unique_filename(song.filename)
-            # upload = upload_file_to_s3(song)
-            # print(upload)
-            # if 'url' not in upload:
-            #     return { 'errors': 'upload error'}
-            # current_song.audio_url = upload['url']
+            song = data["audio_url"]
+            song.filename = get_unique_filename(song.filename)
+
 
             # current_song.audio_url = 'https://moodifybucket.s3.us-east-2.amazonaws.com/bubkas.mp3'
+
+            if os.environ.get('FLASK_ENV') == 'production':
+                upload = upload_file_to_s3(song)
+                print(upload)
+                if 'url' not in upload:
+                    return { 'errors': 'upload error'}
+                current_song.audio_url = upload['url']
+            else:
+                current_song.audio_url = f'{song.filename}.mp3'
 
         current_song.name = data['name']
         ic(data['name'])
@@ -117,8 +123,8 @@ def delete_song(id):
         return { 'errors': 'Song not found' }
     else:
 
-        ##Uncomment this when we actually want to remove from aws
-        # remove_file_from_s3(selected_song_dict['audioUrl'])
+        if os.environ.get('FLASK_ENV') == 'production':
+            remove_file_from_s3(selected_song_dict['audioUrl'])
 
         ic(targetAlbum.album_songs)
 
