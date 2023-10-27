@@ -30,7 +30,7 @@ export default function SongUpdateButton({ user, songId, pageType, playlistId })
     return () => document.removeEventListener("click", closeMenu);
   }, []);
 
-  const currUserPlaylists = Object.values(playlists).filter(playlist => user.userPlaylists.includes(playlist.id))
+  const currUserPlaylists = Object.values(playlists).filter(playlist => user?.userPlaylists.includes(playlist.id))
   const playlistsMap = currUserPlaylists.map(playlist => {
     return (
       <button
