@@ -57,7 +57,7 @@ export default function SongUpdateButton({ user, songId, pageType, playlistId })
 
   return (
     <div className="song-update-dropdown1" ref={ulRef}>
-      <button className="song-update-button" onClick={e => {
+      <button style={{ background: 'transparent', border: 'none', color: '#000' }} className="song-update-button" onClick={e => {
         e.stopPropagation()
         setShowMenu(!showMenu);
       }}>
@@ -65,7 +65,7 @@ export default function SongUpdateButton({ user, songId, pageType, playlistId })
       </button>
       <div className={ulClassName}>
         {user && pageType === 'album' ?
-          <div className="dropdown1">
+          <div className="dropdown1a">
             <OpenModalButton
               buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Song</>}
               modalComponent={<CreateSong formType="edit" songId={songId} />}
@@ -83,10 +83,10 @@ export default function SongUpdateButton({ user, songId, pageType, playlistId })
               e.stopPropagation()
               setShowNestedMenu(!showNestedMenu);
             }}>
-              {<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Add Song to Playlist</>}
+              {<><span className="menu-icon1"><FontAwesomeIcon icon={faPlus} /></span> Add Song to Playlist</>}
             </button>
               <div className={nestedUlClassName}>
-                <div className="dropdown1">
+                <div className="dropdown6">
                   {playlistsMap}
                 </div>
               </div>
@@ -100,7 +100,7 @@ export default function SongUpdateButton({ user, songId, pageType, playlistId })
               e.stopPropagation()
               setShowMenu(!showNestedMenu);
               dispatch(ThunkRemoveSongToPlaylist(playlistId, songId))
-            }}> Remove Song from Playist</button>
+            }}> Remove Song from Playlist</button>
           </div>}
       </div>
     </div>
