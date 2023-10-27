@@ -52,8 +52,8 @@ export const thunkCreateSong = (newSong, albumId) => async (dispatch) => {
       return newData;
     }
   } catch (err) {
-    const errors = err.json();
-    return errors;
+    const data = err.json();
+    return data.errors;
   }
 };
 
@@ -71,28 +71,27 @@ export const thunkUpdateSong = (updatedSong, songId) => async (dispatch) => {
       return newData;
     }
   } catch (err) {
-    const errors = err.json();
-    return errors;
+    const data = err.json();
+    return data.errors;
   }
 };
 
 export const ThunkDeleteSong = (songId) => async (dispatch) => {
-  const response = await fetch(`/api/songs/${songId}/delete`, {
-    method: "DELETE",
-  });
-  if (response.ok) {
-    const data = await response.json();
-
-    dispatch(deleteSong(songId));
-    dispatch(updateAlbum(data.album));
-    return data.message;
+  try {
+    const response = await fetch(`/api/songs/${songId}/delete`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(deleteSong(songId));
+      dispatch(updateAlbum(data.album));
+      return data.message;
+    }
+  } catch (err) {
+    const data = await err.json()
+    return data.errors
   }
 
-  //   catch (error) {
-  //         const err=await error.json()
-  //         return err
-
-  //     }
 };
 
 // reducer

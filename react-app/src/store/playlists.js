@@ -43,37 +43,45 @@ export const ThunkDeletePlaylist = (id) => async (dispatch) => {
 };
 
 export const ThunkCreatePlaylist = (formData) => async (dispatch) => {
-  const res = await fetch(`/api/playlists/new`, {
-    method: "POST",
-    body: formData,
-  });
-  if (res.ok) {
-    const realNewPlaylist = await res.json();
-    const returnPlaylist = { ...realNewPlaylist };
-    await dispatch(createPlaylist(realNewPlaylist));
-    return returnPlaylist;
-  } else {
+  try {
+    const res = await fetch(`/api/playlists/new`, {
+      method: "POST",
+      body: formData,
+    });
+
+    if (res.ok) {
+      const realNewPlaylist = await res.json();
+      const returnPlaylist = { ...realNewPlaylist };
+      await dispatch(createPlaylist(realNewPlaylist));
+      return returnPlaylist;
+
+    }
+  } catch (err) {
     console.log("THERE WAS AN ERROR IN MAKING THE POST");
-    const errors = await res.json();
+    const errors = await err.json();
     return errors;
   }
 };
 
 export const ThunkEditPlaylist = (formData, playlistId) => async (dispatch) => {
+try {
   const res = await fetch(`/api/playlists/${playlistId}/edit`, {
     method: "PUT",
     body: formData,
   });
+
   if (res.ok) {
     const realNewPlaylist = await res.json();
     const returnPlaylist = { ...realNewPlaylist };
     await dispatch(updatePlaylist(realNewPlaylist));
     return returnPlaylist;
-  } else {
-    console.log("THERE WAS AN ERROR IN MAKING THE POST");
-    const errors = await res.json();
-    return { errors };
+
   }
+} catch (err) {
+  console.log("THERE WAS AN ERROR IN MAKING THE POST");
+  const data = await err.json();
+  return data.errors
+}
 };
 
 export const ThunkAddSongToPlaylist = (playlistId, songId) => async dispatch => {
@@ -86,8 +94,8 @@ export const ThunkAddSongToPlaylist = (playlistId, songId) => async dispatch => 
       return playlist
     }
   } catch (err) {
-    const errors = await err.json()
-    return errors
+    const data = await err.json()
+    return data.errors
   }
 }
 
@@ -101,8 +109,8 @@ export const ThunkRemoveSongToPlaylist = (playlistId, songId) => async dispatch 
       return playlist
     }
   } catch (err) {
-    const errors = await err.json()
-    return errors
+    const data = await err.json()
+    return data.errors
   }
 }
 

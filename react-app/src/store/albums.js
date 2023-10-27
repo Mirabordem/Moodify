@@ -45,15 +45,16 @@ export const thunkGetAllAlbums = () => async (dispatch) => {
     dispatch(getAllAlbums(albums));
     return albums;
   } else {
-    const errors = res.json();
-    return errors;
+    const data = res.json();
+    return data.erros;
   }
 };
 
 export const ThunkCreateAlbum = (formData) => async (dispatch) => {
+  try {
     const res = await fetch(`/api/albums/new`, {
-        method: 'POST',
-        body: formData
+      method: 'POST',
+      body: formData
     });
     if (res.ok) {
         const realNewAlbum = await res.json();
@@ -61,18 +62,18 @@ export const ThunkCreateAlbum = (formData) => async (dispatch) => {
         await dispatch(createAlbum(realNewAlbum))
         return returnAlbum
     }
-    else {
-        console.log('THERE WAS AN ERROR IN MAKING THE POST')
-        const errors= await res.json()
-        return errors
-    }
-
+  } catch (err) {
+    console.log('THERE WAS AN ERROR IN MAKING THE POST')
+    const data = await err.json()
+    return data.errors
+  }
 }
 
 export const ThunkEditAlbum = (formData,albumId) => async (dispatch) => {
+  try {
     const res = await fetch(`/api/albums/${albumId}/edit`, {
-        method: 'PUT',
-        body: formData
+      method: 'PUT',
+      body: formData
     });
     if (res.ok) {
         const realNewAlbum = await res.json();
@@ -80,12 +81,11 @@ export const ThunkEditAlbum = (formData,albumId) => async (dispatch) => {
         await dispatch(updateAlbum(realNewAlbum))
         return returnAlbum
     }
-    else {
-        console.log('THERE WAS AN ERROR IN MAKING THE POST')
-        const errors= await res.json()
-        return {errors}
-    }
-
+  } catch (err) {
+    console.log('THERE WAS AN ERROR IN MAKING THE POST')
+        const data = await err.json()
+        return data.errors
+  }
 }
 
 // export const ThunkEditAlbum = (formData, albumId) => async (dispatch) => {
@@ -106,11 +106,16 @@ export const ThunkEditAlbum = (formData,albumId) => async (dispatch) => {
 // };
 
 export const ThunkDeleteAlbum = (id) => async (dispatch) => {
-  const response = await fetch(`/api/albums/${id}/delete`, {
-    method: "DELETE",
-  });
-  dispatch(deleteAlbum());
-  return response;
+  try {
+    const response = await fetch(`/api/albums/${id}/delete`, {
+      method: "DELETE",
+    });
+    dispatch(deleteAlbum());
+    return response;
+  } catch (err) {
+    const data = await err.json()
+    return data.errors
+  }
 };
 
 // reducer

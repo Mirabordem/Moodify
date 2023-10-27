@@ -95,7 +95,9 @@ export default function MusicPlayer() {
     <div className="musicPlayer">
       <audio src={currentSong.audioUrl} ref={audio} onEnded={() => playNext()}/>
       <span onClick={() => playPrev()}>Prev</span>
-      <button onClick={() => setIsPlaying(!isPlaying)}>
+      <button onClick={() =>  {
+        if(songList.length && currentSong.name) setIsPlaying(!isPlaying)
+      }}>
         {!isPlaying ? "Play" : "Pause"}
       </button>
       <span onClick={() => playNext()}>Next</span>
