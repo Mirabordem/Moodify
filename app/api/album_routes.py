@@ -174,9 +174,9 @@ def delete_album(id):
     album = Album.query.get(id)
 
     if album is None:
-        return {'errors': {'message':'Album not found'}}, 404
+        return {'errors': {'error':'Album not found'}}, 404
     elif album.user_owner != current_user.id:
-        return {'errors': {'message':'forbidden'}}, 403
+        return {'errors': {'error':'forbidden'}}, 403
 
 # removing songs in deleted album:
     songs = album.to_dict()['albumSongs']

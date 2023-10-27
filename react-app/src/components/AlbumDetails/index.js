@@ -25,6 +25,7 @@ export default function AlbumDetails() {
   const [newSongs, setNewSongs] = useState(true);
   const user = useSelector((state) => state.session.user);
   const [pageType, setPageType] = useState("album");
+
   const {
     setIsPlaying,
     setNextSong,
