@@ -16,11 +16,14 @@ import AlbumDropDown from "./AlbumDropdown";
 import PlaylistSongUpdate from "./PlayListSongUpdate";
 import LikesSongUpdate from "./LikesSongUpdate"
 
+
 export default function SongUpdateButton({
   songId,
   pageType,
   playlistId,
   albumOwner,
+  isOpen,
+  handlePlaylistButtonClick
 }) {
   const [showMenu, setShowMenu] = useState(false);
   const [showNestedMenu, setShowNestedMenu] = useState(false);
@@ -80,11 +83,14 @@ export default function SongUpdateButton({
         className="song-update-button"
         onClick={(e) => {
           e.stopPropagation();
-          setShowMenu(!showMenu);
+          handlePlaylistButtonClick()
+          setShowMenu(true);
+          // setShowMenu(!showMenu);
         }}
       >
         <i className="fas fa-ellipsis-h"></i>
       </button>
+      {isOpen && user && showMenu && (
       <div className={ulClassName}>
         <div className="dropdown1a">
           {pageType === 'album' && <AlbumDropDown songId={songId} albumOwner={albumOwner}/>}
@@ -92,6 +98,7 @@ export default function SongUpdateButton({
           {pageType === 'likes' && <LikesSongUpdate songId={songId}/>}
         </div>
       </div>
+      )}
     </div>
   );
 }

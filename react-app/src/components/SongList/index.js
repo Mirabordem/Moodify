@@ -22,6 +22,16 @@ export default function SongList({
   playlist,
 }) {
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+  const [showMenu, setShowMenu] = useState(false)
+  const [openPlaylistId,setOpenPlaylistId]=useState(null)
+  const handlePlaylistButtonClick = (playlistId) => {
+    if (openPlaylistId === playlistId) {
+      setOpenPlaylistId(null);
+    } else {
+      setOpenPlaylistId(playlistId);
+    }
+  };
 
   const user = useSelector((state) => state.session.user);
   let userLikedSongIds = [];
@@ -176,6 +186,8 @@ export default function SongList({
                   pageType={pageType}
                   playlistId={playlist?.id}
                   albumOwner={album?.userOwner}
+                  isOpen={openPlaylistId === song.id}
+                  handlePlaylistButtonClick={() => handlePlaylistButtonClick(song.id)}
                 />
               }
             </div>
