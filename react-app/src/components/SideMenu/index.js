@@ -303,6 +303,7 @@ export default function SideMenu() {
         Open Moodify
       </button>
       }
+      <div className="profile-small-button1">
        <div className={ulClassName} ref={ulRef}>
           <div className="profile-small-button">
            <OpenModalButton
@@ -319,6 +320,7 @@ export default function SideMenu() {
               modalComponent={<SignupFormModal />}
             />
             </div>
+         </div>
          </div>
 
       {sideMenuOptions}
