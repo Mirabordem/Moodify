@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     width: 450px;
-    height: 480px;
+    height: 550px;
     background-color: rgb(21, 21, 21);
     padding: 5px;
     /* box-shadow: 2px 2px 22px rgb(107, 106, 106); */
@@ -47,4 +47,8 @@
     color: white;
     background-color: rgb(20, 20, 20);
     margin-top: 3px;
+}
+
+.color {
+    color: rgb(161, 161, 161);;
 }

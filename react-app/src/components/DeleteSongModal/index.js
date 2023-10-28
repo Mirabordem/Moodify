@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { ThunkDeleteSong } from "../../store/songs";
+import "./DeleteSongModal.css";
 
 function DeleteSongModal({ songId }) {
   const dispatch = useDispatch();
@@ -20,18 +21,18 @@ function DeleteSongModal({ songId }) {
   };
 
   return (
-    <div className="login-container">
-      <h1 className="new-h1">Confirm Delete</h1>
-      <h3 className="dm-confirm-txt">
+    <div className="signup-container5">
+      <div className="new-h1">Confirm Delete</div>
+      <div className="dm-confirm-txt">
         Are you sure you want to remove this song?
-      </h3>
+      </div>
       {errors.error && <p className="delete-song-errors">{errors.error}</p>}
       <div className="delete-buttons">
-      <button className="login-button" onClick={handleDelete}>
-        Yes (Delete This Song)
+      <button className="signup-button1" onClick={handleDelete}>
+        YES (delete this song)
       </button>
-      <button className="login-button" onClick={closeModal}>
-        No (Keep This Song)
+      <button className="signup-button1" onClick={closeModal}>
+        NO (keep this song)
       </button>
       </div>
     </div>

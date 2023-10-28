@@ -19,19 +19,19 @@ function DeletePlaylistModal({ playlistId }) {
   };
 
   return (
-    <>
-      <h1 className="dm-title-txt">Confirm Delete</h1>
-      <h3 className="dm-confirm-txt">
+    <div className="signup-container5">
+      <div className="new-h1">Confirm Delete</div>
+      <div className="txt1">
         Are you sure you want to remove this playlist?
-      </h3>
+      </div>
       {errors.error && <p className="delete-playlist-errors">{errors.error}</p>}
-      <button className="dm-delete-button" onClick={handleDelete}>
-        Yes (Delete Playlist)
+      <button className="signup-button" onClick={handleDelete}>
+        YES (delete playlist)
       </button>
-      <button className="dm-close-delete-button" onClick={closeModal}>
-        No (Keep Playlist)
+      <button className="signup-button" onClick={closeModal}>
+        NO (keep playlist)
       </button>
-    </>
+    </div>
   );
 }
 
