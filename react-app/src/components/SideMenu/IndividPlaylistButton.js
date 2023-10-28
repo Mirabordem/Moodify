@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
 import DeletePlaylistModal from "../DeletePlaylistModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-export default function PlaylistUpdateButton({ user, playlistId,isOpen,onClick }) {
+export default function PlaylistUpdateButton({ playlistId,isOpen,handlePlaylistButtonClick }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const user = useSelector((state) => state.session.user);
+
 
   useEffect(() => {
     const closeMenu = (e) => {
@@ -28,19 +31,20 @@ export default function PlaylistUpdateButton({ user, playlistId,isOpen,onClick }
         style={{ background: "transparent", border: "none", color: "#000" }}
         onClick={(e) => {
           e.stopPropagation();
-          onClick()
-          setShowMenu(!showMenu);
+          handlePlaylistButtonClick()
+          setShowMenu(true);
         }}
       >
         <div className="album-dots-container1">
           <span className="album-big-dots2">...</span>
         </div>
       </button>
-      {isOpen && user && (
+      {isOpen && user && showMenu && (
       <div className={ulClassName}>
 
           <div className="dropdown2">
             <OpenModalButton
+            onClick={()=>setShowMenu(false)}
               buttonText={
                 <>
                   <span className="menu-icon">

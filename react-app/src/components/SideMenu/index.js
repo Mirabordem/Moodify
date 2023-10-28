@@ -60,7 +60,7 @@ export default function SideMenu() {
       return (
         <div key={id} className="playlist-menu-container">
           <div>
-            <IndividPlaylistButton user={user} playlistId={id} isOpen={openPlaylistId === id}  onClick={() => handlePlaylistButtonClick(id)}/>
+            <IndividPlaylistButton  playlistId={id} isOpen={openPlaylistId === id}  handlePlaylistButtonClick={() => handlePlaylistButtonClick(id)}/>
           </div>
           <NavLink to={`/playlists/${id}`}>
             <li className="li1">{playlists[id]?.name}</li>
