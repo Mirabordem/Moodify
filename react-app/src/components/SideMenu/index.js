@@ -156,6 +156,8 @@ import SignupFormModal from "../SignupFormModal";
 
 
 export default function SideMenu() {
+
+  const [openPlaylistId,setOpenPlaylistId]=useState(null)
   const [isOpen, setIsOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false)
   const sessionUser = useSelector((state) => state.session.user);
@@ -163,6 +165,16 @@ export default function SideMenu() {
 
   const showProfileMenu = useSelector((state) => state.session.showProfileMenu); // Change to match your store state
   const dispatch = useDispatch();
+
+  const handlePlaylistButtonClick = (playlistId) => {
+    if (openPlaylistId === playlistId) {
+      setOpenPlaylistId(null);
+    } else {
+      setOpenPlaylistId(playlistId);
+    }
+  };
+
+
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -220,7 +232,7 @@ export default function SideMenu() {
       return (
         <div key={id} className="playlist-menu-container">
           <div>
-            <IndividPlaylistButton user={user} playlistId={id} />
+            <IndividPlaylistButton  playlistId={id} isOpen={openPlaylistId === id}  handlePlaylistButtonClick={() => handlePlaylistButtonClick(id)}/>
           </div>
           <NavLink to={`/playlists/${id}`}>
             <li className="li1">{playlists[id]?.name}</li>
