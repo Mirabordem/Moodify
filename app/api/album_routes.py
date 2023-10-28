@@ -40,8 +40,9 @@ def create_new_album():
 
         upload = upload_file_to_s3(image)
         if "url" not in upload:
+            ic('THIS IS UPLOAD IN OUR CREATE ALBUM',upload)
             return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
-        print('THIS IS UPLOAD IN OUR CREATE ALBUM',upload)
+            print('THIS IS UPLOAD IN OUR CREATE ALBUM',upload)
         url = upload['url']
 
 
