@@ -1,0 +1,55 @@
+.likedSongs-container {
+
+    /* background: linear-gradient(to bottom, rgb(81, 71, 77), rgb(215, 191, 202) 90%); */
+    background-color: rgb(96, 85, 91);
+    margin-left: 180px;
+    margin-top: 50px;
+}
+
+.likes-release-info {
+ /* border: 2px solid red; */
+ font-size: 16px;
+ margin-top: 0;
+}
+
+#likes-id-info-words {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: linear-gradient(to bottom, rgb(215, 191, 202), rgb(137, 121, 129) 80%);
+}
+
+
+.album-title-page1 {
+
+    font-size: 54px;
+    margin-top: 60px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    padding-left: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.likes-id-cover-img {
+    height: 220px;
+    width: 220px;
+    margin-left: 150px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    box-shadow: 2px 2px 22px rgb(81, 71, 71);
+}
+
+.middle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 60px;
+    margin-bottom: 30px;
+}
+
+#likes-id-song-list {
+    /* border: 2px solid green; */
+    margin-top: 40px;
+    margin-left: 30px;
+}
