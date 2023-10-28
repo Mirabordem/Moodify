@@ -51,7 +51,7 @@ function SignupFormModal() {
 			return;
 		}
 		const data = await dispatch(signUp(username, email, password));
-		if (data.errors) {
+		if (data && data.errors) {
 			setValidationObject(data.errors);
 		} else {
 			closeModal();

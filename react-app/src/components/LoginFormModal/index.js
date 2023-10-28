@@ -8,14 +8,18 @@ function LoginFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
+    console.log("🚀 ~ file: index.js:17 ~ handleSubmit ~ data:", data)
+
+    console.log("🚀 ~ file: index.js:19 ~ handleSubmit ~ data.errors:", data.errors)
+    if (data.errors) {
+
+      setErrors(data.errors);
     } else {
         closeModal()
     }
@@ -52,8 +56,8 @@ function LoginFormModal() {
         <button className = 'login-button' type="submit">Log In</button>
         <button className="demoUserLink" onClick={demoUserLogIn}>Demo User</button>
             <ul className="errors-ul">
-              {errors.map((error, idx) => (
-                <li key={idx}>{error}</li>
+              {Object.values(errors).map((error, idx=0) => (
+                <li key={idx+1}>{error}</li>
               ))}
             </ul>
       </form>

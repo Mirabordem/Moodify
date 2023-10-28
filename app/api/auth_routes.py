@@ -57,6 +57,7 @@ def login():
         # ic(user_obj['likedSongs'])
         # ic(user_obj)
         return user.to_dict()
+    ic(validation_errors_to_error_messages(form.errors))
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
