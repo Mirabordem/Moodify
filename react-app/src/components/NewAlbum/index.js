@@ -17,7 +17,7 @@ export default function NewAlbum({ formType, albumId }) {
     const [artist, setArtist] = useState('');
     const [albumCover, setAlbumCover] = useState('');
     const [didPicChange, setDidPicChange] = useState(false)
-    const [errors,setErrors] = useState(false)
+    const [errors, setErrors] = useState({})
 
 
 
@@ -47,10 +47,12 @@ export default function NewAlbum({ formType, albumId }) {
 
         if (formType === "Create") {
             formData.append('cover_image_url', albumCover);
-            let test = await dispatch(ThunkCreateAlbum(formData));
-            if (test.title) {
+            let data = await dispatch(ThunkCreateAlbum(formData));
+            if (data?.title) {
                 history.push(`/albums/${test.id}`);
                 closeModal();
+            } else if (data.errors) {
+                setErrors(data.errors)
             }
         }
         else if (formType === "Edit") {
@@ -80,7 +82,7 @@ export default function NewAlbum({ formType, albumId }) {
             {formType === 'Create' && (
                 <div className='new-h5'>Create Album</div>
             )}
-
+            {errors.message && <p className="album-form-errors">{errors.message}</p>}
             <form onSubmit={handleSubmit} encType="multipart/form-data" className='signup-form5'>
                 {/* <ul>
                     {errors.map((error, idx) => (
@@ -96,6 +98,7 @@ export default function NewAlbum({ formType, albumId }) {
                         placeholder="Title"
                     />
                 </label>
+                {errors.title && <p className="album-form-errors">{errors.title}</p>}
                 <label className="login-label">
                     <input
                         type="date"
@@ -105,6 +108,7 @@ export default function NewAlbum({ formType, albumId }) {
                         placeholder="Release Date"
                     />
                 </label>
+                {errors.release_date && <p className="album-form-errors">{errors.release_date}</p>}
                 <label className="login-label">
                     <input
                         type="text"
@@ -139,7 +143,7 @@ export default function NewAlbum({ formType, albumId }) {
                         placeholder="Album Cover"
                     />
                 </label>
-
+                {errors.cover_image_url && <p className="album-form-errors">{errors.cover_image_url}</p>}
                 <button className="signup-button" type="submit">{formType === 'Create' ? 'Create Album' : 'Edit Album'}</button>
             </form>
         </div>

@@ -34,7 +34,7 @@ def create_new_playlist():
                 # print('THIS IS UPLOAD',upload)
 
                 # # if "url" not in upload:
-                # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+                # #     return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
 
                 # url = upload['url']
 
@@ -56,43 +56,6 @@ def create_new_playlist():
 
     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-# @playlist_routes.route('/<int:id>/edit', methods=['PUT'])
-# @login_required
-# def edit_album(id):
-#     form = EditAlbumForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-
-#     album = Album.query.get(id)
-
-#     if album is None:
-#         return {'errors': 'Album not found'}, 404
-#     elif album.user_owner != current_user.id:
-#         return {'errors': 'forbidden'}, 403
-
-#     if form.validate_on_submit():
-#         if form.data['cover_image_url']:
-#             image = form.data['cover_image_url']
-#             image.filename = get_unique_filename(image.filename)
-#             url="https://i.imgur.com/sG9LYzh.jpg"
-
-#             ##KEEP THIS. uncomment this code when we actually want to upload to aws
-#             # upload = upload_file_to_s3(image)
-#             # # if "url" not in upload:
-#             # #     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
-#             # url = upload['url']
-
-#             album.cover_image_url =url
-#         data = form.data
-#         album.title = data['title']
-#         album.release_date = data['release_date']
-#         album.artist = data['artist']
-#         db.session.commit()
-#         return album.to_dict()
-#     print(form.errors)
-
-#     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
-
-
 
 @playlist_routes.route('/<int:id>/delete', methods=['DELETE'])
 @login_required
@@ -103,9 +66,9 @@ def delete_playlist(id):
     playlist = Playlist.query.get(id)
 
     if playlist is None:
-        return {'errors': 'Playlist not found'}, 404
+        return {'errors': {'error':'Playlist not found'}}, 404
     elif playlist.user_id != current_user.id:
-        return {"errors": "Playlist does not belong to current user"}, 403
+        return {'errors': {'error':"Playlist does not belong to current user"}}, 403
 
     db.session.delete(playlist)
     db.session.commit()
@@ -122,7 +85,7 @@ def add_song_to_playlist(playlistId, songId):
     playlist = Playlist.query.get(playlistId)
 
     if song in playlist.songs_on_playlist:
-        return { "errors": "Song already on playlist" }, 405
+        return { "errors": {"message" : "Song already on playlist"} }, 405
 
     playlist.songs_on_playlist.append(song)
 
@@ -140,7 +103,7 @@ def remove_song_to_playlist(playlistId, songId):
     playlist = Playlist.query.get(playlistId)
 
     if song not in playlist.songs_on_playlist:
-        return { "errors": "Song already on playlist" }, 405
+        return { "errors": {"message" : "Song not in playlist"} }, 405
 
     idx = playlist.songs_on_playlist.index(song)
     playlist.songs_on_playlist.pop(idx)

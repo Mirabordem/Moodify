@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
@@ -9,10 +9,12 @@ function DeletePlaylistModal({ playlistId }) {
   const { closeModal } = useModal();
   const history = useHistory();
   const id = playlistId;
+  const [errors, setErrors] = useState({})
 
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.preventDefault();
-    dispatch(ThunkDeletePlaylist(id)).then(closeModal());
+    await dispatch(ThunkDeletePlaylist(id))
+    closeModal();
     history.push(`/`);
   };
 
@@ -22,6 +24,7 @@ function DeletePlaylistModal({ playlistId }) {
       <h3 className="dm-confirm-txt">
         Are you sure you want to remove this playlist?
       </h3>
+      {errors.error && <p className="delete-playlist-errors">{errors.error}</p>}
       <button className="dm-delete-button" onClick={handleDelete}>
         Yes (Delete Playlist)
       </button>
