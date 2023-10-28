@@ -175,6 +175,7 @@ def delete_album(id):
     """
     ic('DELETE ALBUM!!!!!!!')
     album = Album.query.get(id)
+    ic(album)
 
     if album is None:
         return {'errors': {'error':'Album not found'}}, 404
@@ -183,27 +184,28 @@ def delete_album(id):
 
 # removing songs in deleted album:
     songs = album.album_songs
-    if os.environ.get('FLASK_ENV') == 'production':
-        print("In Production Check")
-        if len(songs) != 0:
-            print("songs to delete")
-            for song in songs:
-                remove_file_from_s3(song.audio_url)
-                print('songs removed from AWS')
-            remove_file_from_s3(album.image_url)
-            print('image removed from AWS')
+    ic(songs)
 
+    print("In Production Check")
     if len(songs) != 0:
-        print('going to delete songs from db')
+        print("songs to delete")
         for song in songs:
+            remove_file_from_s3(song.audio_url)
             db.session.delete(song)
-            print('songs deleted songs from db')
+        db.session.commit()
+        remove_file_from_s3(album.cover_image_url)
 
+    # if len(songs) != 0:
+    #     print('going to delete songs from db')
+    #     for song in songs:
+    #         db.session.delete(song)
+    #         print('songs deleted songs from db')
 
-    db.session.delete(album)
-    print('deleted Album from db')
+    album2=Album.query.get(id)
+    db.session.delete(album2)
+
     db.session.commit()
-    print('commited changes to db')
+
     return { 'message': 'Successfully Deleted'}
 
 
