@@ -15,12 +15,14 @@
 .creators1 {
     margin-right: 40px;
     margin-top: 10px;
+    font-weight: bold;
+    font-style: italic;
 }
 
 .creator {
     display: flex;
     align-items: center;
-    margin-right: 40px;
+    margin-right: 30px;
     margin-top: 10px;
     position: relative;
     z-index: 2;
@@ -28,7 +30,6 @@
 
 .creator-text {
     margin-right: 10px;
-    /* font-weight: bold; */
     display: flex;
     align-items: center;
 }
@@ -41,4 +42,14 @@
 
 .creator-link-icon:hover {
     color: white;
+}
+
+.dot {
+    margin-left: 25px;
+}
+
+.year-aa {
+    margin-left: 30px;
+    font-style: italic;
+    font-weight: bold;
 }
