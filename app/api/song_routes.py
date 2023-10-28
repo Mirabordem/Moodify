@@ -89,7 +89,7 @@ def delete_song(id):
     targetAlbumToDict= targetAlbum.to_dict()
     userOwner= targetAlbumToDict['userOwner']
 
-    if song is None:
+    if selected_song is None:
         return {'errors': {'error':'Song not found'}}, 404
     elif userOwner != current_user.id:
         return {'errors': {'error':'Song does not belong to current user'}}, 403

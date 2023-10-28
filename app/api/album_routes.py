@@ -187,7 +187,7 @@ def delete_album(id):
         if len(songs) != 0:
             print("songs to delete")
             for song in songs:
-                remove_file_from_s3(song['song_url'])
+                remove_file_from_s3(song.audio_url)
                 print('songs removed from AWS')
             remove_file_from_s3(album.image_url)
             print('image removed from AWS')
