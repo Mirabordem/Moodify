@@ -64,38 +64,42 @@ function SignupFormModal() {
 			<form onSubmit={handleSubmit} className="signup-form">
 				<label className="login-label">
 					{validationObject.email && <span className="signup-error">{validationObject.email}</span>}
+					Email
 					<input
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
-						placeholder="Email"
+						// placeholder="Email"
 					/>
 				</label>
 				<label className="login-label">
 					{validationObject.username && <span className="signup-error">{validationObject.username}</span>}
+					Username
 					<input
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
-						placeholder="Username"
+						// placeholder="Username"
 					/>
 				</label>
 				<label className="login-label">
 					{validationObject.password && <span className="signup-error">{validationObject.password}</span>}
+					Password
 					<input
 						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
-						placeholder="Password"
+						// placeholder="Password"
 					/>
 				</label>
 				<label className="login-label">
 					{validationObject.confirmPassword && (<span className="signup-error">{validationObject.confirmPassword}</span>)}
+					Confirm Password
 					<input
 						type="password"
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
-						placeholder="Confirm Password"
+						// placeholder="Confirm Password"
 					/>
 				</label>
 				<button className="signup-button" type="submit">Sign Up</button>

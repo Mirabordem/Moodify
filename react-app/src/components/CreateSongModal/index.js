@@ -4,6 +4,7 @@ import { useModal } from '../../context/Modal';
 import { useDispatch, useSelector } from "react-redux";
 import { thunkCreateSong, thunkUpdateSong } from "../../store/songs";
 import { useSongPlayer } from "../../context/SongPlayer";
+import "./CreateSongModal.css";
 
 export default function CreateSong({formType, albumId, songId}) {
     const dispatch = useDispatch()
@@ -60,14 +61,16 @@ export default function CreateSong({formType, albumId, songId}) {
     }
 
     return (
-        <div>
-            <h1 style={{color:"green"}}>{formType === 'edit' ? 'Update Song' : 'Add Song to Album'}</h1>
+        <div signup-container3>
+            <div className="new-h1" style={{color:"green"}}>{formType === 'edit' ? 'Update Song' : 'Add Song to Album'}</div>
             <form
             onSubmit={submitSong}
             encType="multipart/form-data"
+            className='signup-form'
             >
                 {errors.message && <p className="add-song-errors">{errors.message}</p>}
-                <label>
+                <label className='login-label'>
+                    Name
                     <input
                     type="text"
                     value={name}
@@ -75,7 +78,8 @@ export default function CreateSong({formType, albumId, songId}) {
                     />
                 </label>
                 {errors.name && <p className="add-song-errors">{errors.name}</p>}
-                <label>
+                <label className='login-label'>
+                    Track Number
                     <input
                     type="number"
                     min={1}
@@ -84,7 +88,8 @@ export default function CreateSong({formType, albumId, songId}) {
                     />
                 </label>
                 {errors.track_number && <p className="add-song-errors">{errors.track_number}</p>}
-                <label>
+                <label className='login-label'>
+                    Duration
                     <input
                     type="number"
                     min={1}

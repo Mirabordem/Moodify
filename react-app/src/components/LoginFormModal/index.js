@@ -33,21 +33,23 @@ function LoginFormModal() {
       <h1 className="new-h1">Log in</h1>
       <form onSubmit={handleSubmit} className="login-form">
         <label className="login-label">
+        Email
           <input
             className="placeholder"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
+            // placeholder="Email"
           />
         </label>
-        <label >
+        <label className="login-label">
+        Password
           <input
             className="placeholder"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
+            // placeholder="Password"
           />
         </label>
         <button className = 'login-button' type="submit">Log In</button>
