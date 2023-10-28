@@ -95,34 +95,35 @@ return (
                 </ul> */}
                 {errors.message && <p className="add-playlist-errors">{errors.message}</p>}
                 <label className='login-label'>
+                    Name
                     <input
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
-                        placeholder="Name"
+                        // placeholder="Name"
                     />
                 </label>
                 {errors.title && <p className="add-playlist-errors">{errors.title}</p>}
                 <label className='login-label'>
-                    {/* Description */}
+                    Description
                     <input
                         type="text"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
-                        placeholder="Description"
+                        // placeholder="Description"
                     />
                 </label>
                 {errors.description && <p className="add-playlist-errors">{errors.description}</p>}
-                <label className='login-label'>
+                <label class="custom-file-input">
                     {formType === 'Edit' && (
                         <div>
                             <p>Current Album Cover:</p>
                             <img src={albumCover} alt='Album Cover' style={{ maxWidth: '200px', maxHeight: '200px' }} />
                         </div>
                     )}
-                    {/* Playlist Cover */}
+                    ➤  Choose Playlist Cover
 
                     <input
                         type="file"
@@ -133,7 +134,7 @@ return (
                         }}
                         accept='image/*'
                         // required={formType === 'Create'}
-                        placeholder="Playlist Cover"
+                        // placeholder="Playlist Cover"
                     />
                 </label>
                 {errors.cover_image_url && <p className="add-playlist-errors">{errors.cover_image_url}</p>}
