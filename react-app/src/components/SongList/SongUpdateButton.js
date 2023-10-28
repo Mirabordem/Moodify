@@ -175,6 +175,7 @@ export default function SongUpdateButton({
                   dispatch(ThunkRemoveSongToPlaylist(playlistId, songId));
                 }}
               >
+                <i className="fas fa-trash" style={{ marginRight: "5px" }}></i>{" "}
                 Remove Song from Playlist
               </button>
             </div>
