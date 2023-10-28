@@ -1,0 +1,25 @@
+.txt1 {
+
+    color:rgb(194, 176, 184);
+    font-size: 16px;
+}
+
+.dm-confirm-txt {
+    color:rgb(194, 176, 184);
+    font-size: 16px;
+}
+
+.signup-button1 {
+    margin-top: 30px;
+    margin-left: 30px;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(95, 195, 146);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 80%;
+    border-radius: 20px;
+}

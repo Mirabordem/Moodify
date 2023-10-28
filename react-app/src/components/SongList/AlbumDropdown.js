@@ -70,7 +70,7 @@ export default function AlbumDropDown({ songId, albumOwner }) {
     // if (pageType === 'album'){
         if (user && albumOwner === user.id) {
             return (
-                <div ref={ulRef}>
+                <div ref={ulRef} className="album-dropdown">
                     <>
                       <OpenModalButton
                         buttonText={

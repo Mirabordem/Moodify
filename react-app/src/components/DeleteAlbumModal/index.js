@@ -30,10 +30,10 @@ function DeleteAlbumModal({ albumId }) {
         Are you sure you want to remove this album?
       </div>
       <button className="signup-button" onClick={handleDelete}>
-        Yes (Delete Album)
+        YES (delete album)
       </button>
       <button className="signup-button" onClick={closeModal}>
-        No (Keep Album)
+        NO (keep album)
       </button>
     </div>
   );
