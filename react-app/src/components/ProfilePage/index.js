@@ -4,7 +4,7 @@ import "./ProfilePage.css"
 
 
 export default function ProfilePage() {
-    // const playlistIds = useSelector(state => state.user.userPlaylists)
+    // const playlistIds = useSelector(state => state.session.user.userPlaylists)
     // const albums = useSelector(state => state.albums)
     // const playlists = useSelector(state => state.playlists)
 

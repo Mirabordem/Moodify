@@ -16,7 +16,7 @@ export default function NewPlaylist({formType,userId}) {
     const [albumCover, setAlbumCover]= useState();
     const [description,setDescription]=useState("")
     const [didPicChange, setDidPicChange] = useState(false)
-    const [errors,setErrors] = useState(false)
+    const [errors, setErrors] = useState({})
 
     // const playlist = useSelector(state => state.albums[albumId]);
 
@@ -49,10 +49,12 @@ export default function NewPlaylist({formType,userId}) {
             }
             formData.append('user_id', userId);
 
-            let test = await dispatch(ThunkCreatePlaylist(formData));
-            if (test) {
-                history.push(`/playlists/${test.id}`);
+            let data = await dispatch(ThunkCreatePlaylist(formData));
+            if (data) {
+                history.push(`/playlists/${data.id}`);
                 closeModal();
+            } else if (data.errors) {
+                setErrors(data.errors)
             }
         }
         // else if (formType === "Edit") {
@@ -91,33 +93,37 @@ return (
                         <li key={idx}>{error}</li>
                     ))}
                 </ul> */}
+                {errors.message && <p className="add-playlist-errors">{errors.message}</p>}
                 <label className='login-label'>
+                    Name
                     <input
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
-                        placeholder="Name"
+                        // placeholder="Name"
                     />
                 </label>
+                {errors.title && <p className="add-playlist-errors">{errors.title}</p>}
                 <label className='login-label'>
-                    {/* Description */}
+                    Description
                     <input
                         type="text"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
-                        placeholder="Description"
+                        // placeholder="Description"
                     />
                 </label>
-                <label className='login-label'>
+                {errors.description && <p className="add-playlist-errors">{errors.description}</p>}
+                <label class="custom-file-input">
                     {formType === 'Edit' && (
                         <div>
                             <p>Current Album Cover:</p>
                             <img src={albumCover} alt='Album Cover' style={{ maxWidth: '200px', maxHeight: '200px' }} />
                         </div>
                     )}
-                    {/* Playlist Cover */}
+                    ➤  Choose Playlist Cover
 
                     <input
                         type="file"
@@ -128,10 +134,10 @@ return (
                         }}
                         accept='image/*'
                         // required={formType === 'Create'}
-                        placeholder="Playlist Cover"
+                        // placeholder="Playlist Cover"
                     />
                 </label>
-
+                {errors.cover_image_url && <p className="add-playlist-errors">{errors.cover_image_url}</p>}
                 <button className="signup-button" type="submit">{formType === 'Create' ? 'Create Playlist' : 'Edit Playlist'}</button>
             </form>
         </div>

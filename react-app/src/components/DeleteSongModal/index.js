@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { ThunkDeleteSong } from "../../store/songs";
@@ -7,6 +7,7 @@ function DeleteSongModal({ songId }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const id = songId;
+  const [errors, setErrors] = useState({})
 
   const song = useSelector((state) => state.songs[id]);
 
@@ -24,6 +25,7 @@ function DeleteSongModal({ songId }) {
       <h3 className="dm-confirm-txt">
         Are you sure you want to remove this song?
       </h3>
+      {errors.error && <p className="delete-song-errors">{errors.error}</p>}
       <div className="delete-buttons">
       <button className="login-button" onClick={handleDelete}>
         Yes (Delete This Song)

@@ -31,7 +31,7 @@
 
 .fa-clock {
     color: rgb(220, 198, 208);
-    margin-left: 880px;
+    margin-left: 840px;
     font-size: 20px;
 }
 
@@ -42,7 +42,7 @@
 
 .song-info4 {
     width: 200px;
-    margin-left: 400px;
+    margin-left: 360px;
     margin-bottom: 30px;
     display: flex;
     align-items: flex-end;
@@ -98,17 +98,23 @@
 }
 
 .dropdown1a {
-    background-color: rgb(44, 41, 41);
+    background-color: rgb(58, 54, 54);
     border-radius: 10px;
-    width: 160px;
-    height: 160px;
+    width: 90px;
+    height: 150px;
     position: absolute;
     display: flex;
     flex-direction: column;
-    align-items: baseline;
+    /* align-items: baseline; */
     justify-content: center;
     margin-top: 10px;
     /* border: 2px solid red; */
+    /* display: none; */
+    z-index: 3500;
+}
+
+.fa-trash {
+    margin-right: 10px;
 }
 
 .horizontal-line1 {

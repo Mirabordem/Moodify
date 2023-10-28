@@ -39,7 +39,8 @@ def create_new_album():
         # when we remove this if statement it for sure workks
 
         upload = upload_file_to_s3(image)
-
+        if "url" not in upload:
+            return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
         print('THIS IS UPLOAD IN OUR CREATE ALBUM',upload)
         url = upload['url']
 
@@ -66,7 +67,7 @@ def get_all_albums():
     """
     Query to get all albums. Returns list of album dictionaries.
     """
-    
+
     albums = Album.query.all()
     album_dict_list = [album.to_dict() for album in albums]
     # for album in album_dict_list:
@@ -89,15 +90,15 @@ def get_album_by_id(id):
 
 
 
-@album_routes.route('/current')
-@login_required
-def get_user_albums():
-    """
-    Query for all albums created by the current user. Returns a list of album dictionaries.
-    """
-    users_albums = Album.query.filter(Album.user_id == current_user.id).all()
-    albums_dict = [album.to_dict() for album in users_albums]
-    return albums_dict
+# @album_routes.route('/current')
+# @login_required
+# def get_user_albums():
+#     """
+#     Query for all albums created by the current user. Returns a list of album dictionaries.
+#     """
+#     users_albums = Album.query.filter(Album.user_id == current_user.id).all()
+#     albums_dict = [album.to_dict() for album in users_albums]
+#     return albums_dict
 
 
 
@@ -116,9 +117,9 @@ def edit_album(id):
     ic(album_to_dict)
 
     if album is None:
-        return {'errors': 'Album not found'}, 404
+        return {'errors': {'message':'Album not found'}}, 404
     elif album.user_owner != current_user.id:
-        return {'errors': 'forbidden'}, 403
+        return {'errors': {'message':'forbidden'}}, 403
 
     if form.validate_on_submit():
         ic (form.data)
@@ -129,7 +130,7 @@ def edit_album(id):
             upload = upload_file_to_s3(image)
 
             if "url" not in upload:
-                return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
+                return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
             url = upload['url']
             ic(url)
 
@@ -171,26 +172,37 @@ def delete_album(id):
     """
     Deleting album created by the user.
     """
+    ic('DELETE ALBUM!!!!!!!')
     album = Album.query.get(id)
 
     if album is None:
-        return {'errors': 'Album not found'}, 404
+        return {'errors': {'error':'Album not found'}}, 404
     elif album.user_owner != current_user.id:
-        return {'errors': 'forbidden'}, 403
+        return {'errors': {'error':'forbidden'}}, 403
 
 # removing songs in deleted album:
     songs = album.album_songs
     if os.environ.get('FLASK_ENV') == 'production':
+        print("In Production Check")
+        if len(songs) != 0:
+            print("songs to delete")
+            for song in songs:
+                remove_file_from_s3(song['song_url'])
+                print('songs removed from AWS')
+            remove_file_from_s3(album.image_url)
+            print('image removed from AWS')
+
+    if len(songs) != 0:
+        print('going to delete songs from db')
         for song in songs:
-            remove_file_from_s3(song['song_url'])
-        remove_file_from_s3(album.image_url)
-    for song in songs:
-        db.session.delete(song)
+            db.session.delete(song)
+            print('songs deleted songs from db')
 
 
     db.session.delete(album)
+    print('deleted Album from db')
     db.session.commit()
-
+    print('commited changes to db')
     return { 'message': 'Successfully Deleted'}
 
 
@@ -208,9 +220,9 @@ def create_album_song(id):
 
     album = Album.query.get(id)
     if album is None:
-        return {'errors': 'Album not found'}, 404
+        return {'errors': {'message':'Album not found'}}, 404
     elif album.user_owner != current_user.id:
-        return {'errors': 'forbidden'}, 403
+        return {'errors': {'message':'forbidden'}}, 403
     if form.validate_on_submit():
         data = form.data
 
@@ -222,7 +234,7 @@ def create_album_song(id):
         upload = upload_file_to_s3(song)
         print(upload)
         if 'url' not in upload:
-            return { 'errors': 'upload error'}
+            return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
         url = upload['url']
 
         # else:
@@ -251,21 +263,3 @@ def create_album_song(id):
 
     print(validation_errors_to_error_messages(form.errors))
     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400
-
-
-
-
-# @album_routes.route('/<int:id>/songs', methods=['GET'])
-# def get_album_songs(id):
-#     """
-#     Retrieve songs within an album by its Id. Returns a list of song dictionaries.
-#     """
-#     album = Album.query.get(id)
-
-#     if album is None:
-#         return {'errors': 'Album not found'}, 404
-
-#     album_songs = album.albumSongs
-#     song_dict_list = [song.to_dict() for song in album_songs]
-
-#     return song_dict_list

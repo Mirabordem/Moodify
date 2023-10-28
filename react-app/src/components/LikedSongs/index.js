@@ -6,6 +6,7 @@ import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
 import SongList from "../SongList";
+import "./LikedSongs.css";
 
 export default function LikedSongs() {
   const user = useSelector((state) => state.session.user);
@@ -26,24 +27,28 @@ export default function LikedSongs() {
   }, []);
 
   return (
+  <div loved-songs-container>
     <div className="likedSongs-container">
-      <div className="likes-id-top-info">
-        {/* <img
-          className="likes-id-cover-img"
-          src=""
-        /> */}
+
         <div id="likes-id-info-words">
-          <div>
-            <h1>Liked Songs</h1>
+        <img
+          className="likes-id-cover-img"
+          src="https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/ie41418ad09dd2166/version/1698458511/image.png"
+        />
+        <div className="middle-container">
+          <div className="album-title-page1">
+            Your Loved Songs
           </div>
           <p className="likes-release-info">
-            {user?.username} · {userLikedSongIds?.length}
+            {user?.username} • {userLikedSongIds?.length} songs
           </p>
         </div>
+
       </div>
       <div id="likes-id-song-list">
         <SongList pageType={pageType} />
       </div>
+    </div>
     </div>
   );
 }

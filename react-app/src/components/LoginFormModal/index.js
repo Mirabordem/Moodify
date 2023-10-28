@@ -8,14 +8,15 @@ function LoginFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
+    if (data && data.errors) {
+
+      setErrors(data.errors);
     } else {
         closeModal()
     }
@@ -32,28 +33,30 @@ function LoginFormModal() {
       <h1 className="new-h1">Log in</h1>
       <form onSubmit={handleSubmit} className="login-form">
         <label className="login-label">
+        Email
           <input
             className="placeholder"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
+            // placeholder="Email"
           />
         </label>
-        <label >
+        <label className="login-label">
+        Password
           <input
             className="placeholder"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
+            // placeholder="Password"
           />
         </label>
         <button className = 'login-button' type="submit">Log In</button>
         <button className="demoUserLink" onClick={demoUserLogIn}>Demo User</button>
             <ul className="errors-ul">
-              {errors.map((error, idx) => (
-                <li key={idx}>{error}</li>
+              {Object.values(errors).map((error, idx=0) => (
+                <li key={idx+1}>{error}</li>
               ))}
             </ul>
       </form>

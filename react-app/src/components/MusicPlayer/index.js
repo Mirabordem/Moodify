@@ -16,7 +16,7 @@ We need context for isPlaying, nextSong, currentSong, prevSong other two are cal
 export default function MusicPlayer() {
   //   const [skipped, setSkipped] = useState(false);
   const audio = useRef();
-  // const user = useSelector(state => state.user)
+  // const user = useSelector(state => state.session.user)
   const [songProgress, setSongProgress] = useState();
   const {
     isPlaying,
