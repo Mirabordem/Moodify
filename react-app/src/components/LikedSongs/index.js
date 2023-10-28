@@ -6,6 +6,7 @@ import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
 import SongList from "../SongList";
+import "./LikedSongs.css";
 
 export default function LikedSongs() {
   const user = useSelector((state) => state.session.user);

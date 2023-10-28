@@ -27,10 +27,10 @@ export const updateAlbum = (album) => {
   };
 };
 
-export const deleteAlbum = (albumId) => {
+export const deleteAlbum = (id) => {
   return {
     type: DELETE_ALBUM,
-    albumId,
+    id,
   };
 };
 
@@ -110,7 +110,7 @@ export const ThunkDeleteAlbum = (id) => async (dispatch) => {
     const response = await fetch(`/api/albums/${id}/delete`, {
       method: "DELETE",
     });
-    dispatch(deleteAlbum());
+    dispatch(deleteAlbum(id));
     return response;
   } catch (err) {
     const data = await err.json()
@@ -134,7 +134,7 @@ const albumReducer = (state = initialState, action) => {
       return { ...state, [action.album.id]: action.album };
     case DELETE_ALBUM:
       const newState = { ...state };
-      delete newState[action.albumId];
+      delete newState[action.id];
       return newState;
     default:
       return state;
