@@ -61,8 +61,8 @@ export default function CreateSong({formType, albumId, songId}) {
     }
 
     return (
-        <div signup-container3>
-            <div className="new-h1" style={{color:"green"}}>{formType === 'edit' ? 'Update Song' : 'Add Song to Album'}</div>
+        <div className="signup-container7">
+            <div className="new-h2">{formType === 'edit' ? 'Update Song' : 'Add Song to Album'}</div>
             <form
             onSubmit={submitSong}
             encType="multipart/form-data"
@@ -107,7 +107,7 @@ export default function CreateSong({formType, albumId, songId}) {
                     />
                 </label>
                 {errors.audio_url && <p className="add-song-errors">{errors.audio_url}</p>}
-                <button type="submit">{formType === 'edit' ? 'Update Song' : 'Add Song'}</button>
+                <button className="signup-button" type="submit">{formType === 'edit' ? 'Update Song' : 'Add Song'}</button>
             </form>
         </div>
     )
