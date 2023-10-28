@@ -61,8 +61,8 @@ export default function CreateSong({formType, albumId, songId}) {
     }
 
     return (
-        <div signup-container3>
-            <div className="new-h1" style={{color:"green"}}>{formType === 'edit' ? 'Update Song' : 'Add Song to Album'}</div>
+        <div className="signup-container7">
+            <div className="new-h2">{formType === 'edit' ? 'Update Song' : 'Add Song to Album'}</div>
             <form
             onSubmit={submitSong}
             encType="multipart/form-data"
@@ -81,6 +81,7 @@ export default function CreateSong({formType, albumId, songId}) {
                 <label className='login-label'>
                     Track Number
                     <input
+                    className="input-number color"
                     type="number"
                     min={1}
                     value={trackNumber}
@@ -91,6 +92,7 @@ export default function CreateSong({formType, albumId, songId}) {
                 <label className='login-label'>
                     Duration
                     <input
+                    className="input-number color"
                     type="number"
                     min={1}
                     value={songLength}
@@ -98,8 +100,8 @@ export default function CreateSong({formType, albumId, songId}) {
                     />
                 </label>
                 {errors.song_length && <p className="add-song-errors">{errors.song_length}</p>}
-                <label >
-                    Choose Audio File
+                <label class="custom-file-input">
+                    ➤ Choose Audio File
                     <input
                     type="file"
                     accept='audio/*'
@@ -107,7 +109,7 @@ export default function CreateSong({formType, albumId, songId}) {
                     />
                 </label>
                 {errors.audio_url && <p className="add-song-errors">{errors.audio_url}</p>}
-                <button type="submit">{formType === 'edit' ? 'Update Song' : 'Add Song'}</button>
+                <button className="signup-button" type="submit">{formType === 'edit' ? 'Update Song' : 'Add Song'}</button>
             </form>
         </div>
     )
