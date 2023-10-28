@@ -7,8 +7,20 @@ import "./SideMenu.css";
 import IndividPlaylistButton from "./IndividPlaylistButton";
 
 export default function SideMenu() {
+
+  const [openPlaylistId,setOpenPlaylistId]=useState(null)
   const [isOpen, setIsOpen] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
+
+  const handlePlaylistButtonClick = (playlistId) => {
+    if (openPlaylistId === playlistId) {
+      setOpenPlaylistId(null);
+    } else {
+      setOpenPlaylistId(playlistId);
+    }
+  };
+
+
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -48,7 +60,7 @@ export default function SideMenu() {
       return (
         <div key={id} className="playlist-menu-container">
           <div>
-            <IndividPlaylistButton user={user} playlistId={id} />
+            <IndividPlaylistButton user={user} playlistId={id} isOpen={openPlaylistId === id}  onClick={() => handlePlaylistButtonClick(id)}/>
           </div>
           <NavLink to={`/playlists/${id}`}>
             <li className="li1">{playlists[id]?.name}</li>
