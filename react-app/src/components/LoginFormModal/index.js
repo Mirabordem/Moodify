@@ -14,10 +14,7 @@ function LoginFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
-    console.log("🚀 ~ file: index.js:17 ~ handleSubmit ~ data:", data)
-
-    console.log("🚀 ~ file: index.js:19 ~ handleSubmit ~ data.errors:", data.errors)
-    if (data.errors) {
+    if (data && data.errors) {
 
       setErrors(data.errors);
     } else {
