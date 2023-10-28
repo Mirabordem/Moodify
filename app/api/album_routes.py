@@ -40,8 +40,9 @@ def create_new_album():
 
         upload = upload_file_to_s3(image)
         if "url" not in upload:
+            ic('THIS IS UPLOAD IN OUR CREATE ALBUM',upload)
             return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
-        print('THIS IS UPLOAD IN OUR CREATE ALBUM',upload)
+            print('THIS IS UPLOAD IN OUR CREATE ALBUM',upload)
         url = upload['url']
 
 
@@ -67,7 +68,7 @@ def get_all_albums():
     """
     Query to get all albums. Returns list of album dictionaries.
     """
-    
+
     albums = Album.query.all()
     album_dict_list = [album.to_dict() for album in albums]
     # for album in album_dict_list:
@@ -172,7 +173,9 @@ def delete_album(id):
     """
     Deleting album created by the user.
     """
+    ic('DELETE ALBUM!!!!!!!')
     album = Album.query.get(id)
+    ic(album)
 
     if album is None:
         return {'errors': {'error':'Album not found'}}, 404
@@ -181,15 +184,26 @@ def delete_album(id):
 
 # removing songs in deleted album:
     songs = album.album_songs
-    if os.environ.get('FLASK_ENV') == 'production':
+    ic(songs)
+
+    print("In Production Check")
+    if len(songs) != 0:
+        print("songs to delete")
         for song in songs:
-            remove_file_from_s3(song['song_url'])
-        remove_file_from_s3(album.image_url)
-    for song in songs:
-        db.session.delete(song)
+            remove_file_from_s3(song.audio_url)
+            db.session.delete(song)
+        db.session.commit()
+        remove_file_from_s3(album.cover_image_url)
 
+    # if len(songs) != 0:
+    #     print('going to delete songs from db')
+    #     for song in songs:
+    #         db.session.delete(song)
+    #         print('songs deleted songs from db')
 
-    db.session.delete(album)
+    album2=Album.query.get(id)
+    db.session.delete(album2)
+
     db.session.commit()
 
     return { 'message': 'Successfully Deleted'}

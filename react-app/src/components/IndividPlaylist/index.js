@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getAllAlbums } from "../../store/albums";
@@ -26,6 +26,12 @@ export default function PlaylistDetails() {
   );
   const [totalPlaylistLength, setTotalPlaylistLength] = useState(0);
   const [newSongs, setNewSongs] = useState(true);
+
+  // const [isOpen, setIsOpen] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false)
+
+
+  
 
   const {
     setIsPlaying,

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import OpenModalButton from "../OpenModalButton/index";
 import { useSongPlayer } from "../../context/SongPlayer";
 import "./SongList.css";
 import { getAllAlbums } from "../../store/albums";
@@ -9,9 +7,7 @@ import { getAllPlaylists } from "../../store/playlists";
 import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
 import { ThunkAddLike, ThunkDeleteLike } from "../../store/session";
-import DeleteSongModal from "../DeleteAlbumModal";
 import SongUpdateButton from "./SongUpdateButton";
-import { sessionUser } from "../Navigation";
 
 export default function SongList({
   pageType,
@@ -22,6 +18,14 @@ export default function SongList({
   playlist,
 }) {
   const dispatch = useDispatch();
+  const [openPlaylistId,setOpenPlaylistId]=useState(null)
+  const handlePlaylistButtonClick = (playlistId) => {
+    if (openPlaylistId === playlistId) {
+      setOpenPlaylistId(null);
+    } else {
+      setOpenPlaylistId(playlistId);
+    }
+  };
 
   const user = useSelector((state) => state.session.user);
   let userLikedSongIds = [];
@@ -176,6 +180,8 @@ export default function SongList({
                   pageType={pageType}
                   playlistId={playlist?.id}
                   albumOwner={album?.userOwner}
+                  isOpen={openPlaylistId === song.id}
+                  handlePlaylistButtonClick={() => handlePlaylistButtonClick(song.id)}
                 />
               }
             </div>
