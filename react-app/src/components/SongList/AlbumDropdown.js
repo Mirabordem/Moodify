@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import OpenModalButton from "../OpenModalButton"
 import CreateSong from "../CreateSongModal"
@@ -9,13 +9,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, useRef } from "react"
+import { ThunkAddSongToPlaylist } from "../../store/playlists"
 
 
 
 
-export default function AlbumDropDown({ songId, playlistsMap, nestedUlClassName, albumOwner }) {
+export default function AlbumDropDown({ songId, albumOwner }) {
+    console.log("🚀 ~ file: AlbumDropdown.js:18 ~ AlbumDropDown ~ songId:", songId)
     const user = useSelector(state => state.session.user)
-    const {id} = useParams
+    const {id} = useParams()
+    const playlists = useSelector(state => state.playlists)
+    const dispatch = useDispatch()
     const album = useSelector(state => state.albums[id])
     const [showMenu, setShowMenu] = useState(false);
     const [showNestedMenu, setShowNestedMenu] = useState(false);
@@ -33,6 +37,35 @@ export default function AlbumDropDown({ songId, playlistsMap, nestedUlClassName,
 
         return () => document.removeEventListener("click", closeMenu);
       }, [setShowMenu, setShowNestedMenu, showMenu, showNestedMenu]);
+
+      const nestedDropDown = "song-update-dropdown2" + (showNestedMenu ? "" : " hidden")
+
+      const currUserPlaylists = Object.values(playlists).filter((playlist) =>
+      user?.userPlaylists.includes(playlist.id));
+
+      const playlistsMap = currUserPlaylists.map((currPlaylist) => {
+        return (
+          <button
+            style={{ cursor: "pointer" }}
+            className="start"
+            onClick={(e) => {
+              e.stopPropagation();
+              // console.log("user is:" user)
+              if (user) {
+                dispatch(ThunkAddSongToPlaylist(currPlaylist.id, songId));
+                setShowNestedMenu(false);
+                setShowMenu(false)
+              }
+            }}
+          >
+            {
+              <>
+                <span className="menu-icon"></span> {currPlaylist.name}
+              </>
+            }
+          </button>
+        );
+      });
 
     // if (pageType === 'album'){
         if (user && albumOwner === user.id) {
@@ -69,7 +102,7 @@ export default function AlbumDropDown({ songId, playlistsMap, nestedUlClassName,
                       className="start"
                       onClick={(e) => {
                         e.stopPropagation();
-                        setShowNestedMenu(!showNestedMenu);
+                        setShowNestedMenu(true);
                       }}
                     >
                       <span className="menu-icon1">
@@ -77,12 +110,12 @@ export default function AlbumDropDown({ songId, playlistsMap, nestedUlClassName,
                       </span>{" "}
                       Add Song to Playlist
                     </button>
-                  <div className={nestedUlClassName}>
+                  <div className={nestedDropDown}>
                     <div className="dropdown6">{playlistsMap}</div>
                   </div>
                 </div>
             )
-        } else if (user && album.userOwner !== user.id) {
+        } else if (user && albumOwner !== user.id) {
 
             return (
                 <div ref={ulRef}>
@@ -91,7 +124,7 @@ export default function AlbumDropDown({ songId, playlistsMap, nestedUlClassName,
                       className="start"
                       onClick={(e) => {
                         e.stopPropagation();
-                        setShowNestedMenu(!showNestedMenu);
+                        setShowNestedMenu(true);
                       }}
                     >
                       <span className="menu-icon1">
@@ -99,7 +132,11 @@ export default function AlbumDropDown({ songId, playlistsMap, nestedUlClassName,
                       </span>{" "}
                       Add Song to Playlist
                     </button>
-                  <div className={nestedUlClassName}>
+                  <div className={nestedDropDown} onClick={e => {
+                    e.stopPropagation()
+                    setShowNestedMenu(false)
+                    setShowMenu(false)
+                  }}>
                     <div className="dropdown6">{playlistsMap}</div>
                   </div>
                 </div>

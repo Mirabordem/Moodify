@@ -87,9 +87,9 @@ export default function SongUpdateButton({
       </button>
       <div className={ulClassName}>
         <div className="dropdown1a">
-          {pageType === 'album' && <AlbumDropDown playlistsMap={playlistsMap} albumOwner={albumOwner}/>}
-          {pageType === 'playlist' && <PlaylistSongUpdate songId={songId} playlistsMap={playlistsMap} nestedUlClassName={nestedUlClassName}/>}
-          {pageType === 'likes' && <LikesSongUpdate songId={songId} playlistsMap={playlistsMap} nestedUlClassName={nestedUlClassName}/>}
+          {pageType === 'album' && <AlbumDropDown songId={songId} albumOwner={albumOwner}/>}
+          {pageType === 'playlist' && <PlaylistSongUpdate songId={songId} playlistsMap={playlistsMap}/>}
+          {pageType === 'likes' && <LikesSongUpdate songId={songId}/>}
 
         </div>
       </div>
