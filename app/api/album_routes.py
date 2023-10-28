@@ -67,7 +67,7 @@ def get_all_albums():
     """
     Query to get all albums. Returns list of album dictionaries.
     """
-    
+
     albums = Album.query.all()
     album_dict_list = [album.to_dict() for album in albums]
     # for album in album_dict_list:
@@ -172,6 +172,7 @@ def delete_album(id):
     """
     Deleting album created by the user.
     """
+    ic('DELETE ALBUM!!!!!!!')
     album = Album.query.get(id)
 
     if album is None:
@@ -182,16 +183,26 @@ def delete_album(id):
 # removing songs in deleted album:
     songs = album.album_songs
     if os.environ.get('FLASK_ENV') == 'production':
+        print("In Production Check")
+        if len(songs) != 0:
+            print("songs to delete")
+            for song in songs:
+                remove_file_from_s3(song['song_url'])
+                print('songs removed from AWS')
+            remove_file_from_s3(album.image_url)
+            print('image removed from AWS')
+
+    if len(songs) != 0:
+        print('going to delete songs from db')
         for song in songs:
-            remove_file_from_s3(song['song_url'])
-        remove_file_from_s3(album.image_url)
-    for song in songs:
-        db.session.delete(song)
+            db.session.delete(song)
+            print('songs deleted songs from db')
 
 
     db.session.delete(album)
+    print('deleted Album from db')
     db.session.commit()
-
+    print('commited changes to db')
     return { 'message': 'Successfully Deleted'}
 
 
