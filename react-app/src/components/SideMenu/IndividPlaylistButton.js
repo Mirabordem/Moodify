@@ -5,7 +5,7 @@ import DeletePlaylistModal from "../DeletePlaylistModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-export default function PlaylistUpdateButton({ playlistId,isOpen,handlePlaylistButtonClick }) {
+export default function PlaylistUpdateButton({ playlistId, isOpen, handlePlaylistButtonClick }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const user = useSelector((state) => state.session.user);
@@ -40,13 +40,12 @@ export default function PlaylistUpdateButton({ playlistId,isOpen,handlePlaylistB
         </div>
       </button>
       {isOpen && user && showMenu && (
-      <div className={ulClassName}>
+        <div className={ulClassName}>
 
 
           <div className="dropdown8">
 
             <OpenModalButton
-            onClick={()=>setShowMenu(false)}
               buttonText={
                 <>
                   <span className="menu-icon">
@@ -56,9 +55,10 @@ export default function PlaylistUpdateButton({ playlistId,isOpen,handlePlaylistB
                 </>
               }
               modalComponent={<DeletePlaylistModal playlistId={playlistId} />}
+              onItemClick={() => setShowMenu(false)}  
             />
           </div>
-      </div>
+        </div>
       )}
     </div>
   );
