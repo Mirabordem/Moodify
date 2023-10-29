@@ -4,6 +4,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "react-h5-audio-player": "^3.9.0"
   }
 }

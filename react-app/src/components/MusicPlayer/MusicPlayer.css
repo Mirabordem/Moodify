@@ -1,0 +1,111 @@
+.musicPlayer {
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 8%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    background-color: black;
+    color: rgb(126, 123, 123);
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    margin-left: 100px;
+    z-index: 40;
+}
+
+.track-parent {
+    /* border: 2px solid yellow; */
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+}
+
+.track-info {
+    /* border: 2px solid red; */
+    margin-right: 200px;
+}
+
+
+.song-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: (132, 92, 125);
+}
+
+.artist-name {
+    font-size: 12px;
+    opacity: 0.8;
+    margin-top: 0;
+    color: rgb(132, 92, 125);
+}
+
+.controls {
+    /* border: 2px solid rgb(95, 195, 146); */
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.controls button {
+    background: transparent;
+    border: none;
+    font-size: 1.2em;
+    margin: 0 15px;
+    color: rgb(95, 195, 146);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.controls button:hover {
+    color: rgb(95, 195, 146);
+}
+
+.progress-bar {
+    margin: 20px 0;
+    /* border: 2px solid purple; */
+}
+
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    margin-left: 300px;
+}
+
+.volume-control input[type="range"] {
+    width: 100px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 5px;
+    background: #888;
+    border-radius: 10px;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: rgb(95, 195, 146);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volume-control input[type="range"]:hover {
+    opacity: 1;
+}
+
+.dot5 {
+    color: rgb(95, 195, 146);
+    font-size: 18px;
+}
