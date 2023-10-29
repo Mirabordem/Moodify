@@ -254,17 +254,13 @@ def create_album_song(id):
         )
         db.session.add(new_song)
         db.session.commit()
-
-        ic(new_song.to_dict())
-        print(new_song.to_dict())
-        ic(Album.query.get(id))
         updated_album = Album.query.get(id)
-        updated_album_obj = updated_album.to_dict()
-        ic(updated_album_obj)
-        song_instances = [Song.query.get(song_id).to_dict() for song_id in updated_album_obj['albumSongs']]
-        updated_album_obj['albumSongs'] = [song['id'] for song in song_instances]
-        new_song_obj = new_song.to_dict()
-        return {'song': new_song_obj, 'album': updated_album_obj}
+        # updated_album_obj = updated_album.to_dict()
+        # ic(updated_album_obj)
+        # song_instances = [Song.query.get(song_id).to_dict() for song_id in updated_album_obj['albumSongs']]
+        # updated_album_obj['albumSongs'] = [song['id'] for song in song_instances]
+        # new_song_obj = new_song.to_dict()
+        return {'song': new_song.to_dict(), 'album': updated_album.to_dict()}
 
-    print(validation_errors_to_error_messages(form.errors))
+    ic({ 'errors': validation_errors_to_error_messages(form.errors)})
     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400

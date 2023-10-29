@@ -68,16 +68,18 @@ export default function MusicPlayer() {
   // }, [isPlaying, playAnyway, user]);
 
   const playNext = () => {
-    console.log("prevSong", prevSong);
-    console.log("currentSong", currentSong);
-    console.log("nextSong", nextSong);
-    if (nextSong) {
+
+    console.log('prevSong', prevSong)
+    console.log('currentSong', currentSong)
+    console.log('nextSong', nextSong)
+    if (nextSong && currentSongIndex !== songQueue.length - 1) {
+
       setPrevSong(songQueue[currentSongIndex]);
       setCurrentSong(songQueue[currentSongIndex + 1]);
       setCurrentSongIndex(currentSongIndex + 1);
-      if (currentSongIndex !== songQueue.length - 1) {
-        setNextSong(songQueue[currentSongIndex + 1]);
-      }
+      // if (currentSongIndex !== songQueue.length - 1) {
+      //   setNextSong(songQueue[currentSongIndex + 1]);
+      // }
       // if (!prevSong.name) {
       //   setPrevSong()
       // }
@@ -89,16 +91,18 @@ export default function MusicPlayer() {
   };
 
   const playPrev = () => {
-    console.log("prevSong", prevSong);
-    console.log("currentSong", currentSong);
-    console.log("nextSong", nextSong);
-    if (prevSong) {
+
+    console.log('prevSong', prevSong)
+    console.log('currentSong', currentSong)
+    console.log('nextSong', nextSong)
+    if (prevSong && currentSongIndex !== 0) {
+
       setNextSong(songQueue[currentSongIndex]);
       setCurrentSong(songQueue[currentSongIndex - 1]);
       setCurrentSongIndex(currentSongIndex - 1);
-      if (currentSongIndex !== 0) {
-        setPrevSong(songQueue[currentSongIndex - 1]);
-      }
+      // if (currentSongIndex !== 0) {
+      //   setPrevSong(songQueue[currentSongIndex - 1]);
+      // }
     }
     if (isPlaying === true) {
       setPlayAnyway(true);

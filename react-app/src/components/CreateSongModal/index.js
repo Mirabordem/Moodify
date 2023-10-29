@@ -39,10 +39,12 @@ export default function CreateSong({formType, albumId, songId}) {
             newSong.append("audio_url", audioUrl)
 
             const data = await dispatch(thunkCreateSong(newSong, albumId))
-            if (data.errors) {
-                setErrors(data.errors)
-            }
 
+            if (data?.errors) {
+                setErrors(data.errors);
+            } else if (data?.name) {
+                closeModal();
+            }
             setSongAdded(!songAdded)
         } else {
             const updatedSong = new FormData()
@@ -52,12 +54,12 @@ export default function CreateSong({formType, albumId, songId}) {
             updatedSong.append("song_length", songLength)
 
             const data = await dispatch(thunkUpdateSong(updatedSong, songId))
-            if (data.errors) {
-                setErrors(data.errors)
+            if (data?.name) {
+                closeModal();
+            } else if (data?.errors) {
+                setErrors(data.errors);
             }
         }
-
-        closeModal()
     }
 
     return (

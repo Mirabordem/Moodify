@@ -62,10 +62,15 @@ export default function NewAlbum({ formType, albumId}) {
       if (didPicChange) {
         formData.append("cover_image_url", albumCover);
       }
-      let test2 = await dispatch(ThunkEditAlbum(formData, albumId));
+      let data = await dispatch(ThunkEditAlbum(formData, albumId));
 
-      if (test2) {
+      if (data?.title) {
+        // history.push(`/albums/${data.id}`);
         closeModal();
+      } else if (data?.errors) {
+        console.log("🚀 ~ file: index.js:57 ~ handleSubmit ~ data:", data)
+        setErrors(data.errors);
+        console.log("🚀 ~ file: index.js:59 ~ handleSubmit ~ errors:", errors)
       }
     }
   };
