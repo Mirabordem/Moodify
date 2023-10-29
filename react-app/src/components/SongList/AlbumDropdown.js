@@ -15,7 +15,7 @@ import { ThunkAddSongToPlaylist } from "../../store/playlists"
 
 
 export default function AlbumDropDown({ songId, albumOwner }) {
-    console.log("🚀 ~ file: AlbumDropdown.js:18 ~ AlbumDropDown ~ songId:", songId)
+    // console.log("🚀 ~ file: AlbumDropdown.js:18 ~ AlbumDropDown ~ songId:", songId)
     const user = useSelector(state => state.session.user)
     const {id} = useParams()
     const playlists = useSelector(state => state.playlists)

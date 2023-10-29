@@ -7,12 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 
-
 export default function AlbumUpdateButton({ user, albumId }) {
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
-
-
 
     useEffect(() => {
       const closeMenu = (e) => {
@@ -25,8 +22,6 @@ export default function AlbumUpdateButton({ user, albumId }) {
 
       return () => document.removeEventListener("click", closeMenu);
     }, []);
-
-
 
     const ulClassName = "album-update-dropdown" + (showMenu ? "" : " hidden");
 

@@ -116,7 +116,7 @@ return (
                     />
                 </label>
                 {errors.description && <p className="add-playlist-errors">{errors.description}</p>}
-                <label class="custom-file-input">
+                {/* <label class="custom-file-input">
                     {formType === 'Edit' && (
                         <div>
                             <p>Current Album Cover:</p>
@@ -136,7 +136,7 @@ return (
                         // required={formType === 'Create'}
                         // placeholder="Playlist Cover"
                     />
-                </label>
+                </label> */}
                 {errors.cover_image_url && <p className="add-playlist-errors">{errors.cover_image_url}</p>}
                 <button className="signup-button" type="submit">{formType === 'Create' ? 'Create Playlist' : 'Edit Playlist'}</button>
             </form>

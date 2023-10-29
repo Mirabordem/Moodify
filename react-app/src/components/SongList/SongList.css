@@ -174,3 +174,8 @@
     z-index: 1;
 
 }
+
+.start:hover {
+    cursor: pointer;
+    color: rgb(95, 195, 146);
+}
