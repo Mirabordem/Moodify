@@ -83,7 +83,7 @@ export default function SongList({
         if (!songQueue.length) setSongQueue(songTracks)
       }
     }
-  }, [songs]);
+  }, [songs, playlist, album, user]);
 
   if (!Object.values(songs).length) {
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
