@@ -89,7 +89,7 @@ export default function PlaylistDetails() {
   const bigPlay = e => {
     console.log(songQueue)
     if(songQueue.length) {
-      if(!currentSong.name || songQueue[0].id !== playlist.songsOnPlaylist[0]) {
+      if(!currentSong.name || songQueue[0].id !== playlist?.songsOnPlaylist[0]) {
         setCurrentSong(songs[playlist.songsOnPlaylist[0]])
         setNextSong(songs[playlist.songsOnPlaylist[1]])
         if(songQueue[0].id !== playlist.songsOnPlaylist[0]) {
