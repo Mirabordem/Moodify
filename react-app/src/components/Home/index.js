@@ -11,6 +11,7 @@ import SideMenu from "../SideMenu";
 export default function Home() {
   const albums = useSelector((state) => state.albums);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user);
 
   const albumsArray = Object.values(albums);
 
@@ -22,10 +23,15 @@ export default function Home() {
     return null;
   }
 
+
+
   const albumCards = albumsArray.map((album) => {
+
+    const isAlbumOwner = album.userOwner === user?.id;
+    const cardClass = isAlbumOwner ? "card2" : "card";
     return (
       <NavLink
-        className="card sample-card album-card"
+        className={`${cardClass} sample-card album-card`}
         key={album.id}
         exact
         to={`albums/${album.id}`}
