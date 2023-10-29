@@ -55,3 +55,10 @@ body {
   font-weight: 300;
   z-index: 40;
 }
+
+
+.all-validation-errors {
+  color: red;
+  margin: 0px;
+  padding: 0px;
+}

@@ -65,7 +65,7 @@ export default function NewAlbum({ formType, albumId }) {
       let data = await dispatch(ThunkEditAlbum(formData, albumId));
 
       if (data?.title) {
-        // history.push(`/albums/${data.id}`);
+        history.push(`/albums/${data.id}`);
         closeModal();
       } else if (data?.errors) {
         console.log("🚀 ~ file: index.js:57 ~ handleSubmit ~ data:", data)
@@ -82,7 +82,7 @@ export default function NewAlbum({ formType, albumId }) {
 
         {formType === "Create" && <div className="new-h5">Create Album</div>}
         {errors.message && (
-          <p className="album-form-errors">{errors.message}</p>
+          <p className="album-form-errors all-validation-errors">{errors.message}</p>
         )}
         <form
           onSubmit={handleSubmit}
@@ -104,7 +104,7 @@ export default function NewAlbum({ formType, albumId }) {
             //   placeholder="Title"
             />
           </label>
-          {errors.title && <p className="album-form-errors">{errors.title}</p>}
+          {errors.title && <p className="album-form-errors all-validation-errors">{errors.title}</p>}
           <label className="login-label">
             Release Date
             <input
@@ -116,7 +116,7 @@ export default function NewAlbum({ formType, albumId }) {
             />
           </label>
           {errors.release_date && (
-            <p className="album-form-errors">{errors.release_date}</p>
+            <p className="album-form-errors all-validation-errors">{errors.release_date}</p>
           )}
           <label className="login-label">
             Artist
@@ -129,7 +129,7 @@ export default function NewAlbum({ formType, albumId }) {
             />
           </label>
           {errors.artist && (
-            <p className="album-form-errors">{errors.artist}</p>
+            <p className="album-form-errors all-validation-errors">{errors.artist}</p>
           )}
           <label className="login-label">
             {formType === "Edit" && (
@@ -163,7 +163,7 @@ export default function NewAlbum({ formType, albumId }) {
             />
           </label>
           {errors.cover_image_url && (
-            <p className="album-form-errors">{errors.cover_image_url}</p>
+            <p className="album-form-errors all-validation-errors">{errors.cover_image_url}</p>
           )}
           <button className="signup-button1" type="submit">
             {formType === "Create" ? "Create Album" : "Edit Album"}
