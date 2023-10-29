@@ -5,7 +5,7 @@ import { useModal } from "../../context/Modal";
 import "./newAlbum.css";
 import { ThunkCreateAlbum, ThunkEditAlbum } from "../../store/albums";
 
-export default function NewAlbum({ formType, albumId }) {
+export default function NewAlbum({ formType, albumId}) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { closeModal } = useModal();

@@ -117,6 +117,7 @@ return (
                         // placeholder="Description"
                     />
                 </label>
+
                 {errors.description && <p className="add-playlist-errors all-validation-errors">{errors.description}</p>}
                 <label class="custom-file-input">
                     {formType === 'Edit' && (
@@ -138,8 +139,10 @@ return (
                         // required={formType === 'Create'}
                         // placeholder="Playlist Cover"
                     />
+
                 </label>
                 {errors.cover_image_url && <p className="add-playlist-errors all-validation-errors">{errors.cover_image_url}</p>}
+
                 <button className="signup-button" type="submit">{formType === 'Create' ? 'Create Playlist' : 'Edit Playlist'}</button>
             </form>
         </div>
