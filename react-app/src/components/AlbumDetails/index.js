@@ -34,7 +34,7 @@ export default function AlbumDetails() {
     songQueue,
     setSongQueue,
     isPlaying,
-    setCurrentSongIndex
+    setCurrentSongIndex,
   } = useSongPlayer();
 
   useEffect(() => {
@@ -70,23 +70,27 @@ export default function AlbumDetails() {
     songs,
     album,
   ]);
-  
 
   useEffect(() => {
-    console.log("🚀 ~ file: index.js:77 ~ useEffect ~ songQueue[0]:", songQueue[0])
+    console.log(
+      "🚀 ~ file: index.js:77 ~ useEffect ~ songQueue[0]:",
+      songQueue[0]
+    );
 
-    if (!songQueue.length ||
+    if (
+      !songQueue.length ||
       (songQueue[0]?.albumId !== id && !isPlaying) ||
-      (songQueue[0]?.albumId === id && isPlaying)) {
-      let songTracks = []
-      if (album){
+      (songQueue[0]?.albumId === id && isPlaying)
+    ) {
+      let songTracks = [];
+      if (album) {
         for (let songId of album.albumSongs) {
           songTracks.push(songs[songId]);
-           setSongQueue(songTracks)
+          setSongQueue(songTracks);
         }
       }
     }
-  }, [songs, id])
+  }, [songs, id]);
 
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
@@ -96,26 +100,25 @@ export default function AlbumDetails() {
     return null;
   }
 
-  const bigPlay = e => {
-    if(songQueue.length) {
-      if(!currentSong.name || songQueue[0].albumId !== id) {
-        setCurrentSong(songs[album.albumSongs[0]])
-        setNextSong(songs[album.albumSongs[1]])
-        if(songQueue[0].albumId !== id) {
-          let songTracks = []
+  const bigPlay = (e) => {
+    if (songQueue?.length) {
+      if (!currentSong?.name || songQueue[0]?.albumId !== id) {
+        setCurrentSong(songs[album.albumSongs[0]]);
+        setNextSong(songs[album.albumSongs[1]]);
+        if (songQueue[0].albumId !== id) {
+          let songTracks = [];
           for (let songId of album.albumSongs) {
             songTracks.push(songs[songId]);
-             setSongQueue(songTracks)
+            setSongQueue(songTracks);
           }
         }
-        setIsPlaying(true)
+        setIsPlaying(true);
       }
-      if(isPlaying) {
+      if (isPlaying) {
         setIsPlaying(false);
       } else {
-        setIsPlaying(true)
+        setIsPlaying(true);
       }
-
     }
   };
 

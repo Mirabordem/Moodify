@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getAllAlbums } from "../../store/albums";
@@ -8,8 +8,6 @@ import fetchAll from "../utils";
 import SongList from "../SongList";
 import "./IndividPlaylist.css";
 import { useSongPlayer } from "../../context/SongPlayer";
-
-
 
 export default function PlaylistDetails() {
   const { id } = useParams();
@@ -30,9 +28,6 @@ export default function PlaylistDetails() {
   // const [isOpen, setIsOpen] = useState(false);
   // const [showMenu, setShowMenu] = useState(false)
 
-
-
-
   const {
     setIsPlaying,
     setNextSong,
@@ -41,7 +36,7 @@ export default function PlaylistDetails() {
     songQueue,
     setSongQueue,
     isPlaying,
-  } = useSongPlayer()
+  } = useSongPlayer();
 
   useEffect(() => {
     let newNumberOfSongs = totalNumberOfSongs;
@@ -68,45 +63,48 @@ export default function PlaylistDetails() {
     newSongs,
     setNewSongs,
     songs,
-    playlist
+    playlist,
   ]);
 
   useEffect(() => {
-    if (!songQueue.length ||
+    if (
+      !songQueue.length ||
       (songQueue[0]?.id !== playlist.songsOnPlaylist[0] && !isPlaying) ||
-      (songQueue[0]?.id === playlist.songsOnPlaylist[0] && isPlaying)) {
-      let songTracks = []
-      if (playlist){
+      (songQueue[0]?.id === playlist.songsOnPlaylist[0] && isPlaying)
+    ) {
+      let songTracks = [];
+      if (playlist) {
         for (let songId of playlist.songsOnPlaylist) {
           songTracks.push(songs[songId]);
-           setSongQueue(songTracks)
+          setSongQueue(songTracks);
         }
       }
     }
-  }, [songs, id])
+  }, [songs, id]);
 
-
-  const bigPlay = e => {
-    console.log(songQueue)
-    if(songQueue.length) {
-      if(!currentSong.name || songQueue[0].id !== playlist?.songsOnPlaylist[0]) {
-        setCurrentSong(songs[playlist.songsOnPlaylist[0]])
-        setNextSong(songs[playlist.songsOnPlaylist[1]])
-        if(songQueue[0].id !== playlist.songsOnPlaylist[0]) {
-          let songTracks = []
+  const bigPlay = (e) => {
+    console.log(songQueue);
+    if (songQueue?.length) {
+      if (
+        !currentSong?.name ||
+        songQueue[0]?.id !== playlist?.songsOnPlaylist[0]
+      ) {
+        setCurrentSong(songs[playlist.songsOnPlaylist[0]]);
+        setNextSong(songs[playlist.songsOnPlaylist[1]]);
+        if (songQueue[0].id !== playlist.songsOnPlaylist[0]) {
+          let songTracks = [];
           for (let songId of playlist.songsOnPlaylist) {
             songTracks.push(songs[songId]);
-             setSongQueue(songTracks)
+            setSongQueue(songTracks);
           }
         }
-        setIsPlaying(true)
+        setIsPlaying(true);
       }
-      if(isPlaying) {
+      if (isPlaying) {
         setIsPlaying(false);
       } else {
-        setIsPlaying(true)
+        setIsPlaying(true);
       }
-
     }
   };
 
@@ -132,8 +130,9 @@ export default function PlaylistDetails() {
   const defaultMinutes = Math.trunc(defaultPlaylistLength / 60);
   const defaultTotalSongs = playlist.songsOnPlaylist.length;
 
-
-  let picture = playlist.coverImageUrl || 'https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/if3eb5db5d38cc3d3/version/1698413261/image.png';
+  let picture =
+    playlist.coverImageUrl ||
+    "https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/if3eb5db5d38cc3d3/version/1698413261/image.png";
 
   return (
     <div className="album-detail-page-container">
@@ -146,22 +145,20 @@ export default function PlaylistDetails() {
         <div id="album-id-info-words">
           {/* <p className="info-album-p">Playlist</p> */}
           <div>
-          <p className="album-title-page1">{playlists[id]?.name}</p>
+            <p className="album-title-page1">{playlists[id]?.name}</p>
             {/* <p className="album-title-page">{playlist.title}</p> */}
           </div>
 
-          <p className="album-release-info">
-            {playlist.description}
+          <p className="album-release-info">{playlist.description}</p>
+          <p className="album-release-info1">
+            {totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs
+            • {minutes ? minutes : defaultMinutes} min
           </p>
-          <p className="album-release-info1">{totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs • {minutes ? minutes : defaultMinutes} min</p>
         </div>
       </div>
 
       <div id="album-id-functions-4">
-      <button
-          className="play-button"
-          onClick={bigPlay}
-        >
+        <button className="play-button" onClick={bigPlay}>
           {/* conditionally render play arrow and pause bars with isPlaying variable */}
           <span className="play-arrow"></span>
         </button>
@@ -180,14 +177,6 @@ export default function PlaylistDetails() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
 
 // export default function PlaylistDetails() {
 //   const { id } = useParams();
@@ -255,15 +244,11 @@ export default function PlaylistDetails() {
 //         {/* <IndividPlaylistButton user={user} playlistId={playlist.id} /> */}
 //       </div>
 
-
-
 //       <div id="playlist-id-song-list">
 //         <SongList
 //         pageType={pageType}
 //         playlist={playlist}/>
 //       </div>
-
-
 
 //     </div>
 //   );
