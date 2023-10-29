@@ -68,13 +68,13 @@ export default function MusicPlayer() {
     console.log('prevSong', prevSong)
     console.log('currentSong', currentSong)
     console.log('nextSong', nextSong)
-    if (nextSong) {
+    if (nextSong && currentSongIndex !== songQueue.length - 1) {
       setPrevSong(songQueue[currentSongIndex]);
       setCurrentSong(songQueue[currentSongIndex + 1]);
       setCurrentSongIndex(currentSongIndex + 1);
-      if (currentSongIndex !== songQueue.length - 1) {
-        setNextSong(songQueue[currentSongIndex + 1]);
-      }
+      // if (currentSongIndex !== songQueue.length - 1) {
+      //   setNextSong(songQueue[currentSongIndex + 1]);
+      // }
       // if (!prevSong.name) {
       //   setPrevSong()
       // }
@@ -89,13 +89,13 @@ export default function MusicPlayer() {
     console.log('prevSong', prevSong)
     console.log('currentSong', currentSong)
     console.log('nextSong', nextSong)
-    if (prevSong) {
+    if (prevSong && currentSongIndex !== 0) {
       setNextSong(songQueue[currentSongIndex]);
       setCurrentSong(songQueue[currentSongIndex - 1]);
       setCurrentSongIndex(currentSongIndex - 1);
-      if (currentSongIndex !== 0) {
-        setPrevSong(songQueue[currentSongIndex - 1]);
-      }
+      // if (currentSongIndex !== 0) {
+      //   setPrevSong(songQueue[currentSongIndex - 1]);
+      // }
     }
     if (isPlaying === true) {
       setPlayAnyway(true);
@@ -106,7 +106,7 @@ export default function MusicPlayer() {
   return (
     <div className="musicPlayer">
       <audio
-        src={currentSong.audioUrl}
+        src={currentSong?.audioUrl}
         ref={audio}
         onEnded={() => playNext()}
       />
