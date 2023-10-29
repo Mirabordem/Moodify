@@ -4,7 +4,6 @@
     flex-direction: column;
     padding-left: 210px;
     min-height: 100vh;
-    padding-right: 50px;
     background: linear-gradient(rgb(80, 79, 79), black);
 }
 
