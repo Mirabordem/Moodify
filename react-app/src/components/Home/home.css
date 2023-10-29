@@ -86,11 +86,11 @@
     max-width: 300px;
     width: calc(20% - 4px);
     margin: 0 2px;
-    background: linear-gradient(rgb(95, 195, 146), rgb(34, 139, 102));
+    background: linear-gradient( rgb(25, 72, 55),rgb(86, 173, 130));
     border-radius: 10px;
     cursor: pointer;
     width: 100%;
-    
+
 }
 
 
