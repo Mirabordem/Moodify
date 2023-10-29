@@ -68,10 +68,7 @@ export default function MusicPlayer() {
   // }, [isPlaying, playAnyway, user]);
 
   const playNext = () => {
-
-
     if (nextSong && currentSongIndex !== songQueue.length - 1) {
-
       setPrevSong(songQueue[currentSongIndex]);
       setCurrentSong(songQueue[currentSongIndex + 1]);
       setCurrentSongIndex(currentSongIndex + 1);
@@ -89,9 +86,7 @@ export default function MusicPlayer() {
   };
 
   const playPrev = () => {
-
     if (prevSong && currentSongIndex !== 0) {
-
       setNextSong(songQueue[currentSongIndex]);
       setCurrentSong(songQueue[currentSongIndex - 1]);
       setCurrentSongIndex(currentSongIndex - 1);
@@ -125,7 +120,8 @@ export default function MusicPlayer() {
         <div className="dot5">•</div>
         <button
           onClick={() => {
-            if (songQueue.length && currentSong.name) setIsPlaying(!isPlaying);
+            if (songQueue?.length && currentSong?.name)
+              setIsPlaying(!isPlaying);
           }}
         >
           {!isPlaying ? "Play" : "Pause"}
@@ -150,16 +146,6 @@ export default function MusicPlayer() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useEffect, useRef, useState } from "react";
 // import ReactSlider from "react-slider";
