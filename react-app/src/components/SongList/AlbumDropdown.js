@@ -70,6 +70,8 @@ export default function AlbumDropDown({ songId, albumOwner }) {
     // if (pageType === 'album'){
         if (user && albumOwner === user.id) {
             return (
+              <div>
+
                 <div ref={ulRef} className="album-dropdown">
                     <>
                       <OpenModalButton
@@ -110,10 +112,12 @@ export default function AlbumDropDown({ songId, albumOwner }) {
                       </span>{" "}
                       Add Song to Playlist
                     </button>
-                  <div className={nestedDropDown}>
+
+                </div>
+                <div className={nestedDropDown}>
                     <div className="dropdown6">{playlistsMap}</div>
                   </div>
-                </div>
+              </div>
             )
         } else if (user && albumOwner !== user.id) {
 

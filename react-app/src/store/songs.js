@@ -39,7 +39,6 @@ export const deleteSong = (songId) => {
 // thunks
 
 export const thunkCreateSong = (newSong, albumId) => async (dispatch) => {
-  try {
     const res = await fetch(`/api/albums/${albumId}/songs/new`, {
       method: "POST",
       // headers: {"Content-Type":"multipart/form-data"},
@@ -50,15 +49,13 @@ export const thunkCreateSong = (newSong, albumId) => async (dispatch) => {
       dispatch(createSong(newData.song));
       dispatch(updateAlbum(newData.album));
       return newData;
+    } else {
+      const data = await res.json()
+      return data
     }
-  } catch (err) {
-    const data = err.json();
-    return data.errors;
-  }
 };
 
 export const thunkUpdateSong = (updatedSong, songId) => async (dispatch) => {
-  try {
     const res = await fetch(`/api/songs/${songId}`, {
       method: "PUT",
       // headers: {"Content-Type":"multipart/form-data"},
@@ -69,28 +66,25 @@ export const thunkUpdateSong = (updatedSong, songId) => async (dispatch) => {
       dispatch(createSong(newData.song));
       dispatch(updateAlbum(newData.album));
       return newData;
+    } else {
+      const data = await res.json()
+      return data
     }
-  } catch (err) {
-    const data = err.json();
-    return data.errors;
-  }
 };
 
 export const ThunkDeleteSong = (songId) => async (dispatch) => {
-  try {
-    const response = await fetch(`/api/songs/${songId}/delete`, {
+    const res = await fetch(`/api/songs/${songId}/delete`, {
       method: "DELETE",
     });
-    if (response.ok) {
-      const data = await response.json();
+    if (res.ok) {
+      const data = await res.json();
       dispatch(deleteSong(songId));
       dispatch(updateAlbum(data.album));
       return data.message;
+    } else {
+      const data = await res.json()
+      return data
     }
-  } catch (err) {
-    const data = await err.json()
-    return data.errors
-  }
 
 };
 

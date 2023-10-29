@@ -48,11 +48,15 @@ export default function NewAlbum({ formType, albumId }) {
     if (formType === "Create") {
       formData.append("cover_image_url", albumCover);
       let data = await dispatch(ThunkCreateAlbum(formData));
+      console.log("🚀 ~ file: index.js:51 ~ handleSubmit ~ data:", data)
+
       if (data?.title) {
         history.push(`/albums/${data.id}`);
         closeModal();
       } else if (data?.errors) {
+        console.log("🚀 ~ file: index.js:57 ~ handleSubmit ~ data:", data)
         setErrors(data.errors);
+        console.log("🚀 ~ file: index.js:59 ~ handleSubmit ~ errors:", errors)
       }
     } else if (formType === "Edit") {
       if (didPicChange) {
@@ -119,6 +123,9 @@ export default function NewAlbum({ formType, albumId }) {
             //   placeholder="Artist"
             />
           </label>
+          {errors.artist && (
+            <p className="album-form-errors">{errors.artist}</p>
+          )}
           <label className="login-label">
             {formType === "Edit" && (
               <div>
