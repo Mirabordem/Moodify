@@ -73,7 +73,7 @@ export default function AlbumDetails() {
 
   useEffect(() => {
     console.log("🚀 ~ file: index.js:77 ~ useEffect ~ songQueue[0]:", songQueue[0])
-    
+
     if (!songQueue.length ||
       (songQueue[0].albumId !== id && !isPlaying) ||
       (songQueue[0].albumId === id && isPlaying)) {
@@ -135,7 +135,7 @@ export default function AlbumDetails() {
   const defaultTotalSongs = album.albumSongs.length;
 
   return (
-    <div className="album-page-container">
+    <div className="album-detail-page-container">
       <div className="album-id-top-info">
         <img className="album-id-cover-img" src={album.coverImageUrl} />
         <div id="album-id-info-words">
