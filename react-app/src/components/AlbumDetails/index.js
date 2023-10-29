@@ -72,6 +72,8 @@ export default function AlbumDetails() {
   ]);
 
   useEffect(() => {
+    console.log("🚀 ~ file: index.js:77 ~ useEffect ~ songQueue[0]:", songQueue[0])
+    
     if (!songQueue.length ||
       (songQueue[0].albumId !== id && !isPlaying) ||
       (songQueue[0].albumId === id && isPlaying)) {
