@@ -111,26 +111,9 @@ export default function PlaylistDetails() {
   };
 
   if (!playlist || !Object.values(songs).length) {
-    // dispatch(thunkGetAllAlbums());
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
-
-  // const playlist_tracks = [];
-  // for (let songId of playlist.songsOnPlaylist) {
-  //   playlist_tracks.push(songs[songId]);
-  // }
-
-  let defaultPlaylistLength = 0;
-  for (let songId of playlist.songsOnPlaylist) {
-    const song = songs[songId];
-    if (song) {
-      defaultPlaylistLength += song.songLength;
-    }
-  }
-
-  const defaultMinutes = Math.trunc(defaultPlaylistLength / 60);
-  const defaultTotalSongs = playlist.songsOnPlaylist.length;
 
 
   let picture = playlist.coverImageUrl || 'https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/if3eb5db5d38cc3d3/version/1698413261/image.png';
@@ -153,7 +136,7 @@ export default function PlaylistDetails() {
           <p className="album-release-info">
             {playlist.description}
           </p>
-          <p className="album-release-info1">{totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs • {minutes ? minutes : defaultMinutes} min</p>
+          <p className="album-release-info1">{playlist.totalTracks} songs • {playlist.totalPlayTime} min</p>
         </div>
       </div>
 

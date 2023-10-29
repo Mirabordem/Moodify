@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-
+from datetime import date
 
 class Album(db.Model):
     __tablename__= 'albums'
@@ -26,5 +26,15 @@ class Album(db.Model):
             "artist": self.artist,
             "coverImageUrl": self.cover_image_url,
             "userOwner": self.user_owner,
-            "albumSongs": [song.id for song in self.album_songs]
+            "albumSongs": [song.id for song in self.album_songs],
+            "totalTracks": len(self.album_songs),
+            "totalPlayTime": self.total_play_time(),
+            # "releaseYear": date(self.release_date).year
         }
+
+
+    def total_play_time(self):
+            total_seconds = 0
+            for song in self.album_songs:
+                total_seconds += song.song_length
+            return total_seconds // 60
