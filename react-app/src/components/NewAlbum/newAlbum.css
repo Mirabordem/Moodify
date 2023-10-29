@@ -120,3 +120,10 @@ signup-form5 input::placeholder {
 input {
     text-align: center;
 }
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  margin: 0px;
+  margin-right: 5px;
+}

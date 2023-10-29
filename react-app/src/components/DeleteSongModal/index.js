@@ -14,8 +14,10 @@ function DeleteSongModal({ songId }) {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    let test=await dispatch(ThunkDeleteSong(songId));
-    if (test){
+    let data = await dispatch(ThunkDeleteSong(songId));
+    if (data.errors){
+      setErrors(data.errors)
+    } else {
       closeModal()
     }
   };
@@ -26,7 +28,7 @@ function DeleteSongModal({ songId }) {
       <div className="dm-confirm-txt">
         Are you sure you want to remove this song?
       </div>
-      {errors.error && <p className="delete-song-errors">{errors.error}</p>}
+      {errors.error && <p className="delete-song-errors all-validation-errors">{errors.error}</p>}
       <div className="delete-buttons">
       <button className="signup-button1" onClick={handleDelete}>
         YES (delete this song)
