@@ -150,6 +150,16 @@ export default function SongList({
         if (user) {
           const id = song.id;
           dispatch(ThunkDeleteLike(id));
+          if(currentSong === song && !playlist) {
+            const idx = songQueue.indexOf(song)
+            let oldSongQueue = songQueue;
+            oldSongQueue.splice(idx, 1)
+            if (oldSongQueue[currentSongIndex]) setCurrentSong(oldSongQueue[currentSongIndex])
+            if (oldSongQueue[currentSongIndex + 1]) setNextSong(oldSongQueue[currentSongIndex + 1])
+            if (oldSongQueue[currentSongIndex - 1]) setPrevSong(oldSongQueue[currentSongIndex - 1])
+            setIsPlaying(false)
+            setSongQueue([...oldSongQueue])
+          }
         }
         heart = emptyHeart;
       };
