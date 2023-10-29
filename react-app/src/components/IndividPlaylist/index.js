@@ -136,7 +136,7 @@ export default function PlaylistDetails() {
   let picture = playlist.coverImageUrl || 'https://image.jimcdn.com/app/cms/image/transf/none/path/sd0536822daf447dd/image/if3eb5db5d38cc3d3/version/1698413261/image.png';
 
   return (
-    <div className="album-page-container">
+    <div className="album-detail-page-container">
       <div className="album-id-top-info">
         <img
           className="playlist-id-cover-img"
