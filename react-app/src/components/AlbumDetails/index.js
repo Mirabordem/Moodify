@@ -31,8 +31,10 @@ export default function AlbumDetails() {
     setNextSong,
     currentSong,
     setCurrentSong,
-    songList,
+    songQueue,
+    setSongQueue,
     isPlaying,
+    setCurrentSongIndex
   } = useSongPlayer();
 
   useEffect(() => {
@@ -69,6 +71,20 @@ export default function AlbumDetails() {
     album,
   ]);
 
+  useEffect(() => {
+    if (!songQueue.length ||
+      (songQueue[0].albumId !== id && !isPlaying) ||
+      (songQueue[0].albumId === id && isPlaying)) {
+      let songTracks = []
+      if (album){
+        for (let songId of album.albumSongs) {
+          songTracks.push(songs[songId]);
+           setSongQueue(songTracks)
+        }
+      }
+    }
+  }, [songs, id])
+
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
     // dispatch(thunkGetAllAlbums());
@@ -78,12 +94,28 @@ export default function AlbumDetails() {
   }
 
   const bigPlay = e => {
-    if(songList.length) {
-      if(!currentSong.name) {
-        setCurrentSong(songList[0])
-        setNextSong(songList[1])
+    console.log('albumId for Queue', songQueue[0].albumId)
+    console.log('albumId for current ALbum', id)
+    console.log(songQueue)
+    if(songQueue.length) {
+      if(!currentSong.name || songQueue[0].albumId !== id) {
+        setCurrentSong(songs[album.albumSongs[0]])
+        setNextSong(songs[album.albumSongs[1]])
+        if(songQueue[0].albumId !== id) {
+          let songTracks = []
+          for (let songId of album.albumSongs) {
+            songTracks.push(songs[songId]);
+             setSongQueue(songTracks)
+          }
+        }
+        setIsPlaying(true)
       }
-      setIsPlaying(!isPlaying);
+      if(isPlaying) {
+        setIsPlaying(false);
+      } else {
+        setIsPlaying(true)
+      }
+
     }
   };
 
