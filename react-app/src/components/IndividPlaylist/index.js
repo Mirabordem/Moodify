@@ -141,13 +141,13 @@ export default function PlaylistDetails() {
           </div>
 
           <p className="album-release-info">{playlist.description}</p>
+          {/* <p className="album-release-info1">
+            {totalNumberOfSongs} songs • {minutes} min
+          </p> */}
+
           <p className="album-release-info1">
-            {totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs
-            • {minutes ? minutes : defaultMinutes} min
+            {playlist.totalTracks} songs • {playlist.totalPlayTime} min
           </p>
-
-          <p className="album-release-info1">{playlist.totalTracks} songs • {playlist.totalPlayTime} min</p>
-
         </div>
       </div>
 
