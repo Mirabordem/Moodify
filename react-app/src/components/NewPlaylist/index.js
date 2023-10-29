@@ -50,10 +50,12 @@ export default function NewPlaylist({formType,userId}) {
             formData.append('user_id', userId);
 
             let data = await dispatch(ThunkCreatePlaylist(formData));
-            if (data) {
+            if (data?.name) {
                 history.push(`/playlists/${data.id}`);
                 closeModal();
-            } else if (data.errors) {
+            } else if (data?.errors) {
+
+                console.log("🚀 ~ file: index.js:59 ~ handleSubmit ~ data.errors:", data.errors)
                 setErrors(data.errors)
             }
         }
@@ -104,7 +106,7 @@ return (
                         // placeholder="Name"
                     />
                 </label>
-                {errors.title && <p className="add-playlist-errors">{errors.title}</p>}
+                {errors.name && <p className="add-playlist-errors">{errors.name}</p>}
                 <label className='login-label'>
                     Description
                     <input

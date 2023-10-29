@@ -45,12 +45,15 @@ export const thunkCreateSong = (newSong, albumId) => async (dispatch) => {
       body: newSong,
     });
     if (res.ok) {
-      const newData = await res.json();
-      dispatch(createSong(newData.song));
-      dispatch(updateAlbum(newData.album));
-      return newData;
+      const data = await res.json();
+      dispatch(createSong(data.song));
+      dispatch(updateAlbum(data.album));
+      console.log("🚀 ~ file: songs.js:53 ~ thunkCreateSong ~ data.song:", data.song)
+      return data.song;
+
     } else {
       const data = await res.json()
+      console.log("🚀 ~ file: songs.js:56 ~ thunkCreateSong ~ data:", data)
       return data
     }
 };
@@ -62,10 +65,10 @@ export const thunkUpdateSong = (updatedSong, songId) => async (dispatch) => {
       body: updatedSong,
     });
     if (res.ok) {
-      const newData = await res.json();
-      dispatch(createSong(newData.song));
-      dispatch(updateAlbum(newData.album));
-      return newData;
+      const data = await res.json();
+      dispatch(createSong(data.song));
+      dispatch(updateAlbum(data.album));
+      return data.song
     } else {
       const data = await res.json()
       return data
