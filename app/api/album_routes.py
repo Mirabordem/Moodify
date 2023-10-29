@@ -60,6 +60,8 @@ def create_new_album():
 
         return new_album.to_dict()
     print(form.errors)
+    ic(form.errors)
+    ic(validation_errors_to_error_messages(form.errors))
     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 

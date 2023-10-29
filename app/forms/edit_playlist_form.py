@@ -1,11 +1,12 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField
 from wtforms import SubmitField, StringField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Length
+from ..api.aws_helpers import ALLOWED_IMG_EXTENSIONS
 
 
 
 class EditPlaylistForm(FlaskForm):
-    name = StringField("Name")
+    name = StringField("Name", validators=[DataRequired(), Length(1,255)])
     cover_image_url = FileField("Cover Image Url")
     description = StringField("Description")
