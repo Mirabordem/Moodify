@@ -25,6 +25,7 @@ export default function AlbumDetails() {
   const [newSongs, setNewSongs] = useState(true);
   const user = useSelector((state) => state.session.user);
   const [pageType, setPageType] = useState("album");
+  const [emptyAggs, setEmptyAggs] = useState(false)
 
   const {
     setIsPlaying,
@@ -58,7 +59,7 @@ export default function AlbumDetails() {
       setNewSongs(false);
     }
 
-    // setAlbumTracks(newAlbumTracks)
+    if(emptyAggs === false) setEmptyAggs(true)
   }, [
     minutes,
     releaseDate,
@@ -69,6 +70,7 @@ export default function AlbumDetails() {
     setNewSongs,
     songs,
     album,
+    emptyAggs
   ]);
 
   useEffect(() => {
@@ -146,9 +148,9 @@ export default function AlbumDetails() {
           </div>
 
           <p className="album-release-info">
-            {album.artist} • {releaseYear ? releaseYear : defaultReleaseYear} •{" "}
-            {totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs
-            • {minutes ? minutes : defaultMinutes} min
+            {album.artist} • {releaseYear} •{" "}
+            {album.totalTracks} songs
+            • {album.totalPlayTime} min
           </p>
         </div>
       </div>

@@ -109,15 +109,9 @@ export default function PlaylistDetails() {
   };
 
   if (!playlist || !Object.values(songs).length) {
-    // dispatch(thunkGetAllAlbums());
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
-
-  // const playlist_tracks = [];
-  // for (let songId of playlist.songsOnPlaylist) {
-  //   playlist_tracks.push(songs[songId]);
-  // }
 
   let defaultPlaylistLength = 0;
   for (let songId of playlist.songsOnPlaylist) {
@@ -126,9 +120,6 @@ export default function PlaylistDetails() {
       defaultPlaylistLength += song.songLength;
     }
   }
-
-  const defaultMinutes = Math.trunc(defaultPlaylistLength / 60);
-  const defaultTotalSongs = playlist.songsOnPlaylist.length;
 
   let picture =
     playlist.coverImageUrl ||
@@ -154,6 +145,9 @@ export default function PlaylistDetails() {
             {totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs
             • {minutes ? minutes : defaultMinutes} min
           </p>
+
+          <p className="album-release-info1">{playlist.totalTracks} songs • {playlist.totalPlayTime} min</p>
+
         </div>
       </div>
 
