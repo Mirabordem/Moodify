@@ -1,3 +1,5 @@
+import { setUser } from "./session";
+
 const ALL_PLAYLISTS = "playlists/getPlaylists";
 // const ONE_PLAYLIST = "playlists/onePlaylist"
 const ADD_PLAYLIST = "playlists/createPlaylist";
@@ -40,7 +42,8 @@ export const ThunkDeletePlaylist = (id) => async (dispatch) => {
   });
   if (res.ok) {
     const data = await res.json()
-    await dispatch(deletePlaylist());
+    dispatch(deletePlaylist(id));
+    dispatch(setUser(data.user))
     return data;
   } else {
     const data = await res.json()
@@ -55,10 +58,10 @@ export const ThunkCreatePlaylist = (formData) => async (dispatch) => {
     });
 
     if (res.ok) {
-      const realNewPlaylist = await res.json();
-      const returnPlaylist = { ...realNewPlaylist };
-      await dispatch(createPlaylist(realNewPlaylist));
-      return returnPlaylist;
+      const data = await res.json();
+      dispatch(createPlaylist(data.playlist))
+      dispatch(setUser(data.user));
+      return data.playlist;
 
     } else {
       const data = await res.json()
