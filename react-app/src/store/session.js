@@ -4,7 +4,7 @@ const REMOVE_USER = "session/REMOVE_USER";
 const ADD_LIKE = "session/createLike";
 const DELETE_LIKE = "session/deleteLike";
 
-const setUser = (user) => ({
+export const setUser = (user) => ({
   type: SET_USER,
   payload: user,
 });

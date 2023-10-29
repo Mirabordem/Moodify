@@ -51,7 +51,7 @@ def create_new_playlist():
             db.session.add(new_playlist)
             db.session.commit()
 
-            return new_playlist.to_dict()
+            return {'user': current_user.to_dict(), 'playlist': new_playlist.to_dict()}
     print(form.errors)
 
     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400
@@ -72,7 +72,7 @@ def delete_playlist(id):
 
     db.session.delete(playlist)
     db.session.commit()
-    return {'message': 'Successfully Deleted'}
+    return {'user': current_user.to_dict(), 'message': 'Successfully Deleted'}
 
 
 @playlist_routes.route('/<int:playlistId>/songs/<int:songId>')
