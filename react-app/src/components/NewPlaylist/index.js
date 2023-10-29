@@ -139,6 +139,9 @@ return (
                 </label> */}
                 {errors.cover_image_url && <p className="add-playlist-errors">{errors.cover_image_url}</p>}
                 <button className="signup-button" type="submit">{formType === 'Create' ? 'Create Playlist' : 'Edit Playlist'}</button>
+                <button type="button" className="signup-button" onClick={closeModal}>
+                    Cancel
+                </button>
             </form>
         </div>
     )
