@@ -82,6 +82,19 @@
     /* border: 2px solid blue; */
 }
 
+.card2 {
+    max-width: 300px;
+    width: calc(20% - 4px);
+    margin: 0 2px;
+    background: linear-gradient( rgb(25, 72, 55),rgb(86, 173, 130));
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+
+}
+
+
+
 .card-info-container {
     display: block;
     height: 60px;

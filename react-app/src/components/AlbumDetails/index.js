@@ -70,6 +70,7 @@ export default function AlbumDetails() {
     songs,
     album,
   ]);
+  
 
   useEffect(() => {
     console.log("🚀 ~ file: index.js:77 ~ useEffect ~ songQueue[0]:", songQueue[0])
