@@ -27,8 +27,8 @@ export default function MusicPlayer() {
     setCurrentSong,
     prevSong,
     setPrevSong,
-    songList,
-    setSongList,
+    songQueue,
+    setSongQueue,
     playAnyway,
     setPlayAnyway,
     currentSongIndex,
@@ -65,13 +65,19 @@ export default function MusicPlayer() {
   // }, [isPlaying, playAnyway, user]);
 
   const playNext = () => {
+    console.log('prevSong', prevSong)
+    console.log('currentSong', currentSong)
+    console.log('nextSong', nextSong)
     if (nextSong) {
-      setPrevSong(currentSong);
-      setCurrentSong(nextSong);
-      if (currentSongIndex !== songList.length - 1) {
-        setNextSong(songList[currentSongIndex + 1]);
-        setCurrentSongIndex(currentSongIndex + 1);
+      setPrevSong(songQueue[currentSongIndex]);
+      setCurrentSong(songQueue[currentSongIndex + 1]);
+      setCurrentSongIndex(currentSongIndex + 1);
+      if (currentSongIndex !== songQueue.length - 1) {
+        setNextSong(songQueue[currentSongIndex + 1]);
       }
+      // if (!prevSong.name) {
+      //   setPrevSong()
+      // }
     }
     if (isPlaying === true) {
       setPlayAnyway(true);
@@ -80,12 +86,15 @@ export default function MusicPlayer() {
   };
 
   const playPrev = () => {
+    console.log('prevSong', prevSong)
+    console.log('currentSong', currentSong)
+    console.log('nextSong', nextSong)
     if (prevSong) {
-      setNextSong(currentSong);
-      setCurrentSong(prevSong);
+      setNextSong(songQueue[currentSongIndex]);
+      setCurrentSong(songQueue[currentSongIndex - 1]);
+      setCurrentSongIndex(currentSongIndex - 1);
       if (currentSongIndex !== 0) {
-        setPrevSong(songList[currentSongIndex - 1]);
-        setCurrentSongIndex(currentSongIndex - 1);
+        setPrevSong(songQueue[currentSongIndex - 1]);
       }
     }
     if (isPlaying === true) {
@@ -107,7 +116,7 @@ export default function MusicPlayer() {
       </div>
       <span onClick={() => playPrev()}>Prev</span>
       <button onClick={() =>  {
-        if(songList.length && currentSong.name) setIsPlaying(!isPlaying)
+        if(songQueue.length && currentSong.name) setIsPlaying(!isPlaying)
       }}>
         {!isPlaying ? "Play" : "Pause"}
       </button>

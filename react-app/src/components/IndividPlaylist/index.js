@@ -31,14 +31,15 @@ export default function PlaylistDetails() {
   // const [showMenu, setShowMenu] = useState(false)
 
 
-  
+
 
   const {
     setIsPlaying,
     setNextSong,
     currentSong,
     setCurrentSong,
-    songList,
+    songQueue,
+    setSongQueue,
     isPlaying,
   } = useSongPlayer()
 
@@ -70,14 +71,42 @@ export default function PlaylistDetails() {
     playlist
   ]);
 
+  useEffect(() => {
+    if (!songQueue.length ||
+      (songQueue[0].id !== playlist.songsOnPlaylist[0] && !isPlaying) ||
+      (songQueue[0].id === playlist.songsOnPlaylist[0] && isPlaying)) {
+      let songTracks = []
+      if (playlist){
+        for (let songId of playlist.songsOnPlaylist) {
+          songTracks.push(songs[songId]);
+           setSongQueue(songTracks)
+        }
+      }
+    }
+  }, [songs, id])
+
 
   const bigPlay = e => {
-    if(songList.length) {
-      if(!currentSong.name) {
-        setCurrentSong(songList[0])
-        setNextSong(songList[1])
+    console.log(songQueue)
+    if(songQueue.length) {
+      if(!currentSong.name || songQueue[0].id !== playlist.songsOnPlaylist[0]) {
+        setCurrentSong(songs[playlist.songsOnPlaylist[0]])
+        setNextSong(songs[playlist.songsOnPlaylist[1]])
+        if(songQueue[0].id !== playlist.songsOnPlaylist[0]) {
+          let songTracks = []
+          for (let songId of playlist.songsOnPlaylist) {
+            songTracks.push(songs[songId]);
+             setSongQueue(songTracks)
+          }
+        }
+        setIsPlaying(true)
       }
-      setIsPlaying(!isPlaying);
+      if(isPlaying) {
+        setIsPlaying(false);
+      } else {
+        setIsPlaying(true)
+      }
+
     }
   };
 
