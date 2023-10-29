@@ -8,12 +8,14 @@ import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { ThunkAddSongToPlaylist, ThunkRemoveSongToPlaylist } from "../../store/playlists"
 import { useState, useEffect, useRef } from "react"
+import { useSongPlayer } from "../../context/SongPlayer"
 
 
 
 export default function PlaylistSongUpdate({ songId }) {
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
+    const song = useSelector((state) => state.songs[songId]);
     const {id} = useParams()
     console.log("🚀 ~ file: PlayListSongUpdate.js:18 ~ PlaylistSongUpdate ~ id:", id)
 
@@ -22,6 +24,7 @@ export default function PlaylistSongUpdate({ songId }) {
     const [showMenu, setShowMenu] = useState(false);
     const [showNestedMenu, setShowNestedMenu] = useState(false);
     const ulRef = useRef()
+    const {songQueue, setSongQueue, setCurrentSong, setNextSong, setPrevSong, currentSongIndex, currentSong, setIsPlaying} = useSongPlayer()
 
     useEffect(() => {
         const closeMenu = (e) => {
@@ -89,6 +92,16 @@ export default function PlaylistSongUpdate({ songId }) {
                       e.stopPropagation();
                       setShowMenu(!showNestedMenu);
                       dispatch(ThunkRemoveSongToPlaylist(playlist.id, songId));
+                      if(currentSong === song) {
+                        const idx = songQueue.indexOf(song)
+                        let oldSongQueue = songQueue;
+                        oldSongQueue.splice(idx, 1)
+                        if (oldSongQueue[currentSongIndex]) setCurrentSong(oldSongQueue[currentSongIndex])
+                        if (oldSongQueue[currentSongIndex + 1]) setNextSong(oldSongQueue[currentSongIndex + 1])
+                        if (oldSongQueue[currentSongIndex - 1]) setPrevSong(oldSongQueue[currentSongIndex - 1])
+                        setIsPlaying(false)
+                        setSongQueue([...oldSongQueue])
+                      }
                     }}
                   >
                     Remove Song from Playlist

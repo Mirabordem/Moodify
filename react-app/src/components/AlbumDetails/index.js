@@ -75,8 +75,8 @@ export default function AlbumDetails() {
     console.log("🚀 ~ file: index.js:77 ~ useEffect ~ songQueue[0]:", songQueue[0])
 
     if (!songQueue.length ||
-      (songQueue[0].albumId !== id && !isPlaying) ||
-      (songQueue[0].albumId === id && isPlaying)) {
+      (songQueue[0]?.albumId !== id && !isPlaying) ||
+      (songQueue[0]?.albumId === id && isPlaying)) {
       let songTracks = []
       if (album){
         for (let songId of album.albumSongs) {
@@ -96,9 +96,6 @@ export default function AlbumDetails() {
   }
 
   const bigPlay = e => {
-    console.log('albumId for Queue', songQueue[0].albumId)
-    console.log('albumId for current ALbum', id)
-    console.log(songQueue)
     if(songQueue.length) {
       if(!currentSong.name || songQueue[0].albumId !== id) {
         setCurrentSong(songs[album.albumSongs[0]])

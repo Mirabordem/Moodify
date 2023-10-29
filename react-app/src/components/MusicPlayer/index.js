@@ -69,9 +69,7 @@ export default function MusicPlayer() {
 
   const playNext = () => {
 
-    console.log('prevSong', prevSong)
-    console.log('currentSong', currentSong)
-    console.log('nextSong', nextSong)
+
     if (nextSong && currentSongIndex !== songQueue.length - 1) {
 
       setPrevSong(songQueue[currentSongIndex]);
@@ -92,9 +90,6 @@ export default function MusicPlayer() {
 
   const playPrev = () => {
 
-    console.log('prevSong', prevSong)
-    console.log('currentSong', currentSong)
-    console.log('nextSong', nextSong)
     if (prevSong && currentSongIndex !== 0) {
 
       setNextSong(songQueue[currentSongIndex]);

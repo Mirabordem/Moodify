@@ -4,6 +4,7 @@ import { useModal } from "../../context/Modal";
 import { useHistory } from "react-router-dom";
 import { ThunkDeletePlaylist } from "../../store/playlists";
 
+
 function DeletePlaylistModal({ playlistId }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();

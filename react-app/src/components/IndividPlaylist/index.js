@@ -73,8 +73,8 @@ export default function PlaylistDetails() {
 
   useEffect(() => {
     if (!songQueue.length ||
-      (songQueue[0].id !== playlist.songsOnPlaylist[0] && !isPlaying) ||
-      (songQueue[0].id === playlist.songsOnPlaylist[0] && isPlaying)) {
+      (songQueue[0]?.id !== playlist.songsOnPlaylist[0] && !isPlaying) ||
+      (songQueue[0]?.id === playlist.songsOnPlaylist[0] && isPlaying)) {
       let songTracks = []
       if (playlist){
         for (let songId of playlist.songsOnPlaylist) {
