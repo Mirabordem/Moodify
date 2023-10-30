@@ -63,8 +63,8 @@ export const thunkUpdateSong = (updatedSong, songId) => async (dispatch) => {
   });
   if (res.ok) {
     const data = await res.json();
-    dispatch(createSong(data.song));
-    dispatch(updateAlbum(data.album));
+    await dispatch(createSong(data.song));
+    await dispatch(updateAlbum(data.album));
     return data.song;
   } else {
     const data = await res.json();
