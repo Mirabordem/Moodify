@@ -1,0 +1,8 @@
+.nested-dropdown {
+    /* background-color: rgb(61, 58, 58); */
+    background-color: rgb(5, 5, 5);
+    width: 180px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    box-shadow: 2px 2px 22px rgb(70, 70, 70);
+}

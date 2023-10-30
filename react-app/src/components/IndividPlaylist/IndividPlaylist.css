@@ -6,6 +6,7 @@
     padding-left: 210px;
     min-height: 100vh;
     background: linear-gradient(rgb(108, 94, 101), rgb(54, 47, 51) 80%);
+    margin-left: 50px;
 }
 
 .album-id-top-info {

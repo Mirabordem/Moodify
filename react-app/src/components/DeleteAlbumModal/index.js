@@ -12,6 +12,7 @@ function DeleteAlbumModal({ albumId }) {
   const id = albumId;
   const album = useSelector((state) => state.albums[id]);
   const [errors, setErrors] = useState({})
+  
   const handleDelete = async (e) => {
     e.preventDefault();
     const data = await dispatch(ThunkDeleteAlbum(id))
@@ -25,7 +26,7 @@ function DeleteAlbumModal({ albumId }) {
   return (
     <div className="signup-container5">
       <div className="new-h1">Confirm Delete</div>
-      {errors.error && <p className="delete-album-errors">{errors.error}</p>}
+      {errors.error && <p className="delete-album-errors all-validation-errors">{errors.error}</p>}
       <div className="txt1">
         Are you sure you want to remove this album?
       </div>

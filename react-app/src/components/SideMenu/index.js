@@ -10,7 +10,6 @@ import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 
-
 // export default function SideMenu() {
 //   const [isOpen, setIsOpen] = useState(false);
 //   const sessionUser = useSelector((state) => state.session.user);
@@ -138,28 +137,10 @@ import SignupFormModal from "../SignupFormModal";
 //   );
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export default function SideMenu() {
-
-  const [openPlaylistId,setOpenPlaylistId]=useState(null)
+  const [openPlaylistId, setOpenPlaylistId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [showMenu, setShowMenu] = useState(false)
+  const [showMenu, setShowMenu] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
   const ulRef = useRef();
 
@@ -174,13 +155,9 @@ export default function SideMenu() {
     }
   };
 
-
-
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
-
-
 
   const user = useSelector((state) => state.session.user);
   const playlists = useSelector((state) => state.playlists);
@@ -207,10 +184,6 @@ export default function SideMenu() {
   const closeMenu = () => setShowMenu(false);
   const ulClassName = "profile-dropdown1" + (showMenu ? "" : " hidden");
 
-  if (user) {
-    console.log(Object.values(user.userPlaylists));
-  }
-
   let likedSongs = null;
 
   if (user?.likedSongs.length) {
@@ -224,7 +197,6 @@ export default function SideMenu() {
   let userPlaylists = [];
   if (user?.userPlaylists) {
     userPlaylists = Object.values(user.userPlaylists);
-    console.log(userPlaylists);
   }
 
   const userPlaylistMap = userPlaylists.map((id) => {
@@ -232,7 +204,11 @@ export default function SideMenu() {
       return (
         <div key={id} className="playlist-menu-container">
           <div>
-            <IndividPlaylistButton  playlistId={id} isOpen={openPlaylistId === id}  handlePlaylistButtonClick={() => handlePlaylistButtonClick(id)}/>
+            <IndividPlaylistButton
+              playlistId={id}
+              isOpen={openPlaylistId === id}
+              handlePlaylistButtonClick={() => handlePlaylistButtonClick(id)}
+            />
           </div>
           <NavLink to={`/playlists/${id}`}>
             <li className="li1">{playlists[id]?.name}</li>
@@ -246,9 +222,7 @@ export default function SideMenu() {
   if (user) {
     sideMenuOptions = (
       <div>
-        <button className="menu-toggle">
-          Your Library
-        </button>
+        <button className="menu-toggle">Your Library</button>
         <ul className="ul-container">
           {/* <li>
           <NavLink to="/albums" className="loved-songs">
@@ -298,7 +272,6 @@ export default function SideMenu() {
     );
   }
 
-
   return (
     <div className={`side-menu ${isOpen ? "open" : ""}`}>
       <div className="logo-container">
@@ -310,16 +283,23 @@ export default function SideMenu() {
           />
         </NavLink>
       </div>
-      {!user &&
-         <button className="side-login" onClick={toggleMenu}>
-        Open Moodify
-      </button>
-      }
+      {!user && (
+        <button className="side-login" onClick={toggleMenu}>
+          Open Moodify
+        </button>
+      )}
       <div className="profile-small-button1">
-       <div className={ulClassName} ref={ulRef}>
+        <div className={ulClassName} ref={ulRef}>
           <div className="profile-small-button">
-           <OpenModalButton
-              buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faSignInAlt} /></span> Login</>}
+            <OpenModalButton
+              buttonText={
+                <>
+                  <span className="menu-icon">
+                    <FontAwesomeIcon icon={faSignInAlt} />
+                  </span>{" "}
+                  Login
+                </>
+              }
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
@@ -327,13 +307,20 @@ export default function SideMenu() {
           <div className="horizontal-line1"></div>
           <div className="profile-small-button">
             <OpenModalButton
-              buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faUserPlus} /></span> Sign Up</>}
+              buttonText={
+                <>
+                  <span className="menu-icon">
+                    <FontAwesomeIcon icon={faUserPlus} />
+                  </span>{" "}
+                  Sign Up
+                </>
+              }
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
-            </div>
-         </div>
-         </div>
+          </div>
+        </div>
+      </div>
 
       {sideMenuOptions}
     </div>

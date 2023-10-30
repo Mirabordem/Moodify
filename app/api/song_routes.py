@@ -20,8 +20,6 @@ def edit_song(id):
 
     current_song = Song.query.get(id)
     curr_song_dict = current_song.to_dict()
-    ic(current_song)
-    ic(current_song.to_dict())
     if current_song is None:
         return {'errors': {'message': 'Song not found'}}, 404
     album_of_song = Album.query.get(curr_song_dict['albumId'])
@@ -30,9 +28,7 @@ def edit_song(id):
 
     if form.validate_on_submit():
         data = form.data
-        ic(data["audio_url"])
         if data["audio_url"]:
-            print("HIT THE IF BLOCK")
             song = data["audio_url"]
             song.filename = get_unique_filename(song.filename)
 
@@ -41,7 +37,6 @@ def edit_song(id):
 
             if os.environ.get('FLASK_ENV') == 'production':
                 upload = upload_file_to_s3(song)
-                print(upload)
                 if 'url' not in upload:
                     return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
                 current_song.audio_url = upload['url']
@@ -49,25 +44,14 @@ def edit_song(id):
                 current_song.audio_url = f'{song.filename}.mp3'
 
         current_song.name = data['name']
-        ic(data['name'])
-        print(data['name'])
-
         current_song.track_number = data['track_number']
-
         current_song.song_length = data['song_length']
-
-        ic(current_song.to_dict())
 
         db.session.commit()
 
-        print('Did we make it beyond the commit?????????')
+        updated_album = Album.query.get(album_of_song.id)
 
-        updated_album_obj = Album.query.get(album_of_song.id).to_dict()
-        song_instances = [song.to_dict() for song in updated_album_obj['albumSongs']]
-        updated_album_obj['albumSongs'] = [song['id'] for song in song_instances]
-        current_song_obj = current_song.to_dict()
-
-        return {'song': current_song_obj, 'album': updated_album_obj}
+        return {'song': current_song.to_dict(), 'album': updated_album.to_dict()}
 
 
     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400
@@ -98,12 +82,10 @@ def delete_song(id):
         if os.environ.get('FLASK_ENV') == 'production':
             remove_file_from_s3(selected_song_dict['audioUrl'])
 
-        ic(targetAlbum.album_songs)
 
         db.session.delete(selected_song)
         db.session.commit()
 
-        ic(targetAlbum.album_songs)
 
         # idx = targetAlbum.album_songs.index(selected_song)
         # targetAlbum.album_songs.pop(idx)

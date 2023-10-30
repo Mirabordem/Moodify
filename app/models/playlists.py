@@ -27,5 +27,13 @@ class Playlist(db.Model):
             "coverImageUrl": self.cover_image_url,
             "description": self.description,
             "userId": self.user_id,
-            "songsOnPlaylist": [song.id for song in self.songs_on_playlist]
+            "songsOnPlaylist": [song.id for song in self.songs_on_playlist],
+            "totalTracks": len(self.songs_on_playlist),
+            "totalPlayTime": self.total_play_time()
         }
+
+    def total_play_time(self):
+        total_seconds = 0
+        for song in self.songs_on_playlist:
+            total_seconds += song.song_length
+        return total_seconds // 60

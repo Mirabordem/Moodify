@@ -3,19 +3,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { ThunkDeleteSong } from "../../store/songs";
 import "./DeleteSongModal.css";
+import { useSongPlayer } from "../../context/SongPlayer";
 
 function DeleteSongModal({ songId }) {
   const dispatch = useDispatch();
+  const {songQueue, setSongQueue, setCurrentSong, setNextSong, setPrevSong, currentSongIndex, currentSong, setIsPlaying} = useSongPlayer()
   const { closeModal } = useModal();
   const id = songId;
   const [errors, setErrors] = useState({})
-
   const song = useSelector((state) => state.songs[id]);
-
+  const holdSong = song
   const handleDelete = async (e) => {
     e.preventDefault();
-    let test=await dispatch(ThunkDeleteSong(songId));
-    if (test){
+    const idx = songQueue.indexOf(song)
+    let data = await dispatch(ThunkDeleteSong(songId));
+    if (data.errors){
+      setErrors(data.errors)
+    } else {
+      if(currentSong === holdSong) {
+        let oldSongQueue = songQueue;
+        oldSongQueue.splice(idx, 1)
+        if (oldSongQueue[currentSongIndex]) setCurrentSong(oldSongQueue[currentSongIndex])
+        if (oldSongQueue[currentSongIndex + 1]) setNextSong(oldSongQueue[currentSongIndex + 1])
+        if (oldSongQueue[currentSongIndex - 1]) setPrevSong(oldSongQueue[currentSongIndex - 1])
+        setIsPlaying(false)
+        setSongQueue([...oldSongQueue])
+      }
       closeModal()
     }
   };
@@ -26,7 +39,7 @@ function DeleteSongModal({ songId }) {
       <div className="dm-confirm-txt">
         Are you sure you want to remove this song?
       </div>
-      {errors.error && <p className="delete-song-errors">{errors.error}</p>}
+      {errors.error && <p className="delete-song-errors all-validation-errors">{errors.error}</p>}
       <div className="delete-buttons">
       <button className="signup-button1" onClick={handleDelete}>
         YES (delete this song)

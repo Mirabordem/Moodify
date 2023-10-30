@@ -40,9 +40,8 @@ def create_new_album():
 
         upload = upload_file_to_s3(image)
         if "url" not in upload:
-            ic('THIS IS UPLOAD IN OUR CREATE ALBUM',upload)
             return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
-            print('THIS IS UPLOAD IN OUR CREATE ALBUM',upload)
+
         url = upload['url']
 
 
@@ -59,7 +58,6 @@ def create_new_album():
         db.session.commit()
 
         return new_album.to_dict()
-    print(form.errors)
     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
 
@@ -115,7 +113,6 @@ def edit_album(id):
     album = Album.query.get(id)
     album_to_dict=album.to_dict()
 
-    ic(album_to_dict)
 
     if album is None:
         return {'errors': {'message':'Album not found'}}, 404
@@ -123,7 +120,6 @@ def edit_album(id):
         return {'errors': {'message':'forbidden'}}, 403
 
     if form.validate_on_submit():
-        ic (form.data)
 
         if form.data['cover_image_url']:
             image = form.data['cover_image_url']
@@ -133,7 +129,6 @@ def edit_album(id):
             if "url" not in upload:
                 return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
             url = upload['url']
-            ic(url)
 
             # if os.environ.get('FLASK_ENV') == 'production':
             # image= form.data['cover_image_url']
@@ -160,7 +155,6 @@ def edit_album(id):
             album.artist = data['artist']
         db.session.commit()
         return album.to_dict()
-    print(form.errors)
 
     return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
 
@@ -173,9 +167,9 @@ def delete_album(id):
     """
     Deleting album created by the user.
     """
-    ic('DELETE ALBUM!!!!!!!')
+
     album = Album.query.get(id)
-    ic(album)
+
 
     if album is None:
         return {'errors': {'error':'Album not found'}}, 404
@@ -184,11 +178,11 @@ def delete_album(id):
 
 # removing songs in deleted album:
     songs = album.album_songs
-    ic(songs)
 
-    print("In Production Check")
+
+
     if len(songs) != 0:
-        print("songs to delete")
+
         for song in songs:
             remove_file_from_s3(song.audio_url)
             db.session.delete(song)
@@ -217,7 +211,7 @@ def create_album_song(id):
     Create Song for Album.
     """
 
-    print()
+
     form = CreateSongForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -230,12 +224,12 @@ def create_album_song(id):
         data = form.data
 
         song = data["audio_url"]
-        ic(song)
+
         song.filename = get_unique_filename(song.filename)
         # if os.environ.get('FLASK_ENV') == 'production':
         url='test'
         upload = upload_file_to_s3(song)
-        print(upload)
+
         if 'url' not in upload:
             return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
         url = upload['url']
@@ -252,17 +246,12 @@ def create_album_song(id):
         )
         db.session.add(new_song)
         db.session.commit()
-
-        ic(new_song.to_dict())
-        print(new_song.to_dict())
-        ic(Album.query.get(id))
         updated_album = Album.query.get(id)
-        updated_album_obj = updated_album.to_dict()
-        ic(updated_album_obj)
-        song_instances = [Song.query.get(song_id).to_dict() for song_id in updated_album_obj['albumSongs']]
-        updated_album_obj['albumSongs'] = [song['id'] for song in song_instances]
-        new_song_obj = new_song.to_dict()
-        return {'song': new_song_obj, 'album': updated_album_obj}
+        # updated_album_obj = updated_album.to_dict()
+        # ic(updated_album_obj)
+        # song_instances = [Song.query.get(song_id).to_dict() for song_id in updated_album_obj['albumSongs']]
+        # updated_album_obj['albumSongs'] = [song['id'] for song in song_instances]
+        # new_song_obj = new_song.to_dict()
+        return {'song': new_song.to_dict(), 'album': updated_album.to_dict()}
 
-    print(validation_errors_to_error_messages(form.errors))
     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400

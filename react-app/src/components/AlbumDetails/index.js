@@ -25,20 +25,22 @@ export default function AlbumDetails() {
   const [newSongs, setNewSongs] = useState(true);
   const user = useSelector((state) => state.session.user);
   const [pageType, setPageType] = useState("album");
+  const [emptyAggs, setEmptyAggs] = useState(false);
 
   const {
     setIsPlaying,
     setNextSong,
     currentSong,
     setCurrentSong,
-    songList,
+    songQueue,
+    setSongQueue,
     isPlaying,
+    setCurrentSongIndex,
   } = useSongPlayer();
 
   useEffect(() => {
     let newNumberOfSongs = totalNumberOfSongs;
     let newAlbumLength = totalAlbumLength;
-    // console.log('IN THE USEEFFECT>>>>>>>>>>')
     if (album && newSongs) {
       for (let songId of album.albumSongs) {
         const song = songs[songId];
@@ -56,7 +58,7 @@ export default function AlbumDetails() {
       setNewSongs(false);
     }
 
-    // setAlbumTracks(newAlbumTracks)
+    if (emptyAggs === false) setEmptyAggs(true);
   }, [
     minutes,
     releaseDate,
@@ -67,7 +69,24 @@ export default function AlbumDetails() {
     setNewSongs,
     songs,
     album,
+    emptyAggs,
   ]);
+
+  useEffect(() => {
+    if (
+      !songQueue.length ||
+      (songQueue[0]?.albumId !== id && !isPlaying) ||
+      (songQueue[0]?.albumId === id && isPlaying)
+    ) {
+      let songTracks = [];
+      if (album) {
+        for (let songId of album.albumSongs) {
+          songTracks.push(songs[songId]);
+          setSongQueue(songTracks);
+        }
+      }
+    }
+  }, [songs, id]);
 
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
@@ -77,13 +96,25 @@ export default function AlbumDetails() {
     return null;
   }
 
-  const bigPlay = e => {
-    if(songList.length) {
-      if(!currentSong.name) {
-        setCurrentSong(songList[0])
-        setNextSong(songList[1])
+  const bigPlay = (e) => {
+    if (songQueue?.length) {
+      if (!currentSong?.name || songQueue[0]?.albumId !== id) {
+        setCurrentSong(songs[album.albumSongs[0]]);
+        setNextSong(songs[album.albumSongs[1]]);
+        if (songQueue[0].albumId !== id) {
+          let songTracks = [];
+          for (let songId of album.albumSongs) {
+            songTracks.push(songs[songId]);
+            setSongQueue(songTracks);
+          }
+        }
+        setIsPlaying(true);
       }
-      setIsPlaying(!isPlaying);
+      if (isPlaying) {
+        setIsPlaying(false);
+      } else {
+        setIsPlaying(true);
+      }
     }
   };
 
@@ -101,7 +132,7 @@ export default function AlbumDetails() {
   const defaultTotalSongs = album.albumSongs.length;
 
   return (
-    <div className="album-page-container">
+    <div className="album-detail-page-container">
       <div className="album-id-top-info">
         <img className="album-id-cover-img" src={album.coverImageUrl} />
         <div id="album-id-info-words">
@@ -111,9 +142,8 @@ export default function AlbumDetails() {
           </div>
 
           <p className="album-release-info">
-            {album.artist} • {releaseYear ? releaseYear : defaultReleaseYear} •{" "}
-            {totalNumberOfSongs ? totalNumberOfSongs : defaultTotalSongs} songs
-            • {minutes ? minutes : defaultMinutes} min
+            {album.artist} • {releaseYear} • {album.totalTracks} songs •{" "}
+            {album.totalPlayTime} min
           </p>
         </div>
       </div>

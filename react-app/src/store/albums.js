@@ -37,7 +37,6 @@ export const deleteAlbum = (id) => {
 // thunks
 
 export const thunkGetAllAlbums = () => async (dispatch) => {
-
   const res = await fetch("/api/albums");
 
   if (res.ok) {
@@ -46,75 +45,53 @@ export const thunkGetAllAlbums = () => async (dispatch) => {
     return albums;
   } else {
     const data = res.json();
-    return data.erros;
+    return data.errors;
   }
 };
 
 export const ThunkCreateAlbum = (formData) => async (dispatch) => {
-  try {
-    const res = await fetch(`/api/albums/new`, {
-      method: 'POST',
-      body: formData
-    });
-    if (res.ok) {
-        const realNewAlbum = await res.json();
-        const returnAlbum={...realNewAlbum}
-        await dispatch(createAlbum(realNewAlbum))
-        return returnAlbum
-    }
-  } catch (err) {
-    console.log('THERE WAS AN ERROR IN MAKING THE POST')
-    const data = await err.json()
-    return data.errors
+  const res = await fetch(`/api/albums/new`, {
+    method: "POST",
+    body: formData,
+  });
+  if (res.ok) {
+    const realNewAlbum = await res.json();
+    const returnAlbum = { ...realNewAlbum };
+    await dispatch(createAlbum(realNewAlbum));
+    return returnAlbum;
+  } else {
+    const data = await res.json();
+    return data;
   }
-}
+};
 
-export const ThunkEditAlbum = (formData,albumId) => async (dispatch) => {
-  try {
-    const res = await fetch(`/api/albums/${albumId}/edit`, {
-      method: 'PUT',
-      body: formData
-    });
-    if (res.ok) {
-        const realNewAlbum = await res.json();
-        const returnAlbum={...realNewAlbum}
-        await dispatch(updateAlbum(realNewAlbum))
-        return returnAlbum
-    }
-  } catch (err) {
-    console.log('THERE WAS AN ERROR IN MAKING THE POST')
-        const data = await err.json()
-        return data.errors
+export const ThunkEditAlbum = (formData, albumId) => async (dispatch) => {
+  const res = await fetch(`/api/albums/${albumId}/edit`, {
+    method: "PUT",
+    body: formData,
+  });
+  if (res.ok) {
+    const realNewAlbum = await res.json();
+    const returnAlbum = { ...realNewAlbum };
+    await dispatch(updateAlbum(realNewAlbum));
+    return returnAlbum;
+  } else {
+    const data = await res.json();
+    return data;
   }
-}
-
-// export const ThunkEditAlbum = (formData, albumId) => async (dispatch) => {
-//   const res = await fetch(`/api/albums/${albumId}/edit`, {
-//     method: "PUT",
-//     body: formData,
-//   });
-//   if (res.ok) {
-//     const realNewAlbum = await res.json();
-//     const returnAlbum = { ...realNewAlbum };
-//     await dispatch(updateAlbum(realNewAlbum));
-//     return returnAlbum;
-//   } else {
-//     console.log("THERE WAS AN ERROR IN MAKING THE POST");
-//     const errors = await res.json();
-//     return { errors };
-//   }
-// };
+};
 
 export const ThunkDeleteAlbum = (id) => async (dispatch) => {
-  try {
-    const response = await fetch(`/api/albums/${id}/delete`, {
-      method: "DELETE",
-    });
+  const res = await fetch(`/api/albums/${id}/delete`, {
+    method: "DELETE",
+  });
+  if (res.ok) {
+    const data = await res.json();
     dispatch(deleteAlbum(id));
-    return response;
-  } catch (err) {
-    const data = await err.json()
-    return data.errors
+    return data;
+  } else {
+    const data = await res.json();
+    return data;
   }
 };
 

@@ -19,6 +19,7 @@ export default function SongList({
 }) {
   const dispatch = useDispatch();
   const [openPlaylistId,setOpenPlaylistId]=useState(null)
+  const [songList, setSongList] = useState()
   const handlePlaylistButtonClick = (playlistId) => {
     if (openPlaylistId === playlistId) {
       setOpenPlaylistId(null);
@@ -45,58 +46,87 @@ export default function SongList({
     setCurrentSong,
     prevSong,
     setPrevSong,
-    songList,
-    setSongList,
+    songQueue,
+    setSongQueue,
     playAnyway,
     setPlayAnyway,
     currentSongIndex,
     setCurrentSongIndex,
   } = useSongPlayer();
 
-  let songTracks = [];
+  // let songTracks = [];
 
   let emptyHeart = null;
   let filledHeart = null;
 
   useEffect(() => {
-    setSongList(songTracks);
-  }, [songs]);
+    // setSongList(songTracks);
+    if (pageType === "playlist") {
+      let songTracks = []
+      for (let songId of playlist.songsOnPlaylist) {
+        songTracks.push(songs[songId]);
+        setSongList(songTracks)
+        if (!songQueue.length) setSongQueue(songTracks)
+      }
+    } else if (pageType === "likes") {
+      let songTracks = []
+      for (let likeId of userLikedSongIds) {
+        songTracks.push(songs[likeId]);
+        setSongList(songTracks)
+        if (!songQueue.length) setSongQueue(songTracks)
+      }
+    } else {
+      let songTracks = []
+      for (let songId of album.albumSongs) {
+        songTracks.push(songs[songId]);
+        setSongList(songTracks)
+        if (!songQueue.length) setSongQueue(songTracks)
+      }
+    }
+  }, [songs, playlist, album, user]);
 
   if (!Object.values(songs).length) {
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
 
-  if (pageType === "playlist") {
-    for (let songId of playlist.songsOnPlaylist) {
-      songTracks.push(songs[songId]);
-    }
-  } else if (pageType === "likes") {
-    for (let likeId of userLikedSongIds) {
-      songTracks.push(songs[likeId]);
-    }
-  } else {
-    for (let songId of album.albumSongs) {
-      songTracks.push(songs[songId]);
-    }
-  }
+  // if (pageType === "playlist") {
+  //   let songTracks = []
+  //   for (let songId of playlist.songsOnPlaylist) {
+  //     songTracks.push(songs[songId]);
+  //     setSongList(songTracks)
+  //   }
+  // } else if (pageType === "likes") {
+  //   let songTracks = []
+  //   for (let likeId of userLikedSongIds) {
+  //     songTracks.push(songs[likeId]);
+  //     setSongList(songTracks)
+  //   }
+  // } else {
+  //   let songTracks = []
+  //   for (let songId of album.albumSongs) {
+  //     songTracks.push(songs[songId]);
+  //     setSongList(songTracks)
+  //   }
+  // }
 
   const setSongs = (song) => {
+    setSongQueue(songList)
     setCurrentSong(song);
 
-    const index = songTracks.findIndex((item) => item.name === song.name);
+    const index = songList.findIndex((item) => item.name === song.name);
 
     setCurrentSongIndex(index);
 
     if (index === 0) {
-      setNextSong(songs[index + 1]);
+      setNextSong(songQueue[index + 1]);
       setPrevSong(null);
     } else if (index === songs.length - 1) {
-      setPrevSong(songs[index - 1]);
+      setPrevSong(songQueue[index - 1]);
       setNextSong(null);
     } else {
-      setPrevSong(songs[index - 1]);
-      setNextSong(songs[index + 1]);
+      setPrevSong(songQueue[index - 1]);
+      setNextSong(songQueue[index + 1]);
     }
 
     if (isPlaying === true) {
@@ -105,7 +135,7 @@ export default function SongList({
     setIsPlaying(true);
   };
 
-  const songListMap = songTracks.map((song) => {
+  const songListMap = songList?.map((song) => {
     if (song) {
       const handleLike = (e) => {
         e.stopPropagation();
@@ -120,6 +150,16 @@ export default function SongList({
         if (user) {
           const id = song.id;
           dispatch(ThunkDeleteLike(id));
+          if(currentSong === song && !playlist) {
+            const idx = songQueue.indexOf(song)
+            let oldSongQueue = songQueue;
+            oldSongQueue.splice(idx, 1)
+            if (oldSongQueue[currentSongIndex]) setCurrentSong(oldSongQueue[currentSongIndex])
+            if (oldSongQueue[currentSongIndex + 1]) setNextSong(oldSongQueue[currentSongIndex + 1])
+            if (oldSongQueue[currentSongIndex - 1]) setPrevSong(oldSongQueue[currentSongIndex - 1])
+            setIsPlaying(false)
+            setSongQueue([...oldSongQueue])
+          }
         }
         heart = emptyHeart;
       };
@@ -148,7 +188,7 @@ export default function SongList({
       let displayNumber = null;
       if (pageType !== "album") {
         const displayNumberIndex =
-          songTracks.findIndex((item) => item.name === song.name) + 1;
+          songList?.findIndex((item) => item.name === song.name) + 1;
         displayNumber = (
           <span className="song-info1">{displayNumberIndex}</span>
         );

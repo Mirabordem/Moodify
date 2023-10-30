@@ -15,7 +15,6 @@ playlist_routes = Blueprint('playlists', __name__)
 @playlist_routes.route('/new', methods=['POST'])
 @login_required
 def create_new_playlist():
-    print('im inside create_new_playlist ROUTE!!!!!')
     """
     Creates a new playlist. Returns a playlist dictionary.
     """
@@ -51,8 +50,7 @@ def create_new_playlist():
             db.session.add(new_playlist)
             db.session.commit()
 
-            return new_playlist.to_dict()
-    print(form.errors)
+            return {'user': current_user.to_dict(), 'playlist': new_playlist.to_dict()}
 
     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400
 
@@ -72,7 +70,7 @@ def delete_playlist(id):
 
     db.session.delete(playlist)
     db.session.commit()
-    return {'message': 'Successfully Deleted'}
+    return {'user': current_user.to_dict(), 'message': 'Successfully Deleted'}
 
 
 @playlist_routes.route('/<int:playlistId>/songs/<int:songId>')

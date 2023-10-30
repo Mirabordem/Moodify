@@ -10,9 +10,10 @@ export default function SongPlayerProvider({ children }) {
   const [nextSong, setNextSong] = useState({});
   const [currentSong, setCurrentSong] = useState({});
   const [prevSong, setPrevSong] = useState({});
-  const [songList, setSongList] = useState([]);
-  const [currentSongIndex, setCurrentSongIndex] = useState();
+  const [songQueue, setSongQueue] = useState([]);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [songAdded, setSongAdded] = useState(false)
+  const [currentVolume, setVolume] = useState(50);
 
   return (
     <>
@@ -26,14 +27,16 @@ export default function SongPlayerProvider({ children }) {
           setCurrentSong,
           prevSong,
           setPrevSong,
-          songList,
-          setSongList,
+          songQueue,
+          setSongQueue,
           playAnyway,
           setPlayAnyway,
           currentSongIndex,
           setCurrentSongIndex,
           songAdded,
-          setSongAdded
+          setSongAdded,
+          currentVolume,
+          setVolume,
         }}
       >
         {children}

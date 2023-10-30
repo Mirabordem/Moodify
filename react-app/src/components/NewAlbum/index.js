@@ -31,7 +31,6 @@ export default function NewAlbum({ formType, albumId }) {
     }
   }, [formType, album]);
 
-
   const handleAlbumCoverChange = (e) => {
     const ourPicture = e.target.files[0];
     setAlbumCover(ourPicture);
@@ -48,6 +47,7 @@ export default function NewAlbum({ formType, albumId }) {
     if (formType === "Create") {
       formData.append("cover_image_url", albumCover);
       let data = await dispatch(ThunkCreateAlbum(formData));
+
       if (data?.title) {
         history.push(`/albums/${data.id}`);
         closeModal();
@@ -58,10 +58,13 @@ export default function NewAlbum({ formType, albumId }) {
       if (didPicChange) {
         formData.append("cover_image_url", albumCover);
       }
-      let test2 = await dispatch(ThunkEditAlbum(formData, albumId));
+      let data = await dispatch(ThunkEditAlbum(formData, albumId));
 
-      if (test2) {
+      if (data?.title) {
+        history.push(`/albums/${data.id}`);
         closeModal();
+      } else if (data?.errors) {
+        setErrors(data.errors);
       }
     }
   };
@@ -73,7 +76,9 @@ export default function NewAlbum({ formType, albumId }) {
 
         {formType === "Create" && <div className="new-h5">Create Album</div>}
         {errors.message && (
-          <p className="album-form-errors">{errors.message}</p>
+          <p className="album-form-errors all-validation-errors">
+            {errors.message}
+          </p>
         )}
         <form
           onSubmit={handleSubmit}
@@ -92,10 +97,14 @@ export default function NewAlbum({ formType, albumId }) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-            //   placeholder="Title"
+              //   placeholder="Title"
             />
           </label>
-          {errors.title && <p className="album-form-errors">{errors.title}</p>}
+          {errors.title && (
+            <p className="album-form-errors all-validation-errors">
+              {errors.title}
+            </p>
+          )}
           <label className="login-label">
             Release Date
             <input
@@ -103,11 +112,13 @@ export default function NewAlbum({ formType, albumId }) {
               value={releaseDate}
               onChange={(e) => setReleaseDate(e.target.value)}
               required
-            //   placeholder="Release Date"
+              //   placeholder="Release Date"
             />
           </label>
           {errors.release_date && (
-            <p className="album-form-errors">{errors.release_date}</p>
+            <p className="album-form-errors all-validation-errors">
+              {errors.release_date}
+            </p>
           )}
           <label className="login-label">
             Artist
@@ -116,9 +127,14 @@ export default function NewAlbum({ formType, albumId }) {
               value={artist}
               onChange={(e) => setArtist(e.target.value)}
               required
-            //   placeholder="Artist"
+              //   placeholder="Artist"
             />
           </label>
+          {errors.artist && (
+            <p className="album-form-errors all-validation-errors">
+              {errors.artist}
+            </p>
+          )}
           <label className="login-label">
             {formType === "Edit" && (
               <div>
@@ -151,7 +167,9 @@ export default function NewAlbum({ formType, albumId }) {
             />
           </label>
           {errors.cover_image_url && (
-            <p className="album-form-errors">{errors.cover_image_url}</p>
+            <p className="album-form-errors all-validation-errors">
+              {errors.cover_image_url}
+            </p>
           )}
           <button className="signup-button1" type="submit">
             {formType === "Create" ? "Create Album" : "Edit Album"}
