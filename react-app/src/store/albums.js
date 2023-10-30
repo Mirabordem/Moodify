@@ -37,7 +37,6 @@ export const deleteAlbum = (id) => {
 // thunks
 
 export const thunkGetAllAlbums = () => async (dispatch) => {
-
   const res = await fetch("/api/albums");
 
   if (res.ok) {
@@ -52,52 +51,48 @@ export const thunkGetAllAlbums = () => async (dispatch) => {
 
 export const ThunkCreateAlbum = (formData) => async (dispatch) => {
   const res = await fetch(`/api/albums/new`, {
-    method: 'POST',
-    body: formData
+    method: "POST",
+    body: formData,
   });
   if (res.ok) {
-
-      const realNewAlbum = await res.json();
-      const returnAlbum={...realNewAlbum}
-      await dispatch(createAlbum(realNewAlbum))
-      console.log("🚀 ~ file: albums.js:66 ~ ThunkCreateAlbum ~ returnAlbum:", returnAlbum)
-      return returnAlbum
-
+    const realNewAlbum = await res.json();
+    const returnAlbum = { ...realNewAlbum };
+    await dispatch(createAlbum(realNewAlbum));
+    return returnAlbum;
   } else {
-    const data = await res.json()
-    return data
+    const data = await res.json();
+    return data;
   }
-}
+};
 
-export const ThunkEditAlbum = (formData,albumId) => async (dispatch) => {
-    const res = await fetch(`/api/albums/${albumId}/edit`, {
-      method: 'PUT',
-      body: formData
-    });
-    if (res.ok) {
-        const realNewAlbum = await res.json();
-        const returnAlbum={...realNewAlbum}
-        await dispatch(updateAlbum(realNewAlbum))
-        return returnAlbum
-    } else {
-      const data = await res.json()
-      return data
-    }
-}
+export const ThunkEditAlbum = (formData, albumId) => async (dispatch) => {
+  const res = await fetch(`/api/albums/${albumId}/edit`, {
+    method: "PUT",
+    body: formData,
+  });
+  if (res.ok) {
+    const realNewAlbum = await res.json();
+    const returnAlbum = { ...realNewAlbum };
+    await dispatch(updateAlbum(realNewAlbum));
+    return returnAlbum;
+  } else {
+    const data = await res.json();
+    return data;
+  }
+};
 
 export const ThunkDeleteAlbum = (id) => async (dispatch) => {
-    const res = await fetch(`/api/albums/${id}/delete`, {
-      method: "DELETE",
-    });
-    if (res.ok) {
-      const data = await res.json()
-      dispatch(deleteAlbum(id));
-      return data;
-    } else {
-      const data = await res.json()
-      return data
-    }
-
+  const res = await fetch(`/api/albums/${id}/delete`, {
+    method: "DELETE",
+  });
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(deleteAlbum(id));
+    return data;
+  } else {
+    const data = await res.json();
+    return data;
+  }
 };
 
 // reducer

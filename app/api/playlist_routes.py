@@ -15,7 +15,6 @@ playlist_routes = Blueprint('playlists', __name__)
 @playlist_routes.route('/new', methods=['POST'])
 @login_required
 def create_new_playlist():
-    print('im inside create_new_playlist ROUTE!!!!!')
     """
     Creates a new playlist. Returns a playlist dictionary.
     """
@@ -52,7 +51,6 @@ def create_new_playlist():
             db.session.commit()
 
             return {'user': current_user.to_dict(), 'playlist': new_playlist.to_dict()}
-    print(form.errors)
 
     return { 'errors': validation_errors_to_error_messages(form.errors)}, 400
 

@@ -39,56 +39,52 @@ export const deleteSong = (songId) => {
 // thunks
 
 export const thunkCreateSong = (newSong, albumId) => async (dispatch) => {
-    const res = await fetch(`/api/albums/${albumId}/songs/new`, {
-      method: "POST",
-      // headers: {"Content-Type":"multipart/form-data"},
-      body: newSong,
-    });
-    if (res.ok) {
-      const data = await res.json();
-      dispatch(createSong(data.song));
-      dispatch(updateAlbum(data.album));
-      console.log("🚀 ~ file: songs.js:53 ~ thunkCreateSong ~ data.song:", data.song)
-      return data.song;
-
-    } else {
-      const data = await res.json()
-      console.log("🚀 ~ file: songs.js:56 ~ thunkCreateSong ~ data:", data)
-      return data
-    }
+  const res = await fetch(`/api/albums/${albumId}/songs/new`, {
+    method: "POST",
+    // headers: {"Content-Type":"multipart/form-data"},
+    body: newSong,
+  });
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(createSong(data.song));
+    dispatch(updateAlbum(data.album));
+    return data.song;
+  } else {
+    const data = await res.json();
+    return data;
+  }
 };
 
 export const thunkUpdateSong = (updatedSong, songId) => async (dispatch) => {
-    const res = await fetch(`/api/songs/${songId}`, {
-      method: "PUT",
-      // headers: {"Content-Type":"multipart/form-data"},
-      body: updatedSong,
-    });
-    if (res.ok) {
-      const data = await res.json();
-      dispatch(createSong(data.song));
-      dispatch(updateAlbum(data.album));
-      return data.song
-    } else {
-      const data = await res.json()
-      return data
-    }
+  const res = await fetch(`/api/songs/${songId}`, {
+    method: "PUT",
+    // headers: {"Content-Type":"multipart/form-data"},
+    body: updatedSong,
+  });
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(createSong(data.song));
+    dispatch(updateAlbum(data.album));
+    return data.song;
+  } else {
+    const data = await res.json();
+    return data;
+  }
 };
 
 export const ThunkDeleteSong = (songId) => async (dispatch) => {
-    const res = await fetch(`/api/songs/${songId}/delete`, {
-      method: "DELETE",
-    });
-    if (res.ok) {
-      const data = await res.json();
-      dispatch(deleteSong(songId));
-      dispatch(updateAlbum(data.album));
-      return data.message;
-    } else {
-      const data = await res.json()
-      return data
-    }
-
+  const res = await fetch(`/api/songs/${songId}/delete`, {
+    method: "DELETE",
+  });
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(deleteSong(songId));
+    dispatch(updateAlbum(data.album));
+    return data.message;
+  } else {
+    const data = await res.json();
+    return data;
+  }
 };
 
 // reducer
