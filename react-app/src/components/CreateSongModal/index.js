@@ -107,7 +107,10 @@ export default function CreateSong({formType, albumId, songId}) {
                     <input
                     type="file"
                     accept='audio/*'
-                    onChange={e => setAudioUrl(e.target.files[0])}
+                    onChange={e => {
+                        setChangeAudioURL(e.target.files[0]);
+                        setAudioUrl(e.target.files[0]);
+                      }}
                     />
                 </label>
                 {errors.audio_url && <p className="add-song-errors all-validation-errors">{errors.audio_url}</p>}
