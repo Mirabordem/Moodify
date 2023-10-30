@@ -108,7 +108,7 @@ export default function CreateSong({formType, albumId, songId}) {
                     type="file"
                     accept='audio/*'
                     onChange={e => {
-                        setChangeAudioURL(e.target.files[0]);
+                        setChangeAudioURL(true);
                         setAudioUrl(e.target.files[0]);
                       }}
                     />
