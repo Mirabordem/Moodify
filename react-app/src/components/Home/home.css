@@ -1,118 +1,120 @@
 .page-container {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    padding-left: 210px;
-    min-height: 100vh;
-    background: linear-gradient(rgb(80, 79, 79), black);
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  padding-left: 210px;
+  min-height: 100vh;
+  background: linear-gradient(rgb(80, 79, 79), black);
 }
 
 .content-container {
-    width: 100%;
-    padding: 10px;
+  width: 100%;
+  padding: 10px;
 }
 
 .homeText {
-    height: 60px;
-    width: 100%;
-    margin-top: 40px;
-    padding-bottom: 5px;
-    display: flex;
-    justify-content: center;
-    font-weight: lighter;
+  height: 60px;
+  width: 100%;
+  margin-top: 40px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  font-weight: lighter;
 }
 
 .home-h3 {
-    height: 60px;
-    color: white;
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+  height: 60px;
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .homeAlbums {
-    color: rgb(223, 221, 221);
-    font-size: 28px;
-    font-weight: 400;
-    margin-left: 50px;
+  color: rgb(223, 221, 221);
+  font-size: 28px;
+  font-weight: 400;
+  margin-left: 50px;
 }
 
-
 .album-cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    margin-left: 49px;
-    padding-right: 20px;
-    /* background: linear-gradient(rgb(80, 79, 79), black); */
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-left: 49px;
+  padding-right: 20px;
+  /* background: linear-gradient(rgb(80, 79, 79), black); */
 }
 
 .card-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 260px;
-    max-height: 300px;
-    max-width: 300px;
-    border-radius: 10px;
-    flex-shrink: 0;
-    width: 286px;
-    /* border: 2px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 260px;
+  max-height: 300px;
+  max-width: 300px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  width: 286px;
+  /* border: 2px solid red; */
 }
 
 .album-image {
-    margin-top: 10px;
-    /* width: 85%; */
-    width: 247px;
-    /* height: 90%; */
-    height: 229px
+  margin-top: 10px;
+  /* width: 85%; */
+  width: 247px;
+  /* height: 90%; */
+  height: 229px;
 }
 
 .card {
-    max-width: 300px;
-    width: calc(20% - 4px);
-    margin: 0 2px;
-    background: linear-gradient(black, rgb(106, 106, 106));
-    border-radius: 10px;
-    cursor: pointer;
-    width: 100%;
-    /* border: 2px solid blue; */
+  max-width: 300px;
+  width: calc(20% - 4px);
+  margin: 0 2px;
+  background: linear-gradient(black, rgb(106, 106, 106));
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  /* border: 2px solid blue; */
 }
 
 .card2 {
-    max-width: 300px;
-    width: calc(20% - 4px);
-    margin: 0 2px;
-    background: linear-gradient( rgb(25, 72, 55),rgb(86, 173, 130));
-    border-radius: 10px;
-    cursor: pointer;
-    width: 100%;
-
+  max-width: 300px;
+  width: calc(20% - 4px);
+  margin: 0 2px;
+  /* background: linear-gradient( rgb(25, 72, 55),rgb(86, 173, 130)); */
+  /* background: linear-gradient( rgb(33, 23, 32), rgb(155, 102, 146) 100%); */
+  background: linear-gradient(
+    to bottom,
+    rgba(16, 10, 15, 0.7) 70%,
+    rgba(247, 78, 219, 0.3) 100%
+  );
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
 }
 
-
-
 .card-info-container {
-    display: block;
-    height: 60px;
+  display: block;
+  height: 60px;
 }
 
 .album-title {
-    margin-left: 20px;
-    margin-bottom: 0;
-    margin-top: 2px;
-    /* border: 2px solid orange; */
+  margin-left: 20px;
+  margin-bottom: 0;
+  margin-top: 2px;
+  /* border: 2px solid orange; */
 }
 
 .album-title1 {
-    margin-left: 20px;
-    margin-bottom: 0;
-    margin-top: 2px;
-    font-weight: bold;
-    font-stretch: expanded;
-    color: rgb(223, 221, 221);
-    /* border: 2px solid orange; */
+  margin-left: 20px;
+  margin-bottom: 0;
+  margin-top: 2px;
+  font-weight: bold;
+  font-stretch: expanded;
+  color: rgb(223, 221, 221);
+  /* border: 2px solid orange; */
 }
