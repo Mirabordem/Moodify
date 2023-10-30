@@ -9,6 +9,7 @@ import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, useRef } from "react";
 import { ThunkAddSongToPlaylist } from "../../store/playlists";
 import AddSongPlaylistModal from "../AddSongPlaylistModal";
+import NewPlaylist from "../NewPlaylist";
 
 export default function LikesSongUpdate({ songId }) {
   const user = useSelector((state) => state.session.user);
@@ -34,7 +35,7 @@ export default function LikesSongUpdate({ songId }) {
   const nestedDropDown =
     "song-update-dropdown2" + (showNestedMenu ? "" : " hidden");
 
-  const addSongPlaylist = (
+  let addSongPlaylist = (
     <OpenModalButton
       buttonText={
         <>
@@ -51,6 +52,23 @@ export default function LikesSongUpdate({ songId }) {
   const currUserPlaylists = Object.values(playlists).filter((playlist) =>
     user?.userPlaylists.includes(playlist.id)
   );
+
+  if (!currUserPlaylists.length) {
+    addSongPlaylist = (
+      <OpenModalButton
+        className="new-album-playlist1"
+        buttonText={
+          <>
+            <span className="menu-icon1">
+              <FontAwesomeIcon icon={faPlus} />
+            </span>{" "}
+            Create Playlist
+          </>
+        }
+        modalComponent={<NewPlaylist formType="Create" userId={user.id} />}
+      />
+    );
+  }
 
   const playlistsMap = currUserPlaylists.map((currPlaylist) => {
     return (
