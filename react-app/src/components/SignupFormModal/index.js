@@ -62,8 +62,9 @@ function SignupFormModal() {
 		<div className="signup-container">
 			<div className="new-h1">Sign up</div>
 			<form onSubmit={handleSubmit} className="signup-form">
+			{validationObject.email && <span className="signup-error">{validationObject.email}</span>}
 				<label className="login-label">
-					{validationObject.email && <span className="signup-error">{validationObject.email}</span>}
+					{/* {validationObject.email && <span className="signup-error">{validationObject.email}</span>} */}
 					Email
 					<input
 						type="text"
@@ -72,8 +73,8 @@ function SignupFormModal() {
 						// placeholder="Email"
 					/>
 				</label>
+				{validationObject.username && <span className="signup-error">{validationObject.username}</span>}
 				<label className="login-label">
-					{validationObject.username && <span className="signup-error">{validationObject.username}</span>}
 					Username
 					<input
 						type="text"
@@ -82,8 +83,8 @@ function SignupFormModal() {
 						// placeholder="Username"
 					/>
 				</label>
+				{validationObject.password && <span className="signup-error">{validationObject.password}</span>}
 				<label className="login-label">
-					{validationObject.password && <span className="signup-error">{validationObject.password}</span>}
 					Password
 					<input
 						type="password"
@@ -92,8 +93,8 @@ function SignupFormModal() {
 						// placeholder="Password"
 					/>
 				</label>
+				{validationObject.confirmPassword && (<span className="signup-error">{validationObject.confirmPassword}</span>)}
 				<label className="login-label">
-					{validationObject.confirmPassword && (<span className="signup-error">{validationObject.confirmPassword}</span>)}
 					Confirm Password
 					<input
 						type="password"
