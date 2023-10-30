@@ -23,7 +23,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 16%;
+  width: 260px;
   display: inline-flex;
   flex-direction: column;
   height: 100%;
