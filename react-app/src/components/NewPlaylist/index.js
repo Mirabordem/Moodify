@@ -93,9 +93,10 @@ return (
                 {/* <ul>
                     {errors.map((error, idx) => (
                         <li key={idx}>{error}</li>
-                    ))}
-                </ul> */}
+                        ))}
+                    </ul> */}
                 {errors.message && <p className="add-playlist-errors all-validation-errors">{errors.message}</p>}
+                {errors.name && <p className="add-playlist-errors all-validation-errors">{errors.name}</p>}
                 <label className='login-label'>
                     Name
                     <input
@@ -106,7 +107,7 @@ return (
                         // placeholder="Name"
                     />
                 </label>
-                {errors.name && <p className="add-playlist-errors all-validation-errors">{errors.name}</p>}
+                {errors.description && <p className="add-playlist-errors all-validation-errors">{errors.description}</p>}
                 <label className='login-label'>
                     Description
                     <input
@@ -117,10 +118,6 @@ return (
                         // placeholder="Description"
                     />
                 </label>
-
-                {errors.description && <p className="add-playlist-errors all-validation-errors">{errors.description}</p>}
-                
-
                 <button className="signup-button" type="submit">{formType === 'Create' ? 'Create Playlist' : 'Edit Playlist'}</button>
                 <button type="button" className="signup-button" onClick={closeModal}>
                     Cancel
