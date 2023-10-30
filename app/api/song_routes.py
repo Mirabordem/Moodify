@@ -28,9 +28,7 @@ def edit_song(id):
 
     if form.validate_on_submit():
         data = form.data
-        ic(data["audio_url"])
         if data["audio_url"]:
-            print("HIT THE IF BLOCK")
             song = data["audio_url"]
             song.filename = get_unique_filename(song.filename)
 
@@ -39,7 +37,6 @@ def edit_song(id):
 
             if os.environ.get('FLASK_ENV') == 'production':
                 upload = upload_file_to_s3(song)
-                print(upload)
                 if 'url' not in upload:
                     return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
                 current_song.audio_url = upload['url']
@@ -85,12 +82,10 @@ def delete_song(id):
         if os.environ.get('FLASK_ENV') == 'production':
             remove_file_from_s3(selected_song_dict['audioUrl'])
 
-        ic(targetAlbum.album_songs)
 
         db.session.delete(selected_song)
         db.session.commit()
 
-        ic(targetAlbum.album_songs)
 
         # idx = targetAlbum.album_songs.index(selected_song)
         # targetAlbum.album_songs.pop(idx)

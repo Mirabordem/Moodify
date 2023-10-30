@@ -19,10 +19,6 @@ export default function PlaylistSongUpdate({ songId }) {
   const user = useSelector((state) => state.session.user);
   const song = useSelector((state) => state.songs[songId]);
   const { id } = useParams();
-  console.log(
-    "🚀 ~ file: PlayListSongUpdate.js:18 ~ PlaylistSongUpdate ~ id:",
-    id
-  );
 
   const playlists = useSelector((state) => state.playlists);
   const playlist = useSelector((state) => state.playlists[id]);

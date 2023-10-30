@@ -25,7 +25,7 @@ export default function AlbumDetails() {
   const [newSongs, setNewSongs] = useState(true);
   const user = useSelector((state) => state.session.user);
   const [pageType, setPageType] = useState("album");
-  const [emptyAggs, setEmptyAggs] = useState(false)
+  const [emptyAggs, setEmptyAggs] = useState(false);
 
   const {
     setIsPlaying,
@@ -41,7 +41,6 @@ export default function AlbumDetails() {
   useEffect(() => {
     let newNumberOfSongs = totalNumberOfSongs;
     let newAlbumLength = totalAlbumLength;
-    // console.log('IN THE USEEFFECT>>>>>>>>>>')
     if (album && newSongs) {
       for (let songId of album.albumSongs) {
         const song = songs[songId];
@@ -59,7 +58,7 @@ export default function AlbumDetails() {
       setNewSongs(false);
     }
 
-    if(emptyAggs === false) setEmptyAggs(true)
+    if (emptyAggs === false) setEmptyAggs(true);
   }, [
     minutes,
     releaseDate,
@@ -70,15 +69,10 @@ export default function AlbumDetails() {
     setNewSongs,
     songs,
     album,
-    emptyAggs
+    emptyAggs,
   ]);
 
   useEffect(() => {
-    console.log(
-      "🚀 ~ file: index.js:77 ~ useEffect ~ songQueue[0]:",
-      songQueue[0]
-    );
-
     if (
       !songQueue.length ||
       (songQueue[0]?.albumId !== id && !isPlaying) ||
@@ -148,9 +142,8 @@ export default function AlbumDetails() {
           </div>
 
           <p className="album-release-info">
-            {album.artist} • {releaseYear} •{" "}
-            {album.totalTracks} songs
-            • {album.totalPlayTime} min
+            {album.artist} • {releaseYear} • {album.totalTracks} songs •{" "}
+            {album.totalPlayTime} min
           </p>
         </div>
       </div>
