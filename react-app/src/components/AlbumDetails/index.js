@@ -131,6 +131,11 @@ export default function AlbumDetails() {
   const defaultReleaseYear = defaultReleaseDate.getFullYear();
   const defaultTotalSongs = album.albumSongs.length;
 
+  let editAlbumButton = null;
+  if (user?.id === album.userOwner) {
+    editAlbumButton = <AlbumUpdateButton user={user} albumId={album.id} />;
+  }
+
   return (
     <div className="album-detail-page-container">
       <div className="album-id-top-info">
@@ -153,7 +158,7 @@ export default function AlbumDetails() {
           {/* conditionally render play arrow and pause bars with isPlaying variable */}
           <span className="play-arrow"></span>
         </button>
-        <AlbumUpdateButton user={user} albumId={album.id} />
+        {editAlbumButton}
       </div>
 
       <div id="album-id-song-list">
