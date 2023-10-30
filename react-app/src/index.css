@@ -23,7 +23,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 16%;
+  width: 260px;
   display: inline-flex;
   flex-direction: column;
   height: 100%;
@@ -54,4 +54,10 @@ body {
   font-family: "Lato", sans-serif;
   font-weight: 300;
   z-index: 100;
+}
+
+.all-validation-errors {
+  color: red;
+  font-size: smaller;
+  text-align: center;
 }

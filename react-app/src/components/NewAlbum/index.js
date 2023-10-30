@@ -90,6 +90,11 @@ export default function NewAlbum({ formType, albumId }) {
                         <li key={idx}>{error}</li>
                     ))}
                 </ul> */}
+            {errors.title && (
+              <p className="album-form-errors all-validation-errors">
+                {errors.title}
+              </p>
+            )}
           <label className="login-label">
             Title
             <input
@@ -100,11 +105,11 @@ export default function NewAlbum({ formType, albumId }) {
               //   placeholder="Title"
             />
           </label>
-          {errors.title && (
-            <p className="album-form-errors all-validation-errors">
-              {errors.title}
-            </p>
-          )}
+            {errors.release_date && (
+              <p className="album-form-errors all-validation-errors">
+                {errors.release_date}
+              </p>
+            )}
           <label className="login-label">
             Release Date
             <input
@@ -115,11 +120,11 @@ export default function NewAlbum({ formType, albumId }) {
               //   placeholder="Release Date"
             />
           </label>
-          {errors.release_date && (
-            <p className="album-form-errors all-validation-errors">
-              {errors.release_date}
-            </p>
-          )}
+            {errors.artist && (
+              <p className="album-form-errors all-validation-errors">
+                {errors.artist}
+              </p>
+            )}
           <label className="login-label">
             Artist
             <input
@@ -130,11 +135,6 @@ export default function NewAlbum({ formType, albumId }) {
               //   placeholder="Artist"
             />
           </label>
-          {errors.artist && (
-            <p className="album-form-errors all-validation-errors">
-              {errors.artist}
-            </p>
-          )}
           <label className="login-label">
             {formType === "Edit" && (
               <div>
@@ -148,6 +148,11 @@ export default function NewAlbum({ formType, albumId }) {
               </div>
             )}
           </label>
+            {errors.cover_image_url && (
+              <p className="album-form-errors all-validation-errors">
+                {errors.cover_image_url}
+              </p>
+            )}
           <label class="custom-file-input">
             <p className="file-album-cover">Album Cover</p>
             ➤ Choose File
@@ -166,11 +171,6 @@ export default function NewAlbum({ formType, albumId }) {
               placeholder="Album Cover"
             />
           </label>
-          {errors.cover_image_url && (
-            <p className="album-form-errors all-validation-errors">
-              {errors.cover_image_url}
-            </p>
-          )}
           <button className="signup-button1" type="submit">
             {formType === "Create" ? "Create Album" : "Edit Album"}
           </button>

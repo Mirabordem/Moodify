@@ -71,6 +71,7 @@ export default function CreateSong({formType, albumId, songId}) {
             className='signup-form'
             >
                 {errors.message && <p className="add-song-errors validation-errors">{errors.message}</p>}
+                {errors.name && <p className="add-song-errors all-validation-errors">{errors.name}</p>}
                 <label className='login-label'>
                     Name
                     <input
@@ -79,7 +80,7 @@ export default function CreateSong({formType, albumId, songId}) {
                     onChange={e => setName(e.target.value)}
                     />
                 </label>
-                {errors.name && <p className="add-song-errors all-validation-errors">{errors.name}</p>}
+                {errors.track_number && <p className="add-song-errors all-validation-errors">{errors.track_number}</p>}
                 <label className='login-label'>
                     Track Number
                     <input
@@ -90,7 +91,7 @@ export default function CreateSong({formType, albumId, songId}) {
                     onChange={e => setTrackNumber(e.target.value)}
                     />
                 </label>
-                {errors.track_number && <p className="add-song-errors all-validation-errors">{errors.track_number}</p>}
+                {errors.song_length && <p className="add-song-errors all-validation-errors">{errors.song_length}</p>}
                 <label className='login-label'>
                     Duration
                     <input
@@ -101,16 +102,18 @@ export default function CreateSong({formType, albumId, songId}) {
                     onChange={e => setSongLength(e.target.value)}
                     />
                 </label>
-                {errors.song_length && <p className="add-song-errors all-validation-errors">{errors.song_length}</p>}
+                {errors.audio_url && <p className="add-song-errors all-validation-errors">{errors.audio_url}</p>}
                 <label class="custom-file-input">
                     ➤ Choose Audio File
                     <input
                     type="file"
                     accept='audio/*'
-                    onChange={e => setAudioUrl(e.target.files[0])}
+                    onChange={e => {
+                        setChangeAudioURL(true);
+                        setAudioUrl(e.target.files[0]);
+                      }}
                     />
                 </label>
-                {errors.audio_url && <p className="add-song-errors all-validation-errors">{errors.audio_url}</p>}
                 <button className="signup-button" type="submit">{formType === 'edit' ? 'Update Song' : 'Add Song'}</button>
             </form>
         </div>

@@ -31,17 +31,20 @@ def edit_song(id):
         if data["audio_url"]:
             song = data["audio_url"]
             song.filename = get_unique_filename(song.filename)
-
+            upload = upload_file_to_s3(song)
+            if 'url' not in upload:
+                return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
+            current_song.audio_url = upload['url']
 
             # current_song.audio_url = 'https://moodifybucket.s3.us-east-2.amazonaws.com/bubkas.mp3'
 
-            if os.environ.get('FLASK_ENV') == 'production':
-                upload = upload_file_to_s3(song)
-                if 'url' not in upload:
-                    return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
-                current_song.audio_url = upload['url']
-            else:
-                current_song.audio_url = f'{song.filename}.mp3'
+            # if os.environ.get('FLASK_ENV') == 'production':
+            #     upload = upload_file_to_s3(song)
+            #     if 'url' not in upload:
+            #         return { 'errors': {'message': 'Oops! something went wrong on our end '}}, 500
+            #     current_song.audio_url = upload['url']
+            # else:
+            #     current_song.audio_url = f'{song.filename}.mp3'
 
         current_song.name = data['name']
         current_song.track_number = data['track_number']
