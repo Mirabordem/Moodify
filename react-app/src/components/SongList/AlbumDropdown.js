@@ -11,6 +11,7 @@ import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, useRef } from "react";
 import { ThunkAddSongToPlaylist } from "../../store/playlists";
 import AddSongPlaylistModal from "../AddSongPlaylistModal";
+import NewPlaylist from "../NewPlaylist";
 
 export default function AlbumDropDown({ songId, albumOwner }) {
   // console.log("🚀 ~ file: AlbumDropdown.js:18 ~ AlbumDropDown ~ songId:", songId)
@@ -67,7 +68,7 @@ export default function AlbumDropDown({ songId, albumOwner }) {
     );
   });
 
-  const addSongPlaylist = (
+  let addSongPlaylist = (
     <OpenModalButton
       buttonText={
         <>
@@ -80,6 +81,23 @@ export default function AlbumDropDown({ songId, albumOwner }) {
       modalComponent={<AddSongPlaylistModal songId={songId} />}
     />
   );
+
+  if (!currUserPlaylists.length) {
+    addSongPlaylist = (
+      <OpenModalButton
+        className="new-album-playlist1"
+        buttonText={
+          <>
+            <span className="menu-icon1">
+              <FontAwesomeIcon icon={faPlus} />
+            </span>{" "}
+            Create Playlist
+          </>
+        }
+        modalComponent={<NewPlaylist formType="Create" userId={user.id} />}
+      />
+    );
+  }
 
   // if (pageType === 'album'){
   if (user && albumOwner === user.id) {
