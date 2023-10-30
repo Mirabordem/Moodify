@@ -55,3 +55,9 @@ body {
   font-weight: 300;
   z-index: 100;
 }
+
+.all-validation-errors {
+  color: red;
+  font-size: smaller;
+  text-align: center;
+}
