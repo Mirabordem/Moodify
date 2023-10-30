@@ -27,7 +27,7 @@
 
 .track-info {
     /* border: 2px solid red; */
-    margin-right: 200px;
+    margin-right: 100px;
 }
 
 
@@ -75,8 +75,8 @@
 
 .volume-control {
     display: flex;
+    margin-left: 120px;
     align-items: center;
-    margin-left: 300px;
 }
 
 .volume-control input[type="range"] {

@@ -2,6 +2,7 @@ import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect, useRef } from "react";
 import { ThunkAddSongToPlaylist } from "../../store/playlists";
+import "./AddSongPlaylistModal.css";
 
 function AddSongPlaylistModal({ songId }) {
   const { closeModal } = useModal();
@@ -38,7 +39,8 @@ function AddSongPlaylistModal({ songId }) {
     );
   });
 
-  return <div>{playlistsMap}</div>;
+  return <div className="nested-dropdown"> {playlistsMap}</div>;
+
 }
 
 export default AddSongPlaylistModal;
