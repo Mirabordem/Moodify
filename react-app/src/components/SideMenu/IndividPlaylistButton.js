@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
 import DeletePlaylistModal from "../DeletePlaylistModal";
+import NewPlaylist from "../NewPlaylist";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 
@@ -49,13 +50,26 @@ export default function PlaylistUpdateButton({ playlistId, isOpen, handlePlaylis
               buttonText={
                 <>
                   <span className="menu-icon">
+                    <FontAwesomeIcon icon={faEdit}/>
+                  </span>{" "}
+                  Update Playlist
+                </>
+              }
+              // modalComponent={<DeletePlaylistModal playlistId={playlistId} />}
+              modalComponent={<NewPlaylist formType="Edit" playlistId={playlistId} />}
+              onItemClick={() => setShowMenu(false)}
+            />
+            <OpenModalButton
+              buttonText={
+                <>
+                  <span className="menu-icon">
                     <FontAwesomeIcon icon={faTrash} />
                   </span>{" "}
                   Delete Playlist
                 </>
               }
               modalComponent={<DeletePlaylistModal playlistId={playlistId} />}
-              onItemClick={() => setShowMenu(false)}  
+              onItemClick={() => setShowMenu(false)}
             />
           </div>
         </div>
