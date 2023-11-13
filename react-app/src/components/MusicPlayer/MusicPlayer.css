@@ -62,6 +62,10 @@
     transition: color 0.2s;
 }
 
+.controls button:disabled {
+    color: rgb(85, 106, 96);
+}
+
 .controls button:hover {
     color: rgb(95, 195, 146);
 }

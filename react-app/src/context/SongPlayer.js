@@ -14,6 +14,7 @@ export default function SongPlayerProvider({ children }) {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [songAdded, setSongAdded] = useState(false)
   const [currentVolume, setVolume] = useState(50);
+  const [shuffle, setShuffle] = useState(false)
 
   return (
     <>
@@ -37,6 +38,8 @@ export default function SongPlayerProvider({ children }) {
           setSongAdded,
           currentVolume,
           setVolume,
+          shuffle,
+          setShuffle
         }}
       >
         {children}
