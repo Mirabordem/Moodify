@@ -44,6 +44,11 @@
     color: rgb(132, 92, 125);
 }
 
+.controls-progress {
+    display: flex;
+    flex-direction: column;
+}
+
 .controls {
     /* border: 2px solid rgb(95, 195, 146); */
     width: 400px;
@@ -72,6 +77,8 @@
 
 .progress-bar {
     margin: 20px 0;
+    width: 400px;
+    height: 30px;
     /* border: 2px solid purple; */
 }
 
