@@ -73,6 +73,43 @@ def delete_playlist(id):
     return {'user': current_user.to_dict(), 'message': 'Successfully Deleted'}
 
 
+
+@playlist_routes.route('/<int:id>/edit', methods=['PUT'])
+@login_required
+def edit_playlist(id):
+    """
+    Edits playlist. Returns a new playlist dictionary.
+    """
+
+    form = EditPlaylistForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+
+        playlist = Playlist.query.get(id)
+
+        if form.data['cover_image_url']:
+
+            image = form.data['cover_image_url']
+            image.filename = get_unique_filename(image.filename)
+            url='https://i.imgur.com/wzh4JdR.jpg'
+
+        else:
+            url=None
+
+        playlist.name = form.data['name']
+        playlist.cover_image_url = url
+        playlist.description = form.data['description']
+        user_id= current_user.id
+
+        db.session.commit()
+        return playlist.to_dict()
+
+    return {'errors': form.errors}, 400
+
+
+
+
 @playlist_routes.route('/<int:playlistId>/songs/<int:songId>')
 @login_required
 def add_song_to_playlist(playlistId, songId):

@@ -12,7 +12,7 @@ function DeleteAlbumModal({ albumId }) {
   const id = albumId;
   const album = useSelector((state) => state.albums[id]);
   const [errors, setErrors] = useState({})
-  
+
   const handleDelete = async (e) => {
     e.preventDefault();
     const data = await dispatch(ThunkDeleteAlbum(id))
