@@ -16,12 +16,13 @@
 }
 
 .signup-container6 {
+    /* border: 2px solid red; */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 480px;
-    height: 710px;
+    height: 720px;
     background-color: rgb(21, 21, 21);
     padding: 5px;
     box-shadow: 2px 2px 22px rgb(70, 70, 70);
@@ -37,7 +38,10 @@
 
 .cac-2 {
     margin-top: 0;
-    margin-left:14px;
+    height: 110px;
+    width: 110px;
+    /* margin-left: 14px; */
+    margin-left: 40px;
     /* border: 2px solid red; */
 }
 
@@ -123,7 +127,26 @@ input {
 
 input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-  margin: 0px;
-  margin-right: 5px;
+    filter: invert(1);
+    margin: 0px;
+    margin-right: 5px;
+}
+
+
+.not-loading {
+    display: none;
+}
+
+
+.is-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: 670px;
 }

@@ -309,24 +309,17 @@ export default function NewPlaylist({ formType, userId, playlistId }) {
     const [description, setDescription] = useState("");
     const [didPicChange, setDidPicChange] = useState(false);
     const [errors, setErrors] = useState({});
-    // const { playlistId } = useParams();
+    const [loading, setLoading] = useState(false)
 
     const playlist = useSelector(state => state.playlists[playlistId]);
 
     useEffect(() => {
       if (formType === 'Edit' && playlist) {
-
-        // setDidPicChange(false); // Reset the pic change state
         setDescription(playlist.description);
         setName(playlist.name);
       }
     }, [formType, playlist]);
 
-    // const handleAlbumCoverChange = (e) => {
-    //   const ourPicture = e.target.files[0];
-    //   setDidPicChange(true); // Set the pic change state to true
-    //   // Additional logic for handling album cover
-    // };
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -334,9 +327,9 @@ export default function NewPlaylist({ formType, userId, playlistId }) {
       formData.append('name', name);
       formData.append('description', description);
 
-    //   if (didPicChange) {
-    //     // Handle album cover in formData
-    //   }
+      setLoading(true)
+
+
 
       if (formType === "Create") {
         formData.append('user_id', userId);
@@ -344,6 +337,8 @@ export default function NewPlaylist({ formType, userId, playlistId }) {
         try {
           const data = await dispatch(ThunkCreatePlaylist(formData));
           if (data?.name) {
+            setLoading(false)
+
             closeModal();
           } else if (data?.errors) {
             setErrors(data.errors);
@@ -357,6 +352,8 @@ export default function NewPlaylist({ formType, userId, playlistId }) {
           if (response.errors) {
             setErrors(response.errors);
           } else {
+            setLoading(false)
+
             closeModal();
           }
         } catch (error) {
@@ -364,9 +361,10 @@ export default function NewPlaylist({ formType, userId, playlistId }) {
         }
       }
     };
-    console.log("Description", description)
-    console.log("Name", name)
-    console.log("playlist-description", playlist?.description)
+
+    const loadingClass1 = loading ? "is-loading1" : "not-loading1"
+
+
 
   return (
     <div className="signup-container3">
@@ -405,6 +403,7 @@ export default function NewPlaylist({ formType, userId, playlistId }) {
           Cancel
         </button>
       </form>
+      <div className={loadingClass1}>Loading...</div>
     </div>
   );
 }
