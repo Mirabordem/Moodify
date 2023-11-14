@@ -111,6 +111,28 @@
     cursor: pointer;
 }
 
+.progress-bar input[type="range"] {
+    width: 300px;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 5px;
+    background: #888;
+    border-radius: 10px;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.progress-bar input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: rgb(95, 195, 146);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 .volume-control input[type="range"]:hover {
     opacity: 1;
 }

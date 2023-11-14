@@ -72,10 +72,10 @@ export default function MusicPlayer() {
    return songsArr.sort(() => Math.random() - 0.5)
   }
 
-  const progress = () => {
+  const timeUpdate = () => {
     const duration = audio.current.duration
     const currentTime = audio.current.currentTime
-
+    setCurrentSong({...currentSong, 'progress': currentTime / duration * 100, 'duration': duration})
   }
 
 
@@ -84,7 +84,7 @@ export default function MusicPlayer() {
       <audio
         src={currentSong?.audioUrl}
         ref={audio}
-        onTimeUpdate={progress}
+        onTimeUpdate={timeUpdate}
         onEnded={() => playNext()}
       />
 
@@ -115,7 +115,6 @@ export default function MusicPlayer() {
                 setIsPlaying(true)
               }
             }}
-            // disabled={!currentSong?.name}
           >
             {!isPlaying ? "Play" : "Pause"}
           </button>
@@ -126,6 +125,16 @@ export default function MusicPlayer() {
           >
             Next</button>
         </div>
+        <div className="progress-bar">
+          <input
+            type="range"
+            step='0.5'
+            min="0"
+            max={String(currentSong.duration)}
+            value={String(songProgress)}
+            onChange={(e) => setSongProgress(currentSong.progress)}
+          />
+          </div>
       </div>
       <div className="volume-control">
         <input
