@@ -20,6 +20,7 @@ alex_songs = [
             "audio_url": "https://moodifybucket.s3.us-east-2.amazonaws.com/Amy+Winehouse+-+Back+to+Black+-2006+released/3-Me+%26+Mr+Jones.mp3",
             "song_length": 153,
         },
+        
         {
             "name": "Just Friends",
             "album_id": 7,

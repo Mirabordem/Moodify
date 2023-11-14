@@ -224,7 +224,6 @@ def create_album_song(id):
         data = form.data
 
         song = data["audio_url"]
-
         song.filename = get_unique_filename(song.filename)
         # if os.environ.get('FLASK_ENV') == 'production':
         url='test'

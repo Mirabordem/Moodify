@@ -76,6 +76,93 @@ def seed_albums():
         user_owner=3
     )
 
+    album_10 = Album(
+        title="Don't Look Back",
+        release_date=date(1978,8,2),
+        artist="Boston",
+        cover_image_url="https://moodifybucket.s3.amazonaws.com/f1595d68e0ab4ace89eb13a25cd2907f.jpg",
+        user_owner=1
+    )
+    album_11 = Album(
+        title="24K Magic",
+        release_date=date(2016,11,18),
+        artist="Bruno Mars",
+        cover_image_url="https://moodifybucket.s3.amazonaws.com/c72acb7503fa4187a6a5830bd750fa59.mp3",
+        user_owner=2
+    )
+    album_12 = Album(
+        title="Collage",
+        release_date=date(2016, 11, 4),
+        artist="ChainSmokers",
+        cover_image_url="https://moodifybucket.s3.amazonaws.com/83d65adbb58e4b61af227d53507e6ecf.jpg",
+        user_owner=1
+    )
+
+    album_13 = Album(
+        title="The Essence",
+        release_date=date(2008, 10, 15),
+        artist="Deva Premal",
+        cover_image_url="https://moodifybucket.s3.amazonaws.com/a34236f270374f399d1da7a842a50e78.jpg",
+        user_owner=2
+    )
+
+    album_14 = Album(
+        title="Hotel California",
+        release_date=date(1976, 12, 8),
+        artist="Eagles",
+        cover_image_url="https://moodifybucket.s3.amazonaws.com/66113f69bbd347e88c7cd6163dc9dc95.png",
+        user_owner=3
+    )
+
+    album_15 = Album(
+        title="Powerslave",
+        release_date=date(1984, 9, 3),
+        artist="Iron Maiden",
+        cover_image_url="https://moodifybucket.s3.amazonaws.com/4ba249c7a9d04f9bbb5779a3830d956a.jpg",
+        user_owner=1
+    )
+
+    album_16 = Album(
+        title="One of the Boys",
+        release_date=date(2008, 6, 17),
+        artist="Katy Perry",
+        cover_image_url="https://moodifybucket.s3.amazonaws.com/0687230ca2944dd1b07fb72b9c601898.jpg",
+        user_owner=2
+    )
+
+    album_17 = Album(
+        title="Wish You Were Here",
+        release_date=date(1975, 9, 12),
+        artist="Pink Floyd",
+        cover_image_url="https://moodifybucket.s3.amazonaws.com/0dcb3208222f4155a192ff234ca4711e.jpg",
+        user_owner=3
+    )
+
+    album_18 = Album(
+        title="The Grand Illusion",
+        release_date=date(1977, 7, 7),
+        artist="Styx",
+        cover_image_url="https://moodifybucket.s3.amazonaws.com/55b31fa476094e3c887e37a54178b6f6.jpg",
+        user_owner=1
+    )
+
+    album_19 = Album(
+        title="House of Balloons",
+        release_date=date(2011, 3, 21),
+        artist="The Weeknd",
+        cover_image_url="https://moodifybucket.s3.amazonaws.com/9ccf9d767c1e4ee1b1bcf9d177c47619.jpg",
+        user_owner=2
+    )
+
+    album_20 = Album(
+        title="Blue Album",
+        release_date=date(1994, 5, 10),
+        artist="Weezer",
+        cover_image_url="https://moodifybucket.s3.amazonaws.com/9b3c0fd510b04a7cb0b711ba594cd9b4.jpg",
+        user_owner=3
+    )
+
+
 
     db.session.add(album_1)
     db.session.add(album_2)
@@ -86,6 +173,17 @@ def seed_albums():
     db.session.add(album_7)
     db.session.add(album_8)
     db.session.add(album_9)
+    db.session.add(album_10)
+    db.session.add(album_11)
+    db.session.add(album_12)
+    db.session.add(album_13)
+    db.session.add(album_14)
+    db.session.add(album_15)
+    db.session.add(album_16)
+    db.session.add(album_17)
+    db.session.add(album_18)
+    db.session.add(album_19)
+    db.session.add(album_20)
 
     db.session.commit()
 
