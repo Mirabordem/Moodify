@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import ReactSlider from "react-slider";
+import Slider from 'rc-slider'
 import { useSongPlayer } from "../../context/SongPlayer";
 import { useSelector } from "react-redux";
 import "./MusicPlayer.css";
@@ -57,10 +57,12 @@ export default function MusicPlayer() {
   };
 
   const playPrev = () => {
-    if (prevSong && currentSongIndex !== 0) {
-      setNextSong(songQueue[currentSongIndex]);
-      setCurrentSong(songQueue[currentSongIndex - 1]);
-      setCurrentSongIndex(currentSongIndex - 1);
+    if (currentSong?.progress < 3) {
+        audio.current.currentTime = 0;
+    } else if (prevSong && currentSongIndex !== 0) {
+        setNextSong(songQueue[currentSongIndex]);
+        setCurrentSong(songQueue[currentSongIndex - 1]);
+        setCurrentSongIndex(currentSongIndex - 1);
     }
     if (isPlaying === true) {
       setPlayAnyway(true);
@@ -75,9 +77,12 @@ export default function MusicPlayer() {
   const timeUpdate = () => {
     const duration = audio.current.duration
     const currentTime = audio.current.currentTime
-    setCurrentSong({...currentSong, 'progress': currentTime / duration * 100, 'duration': duration})
+    setCurrentSong({...currentSong, 'progress': currentTime, 'duration': duration})
+    console.log('progress', currentSong.progress)
+    console.log('duration', currentSong.duration)
   }
 
+  console.log()
 
   return (
     <div className="musicPlayer">
@@ -126,13 +131,15 @@ export default function MusicPlayer() {
             Next</button>
         </div>
         <div className="progress-bar">
-          <input
-            type="range"
-            step='0.5'
-            min="0"
-            max={String(currentSong.duration)}
-            value={String(songProgress)}
-            onChange={(e) => setSongProgress(currentSong.progress)}
+          <Slider
+            min={0}
+            defaultValue={0}
+            max={currentSong.duration}
+            value={currentSong.progress}
+            onChange={(e) => audio.current.currentTime = e}
+            railStyle={{ backgroundColor: "#888", height: 10, borderRadius: '5px'}}
+            trackStyle={{ backgroundColor: "rgb(95, 195, 146)", height: 10, borderRadius: '5px'}}
+            disabled={!currentSong?.name}
           />
           </div>
       </div>
