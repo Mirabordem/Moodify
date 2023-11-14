@@ -18,6 +18,7 @@ export default function CreateSong({formType, albumId, songId}) {
     const [songLength, setSongLength] = useState(1)
     const [changeAudioURL, setChangeAudioURL] = useState(false)
     const [errors, setErrors] = useState({})
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         if (formType === 'edit' && currentSong) {
@@ -27,8 +28,12 @@ export default function CreateSong({formType, albumId, songId}) {
             setSongLength(currentSong.songLength)
         }
     }, [currentSong])
+
+
+
     const submitSong = async e => {
         e.preventDefault()
+        setLoading(true)
 
 
         if(formType !== 'edit') {
@@ -43,6 +48,8 @@ export default function CreateSong({formType, albumId, songId}) {
             if (data?.errors) {
                 setErrors(data.errors);
             } else if (data?.name) {
+                setLoading(false)
+
                 closeModal();
             }
             setSongAdded(!songAdded)
@@ -55,12 +62,18 @@ export default function CreateSong({formType, albumId, songId}) {
 
             const data = await dispatch(thunkUpdateSong(updatedSong, songId))
             if (data?.name) {
+                setLoading(false)
+
                 closeModal();
             } else if (data?.errors) {
                 setErrors(data.errors);
             }
         }
     }
+
+
+    const loadingClass2 = loading ? "is-loading2" : "not-loading2"
+
 
     return (
         <div className="signup-container7">
@@ -116,6 +129,7 @@ export default function CreateSong({formType, albumId, songId}) {
                 </label>
                 <button className="signup-button" type="submit">{formType === 'edit' ? 'Update Song' : 'Add Song'}</button>
             </form>
+            <div className={loadingClass2}>Loading...</div>
         </div>
     )
 }
