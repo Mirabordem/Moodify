@@ -87,7 +87,7 @@ def seed_albums():
         title="24K Magic",
         release_date=date(2016,11,18),
         artist="Bruno Mars",
-        cover_image_url="https://moodifybucket.s3.amazonaws.com/c72acb7503fa4187a6a5830bd750fa59.mp3",
+        cover_image_url="https://moodifybucket.s3.amazonaws.com/5e7f35c45d1641ec99ae012554eeb517.jpg",
         user_owner=2
     )
     album_12 = Album(
