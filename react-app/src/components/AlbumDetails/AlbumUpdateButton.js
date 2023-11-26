@@ -24,12 +24,13 @@ export default function AlbumUpdateButton({ user, albumId }) {
     }, []);
 
     const ulClassName = "album-update-dropdown" + (showMenu ? "" : " hidden");
+    const hideMenuOnClick = () => setShowMenu(false)
 
     return (
       <div className="album-update-dropdown1" ref={ulRef}>
         <button style={{ background: 'transparent', border: 'none', color: '#000' }} onClick={(e) => {
           e.stopPropagation();
-          setShowMenu(!showMenu);
+          setShowMenu(true);
         }}>
             <div className="album-dots-container">
           <span className="album-big-dots">...</span>
@@ -40,17 +41,20 @@ export default function AlbumUpdateButton({ user, albumId }) {
             <div className="dropdown5">
               <OpenModalButton
                 className="new-album"
+                onButtonClick={hideMenuOnClick}
                 buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faEdit} /></span> Edit Album</>}
                 modalComponent={<NewAlbum formType="Edit" albumId={albumId} />}
               />
               <div className="horizontal-line2"></div>
               <OpenModalButton
                 buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faPlus} /></span> Add Song</>}
+                onButtonClick={hideMenuOnClick}
                 modalComponent={<CreateSong albumId={albumId} />}
               />
               <div className="horizontal-line2"></div>
               <OpenModalButton
                 buttonText={<><span className="menu-icon"><FontAwesomeIcon icon={faTrash} /></span> Delete Album</>}
+                onButtonClick={hideMenuOnClick}
                 modalComponent={<DeleteAlbumModal albumId={albumId} />}
               />
             </div>

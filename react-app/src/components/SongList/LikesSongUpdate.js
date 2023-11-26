@@ -11,11 +11,11 @@ import { ThunkAddSongToPlaylist } from "../../store/playlists";
 import AddSongPlaylistModal from "../AddSongPlaylistModal";
 import NewPlaylist from "../NewPlaylist";
 
-export default function LikesSongUpdate({ songId }) {
+export default function LikesSongUpdate({ songId, showMenu, setShowMenu }) {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const playlists = useSelector((state) => state.playlists);
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
   const [showNestedMenu, setShowNestedMenu] = useState(false);
   const ulRef = useRef();
 
@@ -35,8 +35,11 @@ export default function LikesSongUpdate({ songId }) {
   const nestedDropDown =
     "song-update-dropdown2" + (showNestedMenu ? "" : " hidden");
 
+  const hideMenuOnClick = () => setShowMenu(false)
+
   let addSongPlaylist = (
     <OpenModalButton
+      onButtonClick={hideMenuOnClick}
       buttonText={
         <>
           <span className="menu-icon1">
@@ -56,6 +59,7 @@ export default function LikesSongUpdate({ songId }) {
   if (!currUserPlaylists.length) {
     addSongPlaylist = (
       <OpenModalButton
+        onButtonClick={hideMenuOnClick}
         className="new-album-playlist1"
         buttonText={
           <>
@@ -101,6 +105,7 @@ export default function LikesSongUpdate({ songId }) {
       <div ref={ulRef}>
         <div className="profile-small-button">
           <OpenModalButton
+            onButtonClick={hideMenuOnClick}
             buttonText={
               <>
                 <span className="menu-icon">
@@ -115,6 +120,7 @@ export default function LikesSongUpdate({ songId }) {
         <div className="horizontal-line1"></div>
         <div className="profile-small-button">
           <OpenModalButton
+            onButtonClick={hideMenuOnClick}
             buttonText={
               <>
                 <span className="menu-icon">

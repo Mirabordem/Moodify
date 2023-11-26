@@ -1,17 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import OpenModalButton from "../OpenModalButton";
-import DeleteSongModal from "../DeleteSongModal";
-import SignupFormModal from "../SignupFormModal";
-import LoginFormModal from "../LoginFormModal";
-import CreateSong from "../CreateSongModal";
 import {
   ThunkAddSongToPlaylist,
   ThunkRemoveSongToPlaylist,
 } from "../../store/playlists";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+// import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import AlbumDropDown from "./AlbumDropdown";
 import PlaylistSongUpdate from "./PlayListSongUpdate";
 import LikesSongUpdate from "./LikesSongUpdate"
@@ -93,13 +88,12 @@ export default function SongUpdateButton({
       {isOpen && user && showMenu && (
       <div className={ulClassName}>
         <div className="dropdown1a">
-          {pageType === 'album' && <AlbumDropDown songId={songId} albumOwner={albumOwner}/>}
-          {pageType === 'playlist' && <PlaylistSongUpdate songId={songId} playlistsMap={playlistsMap}/>}
-          {pageType === 'likes' && <LikesSongUpdate songId={songId}/>}
+          {pageType === 'album' && <AlbumDropDown songId={songId} albumOwner={albumOwner} setShowMenu={setShowMenu} showMenu={showMenu}/>}
+          {pageType === 'playlist' && <PlaylistSongUpdate songId={songId} playlistsMap={playlistsMap} setShowMenu={setShowMenu} showMenu={showMenu}/>}
+          {pageType === 'likes' && <LikesSongUpdate songId={songId} setShowMenu={setShowMenu} showMenu={showMenu}/>}
         </div>
       </div>
       )}
     </div>
   );
 }
-

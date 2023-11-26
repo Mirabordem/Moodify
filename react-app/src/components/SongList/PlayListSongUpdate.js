@@ -14,7 +14,7 @@ import { useState, useEffect, useRef } from "react";
 import { useSongPlayer } from "../../context/SongPlayer";
 import AddSongPlaylistModal from "../AddSongPlaylistModal";
 
-export default function PlaylistSongUpdate({ songId }) {
+export default function PlaylistSongUpdate({ songId, showMenu, setShowMenu }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const song = useSelector((state) => state.songs[songId]);
@@ -22,7 +22,7 @@ export default function PlaylistSongUpdate({ songId }) {
 
   const playlists = useSelector((state) => state.playlists);
   const playlist = useSelector((state) => state.playlists[id]);
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
   const [showNestedMenu, setShowNestedMenu] = useState(false);
   const ulRef = useRef();
   const {
@@ -51,6 +51,8 @@ export default function PlaylistSongUpdate({ songId }) {
 
   const nestedDropDown =
     "song-update-dropdown2" + (showNestedMenu ? "" : " hidden");
+
+  const hideMenuOnClick = () => setShowMenu(false)
 
   const currUserPlaylists = Object.values(playlists).filter((playlist) =>
     user?.userPlaylists.includes(playlist.id)
@@ -82,6 +84,7 @@ export default function PlaylistSongUpdate({ songId }) {
 
   const addSongPlaylist = (
     <OpenModalButton
+      onButtonClick={hideMenuOnClick}
       buttonText={
         <>
           <span className="menu-icon1">
@@ -147,6 +150,7 @@ export default function PlaylistSongUpdate({ songId }) {
       <div ref={ulRef}>
         <div className="profile-small-button">
           <OpenModalButton
+            onButtonClick={hideMenuOnClick}
             buttonText={
               <>
                 <span className="menu-icon">
@@ -161,6 +165,7 @@ export default function PlaylistSongUpdate({ songId }) {
         <div className="horizontal-line1"></div>
         <div className="profile-small-button">
           <OpenModalButton
+            onButtonClick={hideMenuOnClick}
             buttonText={
               <>
                 <span className="menu-icon">
