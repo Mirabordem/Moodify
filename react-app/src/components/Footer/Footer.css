@@ -13,7 +13,8 @@
 }
 
 .creators1 {
-    margin-right: 40px;
+    margin-right: 25px;
+    margin-left: 50px;
     margin-top: 10px;
     font-weight: bold;
     font-style: italic;
@@ -45,11 +46,28 @@
 }
 
 .dot {
-    margin-left: 25px;
+    margin-left: 30px;
+    color:rgb(66, 60, 63);
+}
+
+.dot1 {
+    margin-left: 35px;
+    font-style: italic;
 }
 
 .year-aa {
-    margin-left: 30px;
+    margin-left: 5px;
     font-style: italic;
     font-weight: bold;
+}
+
+.footer-icon {
+    margin-left: 5px;
+    font-size: 19px;
+    /* border: 2px solid red; */
+}
+
+.footer-icon:hover {
+    cursor: pointer;
+    color: white;
 }
