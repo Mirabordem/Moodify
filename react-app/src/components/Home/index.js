@@ -56,9 +56,9 @@ export default function Home() {
             <h1>Welcome to Moodify!</h1>
           </div>
           <div className="home-h3">
-            <NavLink exact to="/albums" className="homeAlbums">
+            <h2 className="homeAlbums">
               All Albums
-            </NavLink>
+            </h2>
           </div>
           <div className="album-cards-container">
             {albumCards}
