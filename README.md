@@ -149,18 +149,18 @@ flask run
 ## Contributors:
 
 Miroslawa(Mira) Borkowska
-https://github.com/Mirabordem
-https://www.linkedin.com/in/miroslawa-borkowska-3b72332a0/
+ - https://github.com/Mirabordem
+ - https://www.linkedin.com/in/miroslawa-borkowska-3b72332a0/
 
 Hayden Gogan
-https://github.com/h-moon-g
-https://www.linkedin.com/in/hayden-gogan-2570a92a1/
+ - https://github.com/h-moon-g
+ - https://www.linkedin.com/in/hayden-gogan-2570a92a1/
 
 Josh Goldenberg
-https://github.com/jgoldenberg29
-https://www.linkedin.com/in/josh-goldenberg-252416a1/
+ - https://github.com/jgoldenberg29
+ - https://www.linkedin.com/in/josh-goldenberg-252416a1/
 
 Alex Heasley
-https://github.com/alexchrono
-https://www.linkedin.com/in/alexander-heasley-1979732a0/
+ - https://github.com/alexchrono
+ - https://www.linkedin.com/in/alexander-heasley-1979732a0/
 
