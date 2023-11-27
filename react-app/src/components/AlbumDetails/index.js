@@ -105,8 +105,9 @@ export default function AlbumDetails() {
   }
 
   const bigPlay = (e) => {
+    console.log()
     if (songQueue?.length) {
-      if (!currentSong?.name || songQueue[0]?.albumId !== id) {
+      if (!currentSong?.name || songQueue[0]?.albumId !== album.id) {
         setCurrentSong(songs[album.albumSongs[0]]);
         setNextSong(songs[album.albumSongs[1]]);
         if (songQueue[0].albumId !== id) {
@@ -126,10 +127,10 @@ export default function AlbumDetails() {
           setBigButtonStatus('play')
         }
       }
-      // else {
-      //   setIsPlaying(true);
-      //   setBigButtonStatus('pause')
-      // }
+      else {
+        setIsPlaying(true);
+        setBigButtonStatus('pause')
+      }
     }
   };
 

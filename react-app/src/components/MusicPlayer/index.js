@@ -39,7 +39,7 @@ export default function MusicPlayer() {
       audio.current.pause();
     }
     if (playAnyway) {
-      audio.current.play();
+      // audio.current.play();
       setPlayAnyway(false);
     }
   }, [isPlaying, playAnyway, bigButtonStatus]);
