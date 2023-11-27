@@ -27,7 +27,9 @@ export default function MusicPlayer() {
     currentVolume,
     setVolume,
     shuffle,
-    setShuffle
+    setShuffle,
+    bigButtonStatus,
+    setBigButtonStatus
   } = useSongPlayer();
 
   useEffect(() => {
@@ -40,7 +42,7 @@ export default function MusicPlayer() {
       audio.current.play();
       setPlayAnyway(false);
     }
-  }, [isPlaying, playAnyway]);
+  }, [isPlaying, playAnyway, bigButtonStatus]);
 
   const albums = useSelector((state) => state.albums);
 
@@ -57,7 +59,7 @@ export default function MusicPlayer() {
   };
 
   const playPrev = () => {
-    if (currentSong?.progress < 3) {
+    if (currentSong?.progress > 3) {
         audio.current.currentTime = 0;
     } else if (prevSong && currentSongIndex !== 0) {
         setNextSong(songQueue[currentSongIndex]);
@@ -82,7 +84,7 @@ export default function MusicPlayer() {
     console.log('duration', currentSong.duration)
   }
 
-  console.log()
+  console.log('isPlaying', isPlaying)
 
   return (
     <div className="musicPlayer">
@@ -111,6 +113,7 @@ export default function MusicPlayer() {
             onClick={() => {
               if (songQueue?.length && currentSong?.name) {
                 setIsPlaying(!isPlaying);
+                if(bigButtonStatus === 'pause') setBigButtonStatus('play')
               }
               else {
                 const newQueue = shuffleSongs(Object.values(allSongs))

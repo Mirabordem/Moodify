@@ -26,7 +26,7 @@ export default function AlbumDetails() {
   const user = useSelector((state) => state.session.user);
   const [pageType, setPageType] = useState("album");
   const [emptyAggs, setEmptyAggs] = useState(false);
-  const [bigButtonStatus, setBigButtonStatus] = useState('play')
+  // const [bigButtonStatus, setBigButtonStatus] = useState('play')
 
   const {
     setIsPlaying,
@@ -37,6 +37,9 @@ export default function AlbumDetails() {
     setSongQueue,
     isPlaying,
     setCurrentSongIndex,
+    bigButtonStatus,
+    setBigButtonStatus,
+    setPlayAnyway
   } = useSongPlayer();
 
   useEffect(() => {
@@ -89,6 +92,10 @@ export default function AlbumDetails() {
     }
   }, [songs, id]);
 
+  useEffect(() => {
+    setBigButtonStatus('play')
+  }, [])
+
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
     // dispatch(thunkGetAllAlbums());
@@ -110,15 +117,19 @@ export default function AlbumDetails() {
           }
         }
         setIsPlaying(true);
+        setPlayAnyway(true)
         setBigButtonStatus('pause')
       }
       if (isPlaying) {
-        setIsPlaying(false);
-        setBigButtonStatus('play')
-      } else {
-        setIsPlaying(true);
-        setBigButtonStatus('pause')
+        if(songQueue[0]?.albumId === album.id) {
+          setIsPlaying(false);
+          setBigButtonStatus('play')
+        }
       }
+      // else {
+      //   setIsPlaying(true);
+      //   setBigButtonStatus('pause')
+      // }
     }
   };
 
@@ -140,6 +151,8 @@ export default function AlbumDetails() {
     editAlbumButton = <AlbumUpdateButton user={user} albumId={album.id} />;
   }
 
+  console.log("songQueue", songQueue)
+  console.log("current Song", currentSong)
   return (
     <div className="album-detail-page-container">
       <div className="album-id-top-info">
@@ -162,7 +175,7 @@ export default function AlbumDetails() {
           <span className="play-arrow"></span>
         </button> */}
         <button className="play-button" onClick={bigPlay}>
-        {bigButtonStatus === 'play' ? <i className="fa-solid fa-play"></i> : <i class="fa-solid fa-pause"></i>}
+        {bigButtonStatus === 'pause' || (isPlaying && currentSong.albumId === album.id) ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}
         </button>
         {editAlbumButton}
       </div>

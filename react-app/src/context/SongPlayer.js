@@ -15,6 +15,7 @@ export default function SongPlayerProvider({ children }) {
   const [songAdded, setSongAdded] = useState(false)
   const [currentVolume, setVolume] = useState(50);
   const [shuffle, setShuffle] = useState(false)
+  const [bigButtonStatus, setBigButtonStatus] = useState('play')
 
   return (
     <>
@@ -39,7 +40,9 @@ export default function SongPlayerProvider({ children }) {
           currentVolume,
           setVolume,
           shuffle,
-          setShuffle
+          setShuffle,
+          bigButtonStatus,
+          setBigButtonStatus
         }}
       >
         {children}
