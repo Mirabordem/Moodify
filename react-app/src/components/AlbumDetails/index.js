@@ -11,6 +11,23 @@ import AlbumUpdateButton from "./AlbumUpdateButton";
 import { useSongPlayer } from "../../context/SongPlayer";
 
 export default function AlbumDetails() {
+  const {
+    setIsPlaying,
+    setNextSong,
+    currentSong,
+    setCurrentSong,
+    songQueue,
+    setSongQueue,
+    isPlaying,
+    setCurrentSongIndex,
+    bigButtonStatus,
+    setBigButtonStatus,
+    setPlayAnyway,
+    pageTitle,
+    setPageTitle,
+    queueTitle,
+    setQueueTitle
+  } = useSongPlayer();
   const { id } = useParams();
   const dispatch = useDispatch();
   const album = useSelector((state) => state.albums[id]);
@@ -28,19 +45,7 @@ export default function AlbumDetails() {
   const [emptyAggs, setEmptyAggs] = useState(false);
   // const [bigButtonStatus, setBigButtonStatus] = useState('play')
 
-  const {
-    setIsPlaying,
-    setNextSong,
-    currentSong,
-    setCurrentSong,
-    songQueue,
-    setSongQueue,
-    isPlaying,
-    setCurrentSongIndex,
-    bigButtonStatus,
-    setBigButtonStatus,
-    setPlayAnyway
-  } = useSongPlayer();
+
 
   useEffect(() => {
     let newNumberOfSongs = totalNumberOfSongs;
@@ -93,8 +98,14 @@ export default function AlbumDetails() {
   }, [songs, id]);
 
   useEffect(() => {
-    setBigButtonStatus('play')
-  }, [])
+    if(pageTitle !== queueTitle) {
+      setBigButtonStatus('play')
+    }
+  }, [pageTitle, queueTitle])
+
+  useEffect(() => {
+    setPageTitle(album?.title)
+  }, [album])
 
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
@@ -105,12 +116,12 @@ export default function AlbumDetails() {
   }
 
   const bigPlay = (e) => {
-    console.log()
     if (songQueue?.length) {
-      if (!currentSong?.name || songQueue[0]?.albumId !== album.id) {
+      if (!currentSong?.name || pageTitle !== queueTitle) {
         setCurrentSong(songs[album.albumSongs[0]]);
         setNextSong(songs[album.albumSongs[1]]);
-        if (songQueue[0].albumId !== id) {
+        if (pageTitle !== queueTitle) {
+          setQueueTitle(album?.title)
           let songTracks = [];
           for (let songId of album.albumSongs) {
             songTracks.push(songs[songId]);
@@ -122,7 +133,7 @@ export default function AlbumDetails() {
         setBigButtonStatus('pause')
       }
       if (isPlaying) {
-        if(songQueue[0]?.albumId === album.id) {
+        if(pageTitle === queueTitle) {
           setIsPlaying(false);
           setBigButtonStatus('play')
         }
@@ -172,11 +183,8 @@ export default function AlbumDetails() {
       </div>
 
       <div className="album-id-functions-3">
-        {/* <button className="play-button" onClick={bigPlay}>
-          <span className="play-arrow"></span>
-        </button> */}
-        <button className="play-button" onClick={bigPlay}>
-        {bigButtonStatus === 'pause' || (isPlaying && currentSong.albumId === album.id) ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}
+        <button className="play-button-album" onClick={bigPlay}>
+        {bigButtonStatus === 'pause' || (isPlaying && pageTitle === queueTitle) ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}
         </button>
         {editAlbumButton}
       </div>
