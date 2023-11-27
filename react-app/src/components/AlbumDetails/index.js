@@ -26,6 +26,7 @@ export default function AlbumDetails() {
   const user = useSelector((state) => state.session.user);
   const [pageType, setPageType] = useState("album");
   const [emptyAggs, setEmptyAggs] = useState(false);
+  const [bigButtonStatus, setBigButtonStatus] = useState('play')
 
   const {
     setIsPlaying,
@@ -109,11 +110,14 @@ export default function AlbumDetails() {
           }
         }
         setIsPlaying(true);
+        setBigButtonStatus('pause')
       }
       if (isPlaying) {
         setIsPlaying(false);
+        setBigButtonStatus('play')
       } else {
         setIsPlaying(true);
+        setBigButtonStatus('pause')
       }
     }
   };
@@ -154,9 +158,11 @@ export default function AlbumDetails() {
       </div>
 
       <div className="album-id-functions-3">
-        <button className="play-button" onClick={bigPlay}>
-          {/* conditionally render play arrow and pause bars with isPlaying variable */}
+        {/* <button className="play-button" onClick={bigPlay}>
           <span className="play-arrow"></span>
+        </button> */}
+        <button className="play-button" onClick={bigPlay}>
+        {bigButtonStatus === 'play' ? <i className="fa-solid fa-play"></i> : <i class="fa-solid fa-pause"></i>}
         </button>
         {editAlbumButton}
       </div>

@@ -119,3 +119,27 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+
+.play-button {
+    position: relative;
+    background: rgb(95, 195, 146);
+    border: none;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 55px;
+}
+
+.fa-play {
+    font-size: 43px;
+    margin-left: 10px;
+}
+
+.fa-pause {
+    font-size: 45px;
+}
