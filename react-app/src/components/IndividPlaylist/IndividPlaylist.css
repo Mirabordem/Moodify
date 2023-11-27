@@ -72,7 +72,7 @@
     height: 100px;
     display: flex;
     align-items: center;
-    margin-left: 100px;
+    margin-left: 200px;
 }
 
 .new-album {
@@ -140,9 +140,25 @@
 }
 
 
-.play-button {
-    /* border: 2px solid red; */
-    margin-left: 100px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+.play-button-playlist {
+    position: relative;
+    background: rgb(95, 195, 146);
+    border: none;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 15px 0px 0px 105px;
+}
+
+.fa-play {
+    font-size: 43px;
+    margin-left: 10px;
+}
+
+.fa-pause {
+    font-size: 45px;
 }
