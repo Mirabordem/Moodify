@@ -33,6 +33,7 @@ export default function MusicPlayer() {
   } = useSongPlayer();
 
   useEffect(() => {
+
     if (isPlaying) {
       audio.current.play();
     } else {
@@ -42,7 +43,9 @@ export default function MusicPlayer() {
       // audio.current.play();
       setPlayAnyway(false);
     }
-  }, [isPlaying, playAnyway, bigButtonStatus]);
+    audio.current.volume= currentVolume / 100
+  }, [isPlaying, playAnyway, currentVolume]);
+
 
   const albums = useSelector((state) => state.albums);
 
