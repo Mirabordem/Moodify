@@ -55,7 +55,7 @@ export default function SideMenu() {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const closeMenu = () => setShowMenu(false);
+  const hideMenuOnClick = () => setShowMenu(false);
   const ulClassName = "profile-dropdown1" + (showMenu ? "" : " hidden");
 
   let likedSongs = null;
@@ -129,6 +129,7 @@ export default function SideMenu() {
                     onMouseLeave={(e) => {
                       e.target.style.color = "rgb(95, 195, 146)";
                     }}
+                    onButtonClick={hideMenuOnClick}
                   >
                     +
                   </span>
@@ -166,6 +167,7 @@ export default function SideMenu() {
         <div className={ulClassName} ref={ulRef}>
           <div className="profile-small-button">
             <OpenModalButton
+              onButtonClick={hideMenuOnClick}
               buttonText={
                 <>
                   <span className="menu-icon">
@@ -174,13 +176,14 @@ export default function SideMenu() {
                   Login
                 </>
               }
-              onItemClick={closeMenu}
+              // onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
           </div>
           <div className="horizontal-line1"></div>
           <div className="profile-small-button">
             <OpenModalButton
+              onButtonClick={hideMenuOnClick}
               buttonText={
                 <>
                   <span className="menu-icon">
@@ -189,7 +192,7 @@ export default function SideMenu() {
                   Sign Up
                 </>
               }
-              onItemClick={closeMenu}
+              // onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
           </div>

@@ -25,6 +25,7 @@ export default function PlaylistUpdateButton({ playlistId, isOpen, handlePlaylis
   }, []);
 
   const ulClassName = "album-update-dropdown" + (showMenu ? "" : " hidden");
+  const hideMenuOnClick = () => setShowMenu(false)
 
   return (
     <div className="album-update-dropdown13" ref={ulRef}>
@@ -47,6 +48,7 @@ export default function PlaylistUpdateButton({ playlistId, isOpen, handlePlaylis
           <div className="dropdown8">
 
             <OpenModalButton
+              onButtonClick={hideMenuOnClick}
               buttonText={
                 <>
                   <span className="menu-icon">
@@ -60,6 +62,7 @@ export default function PlaylistUpdateButton({ playlistId, isOpen, handlePlaylis
               onItemClick={() => setShowMenu(false)}
             />
             <OpenModalButton
+              onButtonClick={hideMenuOnClick}
               buttonText={
                 <>
                   <span className="menu-icon">
@@ -69,7 +72,7 @@ export default function PlaylistUpdateButton({ playlistId, isOpen, handlePlaylis
                 </>
               }
               modalComponent={<DeletePlaylistModal playlistId={playlistId} />}
-              onItemClick={() => setShowMenu(false)}
+              // onItemClick={() => setShowMenu(false)}
             />
           </div>
         </div>

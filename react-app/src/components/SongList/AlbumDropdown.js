@@ -13,14 +13,14 @@ import { ThunkAddSongToPlaylist } from "../../store/playlists";
 import AddSongPlaylistModal from "../AddSongPlaylistModal";
 import NewPlaylist from "../NewPlaylist";
 
-export default function AlbumDropDown({ songId, albumOwner }) {
+export default function AlbumDropDown({ songId, albumOwner, showMenu, setShowMenu }) {
   // console.log("🚀 ~ file: AlbumDropdown.js:18 ~ AlbumDropDown ~ songId:", songId)
   const user = useSelector((state) => state.session.user);
   const { id } = useParams();
   const playlists = useSelector((state) => state.playlists);
   const dispatch = useDispatch();
   const album = useSelector((state) => state.albums[id]);
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
   const [showNestedMenu, setShowNestedMenu] = useState(false);
   const ulRef = useRef();
 
@@ -43,6 +43,8 @@ export default function AlbumDropDown({ songId, albumOwner }) {
   const currUserPlaylists = Object.values(playlists).filter((playlist) =>
     user?.userPlaylists.includes(playlist.id)
   );
+
+  const hideMenuOnClick = () => setShowMenu(false)
 
   const playlistsMap = currUserPlaylists.map((currPlaylist) => {
     return (
@@ -70,6 +72,7 @@ export default function AlbumDropDown({ songId, albumOwner }) {
 
   let addSongPlaylist = (
     <OpenModalButton
+      onButtonClick={hideMenuOnClick}
       buttonText={
         <>
           <span className="menu-icon1">
@@ -85,6 +88,7 @@ export default function AlbumDropDown({ songId, albumOwner }) {
   if (!currUserPlaylists.length) {
     addSongPlaylist = (
       <OpenModalButton
+        onButtonClick={hideMenuOnClick}
         className="new-album-playlist1"
         buttonText={
           <>
@@ -106,6 +110,7 @@ export default function AlbumDropDown({ songId, albumOwner }) {
         <div ref={ulRef} className="album-dropdown">
           <>
             <OpenModalButton
+              onButtonClick={hideMenuOnClick}
               buttonText={
                 <>
                   <span className="menu-icon">
@@ -118,6 +123,7 @@ export default function AlbumDropDown({ songId, albumOwner }) {
             />
             <div className="horizontal-line1"></div>
             <OpenModalButton
+              onButtonClick={hideMenuOnClick}
               buttonText={
                 <>
                   <span className="menu-icon">
@@ -184,6 +190,7 @@ export default function AlbumDropDown({ songId, albumOwner }) {
       <div>
         <div className="profile-small-button">
           <OpenModalButton
+            onButtonClick={hideMenuOnClick}
             buttonText={
               <>
                 <span className="menu-icon">
@@ -198,6 +205,7 @@ export default function AlbumDropDown({ songId, albumOwner }) {
         <div className="horizontal-line1"></div>
         <div className="profile-small-button">
           <OpenModalButton
+            onButtonClick={hideMenuOnClick}
             buttonText={
               <>
                 <span className="menu-icon">

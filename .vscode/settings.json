@@ -4,6 +4,7 @@
         "Individ",
         "jsonify",
         "Moodify"
+
     ],
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#65c89b",
@@ -25,4 +26,7 @@
         "titleBar.inactiveForeground": "#15202b99"
     },
     "peacock.color": "#42b883"
+
+    ]
+
 }
