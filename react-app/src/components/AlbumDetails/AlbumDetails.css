@@ -136,10 +136,9 @@
 }
 
 .fa-play {
-    font-size: 43px;
-    margin-left: 10px;
+    color: rgb(61, 61, 61);
 }
 
 .fa-pause {
-    font-size: 45px;
+    color: rgb(61, 61, 61);
 }

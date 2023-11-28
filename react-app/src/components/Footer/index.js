@@ -31,7 +31,7 @@ export default function Footer() {
   return (
     <div id="footer-container">
       <div className="creators">
-        <div className="creators1">Meet Awesome Developers:</div>
+        <div className="creators1">Developers:</div>
         <div className="creator">
           <div className="creator-text">Miroslawa (Mira) Borkowska</div>
           <a
@@ -42,7 +42,7 @@ export default function Footer() {
             <i className="fab fa-github creator-link-icon"></i>
           </a>
             <FontAwesomeIcon icon={faLinkedin} className="footer-icon" onClick={handleLinkedinMira} />
-          <div className="dot">•</div>
+          {/* <div className="dot">•</div> */}
 
         </div>
         <div className="creator">
@@ -55,7 +55,7 @@ export default function Footer() {
             <i className="fab fa-github creator-link-icon"></i>
           </a>
           <FontAwesomeIcon icon={faLinkedin} className="footer-icon" onClick={handleLinkedinHayden} />
-          <div className="dot">•</div>
+          {/* <div className="dot">•</div> */}
 
 
         </div>
@@ -69,7 +69,7 @@ export default function Footer() {
             <i className="fab fa-github creator-link-icon"></i>
           </a>
           <FontAwesomeIcon icon={faLinkedin} className="footer-icon" onClick={handleLinkedinJosh} />
-          <div className="dot">•</div>
+          {/* <div className="dot">•</div> */}
 
 
         </div>
