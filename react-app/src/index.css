@@ -26,6 +26,7 @@ body {
   width: 260px;
   display: inline-flex;
   flex-direction: column;
+  align-items: center;
   height: 100%;
   background-color: black;
   color: white;
@@ -53,7 +54,7 @@ body {
   font-family: "Lato", sans-serif;
   font-weight: 300;
   margin-left: 100px;
-  z-index: 100;
+  /* z-index: 100; */
   padding: 0px 100px;
 }
 
