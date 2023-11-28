@@ -93,7 +93,7 @@ export default function PlaylistDetails() {
 
   useEffect(() => {
     if(pageTitle === queueTitle) {
-      setBigButtonStatus('play')
+      setBigButtonStatus('pause')
     } else {
       setBigButtonStatus('play')
     }
@@ -103,9 +103,13 @@ export default function PlaylistDetails() {
     setPageTitle(playlist?.name)
   }, [playlist])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [playlist])
+
   const bigPlay = (e) => {
     if (songQueue?.length) {
-      if (!currentSong?.name || pageTitle !== queueTitle) {
+      if ((!currentSong?.name || pageTitle !== queueTitle) && bigButtonStatus === 'play') {
         setCurrentSong(songs[playlist.songsOnPlaylist[0]]);
         setNextSong(songs[playlist.songsOnPlaylist[1]]);
         if (pageTitle !== queueTitle) {

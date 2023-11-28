@@ -52,6 +52,8 @@ export default function SongList({
     setPlayAnyway,
     currentSongIndex,
     setCurrentSongIndex,
+    setBigButtonStatus,
+    setQueueTitle
   } = useSongPlayer();
 
   // let songTracks = [];
@@ -90,29 +92,14 @@ export default function SongList({
     return null;
   }
 
-  // if (pageType === "playlist") {
-  //   let songTracks = []
-  //   for (let songId of playlist.songsOnPlaylist) {
-  //     songTracks.push(songs[songId]);
-  //     setSongList(songTracks)
-  //   }
-  // } else if (pageType === "likes") {
-  //   let songTracks = []
-  //   for (let likeId of userLikedSongIds) {
-  //     songTracks.push(songs[likeId]);
-  //     setSongList(songTracks)
-  //   }
-  // } else {
-  //   let songTracks = []
-  //   for (let songId of album.albumSongs) {
-  //     songTracks.push(songs[songId]);
-  //     setSongList(songTracks)
-  //   }
-  // }
-
   const setSongs = (song) => {
     setSongQueue(songList)
     setCurrentSong(song);
+    if(album?.title) {
+      setQueueTitle(album?.title)
+    } else if (playlist?.name) {
+      setQueueTitle(playlist?.name)
+    }
 
     const index = songList.findIndex((item) => item.name === song.name);
 
@@ -133,6 +120,7 @@ export default function SongList({
       setPlayAnyway(true);
     }
     setIsPlaying(true);
+    setBigButtonStatus('pause')
   };
 
   const songListMap = songList?.map((song) => {
