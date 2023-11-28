@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
 import DeletePlaylistModal from "../DeletePlaylistModal";
+import NewPlaylist from "../NewPlaylist";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 
@@ -24,6 +25,7 @@ export default function PlaylistUpdateButton({ playlistId, isOpen, handlePlaylis
   }, []);
 
   const ulClassName = "album-update-dropdown" + (showMenu ? "" : " hidden");
+  const hideMenuOnClick = () => setShowMenu(false)
 
   return (
     <div className="album-update-dropdown13" ref={ulRef}>
@@ -46,6 +48,21 @@ export default function PlaylistUpdateButton({ playlistId, isOpen, handlePlaylis
           <div className="dropdown8">
 
             <OpenModalButton
+              onButtonClick={hideMenuOnClick}
+              buttonText={
+                <>
+                  <span className="menu-icon">
+                    <FontAwesomeIcon icon={faEdit}/>
+                  </span>{" "}
+                  Update Playlist
+                </>
+              }
+              // modalComponent={<DeletePlaylistModal playlistId={playlistId} />}
+              modalComponent={<NewPlaylist formType="Edit" playlistId={playlistId} />}
+              onItemClick={() => setShowMenu(false)}
+            />
+            <OpenModalButton
+              onButtonClick={hideMenuOnClick}
               buttonText={
                 <>
                   <span className="menu-icon">
@@ -55,7 +72,7 @@ export default function PlaylistUpdateButton({ playlistId, isOpen, handlePlaylis
                 </>
               }
               modalComponent={<DeletePlaylistModal playlistId={playlistId} />}
-              onItemClick={() => setShowMenu(false)}  
+              // onItemClick={() => setShowMenu(false)}
             />
           </div>
         </div>

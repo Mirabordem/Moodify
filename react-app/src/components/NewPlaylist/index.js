@@ -1,129 +1,110 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from '../../context/Modal'
-import { Link, useHistory, NavLink, useParams } from "react-router-dom";
 import { ThunkCreatePlaylist, ThunkEditPlaylist } from "../../store/playlists";
 import "./NewPlaylist.css"
 
-
-
-export default function NewPlaylist({formType,userId}) {
-
+export default function NewPlaylist({ formType, userId, playlistId }) {
     const dispatch = useDispatch();
-    const history = useHistory();
     const { closeModal } = useModal();
-    const [title,setTitle]= useState();
-    const [albumCover, setAlbumCover]= useState();
-    const [description,setDescription]=useState("")
-    const [didPicChange, setDidPicChange] = useState(false)
-    const [errors, setErrors] = useState({})
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false)
 
-    // const playlist = useSelector(state => state.albums[albumId]);
+    const playlist = useSelector(state => state.playlists[playlistId]);
 
-    // useEffect(() => {
-    //     if (formType === 'Edit' && playlist) {
-    //         setCover_image_url(playlist.coverImageUrl);
-    //         setDescription(playlist.description)
-    //         setName(playlist.title);
+    useEffect(() => {
+      if (formType === 'Edit' && playlist) {
+        setDescription(playlist.description);
+        setName(playlist.name);
+      }
+    }, [formType, playlist]);
 
-
-    //     }
-    // }, [formType, playlist]);
-
-    const handleAlbumCoverChange = (e) => {
-        const ourPicture = e.target.files[0];
-        setAlbumCover(ourPicture);
-    };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        let formData = new FormData();
+      e.preventDefault();
+      let formData = new FormData();
+      formData.append('name', name);
+      formData.append('description', description);
 
-        formData.append('name', title);
-        formData.append('description', description);
+      setLoading(true)
 
 
-        if (formType === "Create") {
-            if (didPicChange) {
-                formData.append('cover_image_url', albumCover);
-            }
-            formData.append('user_id', userId);
 
-            let data = await dispatch(ThunkCreatePlaylist(formData));
-            if (data?.name) {
-                history.push(`/playlists/${data.id}`);
-                closeModal();
-            } else if (data?.errors) {
+      if (formType === "Create") {
+        formData.append('user_id', userId);
 
-                console.log("🚀 ~ file: index.js:59 ~ handleSubmit ~ data.errors:", data.errors)
-                setErrors(data.errors)
-            }
+        try {
+          const data = await dispatch(ThunkCreatePlaylist(formData));
+          if (data?.name) {
+            setLoading(false)
+
+            closeModal();
+          } else if (data?.errors) {
+            setErrors(data.errors);
+          }
+        } catch (error) {
+          console.error("An error occurred:", error.message);
         }
-        // else if (formType === "Edit") {
-        //     if (didPicChange) {
-        //         formData.append('cover_image_url', albumCover);
+      } else if (formType === "Edit") {
+        try {
+          const response = await dispatch(ThunkEditPlaylist(formData, playlistId));
+          if (response.errors) {
+            setErrors(response.errors);
+          } else {
+            setLoading(false)
 
-        //     }
-        //     let test2 = await dispatch(ThunkEditPlaylist(formData, playlistId));
-
-        //     if (test2) {
-        //         closeModal();
-        //     }
-
-        // }
-
+            closeModal();
+          }
+        } catch (error) {
+          console.error("An error occurred:", error.message);
+        }
+      }
     };
 
+    const loadingClass1 = loading ? "is-loading1" : "not-loading1"
 
 
 
-return (
+  return (
+    <div className="signup-container3">
+      {formType === 'Edit' && (
+        <div className="new-h1">Edit Playlist</div>
+      )}
 
+      {formType === 'Create' && (
+        <div className='new-h1'>Create Playlist</div>
+      )}
 
-        <div className="signup-container3">
-            {formType === 'Edit' && (
-                <div className="new-h1">Edit Playlist</div>
-            )}
-
-            {formType === 'Create' && (
-                <div className='new-h1'>Create Playlist</div>
-            )}
-
-            <form onSubmit={handleSubmit} encType="multipart/form-data" className='signup-form'>
-                {/* <ul>
-                    {errors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
-                        ))}
-                    </ul> */}
-                {errors.message && <p className="add-playlist-errors all-validation-errors">{errors.message}</p>}
-                {errors.name && <p className="add-playlist-errors all-validation-errors">{errors.name}</p>}
-                <label className='login-label'>
-                    Name
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                        // placeholder="Name"
-                    />
-                </label>
-                {errors.description && <p className="add-playlist-errors all-validation-errors">{errors.description}</p>}
-                <label className='login-label'>
-                    Description
-                    <input
-                        type="text"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
-                        // placeholder="Description"
-                    />
-                </label>
-                <button className="signup-button" type="submit">{formType === 'Create' ? 'Create Playlist' : 'Edit Playlist'}</button>
-                <button type="button" className="signup-button" onClick={closeModal}>
-                    Cancel
-                </button>
-            </form>
-        </div>
-    )
-
+      <form onSubmit={handleSubmit} encType="multipart/form-data" className='signup-form'>
+        {errors.message && <p className="add-playlist-errors all-validation-errors">{errors.message}</p>}
+        {errors.name && <p className="add-playlist-errors all-validation-errors">{errors.name}</p>}
+        <label className='login-label'>
+          Name
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </label>
+        {errors.description && <p className="add-playlist-errors all-validation-errors">{errors.description}</p>}
+        <label className='login-label'>
+          Description
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+        </label>
+        <button className="signup-button" type="submit">{formType === 'Create' ? 'Create Playlist' : 'Edit Playlist'}</button>
+        <button type="button" className="signup-button" onClick={closeModal}>
+          Cancel
+        </button>
+      </form>
+      <div className={loadingClass1}>Loading...</div>
+    </div>
+  );
 }

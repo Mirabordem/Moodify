@@ -12,6 +12,7 @@ import IndividPlaylist from "./components/IndividPlaylist";
 import ProfilePage from "./components/ProfilePage";
 import LikedSongs from "./components/LikedSongs";
 import Footer from "./components/Footer";
+import NewPlaylist from "./components/NewPlaylist";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ function App() {
           <Route exact path="/playlists/:id">
             <IndividPlaylist />
           </Route>
+  
         </Switch>
       )}
         <Footer />

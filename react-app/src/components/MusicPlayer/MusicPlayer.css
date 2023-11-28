@@ -1,12 +1,11 @@
-.musicPlayer {
+/* .musicPlayer {
     position: fixed;
     bottom: 0px;
     left: 0;
     width: 100%;
-    height: 8%;
+    height: 11%;
     display: flex;
-    flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     background-color: black;
     color: rgb(126, 123, 123);
@@ -14,10 +13,12 @@
     font-weight: 300;
     margin-left: 100px;
     z-index: 100;
-}
+} */
 .track-parent {
     /* border: 2px solid yellow; */
-    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    /* margin-right: 80px; */
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -31,6 +32,7 @@
 
 
 .song-name {
+    text-wrap: wrap;
     font-size: 18px;
     font-weight: bold;
     margin: 10px 0;
@@ -42,6 +44,14 @@
     opacity: 0.8;
     margin-top: 0;
     color: rgb(132, 92, 125);
+}
+
+.controls-progress {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    /* padding: 0px 25px;
+    margin: 0px 25px; */
 }
 
 .controls {
@@ -62,19 +72,25 @@
     transition: color 0.2s;
 }
 
-.controls button:hover {
-    color: rgb(95, 195, 146);
+.controls button:disabled {
+    color: rgb(85, 106, 96);
 }
+
+/* .controls button:hover {
+    color: rgb(95, 195, 146);
+} */
 
 .progress-bar {
     margin: 20px 0;
+    width: 400px;
+    height: 30px;
     /* border: 2px solid purple; */
 }
 
 
 .volume-control {
     display: flex;
-    margin-left: 120px;
+    margin-right: 160px;
     align-items: center;
 }
 

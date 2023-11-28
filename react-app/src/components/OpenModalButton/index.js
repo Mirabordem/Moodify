@@ -15,7 +15,7 @@ function OpenModalButton({
     if (onModalClose) setOnModalClose(onModalClose);
     setModalContent(modalComponent);
     if (onButtonClick) onButtonClick();
-    if (onItemClick) onItemClick();
+    // if (onItemClick) onItemClick();
   };
 
   return (

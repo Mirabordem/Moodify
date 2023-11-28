@@ -19,6 +19,7 @@ export default function NewAlbum({ formType, albumId }) {
   const [didPicChange, setDidPicChange] = useState(false);
   const [errors, setErrors] = useState({});
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (formType === "Edit" && album) {
@@ -39,6 +40,7 @@ export default function NewAlbum({ formType, albumId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData();
+    setLoading(true)
 
     formData.append("title", title);
     formData.append("release_date", releaseDate);
@@ -49,6 +51,8 @@ export default function NewAlbum({ formType, albumId }) {
       let data = await dispatch(ThunkCreateAlbum(formData));
 
       if (data?.title) {
+        setLoading(false)
+
         history.push(`/albums/${data.id}`);
         closeModal();
       } else if (data?.errors) {
@@ -61,6 +65,8 @@ export default function NewAlbum({ formType, albumId }) {
       let data = await dispatch(ThunkEditAlbum(formData, albumId));
 
       if (data?.title) {
+        setLoading(false)
+
         history.push(`/albums/${data.id}`);
         closeModal();
       } else if (data?.errors) {
@@ -68,6 +74,10 @@ export default function NewAlbum({ formType, albumId }) {
       }
     }
   };
+
+
+  const loadingClass = loading ? "is-loading" : "not-loading"
+
 
   return (
     <div className="new-album-main-container">
@@ -153,7 +163,7 @@ export default function NewAlbum({ formType, albumId }) {
                 {errors.cover_image_url}
               </p>
             )}
-          <label class="custom-file-input">
+          <label className="custom-file-input">
             <p className="file-album-cover">Album Cover</p>
             ➤ Choose File
             <input
@@ -176,6 +186,7 @@ export default function NewAlbum({ formType, albumId }) {
           </button>
         </form>
       </div>
+      <div className={loadingClass}>Loading...</div>
     </div>
   );
 }

@@ -124,7 +124,7 @@
 }
 
 
-.play-button {
+/* .play-button {
     position: relative;
     background: rgb(95, 195, 146);
     border: none;
@@ -138,10 +138,6 @@
     margin-left: 55px;
 }
 
-.play-button:hover {
-    background: rgb(113, 230, 173);
-}
-
 .play-arrow {
     position: absolute;
     width: 0;
@@ -153,7 +149,7 @@
     left: 50%;
     transform: translate(-40%, -50%);
     z-index: 1000;
-}
+} */
 
 .menu-icon1 {
     margin-right: 8px;

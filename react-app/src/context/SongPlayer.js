@@ -14,6 +14,11 @@ export default function SongPlayerProvider({ children }) {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [songAdded, setSongAdded] = useState(false)
   const [currentVolume, setVolume] = useState(50);
+  const [shuffle, setShuffle] = useState(false)
+  const [bigButtonStatus, setBigButtonStatus] = useState('play')
+  const [newQueue, setNewQueue] = useState(false)
+  const [pageTitle, setPageTitle] = useState('')
+  const [queueTitle, setQueueTitle] = useState('')
 
   return (
     <>
@@ -37,6 +42,16 @@ export default function SongPlayerProvider({ children }) {
           setSongAdded,
           currentVolume,
           setVolume,
+          shuffle,
+          setShuffle,
+          bigButtonStatus,
+          setBigButtonStatus,
+          newQueue,
+          setNewQueue,
+          pageTitle,
+          setPageTitle,
+          queueTitle,
+          setQueueTitle
         }}
       >
         {children}

@@ -10,9 +10,26 @@ import "./IndividPlaylist.css";
 import { useSongPlayer } from "../../context/SongPlayer";
 
 export default function PlaylistDetails() {
+  const {
+    setIsPlaying,
+    setNextSong,
+    currentSong,
+    setCurrentSong,
+    songQueue,
+    setSongQueue,
+    isPlaying,
+    bigButtonStatus,
+    setBigButtonStatus,
+    setPlayAnyway,
+    newQueue,
+    setNewQueue,
+    pageTitle,
+    setPageTitle,
+    queueTitle,
+    setQueueTitle
+  } = useSongPlayer();
   const { id } = useParams();
   const dispatch = useDispatch();
-
   const playlist = useSelector((state) => state.playlists[id]);
   const songs = useSelector((state) => state.songs);
   const [pageType, setPageType] = useState("playlist");
@@ -28,15 +45,7 @@ export default function PlaylistDetails() {
   // const [isOpen, setIsOpen] = useState(false);
   // const [showMenu, setShowMenu] = useState(false)
 
-  const {
-    setIsPlaying,
-    setNextSong,
-    currentSong,
-    setCurrentSong,
-    songQueue,
-    setSongQueue,
-    isPlaying,
-  } = useSongPlayer();
+
 
   useEffect(() => {
     let newNumberOfSongs = totalNumberOfSongs;
@@ -82,16 +91,29 @@ export default function PlaylistDetails() {
     }
   }, [songs, id]);
 
+  useEffect(() => {
+    if(pageTitle === queueTitle) {
+      setBigButtonStatus('pause')
+    } else {
+      setBigButtonStatus('play')
+    }
+  }, [pageTitle, queueTitle])
+
+  useEffect(() => {
+    setPageTitle(playlist?.name)
+  }, [playlist])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [playlist])
+
   const bigPlay = (e) => {
-    console.log(songQueue);
     if (songQueue?.length) {
-      if (
-        !currentSong?.name ||
-        songQueue[0]?.id !== playlist?.songsOnPlaylist[0]
-      ) {
+      if ((!currentSong?.name || pageTitle !== queueTitle) && bigButtonStatus === 'play') {
         setCurrentSong(songs[playlist.songsOnPlaylist[0]]);
         setNextSong(songs[playlist.songsOnPlaylist[1]]);
-        if (songQueue[0].id !== playlist.songsOnPlaylist[0]) {
+        if (pageTitle !== queueTitle) {
+          setQueueTitle(playlist?.name)
           let songTracks = [];
           for (let songId of playlist.songsOnPlaylist) {
             songTracks.push(songs[songId]);
@@ -99,11 +121,17 @@ export default function PlaylistDetails() {
           }
         }
         setIsPlaying(true);
+        setPlayAnyway(true)
+        setBigButtonStatus('pause')
       }
       if (isPlaying) {
-        setIsPlaying(false);
+        if(pageTitle === queueTitle) {
+          setIsPlaying(false);
+          setBigButtonStatus('play')
+        }
       } else {
         setIsPlaying(true);
+        setBigButtonStatus('pause')
       }
     }
   };
@@ -152,17 +180,9 @@ export default function PlaylistDetails() {
       </div>
 
       <div id="album-id-functions-4">
-        <button className="play-button" onClick={bigPlay}>
-          {/* conditionally render play arrow and pause bars with isPlaying variable */}
-          <span className="play-arrow"></span>
+      <button className="play-button-playlist" onClick={bigPlay}>
+        {bigButtonStatus === 'pause' || (isPlaying && queueTitle === pageTitle) ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}
         </button>
-        {/* <button
-          className="play-button"
-          // onClick={playFirstSong}
-        >
-          <span className="play-arrow"></span>
-        </button> */}
-        {/* <IndividPlaylistButton user={user} playlistId={playlist.id} /> */}
       </div>
 
       <div id="playlist-id-song-list">
@@ -171,79 +191,3 @@ export default function PlaylistDetails() {
     </div>
   );
 }
-
-// export default function PlaylistDetails() {
-//   const { id } = useParams();
-//   const dispatch = useDispatch();
-
-//   const playlist = useSelector((state) => state.playlists[id]);
-//   const songs = useSelector((state) => state.songs);
-//   const albums = useSelector((state)=> state.albums)
-//   const [pageType, setPageType] = useState('playlist')
-//   const user = useSelector((state) => state.session.user);
-
-//   if (!playlist || !Object.values(songs).length) {
-//     // dispatch(thunkGetAllAlbums());
-//     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
-//     return null;
-//   }
-
-//   const playlist_tracks = [];
-//   for (let songId of playlist.songsOnPlaylist) {
-//     playlist_tracks.push(songs[songId]);
-//   }
-
-//   let picture
-//   if (playlist.coverImageUrl!==null){
-//     picture=playlist.coverImageUrl
-//   }
-//   else if (playlist?.coverImageUrl=== null && playlist?.songsOnPlaylist.length>0){
-
-//     picture=albums[songs[playlist.songsOnPlaylist[0]].albumId].coverImageUrl
-
-//   }
-//   else {
-//     //below is the default picture for new playlists. we can replace this easily
-//     picture = 'https://i.imgur.com/UFYut0H.jpg'
-//   }
-
-//   return (
-//     <div className="album-page-container">
-//       <div className="album-id-top-info">
-//         <img className="playlist-id-cover-img"
-//         // src={picture}
-//         src={playlist.coverImageUrl}
-//         alt="Playlist Cover"
-//       />
-//         <div id="album-id-info-words">
-//           <p className="info-album-p">Playlist</p>
-//           <div>
-//             <p className="album-title-page">{playlist.title}</p>
-//           </div>
-
-//           <p className="album-release-info">
-//             {playlist.description}, Amount of songs here, Length of playlist
-//             here
-//           </p>
-//         </div>
-//       </div>
-
-//       <div id="album-id-functions-3">
-//       <button
-//           className="play-button"
-//           // onClick={playFirstSong}
-//         >
-//           <span className="play-arrow"></span>
-//         </button>
-//         {/* <IndividPlaylistButton user={user} playlistId={playlist.id} /> */}
-//       </div>
-
-//       <div id="playlist-id-song-list">
-//         <SongList
-//         pageType={pageType}
-//         playlist={playlist}/>
-//       </div>
-
-//     </div>
-//   );
-// }

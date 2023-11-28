@@ -1,4 +1,11 @@
 {
+    "peacock.remoteColor": "#42b883",
+    "cSpell.words": [
+        "Individ",
+        "jsonify",
+        "Moodify"
+
+    ],
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#65c89b",
         "activityBar.background": "#65c89b",
@@ -18,10 +25,8 @@
         "titleBar.inactiveBackground": "#42b88399",
         "titleBar.inactiveForeground": "#15202b99"
     },
-    "peacock.remoteColor": "#42b883",
-    "cSpell.words": [
-        "Individ",
-        "jsonify",
-        "Moodify"
+    "peacock.color": "#42b883"
+
     ]
+
 }

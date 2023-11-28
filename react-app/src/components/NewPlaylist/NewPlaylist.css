@@ -26,7 +26,7 @@
     align-items: center;
     justify-content: center;
     width: 450px;
-    height: 480px;
+    height: 550px;
     background-color: rgb(21, 21, 21);
     padding: 5px;
     /* box-shadow: 2px 2px 22px rgb(107, 106, 106); */
@@ -97,4 +97,24 @@ input {
 
 .sign-up-link a:hover {
     color: rgb(95, 195, 146);
+}
+
+
+
+.not-loading1 {
+    display: none;
+}
+
+
+.is-loading1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: 500px;
 }
