@@ -107,6 +107,10 @@ export default function AlbumDetails() {
     setPageTitle(album?.title)
   }, [album])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [album])
+
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
     // dispatch(thunkGetAllAlbums());
@@ -116,8 +120,9 @@ export default function AlbumDetails() {
   }
 
   const bigPlay = (e) => {
+    console.log("isPlaying1", isPlaying)
     if (songQueue?.length) {
-      if (!currentSong?.name || pageTitle !== queueTitle) {
+      if ((!currentSong?.name || pageTitle !== queueTitle) && bigButtonStatus === 'play') {
         setCurrentSong(songs[album.albumSongs[0]]);
         setNextSong(songs[album.albumSongs[1]]);
         if (pageTitle !== queueTitle) {
@@ -133,7 +138,9 @@ export default function AlbumDetails() {
         setBigButtonStatus('pause')
       }
       if (isPlaying) {
+        console.log("isPlaying2", isPlaying)
         if(pageTitle === queueTitle) {
+          console.log("isPlaying3", isPlaying)
           setIsPlaying(false);
           setBigButtonStatus('play')
         }
@@ -143,6 +150,7 @@ export default function AlbumDetails() {
         setBigButtonStatus('pause')
       }
     }
+    console.log("isPlaying4", isPlaying)
   };
 
   let defaultAlbumLength = 0;

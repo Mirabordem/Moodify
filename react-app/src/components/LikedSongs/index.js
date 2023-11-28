@@ -26,6 +26,10 @@ export default function LikedSongs() {
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
   <div loved-songs-container>
     <div className="likedSongs-container">
