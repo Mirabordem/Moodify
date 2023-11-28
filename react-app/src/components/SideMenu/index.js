@@ -142,7 +142,7 @@ export default function SideMenu() {
           </li>
           <div className="horizontal-line4"></div>
         </ul>
-        <ul>{userPlaylistMap}</ul>
+        <ul className='playlist-container'>{userPlaylistMap}</ul>
       </div>
     );
   }

@@ -3,11 +3,13 @@ body {
   background: linear-gradient(rgb(80, 79, 79), black);
   margin: 0;
   padding: 0;
-  overflow-y: auto;
+
+  overflow-x: hidden;
   width: 100%;
   color: white;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
+
 }
 
 
@@ -24,6 +26,7 @@ body {
   top: 0;
   left: 0;
   width: 260px;
+  height: 89%;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -35,6 +38,27 @@ body {
   flex-grow: 1;
   z-index: 50;
 }
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #5e0a75 #0f0b0b;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 13px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #0f0b0b;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #5e0a75;
+    border-radius: 10px;
+    border: 3px none #000000;
+  }
 
 .container {
   height: 100%;
@@ -53,9 +77,9 @@ body {
   color: rgb(126, 123, 123);
   font-family: "Lato", sans-serif;
   font-weight: 300;
-  margin-left: 100px;
+
   /* z-index: 100; */
-  padding: 0px 100px;
+  padding: 0px 0px 0px 200px;
 }
 
 .all-validation-errors {
