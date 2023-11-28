@@ -51,18 +51,20 @@
 }
 
 .dot1 {
-    margin-left: 35px;
+    margin-left: 15px;
     font-style: italic;
 }
 
 .year-aa {
     margin-left: 5px;
+    margin-right: 0;
     font-style: italic;
     font-weight: bold;
 }
 
 .footer-icon {
     margin-left: 5px;
+    margin-right: 10px;
     font-size: 19px;
     /* border: 2px solid red; */
 }
