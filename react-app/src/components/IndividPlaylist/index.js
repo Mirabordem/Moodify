@@ -172,7 +172,8 @@ export default function PlaylistDetails() {
       </div>
 
       <div id="album-id-functions-4">
-      <button className="play-button-playlist" onClick={bigPlay}>
+      <button
+      className={`play-button-playlist ${!playlist.songsOnPlaylist.length ? 'big-play-diabled-playlist' : ''}`} onClick={bigPlay}>
         {bigButtonStatus === 'pause' || (isPlaying && queueTitle === pageTitle) ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}
         </button>
       </div>

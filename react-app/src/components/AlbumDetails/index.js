@@ -183,7 +183,7 @@ export default function AlbumDetails() {
       </div>
 
       <div className="album-id-functions-3">
-        <button className="play-button-album" onClick={bigPlay}>
+        <button className={`play-button-album ${!album.albumSongs.length ? 'big-play-diabled-album' : ''}`} onClick={bigPlay}>
         {bigButtonStatus === 'pause' || (isPlaying && pageTitle === queueTitle) ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}
         </button>
         {editAlbumButton}
