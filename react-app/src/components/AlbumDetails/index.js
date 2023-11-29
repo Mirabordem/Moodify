@@ -118,7 +118,7 @@ export default function AlbumDetails() {
 
   const bigPlay = (e) => {
 
-    if (songQueue?.length) {
+    if (songQueue?.length && album.albumSongs.length) {
       if ((!currentSong?.name || pageTitle !== queueTitle) && bigButtonStatus === 'play') {
         setCurrentSong(songs[album.albumSongs[0]]);
         setNextSong(songs[album.albumSongs[1]]);
