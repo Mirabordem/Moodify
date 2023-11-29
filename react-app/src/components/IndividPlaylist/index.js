@@ -100,7 +100,7 @@ export default function PlaylistDetails() {
   }, [playlist])
 
   const bigPlay = (e) => {
-    if (songQueue?.length) {
+    if (songQueue?.length && playlist.songsOnPlaylist.length) {
       if ((!currentSong?.name || pageTitle !== queueTitle) && bigButtonStatus === 'play') {
         setCurrentSong(songs[playlist.songsOnPlaylist[0]]);
         setNextSong(songs[playlist.songsOnPlaylist[1]]);
