@@ -77,7 +77,7 @@ export default function NewAlbum({ formType, albumId }) {
 
 
   const loadingClass = loading ? "is-loading" : "not-loading"
-
+  const albumErrorsClass = Object.values(Error).length ? "album-form-errors all-validation-errors" : "no-album-errors"
 
   return (
     <div className="new-album-main-container">
@@ -86,7 +86,7 @@ export default function NewAlbum({ formType, albumId }) {
 
         {formType === "Create" && <div className="new-h5">Create Album</div>}
         {errors.message && (
-          <p className="album-form-errors all-validation-errors">
+          <p className={albumErrorsClass}>
             {errors.message}
           </p>
         )}
@@ -101,7 +101,7 @@ export default function NewAlbum({ formType, albumId }) {
                     ))}
                 </ul> */}
             {errors.title && (
-              <p className="album-form-errors all-validation-errors">
+              <p className={albumErrorsClass}>
                 {errors.title}
               </p>
             )}
@@ -116,7 +116,7 @@ export default function NewAlbum({ formType, albumId }) {
             />
           </label>
             {errors.release_date && (
-              <p className="album-form-errors all-validation-errors">
+              <p className={albumErrorsClass}>
                 {errors.release_date}
               </p>
             )}
@@ -131,7 +131,7 @@ export default function NewAlbum({ formType, albumId }) {
             />
           </label>
             {errors.artist && (
-              <p className="album-form-errors all-validation-errors">
+              <p className={albumErrorsClass}>
                 {errors.artist}
               </p>
             )}
@@ -159,7 +159,7 @@ export default function NewAlbum({ formType, albumId }) {
             )}
           </label>
             {errors.cover_image_url && (
-              <p className="album-form-errors all-validation-errors">
+              <p className={albumErrorsClass}>
                 {errors.cover_image_url}
               </p>
             )}
