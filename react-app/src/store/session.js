@@ -103,7 +103,6 @@ export const signUp = (username, email, password) => async (dispatch) => {
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
-      console.log("🚀 ~ file: session.js:106 ~ signUp ~ data:", data)
       return data;
     }
   } else {

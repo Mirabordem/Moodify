@@ -3,9 +3,6 @@ import {
   ThunkAddSongToPlaylist,
   ThunkRemoveSongToPlaylist,
 } from "../../store/playlists";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faEdit, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
-// import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import AlbumDropDown from "./AlbumDropdown";
 import PlaylistSongUpdate from "./PlayListSongUpdate";
@@ -50,7 +47,6 @@ export default function SongUpdateButton({
         className="start"
         onClick={(e) => {
           e.stopPropagation();
-          // console.log("user is:" user)
           if (user) {
             dispatch(ThunkAddSongToPlaylist(playlist.id, songId));
             setShowNestedMenu(false);
@@ -80,7 +76,6 @@ export default function SongUpdateButton({
           e.stopPropagation();
           handlePlaylistButtonClick()
           setShowMenu(true);
-          // setShowMenu(!showMenu);
         }}
       >
         <i className="fas fa-ellipsis-h"></i>

@@ -39,7 +39,6 @@ function LoginFormModal() {
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            // placeholder="Email"
           />
         </label>
         <label className="login-label">
@@ -49,7 +48,6 @@ function LoginFormModal() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            // placeholder="Password"
           />
         </label>
         <span className="login-errors">{Object.values(errors).length ? 'invalid login credentials': ''}</span>

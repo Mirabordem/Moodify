@@ -25,8 +25,6 @@ function AddSongPlaylistModal({ songId }) {
           if (user) {
             dispatch(ThunkAddSongToPlaylist(currPlaylist.id, songId));
             closeModal();
-            // setShowNestedMenu(false);
-            // setShowMenu(false);
           }
         }}
       >
