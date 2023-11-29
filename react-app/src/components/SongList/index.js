@@ -22,7 +22,7 @@ export default function SongList({
   const [songList, setSongList] = useState([])
   const user = useSelector((state) => state.session.user);
   const album = useSelector((state) => state.albums[id]);
-  const albumSongs = useSelector(state => state.albums[id].albumSongs)
+  const albumSongs = useSelector(state => state.albums[id]?.albumSongs)
   const playlist = useSelector(state => state.playlists[id])
   const songs = useSelector((state) => state.songs);
   const handlePlaylistButtonClick = (playlistId) => {
