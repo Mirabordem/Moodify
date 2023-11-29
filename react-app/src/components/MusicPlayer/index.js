@@ -135,8 +135,8 @@ export default function MusicPlayer() {
           <Slider
             min={0}
             defaultValue={0}
-            max={currentSong.duration}
-            value={currentSong.progress}
+            max={currentSong?.duration}
+            value={currentSong?.progress}
             onChange={(e) => audio.current.currentTime = e}
             railStyle={{ backgroundColor: "#888", height: 10, borderRadius: '5px'}}
             trackStyle={{ backgroundColor: "rgb(95, 195, 146)", height: 10, borderRadius: '5px'}}
