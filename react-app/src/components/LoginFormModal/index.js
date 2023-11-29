@@ -52,13 +52,14 @@ function LoginFormModal() {
             // placeholder="Password"
           />
         </label>
+        <span className="login-errors">{Object.values(errors).length ? 'invalid login credentials': ''}</span>
         <button className = 'login-button' type="submit">Log In</button>
         <button className="demoUserLink" onClick={demoUserLogIn}>Demo User</button>
-            <ul className="errors-ul">
+            {/* <ul className="errors-ul">
               {Object.values(errors).map((error, idx=0) => (
                 <li key={idx+1}>{error}</li>
               ))}
-            </ul>
+            </ul> */}
       </form>
     </div>
   );
