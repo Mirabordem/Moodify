@@ -8,18 +8,25 @@ import { getAllSongs } from "../../store/songs";
 import fetchAll from "../utils";
 import { ThunkAddLike, ThunkDeleteLike } from "../../store/session";
 import SongUpdateButton from "./SongUpdateButton";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function SongList({
   pageType,
   artist,
   songAdded,
   setSongAdded,
-  album,
-  playlist,
+  // album,
+  // playlist,
 }) {
   const dispatch = useDispatch();
+  const { id } = useParams();
   const [openPlaylistId,setOpenPlaylistId]=useState(null)
-  const [songList, setSongList] = useState()
+  const [songList, setSongList] = useState([])
+  const user = useSelector((state) => state.session.user);
+  const album = useSelector((state) => state.albums[id]);
+  const albumSongs = useSelector(state => state.albums[id].albumSongs)
+  const playlist = useSelector(state => state.playlists[id])
+  const songs = useSelector((state) => state.songs);
   const handlePlaylistButtonClick = (playlistId) => {
     if (openPlaylistId === playlistId) {
       setOpenPlaylistId(null);
@@ -28,16 +35,13 @@ export default function SongList({
     }
   };
 
-  const user = useSelector((state) => state.session.user);
+  console.log("albumSongs", albumSongs)
+
   let userLikedSongIds = [];
   if (user) {
     userLikedSongIds = user.likedSongs;
   }
-  const songs = useSelector((state) => state.songs);
-  
 
-  // const album = useSelector(state => state.albums[albumId])
-  // const [songsForRender, setSongsForRender] = useState([])
   const {
     isPlaying,
     setIsPlaying,
@@ -63,30 +67,38 @@ export default function SongList({
   let filledHeart = null;
 
   useEffect(() => {
-    // setSongList(songTracks);
+    songListMap = []
+  },[album, playlist])
+
+  useEffect(() => {
+    console.log("useEffect FIIIIIRRREEDDDD")
+    console.log("pageType", pageType)
     if (pageType === "playlist") {
       let songTracks = []
       for (let songId of playlist.songsOnPlaylist) {
         songTracks.push(songs[songId]);
-        setSongList(songTracks)
         if (!songQueue.length) setSongQueue(songTracks)
       }
+      setSongList(songTracks)
     } else if (pageType === "likes") {
       let songTracks = []
       for (let likeId of userLikedSongIds) {
         songTracks.push(songs[likeId]);
-        setSongList(songTracks)
         if (!songQueue.length) setSongQueue(songTracks)
       }
+      setSongList(songTracks)
     } else {
+      console.log('Album else in useEffect')
       let songTracks = []
-      for (let songId of album.albumSongs) {
+      for (let songId of albumSongs) {
+        console.log('for loop in useEffect')
         songTracks.push(songs[songId]);
-        setSongList(songTracks)
         if (!songQueue.length) setSongQueue(songTracks)
       }
+      setSongList(songTracks)
     }
-  }, [songs, playlist, album, user]);
+    console.log("songList in useEffect", songList)
+  }, [songs, playlist, album, user, id, albumSongs]);
 
   if (!Object.values(songs).length) {
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
@@ -124,7 +136,9 @@ export default function SongList({
     setBigButtonStatus('pause')
   };
 
-  const songListMap = songList?.map((song) => {
+  let songListMap = songList?.map((song) => {
+    console.log('songListMap RUN AGAIN!!!!!!!!')
+    // console.log('Songlist in map', songList)
     if (song) {
       const handleLike = (e) => {
         e.stopPropagation();
