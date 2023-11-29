@@ -51,7 +51,7 @@ export default function NewAlbum({ formType, albumId }) {
       let data = await dispatch(ThunkCreateAlbum(formData));
 
       if (data?.title) {
-        setLoading(false)
+
 
         history.push(`/albums/${data.id}`);
         closeModal();
@@ -63,9 +63,9 @@ export default function NewAlbum({ formType, albumId }) {
         formData.append("cover_image_url", albumCover);
       }
       let data = await dispatch(ThunkEditAlbum(formData, albumId));
+      setLoading(false)
 
       if (data?.title) {
-        setLoading(false)
 
         history.push(`/albums/${data.id}`);
         closeModal();
@@ -73,11 +73,12 @@ export default function NewAlbum({ formType, albumId }) {
         setErrors(data.errors);
       }
     }
+    setLoading(false)
   };
 
 
   const loadingClass = loading ? "is-loading" : "not-loading"
-  const albumErrorsClass = Object.values(Error).length ? "album-form-errors all-validation-errors" : "no-album-errors"
+  const albumErrorsClass = Object.values(errors).length ? "album-form-errors all-validation-errors" : "no-album-errors"
 
   return (
     <div className="new-album-main-container">

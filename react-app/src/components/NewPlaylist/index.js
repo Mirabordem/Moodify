@@ -21,7 +21,6 @@ export default function NewPlaylist({ formType, userId, playlistId }) {
       }
     }, [formType, playlist]);
 
-
     const handleSubmit = async (e) => {
       e.preventDefault();
       let formData = new FormData();
@@ -37,8 +36,8 @@ export default function NewPlaylist({ formType, userId, playlistId }) {
 
         try {
           const data = await dispatch(ThunkCreatePlaylist(formData));
+
           if (data?.name) {
-            setLoading(false)
 
             closeModal();
           } else if (data?.errors) {
@@ -61,10 +60,11 @@ export default function NewPlaylist({ formType, userId, playlistId }) {
           console.error("An error occurred:", error.message);
         }
       }
+      setLoading(false)
     };
 
     const loadingClass1 = loading ? "is-loading1" : "not-loading1"
-
+    const playlistErrorsClass = Object.values(errors).length ? "playist-form-errors all-validation-errors" : "no-playlist-errors"
 
 
   return (
@@ -78,8 +78,8 @@ export default function NewPlaylist({ formType, userId, playlistId }) {
       )}
 
       <form onSubmit={handleSubmit} encType="multipart/form-data" className='signup-form'>
-        {errors.message && <p className="add-playlist-errors all-validation-errors">{errors.message}</p>}
-        {errors.name && <p className="add-playlist-errors all-validation-errors">{errors.name}</p>}
+        {errors.message && <p className={playlistErrorsClass}>{errors.message}</p>}
+        {errors.name && <p className={playlistErrorsClass}>{errors.name}</p>}
         <label className='login-label'>
           Name
           <input
@@ -89,7 +89,7 @@ export default function NewPlaylist({ formType, userId, playlistId }) {
             required
           />
         </label>
-        {errors.description && <p className="add-playlist-errors all-validation-errors">{errors.description}</p>}
+        {errors.description && <p className={playlistErrorsClass}>{errors.description}</p>}
         <label className='login-label'>
           Description
           <input
