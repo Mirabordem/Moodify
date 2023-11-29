@@ -150,3 +150,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     bottom: 0;
     margin-top: 670px;
 }
+
+.album-form-errors {
+    margin: 0px;
+    padding: 0px;
+}

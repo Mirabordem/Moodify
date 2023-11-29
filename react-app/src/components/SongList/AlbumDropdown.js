@@ -14,13 +14,11 @@ import AddSongPlaylistModal from "../AddSongPlaylistModal";
 import NewPlaylist from "../NewPlaylist";
 
 export default function AlbumDropDown({ songId, albumOwner, showMenu, setShowMenu }) {
-  // console.log("🚀 ~ file: AlbumDropdown.js:18 ~ AlbumDropDown ~ songId:", songId)
   const user = useSelector((state) => state.session.user);
   const { id } = useParams();
   const playlists = useSelector((state) => state.playlists);
   const dispatch = useDispatch();
   const album = useSelector((state) => state.albums[id]);
-  // const [showMenu, setShowMenu] = useState(false);
   const [showNestedMenu, setShowNestedMenu] = useState(false);
   const ulRef = useRef();
 
@@ -53,7 +51,6 @@ export default function AlbumDropDown({ songId, albumOwner, showMenu, setShowMen
         className="start"
         onClick={(e) => {
           e.stopPropagation();
-          // console.log("user is:" user)
           if (user) {
             dispatch(ThunkAddSongToPlaylist(currPlaylist.id, songId));
             setShowNestedMenu(false);
@@ -103,7 +100,7 @@ export default function AlbumDropDown({ songId, albumOwner, showMenu, setShowMen
     );
   }
 
-  // if (pageType === 'album'){
+
   if (user && albumOwner === user.id) {
     return (
       <div>
@@ -220,7 +217,4 @@ export default function AlbumDropDown({ songId, albumOwner, showMenu, setShowMen
       </div>
     );
   }
-  // } else {
-  //     return null
-  // }
 }

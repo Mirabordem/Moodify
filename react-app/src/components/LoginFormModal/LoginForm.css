@@ -1,6 +1,7 @@
-.errors-ul {
+.login-errors {
     color:red;
     font-size:small;
+    margin:0px;
 }
 
 .login-container {

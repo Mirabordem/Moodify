@@ -1,7 +1,6 @@
 import { updateAlbum } from "./albums";
 
 const ALL_SONGS = "songs/allSongs";
-// const ONE_SONG = 'songs/oneSong'
 const ADD_SONG = "songs/createSong";
 const UPDATE_SONG = "songs/updateSong";
 const DELETE_SONG = "songs/deleteSong";
@@ -41,7 +40,6 @@ export const deleteSong = (songId) => {
 export const thunkCreateSong = (newSong, albumId) => async (dispatch) => {
   const res = await fetch(`/api/albums/${albumId}/songs/new`, {
     method: "POST",
-    // headers: {"Content-Type":"multipart/form-data"},
     body: newSong,
   });
   if (res.ok) {
@@ -58,7 +56,6 @@ export const thunkCreateSong = (newSong, albumId) => async (dispatch) => {
 export const thunkUpdateSong = (updatedSong, songId) => async (dispatch) => {
   const res = await fetch(`/api/songs/${songId}`, {
     method: "PUT",
-    // headers: {"Content-Type":"multipart/form-data"},
     body: updatedSong,
   });
   if (res.ok) {
