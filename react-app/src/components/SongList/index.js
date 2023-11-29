@@ -60,9 +60,9 @@ export default function SongList({
   let emptyHeart = null;
   let filledHeart = null;
 
-  useEffect(() => {
-    songListMap = []
-  },[album, playlist])
+  // useEffect(() => {
+  //   songListMap = []
+  // },[album, playlist])
 
   useEffect(() => {
     if (pageType === "playlist") {

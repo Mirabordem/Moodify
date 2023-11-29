@@ -203,10 +203,8 @@ export default function NewAlbum({ formType, albumId }) {
                 id="fileInput"
                 accept="image/*"
                 onChange={handleFileSelect}
-
-              </div>
-            )}
-          </label>
+              />
+              )}
             {errors.cover_image_url && (
               <p className={albumErrorsClass}>
                 {errors.cover_image_url}
