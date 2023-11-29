@@ -3,20 +3,16 @@
     font-size:small;
 }
 
-.custom-file-input {
-    color: rgb(119, 239, 6);
-}
 
 .file-album-cover {
-    color: rgb(141, 126, 133);
-    font-size: 16px;
-    /* font-style: oblique; */
+    color: rgb(95, 195, 146);
+    font-size: 20px;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 0;
+    margin-left: 40px;
 }
 
 .signup-container6 {
-    /* border: 2px solid red; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,18 +27,14 @@
 }
 
 .cac-1 {
-    margin-left: 30px;
     margin-top: 0;
-
 }
 
 .cac-2 {
     margin-top: 0;
-    height: 110px;
-    width: 110px;
-    /* margin-left: 14px; */
+    height: 60px;
+    width: 60px;
     margin-left: 40px;
-    /* border: 2px solid red; */
 }
 
 .custom-file-input {
@@ -54,21 +46,25 @@
     border-radius: 5px;
     cursor: pointer;
     margin-top: 0;
+    color: rgb(119, 239, 6);
+    border: none;
+    height: 200px;
+
 }
 
-
-.custom-file-input input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    cursor: pointer;
+.new-album-image {
+    height: 150px;
+    width: 150px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
 }
 
 .signup-form5 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
     position: relative;
     padding-top: 10px;
@@ -95,7 +91,6 @@ signup-form5 input::placeholder {
 .new-h5 {
     font-size: 24px;
     font-weight: bold;
-    /* margin-bottom: 20px; */
 }
 
 .login-label {
@@ -103,9 +98,9 @@ signup-form5 input::placeholder {
     color: rgb(141, 126, 133);
 }
 
-.signup-button1 {
-    margin-top: 5px;
+.signup-button10 {
     padding: 16px 20px;
+    /* margin-top: 15px; */
     border: none;
     border-radius: 4px;
     background-color: rgb(95, 195, 146);
@@ -113,12 +108,13 @@ signup-form5 input::placeholder {
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    width: 100%;
+    width: 80%;
     border-radius: 20px;
 }
 
-.signup-button:hover {
+.signup-button10:hover {
     transform: scale(1.05);
+    background-color: rgb(95, 195, 146);
 }
 
 input {
@@ -149,4 +145,36 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     right: 0;
     bottom: 0;
     margin-top: 670px;
+}
+
+.photo-container {
+    position: relative;
+    height: 200px;
+    width: 200px;
+}
+
+#drop-area {
+    /* padding: 20px; */
+    text-align: center;
+    cursor: pointer;
+    color: white;
+}
+
+#drop-area.dragging {
+    border-color: #28a745;
+}
+
+.choose-file input {
+    display: none;
+}
+
+.upload-text {
+    border: 2px dashed #ddd;
+    padding: 10px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: white;
 }

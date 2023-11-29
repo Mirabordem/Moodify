@@ -9,21 +9,50 @@ export default function NewAlbum({ formType, albumId }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { closeModal } = useModal();
-
   const album = useSelector((state) => state.albums[albumId]);
-
   const [title, setTitle] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
   const [artist, setArtist] = useState("");
-  const [albumCover, setAlbumCover] = useState("");
-  const [didPicChange, setDidPicChange] = useState(false);
   const [errors, setErrors] = useState({});
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [loading, setLoading] = useState(false)
+  const [photoPreview, setPhotoPreview] = useState(null);
+  const [uploadStatus, setUploadStatus] = useState("Drag and drop or");
+  const [dragging, setDragging] = useState(false);
+  const [photo, setPhoto] = useState(null);
+
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragging(false);
+    const file = e.dataTransfer.files[0];
+    setPhoto(file);
+    setUploadStatus("Photo ready for upload");
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setPhotoPreview(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setDragging(true);
+  };
+
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    setPhoto(file);
+    setUploadStatus("Photo ready for upload");
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setPhotoPreview(e.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
 
   useEffect(() => {
     if (formType === "Edit" && album) {
-      setAlbumCover(album.coverImageUrl);
+      setPhoto(album.coverImageUrl);
       setTitle(album.title);
       setArtist(album.artist);
       const releaseDate = new Date(album.releaseDate);
@@ -32,10 +61,6 @@ export default function NewAlbum({ formType, albumId }) {
     }
   }, [formType, album]);
 
-  const handleAlbumCoverChange = (e) => {
-    const ourPicture = e.target.files[0];
-    setAlbumCover(ourPicture);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,7 +72,7 @@ export default function NewAlbum({ formType, albumId }) {
     formData.append("artist", artist);
 
     if (formType === "Create") {
-      formData.append("cover_image_url", albumCover);
+      formData.append("cover_image_url", photo);
       let data = await dispatch(ThunkCreateAlbum(formData));
 
       if (data?.title) {
@@ -57,11 +82,10 @@ export default function NewAlbum({ formType, albumId }) {
         closeModal();
       } else if (data?.errors) {
         setErrors(data.errors);
+        setLoading(false)
       }
     } else if (formType === "Edit") {
-      if (didPicChange) {
-        formData.append("cover_image_url", albumCover);
-      }
+        formData.append("cover_image_url", photo);
       let data = await dispatch(ThunkEditAlbum(formData, albumId));
 
       if (data?.title) {
@@ -71,6 +95,7 @@ export default function NewAlbum({ formType, albumId }) {
         closeModal();
       } else if (data?.errors) {
         setErrors(data.errors);
+        setLoading(false)
       }
     }
   };
@@ -95,11 +120,6 @@ export default function NewAlbum({ formType, albumId }) {
           encType="multipart/form-data"
           className="signup-form5"
         >
-          {/* <ul>
-                    {errors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
-                    ))}
-                </ul> */}
             {errors.title && (
               <p className="album-form-errors all-validation-errors">
                 {errors.title}
@@ -112,7 +132,6 @@ export default function NewAlbum({ formType, albumId }) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              //   placeholder="Title"
             />
           </label>
             {errors.release_date && (
@@ -127,7 +146,6 @@ export default function NewAlbum({ formType, albumId }) {
               value={releaseDate}
               onChange={(e) => setReleaseDate(e.target.value)}
               required
-              //   placeholder="Release Date"
             />
           </label>
             {errors.artist && (
@@ -142,46 +160,53 @@ export default function NewAlbum({ formType, albumId }) {
               value={artist}
               onChange={(e) => setArtist(e.target.value)}
               required
-              //   placeholder="Artist"
             />
           </label>
           <label className="login-label">
-            {formType === "Edit" && (
-              <div>
-                <p className="cac-1">Current Album Cover:</p>
-                <img
-                  className="cac-2"
-                  src={albumCover}
-                  alt="Album Cover"
-                  style={{ maxWidth: "200px", maxHeight: "200px" }}
-                />
-              </div>
-            )}
+          {formType === "Edit" && !photoPreview && (
+            <div>
+              <p className="cac-1">Current Album Cover:</p>
+              <img
+                className="cac-2"
+                src={photo}
+                alt="Album Cover"
+              />
+            </div>
+          )}
           </label>
-            {errors.cover_image_url && (
-              <p className="album-form-errors all-validation-errors">
-                {errors.cover_image_url}
-              </p>
-            )}
           <label className="custom-file-input">
-            <p className="file-album-cover">Album Cover</p>
-            ➤ Choose File
-            <input
-              className="cac-2"
-              type="file"
-              id="fileInput"
-              class="hidden-file-input"
-              onChange={(e) => {
-                setDidPicChange(true);
+          <p className="file-album-cover">Album Cover</p>
 
-                handleAlbumCoverChange(e);
-              }}
-              accept="image/*"
-              required={formType === "Create"}
-              placeholder="Album Cover"
-            />
+          <div className="photo-container">
+            <div
+              id="drop-area"
+              onDrop={handleDrop}
+              onDragOver={handleDragOver}
+              className={dragging ? "dragging" : ""}
+            >
+              {photoPreview ? (
+                <img
+                  className="new-album-image"
+                  src={photoPreview}
+                  alt="Photo Preview"
+                />
+              ) : (
+                <div className="upload-text">Drag or Upload Your File</div>
+              )}
+            </div>
+            <div className="choose-file">
+            {!photoPreview && (
+              <input
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                onChange={handleFileSelect}
+              />
+            )}
+            </div>
+          </div>
           </label>
-          <button className="signup-button1" type="submit">
+          <button className="signup-button10" type="submit">
             {formType === "Create" ? "Create Album" : "Edit Album"}
           </button>
         </form>
