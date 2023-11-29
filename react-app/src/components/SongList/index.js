@@ -15,8 +15,6 @@ export default function SongList({
   artist,
   songAdded,
   setSongAdded,
-  // album,
-  // playlist,
 }) {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -34,8 +32,6 @@ export default function SongList({
       setOpenPlaylistId(playlistId);
     }
   };
-
-  console.log("albumSongs", albumSongs)
 
   let userLikedSongIds = [];
   if (user) {
@@ -61,8 +57,6 @@ export default function SongList({
     setQueueTitle
   } = useSongPlayer();
 
-  // let songTracks = [];
-
   let emptyHeart = null;
   let filledHeart = null;
 
@@ -71,8 +65,6 @@ export default function SongList({
   },[album, playlist])
 
   useEffect(() => {
-    console.log("useEffect FIIIIIRRREEDDDD")
-    console.log("pageType", pageType)
     if (pageType === "playlist") {
       let songTracks = []
       for (let songId of playlist.songsOnPlaylist) {
@@ -88,16 +80,13 @@ export default function SongList({
       }
       setSongList(songTracks)
     } else {
-      console.log('Album else in useEffect')
       let songTracks = []
       for (let songId of albumSongs) {
-        console.log('for loop in useEffect')
         songTracks.push(songs[songId]);
         if (!songQueue.length) setSongQueue(songTracks)
       }
       setSongList(songTracks)
     }
-    console.log("songList in useEffect", songList)
   }, [songs, playlist, album, user, id, albumSongs]);
 
   if (!Object.values(songs).length) {
@@ -137,8 +126,6 @@ export default function SongList({
   };
 
   let songListMap = songList?.map((song) => {
-    console.log('songListMap RUN AGAIN!!!!!!!!')
-    // console.log('Songlist in map', songList)
     if (song) {
       const handleLike = (e) => {
         e.stopPropagation();

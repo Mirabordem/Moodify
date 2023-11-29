@@ -1,5 +1,4 @@
 const ALL_ALBUMS = "albums/getAlbums";
-// const ONE_ALBUM = "albums/oneAlbum"
 const ADD_ALBUM = "albums/createAlbum";
 const UPDATE_ALBUM = "albums/updateAlbum";
 const DELETE_ALBUM = "albums/deleteAlbum";

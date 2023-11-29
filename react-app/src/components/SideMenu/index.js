@@ -37,10 +37,6 @@ export default function SideMenu() {
   const playlists = useSelector((state) => state.playlists);
   const menuDispatch = useDispatch();
 
-  // useEffect(() => {}, [user]);
-
-  // useEffect(() => {}, [playlists]);
-
   useEffect(() => {
     if (!showMenu) return;
 
@@ -176,7 +172,6 @@ export default function SideMenu() {
                   Login
                 </>
               }
-              // onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
           </div>
@@ -192,7 +187,6 @@ export default function SideMenu() {
                   Sign Up
                 </>
               }
-              // onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
           </div>

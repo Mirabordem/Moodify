@@ -113,7 +113,6 @@ export default function NewAlbum({ formType, albumId }) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              //   placeholder="Title"
             />
           </label>
             {errors.release_date && (
@@ -128,7 +127,6 @@ export default function NewAlbum({ formType, albumId }) {
               value={releaseDate}
               onChange={(e) => setReleaseDate(e.target.value)}
               required
-              //   placeholder="Release Date"
             />
           </label>
             {errors.artist && (
@@ -143,7 +141,6 @@ export default function NewAlbum({ formType, albumId }) {
               value={artist}
               onChange={(e) => setArtist(e.target.value)}
               required
-              //   placeholder="Artist"
             />
           </label>
           <label className="login-label">

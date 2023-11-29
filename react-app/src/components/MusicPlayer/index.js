@@ -40,7 +40,6 @@ export default function MusicPlayer() {
       audio.current.pause();
     }
     if (playAnyway) {
-      // audio.current.play();
       setPlayAnyway(false);
     }
     audio.current.volume= currentVolume / 100
@@ -83,11 +82,7 @@ export default function MusicPlayer() {
     const duration = audio.current.duration
     const currentTime = audio.current.currentTime
     setCurrentSong({...currentSong, 'progress': currentTime, 'duration': duration})
-    console.log('progress', currentSong.progress)
-    console.log('duration', currentSong.duration)
   }
-
-  console.log('isPlaying', isPlaying)
 
   return (
     <div className="musicPlayer">

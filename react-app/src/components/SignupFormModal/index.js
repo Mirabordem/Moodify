@@ -10,7 +10,6 @@ function SignupFormModal() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	// const [errors, setErrors] = useState([]);
 	const [validationObject, setValidationObject] = useState({});
 	const { closeModal } = useModal();
 	const [errors, setErrors] = useState({})
@@ -70,7 +69,7 @@ function SignupFormModal() {
 						type="text"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
-						// placeholder="Email"
+
 					/>
 				</label>
 				{validationObject.username && <span className="signup-error">{validationObject.username}</span>}
@@ -80,7 +79,6 @@ function SignupFormModal() {
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
-						// placeholder="Username"
 					/>
 				</label>
 				{validationObject.password && <span className="signup-error">{validationObject.password}</span>}
@@ -90,7 +88,6 @@ function SignupFormModal() {
 						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
-						// placeholder="Password"
 					/>
 				</label>
 				{validationObject.confirmPassword && (<span className="signup-error">{validationObject.confirmPassword}</span>)}
@@ -100,7 +97,6 @@ function SignupFormModal() {
 						type="password"
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
-						// placeholder="Confirm Password"
 					/>
 				</label>
 				<button className="signup-button" type="submit">Sign Up</button>
@@ -108,77 +104,5 @@ function SignupFormModal() {
 		</div>
 	);
 }
-
-
-
-
-
-
-
-// 		if (password === confirmPassword) {
-// 			const data = await dispatch(signUp(username, email, password));
-// 			if (data) {
-// 				setErrors(data);
-// 			} else {
-// 				closeModal();
-// 			}
-// 		} else {
-// 			setErrors([
-// 				"Confirm Password field must be the same as the Password field",
-// 			]);
-// 		}
-// 	};
-
-// 	return (
-// 		<>
-// 			<h1>Sign Up</h1>
-// 			<form onSubmit={handleSubmit}>
-// 				<ul>
-// 					{errors.map((error, idx) => (
-// 						<li key={idx}>{error}</li>
-// 					))}
-// 				</ul>
-// 				<label>
-// 					Email
-// 					</label>
-// 					<input
-// 						type="text"
-// 						value={email}
-// 						onChange={(e) => setEmail(e.target.value)}
-// 						required
-// 					/>
-
-// 				<label>
-// 					Username
-// 					<input
-// 						type="text"
-// 						value={username}
-// 						onChange={(e) => setUsername(e.target.value)}
-// 						required
-// 					/>
-// 				</label>
-// 				<label>
-// 					Password
-// 					<input
-// 						type="password"
-// 						value={password}
-// 						onChange={(e) => setPassword(e.target.value)}
-// 						required
-// 					/>
-// 				</label>
-// 				<label>
-// 					Confirm Password
-// 					<input
-// 						type="password"
-// 						value={confirmPassword}
-// 						onChange={(e) => setConfirmPassword(e.target.value)}
-// 						required
-// 					/>
-// 				</label>
-// 				<button type="submit">Sign Up</button>
-// 			</form>
-// 		</>
-// 	);
-// }
 
 export default SignupFormModal;
