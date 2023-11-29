@@ -43,7 +43,6 @@ export default function AlbumDetails() {
   const user = useSelector((state) => state.session.user);
   const [pageType, setPageType] = useState("album");
   const [emptyAggs, setEmptyAggs] = useState(false);
-  // const [bigButtonStatus, setBigButtonStatus] = useState('play')
 
 
 
@@ -53,7 +52,6 @@ export default function AlbumDetails() {
     if (album && newSongs) {
       for (let songId of album.albumSongs) {
         const song = songs[songId];
-        //  newAlbumTracks.push(song);
         newAlbumLength += song?.songLength;
       }
       setTotalAlbumLength(newAlbumLength);
@@ -113,15 +111,14 @@ export default function AlbumDetails() {
 
   //took out song length conditional below
   if (!album || !Object.values(songs).length) {
-    // dispatch(thunkGetAllAlbums());
 
     fetchAll(dispatch, getAllAlbums, getAllPlaylists, getAllSongs);
     return null;
   }
 
   const bigPlay = (e) => {
-    console.log("isPlaying1", isPlaying)
-    if (songQueue?.length) {
+
+    if (songQueue?.length && album.albumSongs.length) {
       if ((!currentSong?.name || pageTitle !== queueTitle) && bigButtonStatus === 'play') {
         setCurrentSong(songs[album.albumSongs[0]]);
         setNextSong(songs[album.albumSongs[1]]);
@@ -138,9 +135,7 @@ export default function AlbumDetails() {
         setBigButtonStatus('pause')
       }
       if (isPlaying) {
-        console.log("isPlaying2", isPlaying)
         if(pageTitle === queueTitle) {
-          console.log("isPlaying3", isPlaying)
           setIsPlaying(false);
           setBigButtonStatus('play')
         }
@@ -150,7 +145,6 @@ export default function AlbumDetails() {
         setBigButtonStatus('pause')
       }
     }
-    console.log("isPlaying4", isPlaying)
   };
 
   let defaultAlbumLength = 0;
@@ -171,8 +165,6 @@ export default function AlbumDetails() {
     editAlbumButton = <AlbumUpdateButton user={user} albumId={album.id} />;
   }
 
-  console.log("songQueue", songQueue)
-  console.log("current Song", currentSong)
   return (
     <div className="album-detail-page-container">
       <div className="album-id-top-info">
@@ -191,7 +183,7 @@ export default function AlbumDetails() {
       </div>
 
       <div className="album-id-functions-3">
-        <button className="play-button-album" onClick={bigPlay}>
+        <button className={`play-button-album ${!album.albumSongs.length ? 'big-play-diabled-album' : ''}`} onClick={bigPlay}>
         {bigButtonStatus === 'pause' || (isPlaying && pageTitle === queueTitle) ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}
         </button>
         {editAlbumButton}

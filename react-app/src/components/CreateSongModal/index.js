@@ -73,7 +73,7 @@ export default function CreateSong({formType, albumId, songId}) {
 
 
     const loadingClass2 = loading ? "is-loading2" : "not-loading2"
-
+    const songErrorsClass = Object.values(errors).length ? "song-form-errors all-validation-errors" : "no-song-errors"
 
     return (
         <div className="signup-container7">
@@ -83,8 +83,8 @@ export default function CreateSong({formType, albumId, songId}) {
             encType="multipart/form-data"
             className='signup-form'
             >
-                {errors.message && <p className="add-song-errors validation-errors">{errors.message}</p>}
-                {errors.name && <p className="add-song-errors all-validation-errors">{errors.name}</p>}
+                {errors.message && <p className={songErrorsClass}>{errors.message}</p>}
+                {errors.name && <p className={songErrorsClass}>{errors.name}</p>}
                 <label className='login-label'>
                     Name
                     <input
@@ -93,7 +93,7 @@ export default function CreateSong({formType, albumId, songId}) {
                     onChange={e => setName(e.target.value)}
                     />
                 </label>
-                {errors.track_number && <p className="add-song-errors all-validation-errors">{errors.track_number}</p>}
+                {errors.track_number && <p className={songErrorsClass}>{errors.track_number}</p>}
                 <label className='login-label'>
                     Track Number
                     <input
@@ -104,7 +104,7 @@ export default function CreateSong({formType, albumId, songId}) {
                     onChange={e => setTrackNumber(e.target.value)}
                     />
                 </label>
-                {errors.song_length && <p className="add-song-errors all-validation-errors">{errors.song_length}</p>}
+                {errors.song_length && <p className={songErrorsClass}>{errors.song_length}</p>}
                 <label className='login-label'>
                     Duration
                     <input
@@ -115,7 +115,7 @@ export default function CreateSong({formType, albumId, songId}) {
                     onChange={e => setSongLength(e.target.value)}
                     />
                 </label>
-                {errors.audio_url && <p className="add-song-errors all-validation-errors">{errors.audio_url}</p>}
+                {errors.audio_url && <p className={songErrorsClass}>{errors.audio_url}</p>}
                 <label class="custom-file-input">
                     ➤ Choose Audio File
                     <input

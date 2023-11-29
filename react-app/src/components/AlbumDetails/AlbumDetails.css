@@ -142,3 +142,7 @@
 .fa-pause {
     color: rgb(61, 61, 61);
 }
+
+.big-play-diabled-album {
+    background: rgb(28, 51, 39);
+}

@@ -176,5 +176,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 18px;
-    color: white;
+
+.album-form-errors {
+    margin: 0px;
+    padding: 0px;
+
 }

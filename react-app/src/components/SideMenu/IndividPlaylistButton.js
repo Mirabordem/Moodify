@@ -57,7 +57,6 @@ export default function PlaylistUpdateButton({ playlistId, isOpen, handlePlaylis
                   Update Playlist
                 </>
               }
-              // modalComponent={<DeletePlaylistModal playlistId={playlistId} />}
               modalComponent={<NewPlaylist formType="Edit" playlistId={playlistId} />}
               onItemClick={() => setShowMenu(false)}
             />
@@ -72,7 +71,6 @@ export default function PlaylistUpdateButton({ playlistId, isOpen, handlePlaylis
                 </>
               }
               modalComponent={<DeletePlaylistModal playlistId={playlistId} />}
-              // onItemClick={() => setShowMenu(false)}
             />
           </div>
         </div>

@@ -22,7 +22,6 @@ export default function PlaylistSongUpdate({ songId, showMenu, setShowMenu }) {
 
   const playlists = useSelector((state) => state.playlists);
   const playlist = useSelector((state) => state.playlists[id]);
-  // const [showMenu, setShowMenu] = useState(false);
   const [showNestedMenu, setShowNestedMenu] = useState(false);
   const ulRef = useRef();
   const {
@@ -65,7 +64,6 @@ export default function PlaylistSongUpdate({ songId, showMenu, setShowMenu }) {
         className="start"
         onClick={(e) => {
           e.stopPropagation();
-          // console.log("user is:" user)
           if (user) {
             dispatch(ThunkAddSongToPlaylist(currPlaylist.id, songId));
             setShowNestedMenu(false);
@@ -180,7 +178,4 @@ export default function PlaylistSongUpdate({ songId, showMenu, setShowMenu }) {
       </div>
     );
   }
-  // } else {
-  //     return null
-  // }
 }

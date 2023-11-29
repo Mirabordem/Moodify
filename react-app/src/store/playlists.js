@@ -1,7 +1,6 @@
 import { setUser } from "./session";
 
 const ALL_PLAYLISTS = "playlists/getPlaylists";
-// const ONE_PLAYLIST = "playlists/onePlaylist"
 const ADD_PLAYLIST = "playlists/createPlaylist";
 const UPDATE_PLAYLIST = "playlists/updatePlaylist";
 const DELETE_PLAYLIST = "playlists/deletePlaylist";

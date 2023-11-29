@@ -42,19 +42,12 @@ export default function PlaylistDetails() {
   const [totalPlaylistLength, setTotalPlaylistLength] = useState(0);
   const [newSongs, setNewSongs] = useState(true);
 
-  // const [isOpen, setIsOpen] = useState(false);
-  // const [showMenu, setShowMenu] = useState(false)
-
-
-
   useEffect(() => {
     let newNumberOfSongs = totalNumberOfSongs;
     let newPlaylistLength = totalPlaylistLength;
-    // console.log('IN THE USEEFFECT>>>>>>>>>>')
     if (playlist && newSongs) {
       for (let songId of playlist.songsOnPlaylist) {
         const song = songs[songId];
-        //  newAlbumTracks.push(song);
         newPlaylistLength += song?.songLength;
       }
       setTotalPlaylistLength(newPlaylistLength);
@@ -64,7 +57,6 @@ export default function PlaylistDetails() {
       setNewSongs(false);
     }
 
-    // setAlbumTracks(newAlbumTracks)
   }, [
     minutes,
     totalNumberOfSongs,
@@ -108,7 +100,7 @@ export default function PlaylistDetails() {
   }, [playlist])
 
   const bigPlay = (e) => {
-    if (songQueue?.length) {
+    if (songQueue?.length && playlist.songsOnPlaylist.length) {
       if ((!currentSong?.name || pageTitle !== queueTitle) && bigButtonStatus === 'play') {
         setCurrentSong(songs[playlist.songsOnPlaylist[0]]);
         setNextSong(songs[playlist.songsOnPlaylist[1]]);
@@ -180,7 +172,8 @@ export default function PlaylistDetails() {
       </div>
 
       <div id="album-id-functions-4">
-      <button className="play-button-playlist" onClick={bigPlay}>
+      <button
+      className={`play-button-playlist ${!playlist.songsOnPlaylist.length ? 'big-play-diabled-playlist' : ''}`} onClick={bigPlay}>
         {bigButtonStatus === 'pause' || (isPlaying && queueTitle === pageTitle) ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}
         </button>
       </div>

@@ -72,3 +72,12 @@
     bottom: 0;
     margin-top: 580px;
 }
+
+
+.song-form-errors {
+    margin: 0px;
+}
+
+.no-song-errors {
+    padding: 100px;
+}

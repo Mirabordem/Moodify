@@ -76,7 +76,7 @@ export default function NewAlbum({ formType, albumId }) {
       let data = await dispatch(ThunkCreateAlbum(formData));
 
       if (data?.title) {
-        setLoading(false)
+
 
         history.push(`/albums/${data.id}`);
         closeModal();
@@ -87,9 +87,9 @@ export default function NewAlbum({ formType, albumId }) {
     } else if (formType === "Edit") {
         formData.append("cover_image_url", photo);
       let data = await dispatch(ThunkEditAlbum(formData, albumId));
+      setLoading(false)
 
       if (data?.title) {
-        setLoading(false)
 
         history.push(`/albums/${data.id}`);
         closeModal();
@@ -98,11 +98,12 @@ export default function NewAlbum({ formType, albumId }) {
         setLoading(false)
       }
     }
+    setLoading(false)
   };
 
 
   const loadingClass = loading ? "is-loading" : "not-loading"
-
+  const albumErrorsClass = Object.values(errors).length ? "album-form-errors all-validation-errors" : "no-album-errors"
 
   return (
     <div className="new-album-main-container">
@@ -111,7 +112,7 @@ export default function NewAlbum({ formType, albumId }) {
 
         {formType === "Create" && <div className="new-h5">Create Album</div>}
         {errors.message && (
-          <p className="album-form-errors all-validation-errors">
+          <p className={albumErrorsClass}>
             {errors.message}
           </p>
         )}
@@ -121,7 +122,7 @@ export default function NewAlbum({ formType, albumId }) {
           className="signup-form5"
         >
             {errors.title && (
-              <p className="album-form-errors all-validation-errors">
+              <p className={albumErrorsClass}>
                 {errors.title}
               </p>
             )}
@@ -135,7 +136,7 @@ export default function NewAlbum({ formType, albumId }) {
             />
           </label>
             {errors.release_date && (
-              <p className="album-form-errors all-validation-errors">
+              <p className={albumErrorsClass}>
                 {errors.release_date}
               </p>
             )}
@@ -149,7 +150,7 @@ export default function NewAlbum({ formType, albumId }) {
             />
           </label>
             {errors.artist && (
-              <p className="album-form-errors all-validation-errors">
+              <p className={albumErrorsClass}>
                 {errors.artist}
               </p>
             )}
@@ -190,6 +191,7 @@ export default function NewAlbum({ formType, albumId }) {
                   src={photoPreview}
                   alt="Photo Preview"
                 />
+
               ) : (
                 <div className="upload-text">Drag or Upload Your File</div>
               )}
@@ -201,7 +203,15 @@ export default function NewAlbum({ formType, albumId }) {
                 id="fileInput"
                 accept="image/*"
                 onChange={handleFileSelect}
-              />
+
+              </div>
+            )}
+          </label>
+            {errors.cover_image_url && (
+              <p className={albumErrorsClass}>
+                {errors.cover_image_url}
+              </p>
+
             )}
             </div>
           </div>

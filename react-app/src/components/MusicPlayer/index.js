@@ -40,7 +40,6 @@ export default function MusicPlayer() {
       audio.current.pause();
     }
     if (playAnyway) {
-      // audio.current.play();
       setPlayAnyway(false);
     }
     audio.current.volume= currentVolume / 100
@@ -83,11 +82,7 @@ export default function MusicPlayer() {
     const duration = audio.current.duration
     const currentTime = audio.current.currentTime
     setCurrentSong({...currentSong, 'progress': currentTime, 'duration': duration})
-    console.log('progress', currentSong.progress)
-    console.log('duration', currentSong.duration)
   }
-
-  console.log('isPlaying', isPlaying)
 
   return (
     <div className="musicPlayer">
@@ -140,8 +135,8 @@ export default function MusicPlayer() {
           <Slider
             min={0}
             defaultValue={0}
-            max={currentSong.duration}
-            value={currentSong.progress}
+            max={currentSong?.duration}
+            value={currentSong?.progress}
             onChange={(e) => audio.current.currentTime = e}
             railStyle={{ backgroundColor: "#888", height: 10, borderRadius: '5px'}}
             trackStyle={{ backgroundColor: "rgb(95, 195, 146)", height: 10, borderRadius: '5px'}}
