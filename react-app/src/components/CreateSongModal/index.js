@@ -116,7 +116,7 @@ export default function CreateSong({formType, albumId, songId}) {
                     />
                 </label>
                 {errors.audio_url && <p className={songErrorsClass}>{errors.audio_url}</p>}
-                <label class="custom-file-input">
+                <label class="custom-file-input2">
                     ➤ Choose Audio File
                     <input
                     type="file"
@@ -127,7 +127,7 @@ export default function CreateSong({formType, albumId, songId}) {
                       }}
                     />
                 </label>
-                <button className="signup-button" type="submit">{formType === 'edit' ? 'Update Song' : 'Add Song'}</button>
+                <button className="signup-button-song" type="submit">{formType === 'edit' ? 'Update Song' : 'Add Song'}</button>
             </form>
             <div className={loadingClass2}>Loading...</div>
         </div>
