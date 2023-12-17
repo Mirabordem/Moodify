@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import toggleSideMenu from "../Navigation/mobileView";
 
 
 export default function SideMenu() {
@@ -72,6 +73,10 @@ export default function SideMenu() {
   const userPlaylistMap = userPlaylists.map((id) => {
     if (playlists[id]?.name) {
       return (
+        <>
+        {/* <div className='toggleMenu'><button className='menu' onClick={toggleSideMenu}>
+        Menu
+      </button></div> */}
         <div key={id} className="playlist-menu-container">
           <div>
             <IndividPlaylistButton
@@ -84,6 +89,7 @@ export default function SideMenu() {
             <li className="li1">{playlists[id]?.name}</li>
           </NavLink>
         </div>
+        </>
       );
     }
   });
@@ -92,6 +98,9 @@ export default function SideMenu() {
   if (user) {
     sideMenuOptions = (
       <div className='sideToggleAlex'>
+                <div className='toggleMenu'><button className='menu' onClick={toggleSideMenu}>
+        Menu
+      </button></div>
         <button className="menu-toggle">Your Library</button>
         <ul className="ul-container">
           {/* <li>

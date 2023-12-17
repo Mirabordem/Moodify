@@ -4,6 +4,7 @@ import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import OpenModalButton from "../OpenModalButton/index";
 import NewAlbum from '../NewAlbum';
+import toggleSideMenu from './mobileView';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
@@ -11,9 +12,9 @@ function Navigation({ isLoaded }) {
 	return (
 		<div className='nav-container'>
 			<div className='farLeft'>
-				<button className='menu'>
-					Menu
-				</button>
+			<button className='menu' onClick={toggleSideMenu}>
+          Menu
+        </button>
 			</div>
 		  {isLoaded && (
 			<div className='nav-profile'>
