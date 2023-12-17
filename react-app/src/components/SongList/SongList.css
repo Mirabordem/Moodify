@@ -85,6 +85,11 @@
     width: 15px;
     margin-top: 30px;
 }
+.hideaway {
+    visibility: hidden;
+    width: 15px;
+    margin-top: 30px;
+}
 
 
 .song-li:hover .song-actions-container {
