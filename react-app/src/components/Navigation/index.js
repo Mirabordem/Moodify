@@ -10,6 +10,11 @@ function Navigation({ isLoaded }) {
 
 	return (
 		<div className='nav-container'>
+			<div className='farLeft'>
+				<button className='menu'>
+					Menu
+				</button>
+			</div>
 		  {isLoaded && (
 			<div className='nav-profile'>
 				{sessionUser ? (

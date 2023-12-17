@@ -83,3 +83,33 @@ body {
   font-size: smaller;
   text-align: center;
 }
+
+@media only screen and (max-width: 500px) {
+
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    /* width: 20%; */
+    height: 89%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    background-color: black;
+    color: white;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    flex-grow: 1;
+    z-index: 50;
+  }
+
+  .main_window_container {
+    box-sizing: border-box;
+    border: 1px solid red;
+    margin-left: -32%;
+    width: 96vw;
+
+  }
+}

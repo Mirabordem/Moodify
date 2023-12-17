@@ -182,3 +182,35 @@
   align-items: center;
   justify-content: center;
 } */
+
+.farLeft {
+  display: none;
+
+}
+
+@media only screen and (max-width: 500px) {
+  .nav-profile {
+    display: flex;
+    /* justify-content: flex-end; */
+    align-items: center;
+    margin-right: 6%;
+    color: white;
+
+
+  }
+
+  .Moodify-logo {
+    display: none;
+    width: 160px;
+    height: 60px;
+}
+
+.farLeft {
+  display: block;
+  justify-self: start;
+  left: 0px;
+  margin-right: 36%;
+
+}
+
+}

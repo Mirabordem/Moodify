@@ -87,11 +87,9 @@
   margin: 0 2px;
   /* background: linear-gradient( rgb(25, 72, 55),rgb(86, 173, 130)); */
   /* background: linear-gradient( rgb(33, 23, 32), rgb(155, 102, 146) 100%); */
-  background: linear-gradient(
-    to bottom,
-    rgba(16, 10, 15, 0.7) 70%,
-    rgba(247, 78, 219, 0.3) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(16, 10, 15, 0.7) 70%,
+      rgba(247, 78, 219, 0.3) 100%);
   border-radius: 10px;
   cursor: pointer;
   width: 100%;
@@ -117,4 +115,110 @@
   font-stretch: expanded;
   color: rgb(223, 221, 221);
   /* border: 2px solid orange; */
+}
+
+@media only screen and (max-width: 500px) {
+
+  .homeText {
+    height: 66pt;
+    width: 100%;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    font-weight: lighter;
+    font-size: .8em;
+}
+
+
+  .page-container {
+    display: flex;
+    position: relative;
+    padding-left: 3%;
+    flex-direction: column;
+    min-height: 100vh;
+    /* background: linear-gradient(rgb(80, 79, 79), black); */
+    background-color: black;
+
+  }
+
+
+
+  .content-container {
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    /* border: 1px solid blue; */
+    margin-left: 14vw;
+    width: 69%;
+    flex-direction: column;
+    height: 50vh;
+    /* background: linear-gradient(rgb(80, 79, 79), black); */
+  }
+
+  .album-image {
+    width: 70%;
+    height: 70%;
+    margin: 2% 0%;
+
+  }
+
+  .home-h3 {
+    width: 64vw;
+    height: .25%;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.card-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 77vw;
+  height: 31vh;
+  max-height: 300px;
+  max-width: 300px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  /* border: 2px solid red; */
+}
+
+.album-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 15px;
+  gap: 15px;
+  margin-top: 5.5%;
+  margin-bottom: 5.5%;
+  margin-left: 8%;
+  margin-right: 4%;
+  padding-right: 2%;
+  /* background: linear-gradient(rgb(80, 79, 79), black); */
+}
+
+.sideToggleAlex {
+  display: none;
+  position: absolute;
+  left: 0%;
+  top:0%;
+  z-index:9000;
+  width: 59vw;
+  height: 100vh;
+}
+
+.menu-toggle {
+  /* border: 2px solid orange; */
+  background-color: black;
+  font-size: 30px;
+  border: none;
+  margin-top: 35px;
+  width: 20%;
+  color: white;
+  z-index: 3500;
+}
+
 }

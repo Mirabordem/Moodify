@@ -91,7 +91,7 @@ export default function SideMenu() {
   let sideMenuOptions = null;
   if (user) {
     sideMenuOptions = (
-      <div>
+      <div className='sideToggleAlex'>
         <button className="menu-toggle">Your Library</button>
         <ul className="ul-container">
           {/* <li>
