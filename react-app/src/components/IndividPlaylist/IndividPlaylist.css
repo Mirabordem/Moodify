@@ -167,3 +167,32 @@
 .big-play-diabled-playlist {
     background: rgb(28, 51, 39);
 }
+
+
+
+@media only screen and (max-width: 500px) {
+.album-id-top-info {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    border: 5px solid orange;
+    width: 93vw;
+    margin-left: -56vw;
+    height: 370px;
+    background: linear-gradient(to bottom, rgb(215, 191, 202), rgb(108, 94, 101) 90%);
+}
+
+.album-id-cover-img {
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 80%;
+    height: 50%;
+    box-shadow: 2px 2px 22px rgb(59, 51, 51);
+}
+
+.album-title-page {
+    font-size: 1em;
+}
+}

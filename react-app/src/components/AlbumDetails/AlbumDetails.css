@@ -146,3 +146,33 @@
 .big-play-diabled-album {
     background: rgb(28, 51, 39);
 }
+
+@media only screen and (max-width: 500px) {
+    .album-detail-page-container {
+        box-sizing: border-box;
+        border: 5px solid purple;
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        height: 20vh;
+        width: 96vw;
+        background: linear-gradient(rgb(108, 94, 101), rgb(54, 47, 51) 80%);
+    }
+
+
+
+.album-id-cover-img {
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 80%;
+    height: 50%;
+    box-shadow: 2px 2px 22px rgb(59, 51, 51);
+}
+
+.album-id-functions-3 {
+    margin-left: -149%;
+}
+
+}

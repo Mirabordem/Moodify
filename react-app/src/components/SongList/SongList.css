@@ -180,3 +180,29 @@
     cursor: pointer;
     color: rgb(95, 195, 146);
 }
+
+@media only screen and (max-width: 500px) {
+
+    .album-id-song-list {
+        display: flex;
+        flex-direction: row;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: -196%;
+        width: 50%;
+    }
+
+    .song-li {
+        padding-bottom: 0px;
+        margin-left: -210%;
+        margin-top: 28%;
+        margin-bottom: 58%;
+        height: 70px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+
+
+}

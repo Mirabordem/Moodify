@@ -22,3 +22,16 @@
   position: absolute;
   background-color:white;
 }
+
+@media only screen and (max-width: 500px) {
+
+  #modal-content {
+    position: absolute;
+    background-color:white;
+    width: 50%;
+    left:-52%;
+    top:24%;
+
+  }
+
+}
