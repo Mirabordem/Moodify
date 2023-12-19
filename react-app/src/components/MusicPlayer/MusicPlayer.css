@@ -124,3 +124,57 @@
     color: rgb(95, 195, 146);
     font-size: 18px;
 }
+
+@media only screen and (max-width: 500px) {
+.track-parent {
+    /* border: 2px solid yellow; */
+    display: none;
+    display: none;
+    flex-direction: column;
+    /* margin-right: 80px; */
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    width: 0%;
+    display: none;
+}
+.controls {
+    /* border: 2px solid rgb(95, 195, 146); */
+    /* width: 400px; */
+    width: 100%;
+    margin-left: 11.5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.controls-progress {
+    width: 2%;
+    margin: 0%;
+    margin-left: 7%;
+}
+
+.volume-control {
+    display: flex;
+    margin: 6% auto;
+    /* margin-right: 160px;
+     */
+     justify-content: center;
+    align-items: flex-end;
+    padding-top: 8%;
+    padding-bottom: 8%;
+}
+
+.progress-bar {
+    margin-bottom: -60%;
+    width: 82vw;
+    height: 30px;
+    /* border: 2px solid purple; */
+}
+
+.rc-slider-track {
+    position: absolute;
+    bottom: 19%;
+    margin-left: 7%;
+}
+
+}

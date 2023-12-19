@@ -206,7 +206,8 @@
 }
 
 .farLeft {
-  display: block;
+  display: flex;
+  flex-direction: row;
   justify-self: start;
   left: 0px;
   margin-right: 36%;

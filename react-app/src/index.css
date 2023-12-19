@@ -112,4 +112,24 @@ body {
     width: 96vw;
 
   }
+
+  .musicPlayer {
+    position: fixed;
+    box-sizing: border-box;
+    border: 1px solid brown;
+    bottom: 0px;
+    left: .5%;
+    width: 97%;
+    height: 11%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: rgb(126, 123, 123);
+    font-family: "Lato", sans-serif;
+    z-index: 100;
+    padding: 0px 0px 0px 0px;
+    margin: 0px;
+}
 }

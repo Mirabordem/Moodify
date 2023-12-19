@@ -193,6 +193,7 @@
     }
 
     .song-li {
+        width: 297%;
         padding-bottom: 0px;
         margin-left: -210%;
         margin-top: 28%;
@@ -201,6 +202,24 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+    }
+
+    .song-info1 {
+        width: 10%;
+    }
+    .vertical-title {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        margin-left: 20px;
+    }
+
+    .song-info4 {
+        width: 200px;
+        margin-left: 14%;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: flex-end;
     }
 
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import OpenModalButton from "../OpenModalButton/index";
@@ -8,6 +9,7 @@ import toggleSideMenu from './mobileView';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
+  const history = useHistory();
 
 	return (
 		<div className='nav-container'>
@@ -16,6 +18,15 @@ function Navigation({ isLoaded }) {
 			<button className='menu' onClick={toggleSideMenu}>
           Menu
         </button>
+
+
+		<button className='menu' onClick={()=>{
+
+		history.push('/')}}>
+          Home
+        </button>
+
+
 			</div>
 			)}
 		  {isLoaded && (
