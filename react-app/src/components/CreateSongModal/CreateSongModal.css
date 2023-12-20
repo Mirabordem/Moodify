@@ -128,7 +128,18 @@
         border: 1px solid yellow;
         height: 59dvh;
         margin-top: 10%;
-        
+
+    }
+
+    .signup-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        position: relative;
+        gap: 7%;
+        padding-top: 10px;
+        height: 100%;
     }
 
 
