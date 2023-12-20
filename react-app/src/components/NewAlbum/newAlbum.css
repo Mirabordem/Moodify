@@ -216,7 +216,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: center;
     position: relative;
     height: 87%;
-    
+
 }
 
 .login-label {
@@ -268,8 +268,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .specialOps {
     position: absolute;
-    top: 20%;
-    left: 10%;
+    top: 56%;
+    left: 31%;
+    z-index:12000;
+    width: 10%;
+    height: 10%;
 }
 
 

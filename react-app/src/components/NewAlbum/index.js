@@ -166,10 +166,10 @@ export default function NewAlbum({ formType, albumId }) {
 
           {formType === "Edit" && !photoPreview && (
             <label className="login-label">
-            <div className='specialOps'>
+            <div>
               <p className="cac-1">Current Album Cover:</p>
               <img
-                className="cac-2"
+                className="cac-2 specialOps"
                 src={photo}
                 alt="Album Cover"
               />
@@ -189,7 +189,7 @@ export default function NewAlbum({ formType, albumId }) {
             >
               {photoPreview ? (
                 <img
-                  className="new-album-image"
+                  className="new-album-image "
                   src={photoPreview}
                   alt="Photo Preview"
                 />
