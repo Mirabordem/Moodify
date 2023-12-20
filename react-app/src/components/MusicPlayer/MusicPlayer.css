@@ -125,7 +125,7 @@
     font-size: 18px;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
 .track-parent {
     /* border: 2px solid yellow; */
     display: none;

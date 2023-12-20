@@ -147,7 +147,7 @@
     background: rgb(28, 51, 39);
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
     .album-detail-page-container {
         box-sizing: border-box;
         /* border: 5px solid purple; */

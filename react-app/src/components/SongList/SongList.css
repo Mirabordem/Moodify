@@ -181,7 +181,7 @@
     color: rgb(95, 195, 146);
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
 
     .album-id-song-list {
         display: flex;

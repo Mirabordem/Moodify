@@ -119,7 +119,7 @@
 }
 
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
     #modal-content {
         /* border: 2px solid red; */
         margin-left: -14%;

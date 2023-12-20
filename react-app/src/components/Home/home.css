@@ -117,7 +117,7 @@
   /* border: 2px solid orange; */
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
 
   .homeText {
     height: 66pt;

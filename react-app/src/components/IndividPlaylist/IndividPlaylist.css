@@ -170,7 +170,7 @@
 
 
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
 .album-id-top-info {
     display: flex;
     flex-direction: row;
