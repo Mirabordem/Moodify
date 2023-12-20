@@ -40,3 +40,30 @@
 input {
     text-align: center;
 }
+
+
+@media only screen and (max-width: 500px) {
+    .signup-container5 {
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 94vw;
+        height: 60dvh;
+        background-color: rgb(21, 21, 21);
+        padding: 5px;
+        box-shadow: 2px 2px 22px rgb(70, 70, 70);
+        z-index: 5000;
+    }
+
+    .txt1 {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        color: rgb(194, 176, 184);
+        font-size: 16px;
+    }
+
+
+    }
