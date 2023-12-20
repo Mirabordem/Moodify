@@ -267,6 +267,20 @@
         margin-bottom: 0;
     }
 
+    .dropdown1a {
+        background-color: rgb(58, 54, 54);
+        border-radius: 10px;
+        width: 60vw;
+        height: 27dvh;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 10px;
+        z-index: 3500;
+        right: 0%;
+    }
+
 
 
 }
