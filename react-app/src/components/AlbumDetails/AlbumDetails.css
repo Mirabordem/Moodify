@@ -157,6 +157,7 @@
         height: 20vh;
         width: 97vw;
         background: black;
+        padding-left: 2%;
 
     }
 
@@ -177,7 +178,42 @@
 }
 
 .album-id-functions-3 {
-    margin-left: -149%;
+    display: flex;
+    box-sizing: border-box;
+    border: 1px solid white;
+    flex-direction: row;
+    width: 96vw;
+    margin: 0% auto;
+    margin-left: calc(50% - 169%);
 }
+
+element.style {
+}
+.play-button-album {
+    position: relative;
+    background: rgb(95, 195, 146);
+    border: none;
+    border-radius: 50%;
+    width: 30%;;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 2%;
+}
+
+}
+
+@media only screen and (max-width: 375px) {
+    .album-id-functions-3 {
+        display: flex;
+        box-sizing: border-box;
+        border: 1px solid white;
+        flex-direction: row;
+        width: 96vw;
+        margin: 0% auto;
+        margin-left: calc(50% - 215%);
+    }
 
 }
