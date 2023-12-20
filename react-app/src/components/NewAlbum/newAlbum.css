@@ -201,7 +201,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .new-h5 {
     font-size: 1em;
     font-weight: bold;
-    height: 10%;
+    height: 0%;
     max-height: 10%;
     padding: 0%;
     margin: 0%;
@@ -218,22 +218,51 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .login-label {
-    height: 17%;
+    height: 16%;
     color: rgb(141, 126, 133);
     margin-bottom: 1%;
 }
 
 .custom-file-input {
-    display: inline-block;
+    display: inline-flex;
     position: relative;
+    flex-direction: column;
+    flex-wrap: wrap;
     /* overflow: hidden; */
     background: rgb(21, 21, 21);
     /* padding: 10px; */
     border-radius: 5px;
     cursor: pointer;
-    margin-top: -14%;
     color: rgb(119, 239, 6);
     border: none;
-    height: 257px;
+    height: 30%;
+    padding: 0px 0px;
 }
+
+
+.file-album-cover {
+    display: block;
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 0px;
+
+}
+
+.photo-container {
+    position: relative;
+    height: 76%;
+    width: 100%;
+}
+
+.upload-text {
+    border: 2px dashed #ddd;
+    padding: 10px;
+    position: absolute;
+    top: 74%;
+    left: 50%;
+    transform: translate(-49%, -74%);
+    font-size: .7em;
+}
+
+
 }

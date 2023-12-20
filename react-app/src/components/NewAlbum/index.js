@@ -163,8 +163,9 @@ export default function NewAlbum({ formType, albumId }) {
               required
             />
           </label>
-          <label className="login-label">
+
           {formType === "Edit" && !photoPreview && (
+            <label className="login-label">
             <div>
               <p className="cac-1">Current Album Cover:</p>
               <img
@@ -173,8 +174,9 @@ export default function NewAlbum({ formType, albumId }) {
                 alt="Album Cover"
               />
             </div>
+            </label>
           )}
-          </label>
+
           <label className="custom-file-input">
           <p className="file-album-cover">Album Cover</p>
 

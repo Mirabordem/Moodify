@@ -184,9 +184,7 @@
     flex-direction: row;
     width: 96vw;
     margin: 0% auto;
-    margin-left: calc(50% - 169%);
 }
-
 element.style {
 }
 .play-button-album {
