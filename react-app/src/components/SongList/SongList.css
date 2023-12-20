@@ -180,3 +180,107 @@
     cursor: pointer;
     color: rgb(95, 195, 146);
 }
+
+@media only screen and (max-width: 600px) {
+
+    .album-id-song-list {
+        display: flex;
+        flex-direction: row;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: -196%;
+        width: 50%;
+    }
+
+    /* .song-li {
+        width: 297%;
+        padding-bottom: 0px;
+        margin-left: -210%;
+        margin-top: 28%;
+        margin-bottom: 58%;
+        height: 70px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    } */
+    .album-id-song-list {
+        margin-left: 0%;
+    }
+    .separateBottom{
+        padding: 0% 0%;
+        margin: 0% 0%;
+    }
+    .song-li {
+        box-sizing: border-box;
+        /* border:1px solid green; */
+        width: 96vw;
+        padding-bottom: 0px;
+        margin: 0% 0%;
+        padding: 0% 0%;
+        margin-top: 11%;
+        margin-bottom: 11%;
+        height: 70px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .song-info1 {
+        width: 10%;
+    }
+    .vertical-title {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        margin-left: 20px;
+    }
+
+    .song-info4 {
+        width: 200px;
+        margin-left: 14%;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .separateBottom > :last-child {
+        margin-bottom: 26vh;
+    }
+
+    .song-info2 {
+        font-weight: bold;
+        font-size: .9em;
+        max-width: 100%;
+    }
+
+    .song-info3 {
+        margin-top:9%;
+        font-size: .7em
+    }
+
+    .horizontal-line {
+        border-top: 1px solid rgb(141, 126, 133);
+        margin: 10px 0;
+        /* margin-left: 70px; */
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .dropdown1a {
+        background-color: rgb(58, 54, 54);
+        border-radius: 10px;
+        width: 60vw;
+        height: 27dvh;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 10px;
+        z-index: 3500;
+        right: 0%;
+    }
+
+
+
+}

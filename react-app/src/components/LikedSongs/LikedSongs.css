@@ -53,3 +53,14 @@
     margin-top: 40px;
     margin-left: 30px;
 }
+
+@media only screen and (max-width: 600px) {
+.album-title-page1 {
+    font-size: 1.5em;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-weight: bold;
+    padding-left: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+}

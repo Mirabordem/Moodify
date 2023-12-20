@@ -117,3 +117,31 @@
     height: 100px;
 
 }
+
+
+@media only screen and (max-width: 600px) {
+    #modal-content {
+        /* border: 2px solid red; */
+        margin-left: -14%;
+        width: 83vw;
+        box-sizing: border-box;
+        /* border: 1px solid yellow; */
+        height: 59dvh;
+        margin-top: 10%;
+
+    }
+
+    .signup-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        position: relative;
+        gap: 7%;
+        padding-top: 10px;
+        height: 100%;
+    }
+
+
+
+}

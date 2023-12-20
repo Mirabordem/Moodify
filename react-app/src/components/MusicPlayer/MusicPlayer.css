@@ -124,3 +124,72 @@
     color: rgb(95, 195, 146);
     font-size: 18px;
 }
+
+@media only screen and (max-width: 600px) {
+.track-parent {
+    /* border: 2px solid yellow; */
+    display: none;
+    display: none;
+    flex-direction: column;
+    /* margin-right: 80px; */
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    width: 100%;
+    display: none;
+}
+.controls {
+    /* border: 2px solid rgb(95, 195, 146); */
+    /* width: 400px; */
+    height: 5dvh;
+    width: 96vw;
+    box-sizing: border-box;
+    /* border: 1px solid lime; */
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.controls-progress {
+    width: 2%;
+    margin: 0%;
+    /* margin-left: 7%; */
+}
+
+.volume-control {
+    display: flex;
+    box-sizing: border-box;
+    /* border: 1px solid yellow; */
+    margin: 0% auto;
+    /* margin-right: 160px;
+     */
+     justify-content: center;
+    align-items: center;
+
+    height: 7dvh;
+}
+
+.progress-bar {
+
+    box-sizing: border-box;
+    /* border: 1px solid blue; */
+    width: 96vw;
+    height: 6dvh;
+    margin-top:3%;
+    /* border: 2px solid purple; */
+}
+.rc-slider-rail{
+margin-top: 5%;
+}
+.rc-slider-track {
+    position: absolute;
+    bottom: 56%;
+    margin-left: 1%;
+}
+
+/* .rc-slider-track {
+    position: absolute;
+    bottom: 19%;
+    margin-left: 7%;
+} */
+
+}

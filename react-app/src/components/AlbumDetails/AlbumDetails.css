@@ -146,3 +146,73 @@
 .big-play-diabled-album {
     background: rgb(28, 51, 39);
 }
+
+@media only screen and (max-width: 600px) {
+    .album-detail-page-container {
+        box-sizing: border-box;
+        /* border: 5px solid purple; */
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        height: 20vh;
+        width: 97vw;
+        background: black;
+        padding-left: 2%;
+
+    }
+
+    /* .album-detail-page-container > :last-child {
+        margin-bottom: 20%;
+    } */
+
+
+
+.album-id-cover-img {
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 80%;
+    height: 50%;
+    box-shadow: 2px 2px 22px rgb(59, 51, 51);
+}
+
+.album-id-functions-3 {
+    display: flex;
+    box-sizing: border-box;
+    /* border: 1px solid white; */
+    flex-direction: row;
+    width: 96vw;
+    margin: 0% auto;
+}
+element.style {
+}
+.play-button-album {
+    position: relative;
+    background: rgb(95, 195, 146);
+    border: none;
+    border-radius: 50%;
+    width: 30%;;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 2%;
+}
+
+}
+
+@media only screen and (max-width: 375px) {
+    .album-id-functions-3 {
+        display: flex;
+        box-sizing: border-box;
+        border: 1px solid white;
+        flex-direction: row;
+        width: 96vw;
+        margin: 0% auto;
+        margin-left: calc(50% - 215%);
+
+    }
+
+}

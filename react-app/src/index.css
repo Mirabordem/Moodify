@@ -83,3 +83,64 @@ body {
   font-size: smaller;
   text-align: center;
 }
+
+@media only screen and (max-width: 600px) {
+
+  html {
+    background-color: black;
+  }
+  body {
+    background-color: black;
+  }
+
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    /* width: 20%; */
+    height: 89%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    background-color: black;
+    color: white;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    flex-grow: 1;
+    z-index: 50;
+  }
+
+  .main_window_container {
+    background-color: black;
+    box-sizing: border-box;
+    /* border: 1px solid red; */
+    margin-left: -34%;
+    height: 81.5dvh;
+    margin-top: 21%;
+    width: 96vw;
+
+  }
+
+  .musicPlayer {
+    position: fixed;
+    box-sizing: border-box;
+    /* border: 1px solid brown; */
+    bottom: 0px;
+    width: 96.5vw;
+    height: 20%;
+
+    display: block;
+    /* flex-direction: column;
+    flex-wrap: wrap; */
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: black;
+    color: rgb(126, 123, 123);
+    font-family: "Lato", sans-serif;
+    z-index: 100;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px;
+}
+}
