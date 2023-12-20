@@ -191,12 +191,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 96vw;
+    width: 100%;
     height: 60dvh;
     background-color: rgb(21, 21, 21);
     padding: 5px;
     box-shadow: 2px 2px 22px rgb(70, 70, 70);
     z-index: 5000;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    position: static;
+
 }
 
 .new-h5 {
@@ -361,6 +367,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-align: center;
     width: 92vw;
     height: 100%;
+}
+
+.new-album-main-container {
+    width: 100%;
+    height: 60dvh;
 }
 
 
