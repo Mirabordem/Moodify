@@ -210,7 +210,8 @@
   flex-direction: row;
   justify-self: start;
   left: 0px;
-  margin-right: 36%;
+  margin-right: 22%;
+  gap: 10%;
 
 }
 

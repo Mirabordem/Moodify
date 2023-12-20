@@ -98,8 +98,8 @@ export default function SideMenu() {
   if (user) {
     sideMenuOptions = (
       <div className='sideToggleAlex'>
-                <div className='toggleMenu'><button className='menu' onClick={toggleSideMenu}>
-        Menu
+                <div className='toggleMenu'><button className='signup-button20' onClick={toggleSideMenu}>
+        Close
       </button></div>
         <button className="menu-toggle">Your Library</button>
         <ul className="ul-container">

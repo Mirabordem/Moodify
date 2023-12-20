@@ -15,12 +15,12 @@ function Navigation({ isLoaded }) {
 		<div className='nav-container'>
 			{sessionUser && (
 			<div className='farLeft'>
-			<button className='menu' onClick={toggleSideMenu}>
+			<button className='signup-button20' onClick={toggleSideMenu}>
           Menu
         </button>
 
 
-		<button className='menu' onClick={()=>{
+		<button className='signup-button20' onClick={()=>{
 
 		history.push('/')}}>
           Home
