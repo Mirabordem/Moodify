@@ -217,7 +217,7 @@
         padding-bottom: 0px;
         margin: 0% 0%;
         padding: 0% 0%;
-        margin-top: 9%;
+        margin-top: 11%;
         margin-bottom: 11%;
         height: 70px;
         display: flex;
@@ -244,12 +244,12 @@
     }
 
     .separateBottom > :last-child {
-        margin-bottom: 23vh;
+        margin-bottom: 18vh;
     }
 
     .song-info2 {
         font-weight: bold;
-        font-size: 1em;
+        font-size: .9em;
         max-width: 100%;
     }
 
