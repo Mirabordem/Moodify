@@ -155,9 +155,14 @@
         position: relative;
         flex-direction: column;
         height: 20vh;
-        width: 96vw;
-        background: linear-gradient(rgb(108, 94, 101), rgb(54, 47, 51) 80%);
+        width: 97vw;
+        background: black;
+
     }
+
+    /* .album-detail-page-container > :last-child {
+        margin-bottom: 20%;
+    } */
 
 
 

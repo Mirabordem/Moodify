@@ -229,7 +229,7 @@ export default function SongList({
         <i className="far fa-clock"></i>
       </div>
       <div className="horizontal-line"></div>
-      <ul>{songListMap}</ul>
+      <ul className='separateBottom'>{songListMap}</ul>
     </div>
   );
 }

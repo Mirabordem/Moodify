@@ -176,23 +176,27 @@
     flex-direction: row;
     box-sizing: border-box;
     border: 5px solid orange;
-    width: 93vw;
-    margin-left: -56vw;
+    width: 96vw;
+    height: 10dvh;
+    margin-top: 41%;
+    margin-left: -55vw;
     height: 370px;
     background: linear-gradient(to bottom, rgb(215, 191, 202), rgb(108, 94, 101) 90%);
 }
 
 .album-id-cover-img {
-    margin-right: 5%;
-    margin-left: 5%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    width: 80%;
-    height: 50%;
+    margin: auto 5%;
+    width: 50%;
+    height: 67%;
     box-shadow: 2px 2px 22px rgb(59, 51, 51);
 }
 
 .album-title-page {
     font-size: 1em;
+}
+
+.album-release-info {
+    font-size: .8em;
+    margin-top: 20px;
 }
 }

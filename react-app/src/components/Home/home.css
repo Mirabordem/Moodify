@@ -133,11 +133,16 @@
   .page-container {
     display: flex;
     position: relative;
+    box-sizing: border-box;
+    border: 1px solid purple;
     padding-left: 3%;
+    padding-right: 3%;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100dvh;
+    width: 97vw;
     /* background: linear-gradient(rgb(80, 79, 79), black); */
     background-color: black;
+
 
   }
 
@@ -198,6 +203,7 @@
   margin-right: 4%;
   padding-right: 2%;
   background: black;
+  padding-bottom: 25%;
 }
 
 .sideToggleAlex {

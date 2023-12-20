@@ -222,6 +222,10 @@
         align-items: flex-end;
     }
 
+    .separateBottom > :last-child {
+        margin-bottom: 23vh;
+    }
+
 
 
 }
