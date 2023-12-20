@@ -183,3 +183,57 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 0px;
 
 }
+
+@media only screen and (max-width: 500px) {
+.signup-container6 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 96vw;
+    height: 60dvh;
+    background-color: rgb(21, 21, 21);
+    padding: 5px;
+    box-shadow: 2px 2px 22px rgb(70, 70, 70);
+    z-index: 5000;
+}
+
+.new-h5 {
+    font-size: 1em;
+    font-weight: bold;
+    height: 10%;
+    max-height: 10%;
+    padding: 0%;
+    margin: 0%;
+
+}
+
+.signup-form5 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 87%;
+}
+
+.login-label {
+    height: 17%;
+    color: rgb(141, 126, 133);
+    margin-bottom: 1%;
+}
+
+.custom-file-input {
+    display: inline-block;
+    position: relative;
+    /* overflow: hidden; */
+    background: rgb(21, 21, 21);
+    /* padding: 10px; */
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: -14%;
+    color: rgb(119, 239, 6);
+    border: none;
+    height: 257px;
+}
+}

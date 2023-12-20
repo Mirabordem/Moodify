@@ -117,3 +117,19 @@
     height: 100px;
 
 }
+
+
+@media only screen and (max-width: 500px) {
+    #modal-content {
+        /* border: 2px solid red; */
+        margin-left: -14%;
+        width: 83vw;
+        box-sizing: border-box;
+        border: 1px solid yellow;
+        height: 59dvh;
+        margin-top: 10%;
+    }
+
+
+
+}

@@ -29,8 +29,11 @@
     position: absolute;
     background-color:white;
     width: 50%;
-    left:-52%;
-    top:24%;
+    margin-left: 0%;
+
+    /* top:24%; */
+    top:7%;
+    bottom: 25dvh;
 
   }
 
