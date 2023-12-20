@@ -187,6 +187,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media only screen and (max-width: 500px) {
 .signup-container6 {
     display: flex;
+    position: absolute;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -215,6 +216,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: center;
     position: relative;
     height: 87%;
+    
 }
 
 .login-label {
@@ -261,8 +263,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     top: 74%;
     left: 50%;
     transform: translate(-49%, -74%);
-    font-size: .7em;
+    font-size: .6em;
 }
+
+.specialOps {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+}
+
+
 
 
 }
