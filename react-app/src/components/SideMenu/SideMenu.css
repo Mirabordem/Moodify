@@ -252,5 +252,11 @@ a:hover {
         margin-top:9%;
 
     }
+    .playlist-container {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 465px;
+        z-index: 8999;
+    }
 
 }
