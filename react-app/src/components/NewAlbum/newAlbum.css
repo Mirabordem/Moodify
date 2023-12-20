@@ -244,6 +244,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     /* border: 1px solid yellow; */
 }
 
+.justLog {
+    height: 27%;
+    color: rgb(141, 126, 133);
+    margin-bottom: 1%;
+}
+
 
 .file-album-cover {
     display: block;
@@ -317,7 +323,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-radius: 20px;
 }
 .signup-button20 {
-    padding: 4% 4%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    padding-left: 0%;
+    padding-right: 4%;
     margin-top: 0%;
     margin-bottom: 0%;
     border: none;
