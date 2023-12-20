@@ -163,22 +163,24 @@ export default function NewAlbum({ formType, albumId }) {
               required
             />
           </label>
-          <label className="login-label">
+
           {formType === "Edit" && !photoPreview && (
-            <div>
+            <label className="login-label">
+            <div className='mobileMode3'>
               <p className="cac-1">Current Album Cover:</p>
               <img
-                className="cac-2"
+                className="cac-2 specialOps"
                 src={photo}
                 alt="Album Cover"
               />
             </div>
+            </label>
           )}
-          </label>
+
           <label className="custom-file-input">
           <p className="file-album-cover">Album Cover</p>
 
-          <div className="photo-container">
+          <div className="photo-container ">
             <div
               id="drop-area"
               onDrop={handleDrop}
@@ -187,7 +189,7 @@ export default function NewAlbum({ formType, albumId }) {
             >
               {photoPreview ? (
                 <img
-                  className="new-album-image"
+                  className="new-album-image "
                   src={photoPreview}
                   alt="Photo Preview"
                 />

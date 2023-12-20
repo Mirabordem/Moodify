@@ -167,3 +167,64 @@
 .big-play-diabled-playlist {
     background: rgb(28, 51, 39);
 }
+
+
+
+@media only screen and (max-width: 600px) {
+.album-id-top-info {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    /* border: 5px solid orange; */
+    margin-left: 0%;
+    padding-left: 0%;
+    width: 91vw;
+    height: 10dvh;
+    margin-top: 41%;
+    height: 370px;
+    background: linear-gradient(to bottom, rgb(215, 191, 202), rgb(108, 94, 101) 90%);
+}
+#album-id-info-words {
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    padding: 2% 10%;
+    text-align: center;
+
+}
+.album-id-cover-img {
+    margin: auto 1%;
+    width: 50%;
+    height: 67%;
+    box-shadow: 2px 2px 22px rgb(59, 51, 51);
+}
+
+.album-title-page {
+    font-size: 1em;
+}
+
+.album-release-info {
+    font-size: .8em;
+    margin-top: 20px;
+}
+
+.album-update-dropdown1 {
+    display: block;
+    z-index: 3000;
+    width: 70%;
+}
+
+.info-album-p {
+    margin-top: 0%;
+    margin-bottom: 0;
+}
+
+.playlist-id-cover-img {
+    margin: auto 1%;
+    width: 50%;
+    height: 67%;
+    box-shadow: 2px 2px 22px rgb(59, 51, 51);
+}
+}

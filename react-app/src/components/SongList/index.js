@@ -199,10 +199,10 @@ export default function SongList({
             <span className="song-info3">{artist}</span>
           </div>
           <div className="song-info4">
-            <div className="song-actions-container">{heart}</div>
+            <div className={user? "song-actions-container" : "hideaway"}>{heart}</div>
 
             <span className="song-info">{runTime}</span>
-            <div className="song-menu">
+            <div className={user?"song-menu" : "hideaway"}>
               {
                 <SongUpdateButton
                   user={user}
@@ -229,7 +229,7 @@ export default function SongList({
         <i className="far fa-clock"></i>
       </div>
       <div className="horizontal-line"></div>
-      <ul>{songListMap}</ul>
+      <ul className='separateBottom'>{songListMap}</ul>
     </div>
   );
 }
