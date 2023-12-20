@@ -211,6 +211,7 @@
 }
 
 .album-update-dropdown1 {
+    display: block;
     z-index: 3000;
     width: 70%;
 }
