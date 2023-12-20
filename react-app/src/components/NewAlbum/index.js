@@ -166,7 +166,7 @@ export default function NewAlbum({ formType, albumId }) {
 
           {formType === "Edit" && !photoPreview && (
             <label className="login-label">
-            <div>
+            <div className='mobileMode3'>
               <p className="cac-1">Current Album Cover:</p>
               <img
                 className="cac-2 specialOps"
