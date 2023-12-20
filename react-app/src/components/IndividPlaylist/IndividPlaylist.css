@@ -218,4 +218,11 @@
     margin-top: 0%;
     margin-bottom: 0;
 }
+
+.playlist-id-cover-img {
+    margin: auto 1%;
+    width: 50%;
+    height: 67%;
+    box-shadow: 2px 2px 22px rgb(59, 51, 51);
+}
 }
