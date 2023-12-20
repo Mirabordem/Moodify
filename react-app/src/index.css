@@ -115,7 +115,7 @@ body {
   .main_window_container {
     background-color: black;
     box-sizing: border-box;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     margin-left: -34%;
     height: 81.5dvh;
     margin-top: 21%;
@@ -126,7 +126,7 @@ body {
   .musicPlayer {
     position: fixed;
     box-sizing: border-box;
-    border: 1px solid brown;
+    /* border: 1px solid brown; */
     bottom: 0px;
     width: 96.5vw;
     height: 20%;

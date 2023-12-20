@@ -212,7 +212,7 @@
     }
     .song-li {
         box-sizing: border-box;
-        border:1px solid green;
+        /* border:1px solid green; */
         width: 96vw;
         padding-bottom: 0px;
         margin: 0% 0%;

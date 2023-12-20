@@ -241,7 +241,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 100%;
     padding: 0px 0px;
     box-sizing: border-box;
-    border: 1px solid yellow;
+    /* border: 1px solid yellow; */
 }
 
 
@@ -255,7 +255,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     height: 19%;
     text-align: center;
     box-sizing: border-box;
-    border: 1px solid green;
+    /* border: 1px solid green; */
     font-size: 1em;
 
 }
@@ -267,7 +267,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-top: 0%;
     margin-bottom: 0%;
     box-sizing: border-box;
-    border: 5px solid purple;
+    /* border: 5px solid purple; */
 }
 
 #drop-area {
@@ -277,7 +277,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: white;
     width: 100%;
     box-sizing: border-box;
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     height: 100%;
     display: flex;
     justify-content: center;
