@@ -197,17 +197,28 @@
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
+  border: 1px solid orange;
   grid-template-columns: repeat(4, 1fr);
+  width: 96%;
+  /* width: 81%; */
   grid-gap: 15px;
   gap: 15px;
-  margin-top: 5.5%;
+  margin-top: 0%;
   margin-bottom: 0%;
-  margin-left: 8%;
-  margin-right: 4%;
-  padding-right: 2%;
+  margin-left: 1%;
+  margin-right: 0%;
+  padding-right: 0%;
+  padding-bottom: 0%;
   background: black;
-  /* padding-bottom: 57%; */
+  /* height: 67%; */
+  justify-content: center;
+
+  padding-bottom: 200px;
 }
+
+
+
+
 
 .sideToggleAlex {
   display: none;
