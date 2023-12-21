@@ -195,10 +195,12 @@
 @media only screen and (max-width: 600px) {
   .nav-profile {
     display: flex;
-    /* justify-content: flex-end; */
+    box-sizing: border-box;
     align-items: center;
+    justify-content: flex-end;
     color: white;
-    width: 10%;
+    width: 36%;
+    margin-right: 0%;
 
 
   }
@@ -213,13 +215,15 @@
 
   .a90Wide {
     display: block;
-    width: 88%;
+    width: 64%;
+    height: 100%;
   }
 
   .nav-container {
     position: fixed;
     top: 0;
     width: 100%;
+    box-sizing: border-box;
     z-index: 8;
     display: flex;
     justify-content: space-evenly;
@@ -231,9 +235,10 @@
     padding-left: 0%;
     padding-right: 0%;
     left: auto;
-    right: auto;
+    right: 0;
     bottom: auto;
-    top: auto;
+    top: 0;
+    height: 7%;
 }
 
   .Moodify-logo {
