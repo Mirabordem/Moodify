@@ -188,15 +188,32 @@
 
 }
 
+.a90Wide {
+  display: none;
+}
+
 @media only screen and (max-width: 600px) {
   .nav-profile {
     display: flex;
     /* justify-content: flex-end; */
     align-items: center;
-    margin-right: 6%;
     color: white;
+    width: 10%;
 
 
+  }
+
+  /* .profile-button {
+    background-color: black;
+    border: black;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    margin-right: 2%;
+} */
+
+  .a90Wide {
+    display: block;
+    width: 88%;
   }
 
   .nav-container {
@@ -213,6 +230,10 @@
     z-index: 1;
     padding-left: 0%;
     padding-right: 0%;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    top: auto;
 }
 
   .Moodify-logo {

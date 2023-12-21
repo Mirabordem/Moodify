@@ -12,6 +12,10 @@
         width: 96vw;
     }
 
+    html {
+        background-color: black;
+    }
+
 
 
 }

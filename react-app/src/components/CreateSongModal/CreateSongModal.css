@@ -128,11 +128,11 @@
         bottom: auto;
         width: 98%;
         box-sizing: border-box;
-        border: 1px solid yellow;
+        /* border: 1px solid yellow; */
         height: 59dvh;
         margin-left: auto;
         margin-right: auto;
-        position: static;
+        position: relative;
 
     }
 

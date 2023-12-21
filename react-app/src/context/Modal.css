@@ -49,7 +49,7 @@
     align-items: center;
     z-index: 10000;
     box-sizing: border-box;
-    border: 1px solid green;
+    /* border: 1px solid green; */
     width: 96vw;
   }
 
