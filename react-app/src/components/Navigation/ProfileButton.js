@@ -46,7 +46,7 @@ function ProfileButton({ user }) {
   const hideMenuOnClick = () => setShowMenu(false);
 
   return (
-    <div>
+    <div className='forMobz'>
       <button className="profile-button" onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>

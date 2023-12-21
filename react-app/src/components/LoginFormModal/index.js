@@ -31,8 +31,8 @@ function LoginFormModal() {
   return (
     <div className="login-container">
       <h1 className="new-h1">Log in</h1>
-      <form onSubmit={handleSubmit} className="login-form">
-        <label className="login-label">
+      <form onSubmit={handleSubmit} className="login-form ">
+        <label className="login-label justLog">
         Email
           <input
             className="placeholder"
@@ -41,7 +41,7 @@ function LoginFormModal() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
-        <label className="login-label">
+        <label className="login-label justLog">
         Password
           <input
             className="placeholder"

@@ -122,12 +122,17 @@
 @media only screen and (max-width: 600px) {
     #modal-content {
         /* border: 2px solid red; */
-        margin-left: -14%;
-        width: 83vw;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        width: 98%;
         box-sizing: border-box;
         /* border: 1px solid yellow; */
         height: 59dvh;
-        margin-top: 10%;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
 
     }
 
