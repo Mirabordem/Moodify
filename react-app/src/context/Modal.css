@@ -28,7 +28,7 @@
 
   #modal-content {
     position: absolute;
-    background-color:white;
+    background-color:transparent;
     width: 50%;
     margin-left: 0%;
 
@@ -48,6 +48,20 @@
     justify-content: center;
     align-items: center;
     z-index: 10000;
+    box-sizing: border-box;
+    /* border: 1px solid green; */
+    width: 96vw;
   }
+
+  #modal-background {
+    position: fixed;
+    top: 2%;
+    right: 1%;
+    left: 1%;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 99%;
+    height: 93%;
+}
 
 }

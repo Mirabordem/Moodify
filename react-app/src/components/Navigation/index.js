@@ -29,6 +29,9 @@ function Navigation({ isLoaded }) {
 
 			</div>
 			)}
+			{!sessionUser && (
+				<div className='a90Wide'> </div>
+			)}
 		  {isLoaded && (
 			<div className='nav-profile'>
 				{sessionUser ? (
