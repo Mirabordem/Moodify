@@ -302,4 +302,14 @@ a:hover {
     color: rgb(141, 129, 135);
 }
 
+.sideToggleAlex {
+    display: none;
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    z-index: 9000;
+    width: 58vw;
+    height: 100%;
+}
+
 }
