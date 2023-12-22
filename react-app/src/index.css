@@ -99,7 +99,7 @@ body {
     max-width: 100%;
     overflow-x: hidden;
     box-sizing: border-box;
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
   .side-menu {
     position: fixed;
@@ -142,6 +142,8 @@ body {
     display: block;
     /* flex-direction: column;
     flex-wrap: wrap; */
+
+    border-top: 3px solid rgb(130, 130, 130);
     flex-direction: column;
     flex-wrap: wrap;
     background-color: black;
