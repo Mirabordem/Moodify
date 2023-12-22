@@ -281,6 +281,10 @@
         right: 0%;
     }
 
+    .fa-clock {
+        display: none;
+    }
+
 
 
 }
