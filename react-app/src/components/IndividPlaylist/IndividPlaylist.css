@@ -171,6 +171,11 @@
 
 
 @media only screen and (max-width: 600px) {
+
+    .fa-play {
+        font-size: 2em;
+        margin-left: 10px;
+    }
 .album-id-top-info {
     display: flex;
     flex-direction: row;
@@ -178,10 +183,10 @@
     /* border: 5px solid orange; */
     margin-left: 0%;
     padding-left: 0%;
-    width: 91vw;
-    height: 10dvh;
+    width: 100%;
+    height: auto;
     margin-top: 20%;
-    height: 370px;
+    /* height: 370px; */
     background: linear-gradient(to bottom, rgb(215, 191, 202), rgb(108, 94, 101) 90%);
 }
 #album-id-info-words {
@@ -197,7 +202,7 @@
 .album-id-cover-img {
     margin: auto 1%;
     width: 50%;
-    height: 67%;
+    height: auto;
     box-shadow: 2px 2px 22px rgb(59, 51, 51);
 }
 

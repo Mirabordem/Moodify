@@ -205,6 +205,7 @@
     } */
     .album-id-song-list {
         margin-left: 0%;
+        width: 100%;
     }
     .separateBottom{
         padding: 0% 0%;
@@ -283,6 +284,21 @@
 
     .fa-clock {
         display: none;
+    }
+
+    .line-element-cross {
+        margin-left: 0%;
+        color: rgb(220, 198, 208);
+        margin-bottom: 0;
+        font-size: 20px;
+        width: 14%;
+    }
+
+    .line-element-title {
+        margin-left: 0%;
+        color: rgb(220, 198, 208);
+        margin-bottom: 0;
+        font-size: 18px;
     }
 
 

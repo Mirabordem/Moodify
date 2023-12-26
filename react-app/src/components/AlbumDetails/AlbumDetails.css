@@ -182,8 +182,9 @@
     display: flex;
     box-sizing: border-box;
     /* border: 1px solid white; */
+    justify-content: space-between;
     flex-direction: row;
-    width: 96vw;
+    width: 100%;
     margin: 0% auto;
 }
 element.style {
@@ -193,7 +194,7 @@ element.style {
     background: rgb(95, 195, 146);
     border: none;
     border-radius: 50%;
-    width: 30%;;
+    width: 18%;;
     height: 70px;
     display: flex;
     justify-content: center;
@@ -203,5 +204,3 @@ element.style {
 }
 
 }
-
-
