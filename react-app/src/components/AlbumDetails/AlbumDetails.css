@@ -204,16 +204,4 @@ element.style {
 
 }
 
-@media only screen and (max-width: 375px) {
-    .album-id-functions-3 {
-        display: flex;
-        box-sizing: border-box;
-        border: 1px solid white;
-        flex-direction: row;
-        width: 96vw;
-        margin: 0% auto;
-        margin-left: calc(50% - 215%);
 
-    }
-
-}
