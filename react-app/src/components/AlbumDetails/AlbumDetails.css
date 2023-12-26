@@ -155,8 +155,8 @@
         display: flex;
         position: relative;
         flex-direction: column;
-        height: 20vh;
-        width: 97vw;
+        /* height: 20vh; */
+        width: 100%;
         background: black;
         padding-left: 2%;
 

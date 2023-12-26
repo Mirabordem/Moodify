@@ -200,7 +200,10 @@
 
 }
 .album-id-cover-img {
-    margin: auto 1%;
+    box-sizing: border-box;
+    margin: 5% 1%;
+
+    margin-bottom: 5%;
     width: 50%;
     height: auto;
     box-shadow: 2px 2px 22px rgb(59, 51, 51);
